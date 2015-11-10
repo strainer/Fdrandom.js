@@ -1,0 +1,315 @@
+<html>
+
+<!-- <input type="button" onclick="run()" value="run()">   -->
+<!-- <input type="button" onclick="stop()" value="stop()"> -->
+<head>
+<script src='../dlib/Fdrandom.js'></script>
+<script src='../dlib/floatpresc.js'></script>
+<script src='../dlib/mutil.js'></script>
+</head>
+<style type="text/css">
+body
+{ background-color: #dddddd;
+  color:#111111;
+}
+
+svg {
+  background: #ffffff;
+}
+</style>
+<body>
+<div id="log"></div>
+</body>
+</html>
+
+
+<script>
+tlogger = document.getElementById('log');
+
+var hot=Fdrandom.hot()
+var a=[]
+//~ for(var t=0;t<1000000;t++)
+//~ { a.push(1*hot.mixof("0123456789","0.",6)) } 
+nn=1000000
+for(var t=0;t<nn;t++)
+{ a[t]=(t/nn) }
+hot.mixup(a)
+regurg(a)
+
+
+bench = function (meth, bentime, meth_nm, meth_arg) {
+		
+	if( typeof bentime==='undefined' ){ bentime=1 }
+	if( typeof meth_nm==='undefined' ){ meth_nm=meth.name }
+	bentime=bentime*22
+	
+	var qqtlen=1
+	if(typeof meth_arg!=='undefined')
+	{ qqtlen=1 }
+	
+	var tmstamp	
+	if(typeof performance!=='undefined')
+	{ tmstamp=performance }else{ tmstamp=Date }
+		
+	
+	var i = 0, retv= 0,retvsum=0,donereps=0;
+	var minret=0xffffffff>>>0, maxret=0
+	var atm,btm,ctm,dtm,bdtm,qqtlen
+	var ra=0,rb=0,rt=0
+	
+	for (var w=0;w<4;w++)
+	{	
+		var qreps=0,qtime=0,nreps=100000, repfac=1
+		atm= tmstamp.now(); rt=9999999999999
+		ctm = atm, dtm=0
+
+		while(ctm-atm<bentime){
+						
+			if(typeof meth_arg !== 'undefined')
+			{ for(i=0;i<nreps/10;i++)	
+				{ var r=meth(meth_arg)
+					if (r>maxret){ maxret=r}
+					{ if (r<minret){ minret=r } }
+				}			 
+			}else{
+				for(i=0;i<nreps/10;i++)	
+				{ var r=meth(meth_arg) 
+					if (r>maxret){ maxret=r }
+					{ if (r<minret){ minret=r } }
+				}
+			}
+			
+			btm= tmstamp.now();
+			
+			if(typeof meth_arg !== 'undefined'){
+				for(i=0;i<nreps;i++)	{ retv+=meth(meth_arg) } 
+			}else{
+				for(i=0;i<nreps;i++)	{ retv+=meth() }
+			}
+			
+			ctm= tmstamp.now();		
+			
+			bdtm=dtm; dtm=ctm-btm
+			
+			if (dtm==0){ nreps*=8; }
+			else
+			{
+				if (nreps/(dtm)>(rt*0.9))
+				{ qreps+=nreps*4;qtime+=dtm*4; }
+				else 
+				{ qreps+=nreps;qtime+=dtm; } //depreciates low counts
+				
+				retvsum+=retv;retv=0
+				donereps+=nreps;
+				
+				rt=(qreps)/(qtime)
+				//~ console.log(dtm+" "+nreps)
+				var timeleft=(bentime-(ctm-atm))
+				nreps =10+Math.floor(timeleft*rt*0.66);
+				if (nreps>10000000*timeleft){ nreps=10000000*timeleft }
+				//nreps=100+(nreps*repfac*0.7)>>>0
+			}
+		}
+		//~ console.log()
+		if (rt>ra){ rb=ra; ra=rt }
+		else{ if (rt>rb) { rb=rt } }
+	}
+	
+	ops=Math.floor(((ra+rb)*qqtlen*1000)/2)/1000000
+	
+	var rex='<tr>'
+	rex+='<td><b>'+meth_nm+'</b></td>'
+	rex+='<td>'+ops.toFixed(2)+" Mop/s "+'</td>'
+	rex+='<td>'+donereps.toFixed(0)+'</td>'
+	rex+='<td>'+"  avg:"+(retvsum/donereps).toFixed(7)+'</td>'
+	rex+='<td>'+"  mid:"+((minret+maxret)/2).toFixed(7)+'</td>';
+	rex+='</tr>';
+
+  return rex;	
+};
+
+function nout(){
+  Math.random()
+}
+
+benchn = function(n,a,b,c,d){ 
+	var rexx='<br><br><table>';
+	
+	for(var i=0;i<n;i++) 
+	{ 
+	  rexx+=bench(a,b,c,d);		
+	}
+  
+	rexx+= '</table>';
+	//~ $("#log").hide()
+	tlogger.innerHTML += rexx;
+	tlogger.innerHTML += '<div style="float:left; background-color: #fff;">';
+	tlogger.appendChild (givesvg(a,d));
+	tlogger.innerHTML += '</div>';
+	tlogger.innerHTML += '<div style="float:left; background-color: #fff;">';
+	tlogger.appendChild (givesvg2(c,a,d));
+	tlogger.innerHTML += '</div>';
+}
+
+function run(){
+intervar=setInterval(runben, 100);
+}
+
+run()
+function runben() {
+  
+	clearInterval(intervar)
+	//~ $("#log").fadeIn(100)
+	
+	var dur=3,reps=1
+	var funz= [
+	 [Math.random,"math.random "],
+	 //~ [regurg,"regurg "],
+	 //~ [Fdrandom.strand,"strand ",5],
+	 //~ [Fdrandom.strandx,"strandx ",7],
+	 //~ [Fdrandom.rndbit,"rndbit "],
+	 //~ [Fdrandom.f48,"f48 "],
+	 //~ [Fdrandom.f48,"f48 "],
+	 //~ [Fdrandom.rndbit,"rndbit "],
+	 //~ [Fdrandom.fxs,"fxs "],
+	 //~ [Fdrandom.i32,"i32 "],
+	 [Fdrandom.gaus,"gaus "],
+	 //~ [Fdrandom.gausx,"gausx "],
+	 [Fdrandom.usum,"usum 2 ",3],
+	 //~ [Fdrandom.usum,"usum 10 ",3],
+	 [Fdrandom.usum,"usum 64 ",64],
+	 //~ [Fdrandom.i32lz,"i32lz "],
+	 //~ [Fdrandom.i32sh,"i32sh "],
+	 //~ [Fdrandom.fugm,"fugm "],
+	 //~ [Fdrandom.f48ld,"f48ld "],
+	 //~ [Fdrandom.ui32gx,"ui32gx "],
+	 //~ [Fdrandom.ui32gy,"ui32gy "],
+	 //~ [Fdrandom.ui32gl,"ui32gl "],
+	 //~ [Fdrandom.ui32gh,"ui32gh "],
+	 //~ [Fdrandom.ui32glh,"ui32glh "]
+	]
+	
+	benchn(reps, funz[runstep][0], dur, funz[runstep][1], funz[runstep++][2] ) 
+
+  if(runstep<funz.length){ intervar=setInterval(runben, 100); }
+	
+}
+
+var runstep=0;
+var vgsc=10000
+var svgz=256
+function givesvg(func,d)
+{
+	var minval=0,maxval=0 
+	for(var i=0;i<vgsc*5;i++)
+	{ var f=func(d)
+		if(f>maxval) { maxval=f }
+		if(f<minval) { minval=f }
+	}
+	
+	var dist=maxval-minval
+	var mid=dist/2
+	var widefac=svgz/dist
+	var highfac=svgz/dist
+
+	var svgns = "http://www.w3.org/2000/svg";
+	var svg = document.createElementNS(svgns, "svg");
+  svg.setAttribute("width", svgz)
+  svg.setAttribute("height", svgz)
+	
+	mid=mid+minval
+	
+	for (i = 0; i < vgsc; i++) {
+		var mc = document.createElementNS(svgns, "rect");
+		mc.setAttribute("x", (func(d)-minval)*widefac);
+		mc.setAttribute("y", (func(d)-minval)*highfac);
+		mc.setAttribute("width", 0.7);
+		mc.setAttribute("height", 0.7);
+		mc.style.fill = "black";
+		mc.style.opacity =0.9;
+		svg.appendChild(mc);
+	}
+	var myText = document.createElementNS(svgns, "text");
+	myText.setAttribute("y", 13);
+	myText.textContent = " "+minval.toFixed(4)+"  :  "+maxval.toFixed(4)
+	svg.appendChild(myText);
+
+	return svg
+}
+
+function givesvg2(fnm,func,d)
+{
+	//~ alert("d is "+d)
+	var minval=0,maxval=0,tval=0,fb=0 
+	for(var i=0;i<vgsc*5;i++)
+	{ var f=func(d)
+		if(f>maxval) { maxval=f }
+		if(f<minval) { minval=f }
+		tval+=Math.abs(f-fb)
+		fb=f
+	}
+	
+	var tval=tval/(vgsc*5)
+	
+	if(Math.abs(minval*16)<1)
+	{ minval=0; }
+	if(Math.abs((minval-0x7fffffff)/100000)<1)
+	{ minval=-(0x80000000); }
+  if(Math.abs((maxval-1)*16)<1)
+	{ maxval=1; }
+  if(Math.abs((maxval-0x7ffffffff)/100000)<1)
+	{ maxval=0x7fffffff; }  
+	if(Math.abs((maxval-0xffffffff)/100000)<1)
+	{ maxval=0xffffffff; }
+	
+	var g=Math.abs(minval/maxval)
+	if(g>0.3&&g<3)
+	{ maxval*=1.3;minval=-maxval }
+	
+	var dist=maxval-minval
+	var mid=dist/2
+	var widefac=svgz/dist
+	var highfac=svgz/dist
+
+	var svgns = "http://www.w3.org/2000/svg";
+	var svg = document.createElementNS(svgns, "svg");
+  
+  svg.setAttribute("width", svgz*2)
+  svg.setAttribute("height", svgz)
+
+  var sx=0, sy=mid*highfac
+	var nn=vgsc*50, nw=50
+	var hh=0
+	
+	mid=mid+minval
+	var kw=widefac*50/(nn*tval/maxval)
+	var kh=highfac*50/(nn*tval/maxval)
+	for (i = 0; i < nn; i++) {
+		
+		sx+=(func(d)-mid)*kw + ((svgz*4)/nn)
+		sy+=(func(d)-mid)*kh
+		
+		if(sx>(svgz*2)){sx=0}else if(sx<0){sx=svgz*2}
+		if(sy<0){sy=svgz}else if(sy>svgz){sy=0}
+		
+		if ((i%nw)!=0){ continue }
+	  
+		var mc = document.createElementNS(svgns, "rect");
+		mc.setAttribute("x", sx);
+		mc.setAttribute("y", sy);
+		mc.setAttribute("width", 0.5);
+		mc.setAttribute("height", 0.5);
+		mc.style.fill = "black";
+		mc.style.opacity = 0.9;
+		svg.appendChild(mc);
+	}
+	var myText = document.createElementNS(svgns, "text");
+	myText.setAttribute("y", 13);
+	myText.textContent = " "+fnm+"  "+
+	//minval.toFixed(4)+"  :  "+maxval.toFixed(4)+" : "
+	+tval.toFixed(4)
+	svg.appendChild(myText);
+
+	return svg
+}
+</script>

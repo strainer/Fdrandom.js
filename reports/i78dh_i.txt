@@ -1,0 +1,266 @@
+       NOTE: Most of the tests in DIEHARD return a p-value, which               
+       should be uniform on [0,1) if the input file contains truly              
+       independent random bits.   Those p-values are obtained by                
+       p=F(X), where F is the assumed distribution of the sample                
+       random variable X---often normal. But that assumed F is just             
+       an asymptotic approximation, for which the fit will be worst             
+       in the tails. Thus you should not be surprised with                      
+       occasional p-values near 0 or 1, such as .0012 or .9983.                 
+       When a bit stream really FAILS BIG, you will get p's of 0 or             
+       1 to six or more places.  By all means, do not, as a                     
+       Statistician might, think that a p < .025 or p> .975 means               
+       that the RNG has "failed the test at the .05 level".  Such               
+       p's happen among the hundreds that DIEHARD produces, even                
+       with good RNG's.  So keep in mind that " p happens".                     
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::                   THE BITSTREAM TEST                          ::        
+     :: The file under test is viewed as a stream of bits. Call them  ::        
+     :: b1,b2,... .  Consider an alphabet with two "letters", 0 and 1 ::        
+     :: and think of the stream of bits as a succession of 20-letter  ::        
+     :: "words", overlapping.  Thus the first word is b1b2...b20, the ::        
+     :: second is b2b3...b21, and so on.  The bitstream test counts   ::        
+     :: the number of missing 20-letter (20-bit) words in a string of ::        
+     :: 2^21 overlapping 20-letter words.  There are 2^20 possible 20 ::        
+     :: letter words.  For a truly random string of 2^21+19 bits, the ::        
+     :: number of missing words j should be (very close to) normally  ::        
+     :: distributed with mean 141,909 and sigma 428.  Thus            ::        
+     ::  (j-141909)/428 should be a standard normal variate (z score) ::        
+     :: that leads to a uniform [0,1) p value.  The test is repeated  ::        
+     :: twenty times.                                                 ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+ THE OVERLAPPING 20-tuples BITSTREAM  TEST, 20 BITS PER WORD, N words
+   This test uses N=2^21 and samples the bitstream 20 times.
+  No. missing words should average  141909. with sigma=428.
+---------------------------------------------------------
+ tst no  1:  141758 missing words,    -.35 sigmas from mean, p-value= .36183
+ tst no  2:  142189 missing words,     .65 sigmas from mean, p-value= .74326
+ tst no  3:  142498 missing words,    1.38 sigmas from mean, p-value= .91550
+ tst no  4:  141427 missing words,   -1.13 sigmas from mean, p-value= .12989
+ tst no  5:  141892 missing words,    -.04 sigmas from mean, p-value= .48385
+ tst no  6:  142262 missing words,     .82 sigmas from mean, p-value= .79503
+ tst no  7:  142701 missing words,    1.85 sigmas from mean, p-value= .96782
+ tst no  8:  141115 missing words,   -1.86 sigmas from mean, p-value= .03173
+ tst no  9:  142793 missing words,    2.06 sigmas from mean, p-value= .98052
+ tst no 10:  141564 missing words,    -.81 sigmas from mean, p-value= .20988
+ tst no 11:  141658 missing words,    -.59 sigmas from mean, p-value= .27853
+ tst no 12:  142216 missing words,     .72 sigmas from mean, p-value= .76317
+ tst no 13:  142057 missing words,     .35 sigmas from mean, p-value= .63496
+ tst no 14:  142056 missing words,     .34 sigmas from mean, p-value= .63408
+ tst no 15:  140948 missing words,   -2.25 sigmas from mean, p-value= .01235
+ tst no 16:  142090 missing words,     .42 sigmas from mean, p-value= .66354
+ tst no 17:  141511 missing words,    -.93 sigmas from mean, p-value= .17601
+ tst no 18:  141587 missing words,    -.75 sigmas from mean, p-value= .22569
+ tst no 19:  141618 missing words,    -.68 sigmas from mean, p-value= .24804
+ tst no 20:  141737 missing words,    -.40 sigmas from mean, p-value= .34361
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::             The tests OPSO, OQSO and DNA                      ::        
+     ::         OPSO means Overlapping-Pairs-Sparse-Occupancy         ::        
+     :: The OPSO test considers 2-letter words from an alphabet of    ::        
+     :: 1024 letters.  Each letter is determined by a specified ten   ::        
+     :: bits from a 32-bit integer in the sequence to be tested. OPSO ::        
+     :: generates  2^21 (overlapping) 2-letter words  (from 2^21+1    ::        
+     :: "keystrokes")  and counts the number of missing words---that  ::        
+     :: is 2-letter words which do not appear in the entire sequence. ::        
+     :: That count should be very close to normally distributed with  ::        
+     :: mean 141,909, sigma 290. Thus (missingwrds-141909)/290 should ::        
+     :: be a standard normal variable. The OPSO test takes 32 bits at ::        
+     :: a time from the test file and uses a designated set of ten    ::        
+     :: consecutive bits. It then restarts the file for the next de-  ::        
+     :: signated 10 bits, and so on.                                  ::        
+     ::                                                               ::        
+     ::     OQSO means Overlapping-Quadruples-Sparse-Occupancy        ::        
+     ::   The test OQSO is similar, except that it considers 4-letter ::        
+     :: words from an alphabet of 32 letters, each letter determined  ::        
+     :: by a designated string of 5 consecutive bits from the test    ::        
+     :: file, elements of which are assumed 32-bit random integers.   ::        
+     :: The mean number of missing words in a sequence of 2^21 four-  ::        
+     :: letter words,  (2^21+3 "keystrokes"), is again 141909, with   ::        
+     :: sigma = 295.  The mean is based on theory; sigma comes from   ::        
+     :: extensive simulation.                                         ::        
+     ::                                                               ::        
+     ::    The DNA test considers an alphabet of 4 letters::  C,G,A,T,::        
+     :: determined by two designated bits in the sequence of random   ::        
+     :: integers being tested.  It considers 10-letter words, so that ::        
+     :: as in OPSO and OQSO, there are 2^20 possible words, and the   ::        
+     :: mean number of missing words from a string of 2^21  (over-    ::        
+     :: lapping)  10-letter  words (2^21+9 "keystrokes") is 141909.   ::        
+     :: The standard deviation sigma=339 was determined as for OQSO   ::        
+     :: by simulation.  (Sigma for OPSO, 290, is the true value (to   ::        
+     :: three places), not determined by simulation.                  ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+ OPSO test for generator o:\tmp\x32s.raw
+  Output: No. missing words (mw), equiv normal variate (z), p-value (p)
+                                                           mw     z     p
+    OPSO for o:\tmp\x32s.raw using bits 23 to 32        142122   .733  .7683
+    OPSO for o:\tmp\x32s.raw using bits 22 to 31        142389  1.654  .9509
+    OPSO for o:\tmp\x32s.raw using bits 21 to 30        141768  -.487  .3130
+    OPSO for o:\tmp\x32s.raw using bits 20 to 29        142026   .402  .6563
+    OPSO for o:\tmp\x32s.raw using bits 19 to 28        141779  -.449  .3266
+    OPSO for o:\tmp\x32s.raw using bits 18 to 27        141871  -.132  .4474
+    OPSO for o:\tmp\x32s.raw using bits 17 to 26        141425 -1.670  .0475
+    OPSO for o:\tmp\x32s.raw using bits 16 to 25        142119   .723  .7652
+    OPSO for o:\tmp\x32s.raw using bits 15 to 24        141825  -.291  .3856
+    OPSO for o:\tmp\x32s.raw using bits 14 to 23        141568 -1.177  .1196
+    OPSO for o:\tmp\x32s.raw using bits 13 to 22        141800  -.377  .3531
+    OPSO for o:\tmp\x32s.raw using bits 12 to 21        141835  -.256  .3989
+    OPSO for o:\tmp\x32s.raw using bits 11 to 20        141963   .185  .5734
+    OPSO for o:\tmp\x32s.raw using bits 10 to 19        141988   .271  .6069
+    OPSO for o:\tmp\x32s.raw using bits  9 to 18        142446  1.851  .9679
+    OPSO for o:\tmp\x32s.raw using bits  8 to 17        142535  2.157  .9845
+    OPSO for o:\tmp\x32s.raw using bits  7 to 16        142269  1.240  .8926
+    OPSO for o:\tmp\x32s.raw using bits  6 to 15        142264  1.223  .8893
+    OPSO for o:\tmp\x32s.raw using bits  5 to 14        142484  1.982  .9762
+    OPSO for o:\tmp\x32s.raw using bits  4 to 13        141725  -.636  .2625
+    OPSO for o:\tmp\x32s.raw using bits  3 to 12        141748  -.556  .2890
+    OPSO for o:\tmp\x32s.raw using bits  2 to 11        141677  -.801  .2115
+    OPSO for o:\tmp\x32s.raw using bits  1 to 10        142074   .568  .7149
+ OQSO test for generator o:\tmp\x32s.raw
+  Output: No. missing words (mw), equiv normal variate (z), p-value (p)
+                                                           mw     z     p
+    OQSO for o:\tmp\x32s.raw using bits 28 to 32        141889  -.069  .4725
+    OQSO for o:\tmp\x32s.raw using bits 27 to 31        141863  -.157  .4376
+    OQSO for o:\tmp\x32s.raw using bits 26 to 30        141808  -.343  .3656
+    OQSO for o:\tmp\x32s.raw using bits 25 to 29        142259  1.185  .8821
+    OQSO for o:\tmp\x32s.raw using bits 24 to 28        141606 -1.028  .1519
+    OQSO for o:\tmp\x32s.raw using bits 23 to 27        141750  -.540  .2946
+    OQSO for o:\tmp\x32s.raw using bits 22 to 26        141765  -.489  .3123
+    OQSO for o:\tmp\x32s.raw using bits 21 to 25        142014   .355  .6386
+    OQSO for o:\tmp\x32s.raw using bits 20 to 24        141869  -.137  .4456
+    OQSO for o:\tmp\x32s.raw using bits 19 to 23        142044   .457  .6760
+    OQSO for o:\tmp\x32s.raw using bits 18 to 22        141897  -.042  .4833
+    OQSO for o:\tmp\x32s.raw using bits 17 to 21        141940   .104  .5414
+    OQSO for o:\tmp\x32s.raw using bits 16 to 20        142068   .538  .7047
+    OQSO for o:\tmp\x32s.raw using bits 15 to 19        141614 -1.001  .1584
+    OQSO for o:\tmp\x32s.raw using bits 14 to 18        142057   .501  .6917
+    OQSO for o:\tmp\x32s.raw using bits 13 to 17        142216  1.040  .8507
+    OQSO for o:\tmp\x32s.raw using bits 12 to 16        141866  -.147  .4416
+    OQSO for o:\tmp\x32s.raw using bits 11 to 15        141838  -.242  .4045
+    OQSO for o:\tmp\x32s.raw using bits 10 to 14        141941   .107  .5427
+    OQSO for o:\tmp\x32s.raw using bits  9 to 13        142067   .534  .7035
+    OQSO for o:\tmp\x32s.raw using bits  8 to 12        141850  -.201  .4203
+    OQSO for o:\tmp\x32s.raw using bits  7 to 11        141268 -2.174  .0149
+    OQSO for o:\tmp\x32s.raw using bits  6 to 10        141633  -.937  .1745
+    OQSO for o:\tmp\x32s.raw using bits  5 to  9        141757  -.516  .3028
+    OQSO for o:\tmp\x32s.raw using bits  4 to  8        141320 -1.998  .0229
+    OQSO for o:\tmp\x32s.raw using bits  3 to  7        142503  2.012  .9779
+    OQSO for o:\tmp\x32s.raw using bits  2 to  6        142350  1.494  .9324
+    OQSO for o:\tmp\x32s.raw using bits  1 to  5        141780  -.438  .3305
+  DNA test for generator o:\tmp\x32s.raw
+  Output: No. missing words (mw), equiv normal variate (z), p-value (p)
+                                                           mw     z     p
+     DNA for o:\tmp\x32s.raw using bits 31 to 32        142142   .686  .7538
+     DNA for o:\tmp\x32s.raw using bits 30 to 31        141963   .158  .5629
+     DNA for o:\tmp\x32s.raw using bits 29 to 30        141413 -1.464  .0716
+     DNA for o:\tmp\x32s.raw using bits 28 to 29        142194   .840  .7995
+     DNA for o:\tmp\x32s.raw using bits 27 to 28        141003 -2.674  .0038
+     DNA for o:\tmp\x32s.raw using bits 26 to 27        141795  -.337  .3680
+     DNA for o:\tmp\x32s.raw using bits 25 to 26        141609  -.886  .1878
+     DNA for o:\tmp\x32s.raw using bits 24 to 25        141798  -.328  .3713
+     DNA for o:\tmp\x32s.raw using bits 23 to 24        141797  -.331  .3702
+     DNA for o:\tmp\x32s.raw using bits 22 to 23        141732  -.523  .3005
+     DNA for o:\tmp\x32s.raw using bits 21 to 22        141815  -.278  .3904
+     DNA for o:\tmp\x32s.raw using bits 20 to 21        142146   .698  .7575
+     DNA for o:\tmp\x32s.raw using bits 19 to 20        141399 -1.505  .0661
+     DNA for o:\tmp\x32s.raw using bits 18 to 19        141795  -.337  .3680
+     DNA for o:\tmp\x32s.raw using bits 17 to 18        142300  1.152  .8754
+     DNA for o:\tmp\x32s.raw using bits 16 to 17        142217   .908  .8180
+     DNA for o:\tmp\x32s.raw using bits 15 to 16        142080   .503  .6927
+     DNA for o:\tmp\x32s.raw using bits 14 to 15        142281  1.096  .8635
+     DNA for o:\tmp\x32s.raw using bits 13 to 14        142187   .819  .7936
+     DNA for o:\tmp\x32s.raw using bits 12 to 13        141302 -1.792  .0366
+     DNA for o:\tmp\x32s.raw using bits 11 to 12        142676  2.262  .9881
+     DNA for o:\tmp\x32s.raw using bits 10 to 11        141460 -1.325  .0925
+     DNA for o:\tmp\x32s.raw using bits  9 to 10        141984   .220  .5872
+     DNA for o:\tmp\x32s.raw using bits  8 to  9        141736  -.511  .3046
+     DNA for o:\tmp\x32s.raw using bits  7 to  8        141478 -1.272  .1016
+     DNA for o:\tmp\x32s.raw using bits  6 to  7        141393 -1.523  .0639
+     DNA for o:\tmp\x32s.raw using bits  5 to  6        141989   .235  .5929
+     DNA for o:\tmp\x32s.raw using bits  4 to  5        142381  1.391  .9179
+     DNA for o:\tmp\x32s.raw using bits  3 to  4        142107   .583  .7201
+     DNA for o:\tmp\x32s.raw using bits  2 to  3        141873  -.107  .4573
+     DNA for o:\tmp\x32s.raw using bits  1 to  2        142709  2.359  .9908
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::     This is the COUNT-THE-1's TEST on a stream of bytes.      ::        
+     :: Consider the file under test as a stream of bytes (four per   ::        
+     :: 32 bit integer).  Each byte can contain from 0 to 8 1's,      ::        
+     :: with probabilities 1,8,28,56,70,56,28,8,1 over 256.  Now let  ::        
+     :: the stream of bytes provide a string of overlapping  5-letter ::        
+     :: words, each "letter" taking values A,B,C,D,E. The letters are ::        
+     :: determined by the number of 1's in a byte::  0,1,or 2 yield A,::        
+     :: 3 yields B, 4 yields C, 5 yields D and 6,7 or 8 yield E. Thus ::        
+     :: we have a monkey at a typewriter hitting five keys with vari- ::        
+     :: ous probabilities (37,56,70,56,37 over 256).  There are 5^5   ::        
+     :: possible 5-letter words, and from a string of 256,000 (over-  ::        
+     :: lapping) 5-letter words, counts are made on the frequencies   ::        
+     :: for each word.   The quadratic form in the weak inverse of    ::        
+     :: the covariance matrix of the cell counts provides a chisquare ::        
+     :: test::  Q5-Q4, the difference of the naive Pearson sums of    ::        
+     :: (OBS-EXP)^2/EXP on counts for 5- and 4-letter cell counts.    ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+   Test results for o:\tmp\x32s.raw
+ Chi-square with 5^5-5^4=2500 d.of f. for sample size:2560000
+                               chisquare  equiv normal  p-value
+  Results fo COUNT-THE-1's in successive bytes:
+ byte stream for o:\tmp\x32s.raw  2573.30      1.037      .850034
+ byte stream for o:\tmp\x32s.raw  2469.11      -.437      .331108
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::     This is the COUNT-THE-1's TEST for specific bytes.        ::        
+     :: Consider the file under test as a stream of 32-bit integers.  ::        
+     :: From each integer, a specific byte is chosen , say the left-  ::        
+     :: most::  bits 1 to 8. Each byte can contain from 0 to 8 1's,   ::        
+     :: with probabilitie 1,8,28,56,70,56,28,8,1 over 256.  Now let   ::        
+     :: the specified bytes from successive integers provide a string ::        
+     :: of (overlapping) 5-letter words, each "letter" taking values  ::        
+     :: A,B,C,D,E. The letters are determined  by the number of 1's,  ::        
+     :: in that byte::  0,1,or 2 ---> A, 3 ---> B, 4 ---> C, 5 ---> D,::        
+     :: and  6,7 or 8 ---> E.  Thus we have a monkey at a typewriter  ::        
+     :: hitting five keys with with various probabilities::  37,56,70,::        
+     :: 56,37 over 256. There are 5^5 possible 5-letter words, and    ::        
+     :: from a string of 256,000 (overlapping) 5-letter words, counts ::        
+     :: are made on the frequencies for each word. The quadratic form ::        
+     :: in the weak inverse of the covariance matrix of the cell      ::        
+     :: counts provides a chisquare test::  Q5-Q4, the difference of  ::        
+     :: the naive Pearson  sums of (OBS-EXP)^2/EXP on counts for 5-   ::        
+     :: and 4-letter cell counts.                                     ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+ Chi-square with 5^5-5^4=2500 d.of f. for sample size: 256000
+                      chisquare  equiv normal  p value
+  Results for COUNT-THE-1's in specified bytes:
+           bits  1 to  8  2483.32      -.236      .406762
+           bits  2 to  9  2511.21       .158      .562956
+           bits  3 to 10  2657.80      2.232      .987179
+           bits  4 to 11  2588.51      1.252      .894675
+           bits  5 to 12  2575.92      1.074      .858508
+           bits  6 to 13  2472.34      -.391      .347822
+           bits  7 to 14  2611.77      1.581      .943030
+           bits  8 to 15  2376.92     -1.741      .040870
+           bits  9 to 16  2442.03      -.820      .206160
+           bits 10 to 17  2520.30       .287      .612952
+           bits 11 to 18  2533.24       .470      .680863
+           bits 12 to 19  2630.93      1.852      .967959
+           bits 13 to 20  2454.51      -.643      .259995
+           bits 14 to 21  2507.28       .103      .540991
+           bits 15 to 22  2572.98      1.032      .849001
+           bits 16 to 23  2484.45      -.220      .412949
+           bits 17 to 24  2476.17      -.337      .368078
+           bits 18 to 25  2486.60      -.189      .424876
+           bits 19 to 26  2362.02     -1.951      .025511
+           bits 20 to 27  2668.77      2.387      .991501
+           bits 21 to 28  2527.29       .386      .650211
+           bits 22 to 29  2418.27     -1.156      .123862
+           bits 23 to 30  2500.73       .010      .504116
+           bits 24 to 31  2586.77      1.227      .890111
+           bits 25 to 32  2596.25      1.361      .913276
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+ Results of DIEHARD battery of tests sent to file o:\tmp\x32s.txt

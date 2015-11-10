@@ -1,0 +1,943 @@
+       NOTE: Most of the tests in DIEHARD return a p-value, which               
+       should be uniform on [0,1) if the input file contains truly              
+       independent random bits.   Those p-values are obtained by                
+       p=F(X), where F is the assumed distribution of the sample                
+       random variable X---often normal. But that assumed F is just             
+       an asymptotic approximation, for which the fit will be worst             
+       in the tails. Thus you should not be surprised with                      
+       occasional p-values near 0 or 1, such as .0012 or .9983.                 
+       When a bit stream really FAILS BIG, you will get p's of 0 or             
+       1 to six or more places.  By all means, do not, as a                     
+       Statistician might, think that a p < .025 or p> .975 means               
+       that the RNG has "failed the test at the .05 level".  Such               
+       p's happen among the hundreds that DIEHARD produces, even                
+       with good RNG's.  So keep in mind that " p happens".                     
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::            This is the BIRTHDAY SPACINGS TEST                 ::        
+     :: Choose m birthdays in a year of n days.  List the spacings    ::        
+     :: between the birthdays.  If j is the number of values that     ::        
+     :: occur more than once in that list, then j is asymptotically   ::        
+     :: Poisson distributed with mean m^3/(4n).  Experience shows n   ::        
+     :: must be quite large, say n>=2^18, for comparing the results   ::        
+     :: to the Poisson distribution with that mean.  This test uses   ::        
+     :: n=2^24 and m=2^9,  so that the underlying distribution for j  ::        
+     :: is taken to be Poisson with lambda=2^27/(2^26)=2.  A sample   ::        
+     :: of 500 j's is taken, and a chi-square goodness of fit test    ::        
+     :: provides a p value.  The first test uses bits 1-24 (counting  ::        
+     :: from the left) from integers in the specified file.           ::        
+     ::   Then the file is closed and reopened. Next, bits 2-25 are   ::        
+     :: used to provide birthdays, then 3-26 and so on to bits 9-32.  ::        
+     :: Each set of bits provides a p-value, and the nine p-values    ::        
+     :: provide a sample for a KSTEST.                                ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+ BIRTHDAY SPACINGS TEST, M= 512 N=2**24 LAMBDA=  2.0000
+           Results for o:\tmp\x32s.raw
+                   For a sample of size 500:     mean   
+           o:\tmp\x32s.raw using bits  1 to 24   1.950
+  duplicate       number       number 
+  spacings       observed     expected
+        0          71.       67.668
+        1         142.      135.335
+        2         136.      135.335
+        3          82.       90.224
+        4          43.       45.112
+        5          16.       18.045
+  6 to INF         10.        8.282
+ Chisquare with  6 d.o.f. =     1.93 p-value=  .074167
+  :::::::::::::::::::::::::::::::::::::::::
+                   For a sample of size 500:     mean   
+           o:\tmp\x32s.raw using bits  2 to 25   1.996
+  duplicate       number       number 
+  spacings       observed     expected
+        0          63.       67.668
+        1         136.      135.335
+        2         138.      135.335
+        3          98.       90.224
+        4          40.       45.112
+        5          18.       18.045
+  6 to INF          7.        8.282
+ Chisquare with  6 d.o.f. =     1.83 p-value=  .064989
+  :::::::::::::::::::::::::::::::::::::::::
+                   For a sample of size 500:     mean   
+           o:\tmp\x32s.raw using bits  3 to 26   2.012
+  duplicate       number       number 
+  spacings       observed     expected
+        0          63.       67.668
+        1         139.      135.335
+        2         147.      135.335
+        3          80.       90.224
+        4          36.       45.112
+        5          25.       18.045
+  6 to INF         10.        8.282
+ Chisquare with  6 d.o.f. =     7.46 p-value=  .719846
+  :::::::::::::::::::::::::::::::::::::::::
+                   For a sample of size 500:     mean   
+           o:\tmp\x32s.raw using bits  4 to 27   1.946
+  duplicate       number       number 
+  spacings       observed     expected
+        0          79.       67.668
+        1         120.      135.335
+        2         148.      135.335
+        3          82.       90.224
+        4          55.       45.112
+        5           7.       18.045
+  6 to INF          9.        8.282
+ Chisquare with  6 d.o.f. =    14.56 p-value=  .976032
+  :::::::::::::::::::::::::::::::::::::::::
+                   For a sample of size 500:     mean   
+           o:\tmp\x32s.raw using bits  5 to 28   2.010
+  duplicate       number       number 
+  spacings       observed     expected
+        0          60.       67.668
+        1         145.      135.335
+        2         125.      135.335
+        3          98.       90.224
+        4          51.       45.112
+        5          15.       18.045
+  6 to INF          6.        8.282
+ Chisquare with  6 d.o.f. =     4.93 p-value=  .447123
+  :::::::::::::::::::::::::::::::::::::::::
+                   For a sample of size 500:     mean   
+           o:\tmp\x32s.raw using bits  6 to 29   2.006
+  duplicate       number       number 
+  spacings       observed     expected
+        0          66.       67.668
+        1         132.      135.335
+        2         137.      135.335
+        3          99.       90.224
+        4          39.       45.112
+        5          18.       18.045
+  6 to INF          9.        8.282
+ Chisquare with  6 d.o.f. =     1.89 p-value=  .070287
+  :::::::::::::::::::::::::::::::::::::::::
+                   For a sample of size 500:     mean   
+           o:\tmp\x32s.raw using bits  7 to 30   1.960
+  duplicate       number       number 
+  spacings       observed     expected
+        0          70.       67.668
+        1         128.      135.335
+        2         152.      135.335
+        3          84.       90.224
+        4          43.       45.112
+        5          16.       18.045
+  6 to INF          7.        8.282
+ Chisquare with  6 d.o.f. =     3.49 p-value=  .254466
+  :::::::::::::::::::::::::::::::::::::::::
+                   For a sample of size 500:     mean   
+           o:\tmp\x32s.raw using bits  8 to 31   1.966
+  duplicate       number       number 
+  spacings       observed     expected
+        0          68.       67.668
+        1         138.      135.335
+        2         135.      135.335
+        3          97.       90.224
+        4          34.       45.112
+        5          21.       18.045
+  6 to INF          7.        8.282
+ Chisquare with  6 d.o.f. =     3.98 p-value=  .321064
+  :::::::::::::::::::::::::::::::::::::::::
+                   For a sample of size 500:     mean   
+           o:\tmp\x32s.raw using bits  9 to 32   2.060
+  duplicate       number       number 
+  spacings       observed     expected
+        0          56.       67.668
+        1         149.      135.335
+        2         125.      135.335
+        3          94.       90.224
+        4          47.       45.112
+        5          17.       18.045
+  6 to INF         12.        8.282
+ Chisquare with  6 d.o.f. =     6.15 p-value=  .593151
+  :::::::::::::::::::::::::::::::::::::::::
+   The 9 p-values were
+        .074167   .064989   .719846   .976032   .447123
+        .070287   .254466   .321064   .593151
+  A KSTEST for the 9 p-values yields  .678304
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::            THE OVERLAPPING 5-PERMUTATION TEST                 ::        
+     :: This is the OPERM5 test.  It looks at a sequence of one mill- ::        
+     :: ion 32-bit random integers.  Each set of five consecutive     ::        
+     :: integers can be in one of 120 states, for the 5! possible or- ::        
+     :: derings of five numbers.  Thus the 5th, 6th, 7th,...numbers   ::        
+     :: each provide a state. As many thousands of state transitions  ::        
+     :: are observed,  cumulative counts are made of the number of    ::        
+     :: occurences of each state.  Then the quadratic form in the     ::        
+     :: weak inverse of the 120x120 covariance matrix yields a test   ::        
+     :: equivalent to the likelihood ratio test that the 120 cell     ::        
+     :: counts came from the specified (asymptotically) normal dis-   ::        
+     :: tribution with the specified 120x120 covariance matrix (with  ::        
+     :: rank 99).  This version uses 1,000,000 integers, twice.       ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+           OPERM5 test for file o:\tmp\x32s.raw
+     For a sample of 1,000,000 consecutive 5-tuples,
+ chisquare for 99 degrees of freedom= 92.641; p-value= .339216
+           OPERM5 test for file o:\tmp\x32s.raw
+     For a sample of 1,000,000 consecutive 5-tuples,
+ chisquare for 99 degrees of freedom= 86.653; p-value= .192345
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     :: This is the BINARY RANK TEST for 31x31 matrices. The leftmost ::        
+     :: 31 bits of 31 random integers from the test sequence are used ::        
+     :: to form a 31x31 binary matrix over the field {0,1}. The rank  ::        
+     :: is determined. That rank can be from 0 to 31, but ranks< 28   ::        
+     :: are rare, and their counts are pooled with those for rank 28. ::        
+     :: Ranks are found for 40,000 such random matrices and a chisqua-::        
+     :: re test is performed on counts for ranks 31,30,29 and <=28.   ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+    Binary rank test for o:\tmp\x32s.raw
+         Rank test for 31x31 binary matrices:
+        rows from leftmost 31 bits of each 32-bit integer
+      rank   observed  expected (o-e)^2/e  sum
+        28       215     211.4   .060688     .061
+        29      5076    5134.0   .655470     .716
+        30     23052   23103.0   .112790     .829
+        31     11657   11551.5   .963085    1.792
+  chisquare= 1.792 for 3 d. of f.; p-value= .473670
+--------------------------------------------------------------
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     :: This is the BINARY RANK TEST for 32x32 matrices. A random 32x ::        
+     :: 32 binary matrix is formed, each row a 32-bit random integer. ::        
+     :: The rank is determined. That rank can be from 0 to 32, ranks  ::        
+     :: less than 29 are rare, and their counts are pooled with those ::        
+     :: for rank 29.  Ranks are found for 40,000 such random matrices ::        
+     :: and a chisquare test is performed on counts for ranks  32,31, ::        
+     :: 30 and <=29.                                                  ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+    Binary rank test for o:\tmp\x32s.raw
+         Rank test for 32x32 binary matrices:
+        rows from leftmost 32 bits of each 32-bit integer
+      rank   observed  expected (o-e)^2/e  sum
+        29       224     211.4   .748784     .749
+        30      5163    5134.0   .163694     .912
+        31     23116   23103.0   .007262     .920
+        32     11497   11551.5   .257361    1.177
+  chisquare= 1.177 for 3 d. of f.; p-value= .380472
+--------------------------------------------------------------
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     :: This is the BINARY RANK TEST for 6x8 matrices.  From each of  ::        
+     :: six random 32-bit integers from the generator under test, a   ::        
+     :: specified byte is chosen, and the resulting six bytes form a  ::        
+     :: 6x8 binary matrix whose rank is determined.  That rank can be ::        
+     :: from 0 to 6, but ranks 0,1,2,3 are rare; their counts are     ::        
+     :: pooled with those for rank 4. Ranks are found for 100,000     ::        
+     :: random matrices, and a chi-square test is performed on        ::        
+     :: counts for ranks 6,5 and <=4.                                 ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+         Binary Rank Test for o:\tmp\x32s.raw
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits  1 to  8
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          886       944.3       3.600       3.600
+          r =5        21708     21743.9        .059       3.659
+          r =6        77406     77311.8        .115       3.774
+                        p=1-exp(-SUM/2)= .84844
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits  2 to  9
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          906       944.3       1.554       1.554
+          r =5        21861     21743.9        .631       2.184
+          r =6        77233     77311.8        .080       2.264
+                        p=1-exp(-SUM/2)= .67769
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits  3 to 10
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          941       944.3        .012        .012
+          r =5        21831     21743.9        .349        .360
+          r =6        77228     77311.8        .091        .451
+                        p=1-exp(-SUM/2)= .20199
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits  4 to 11
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          950       944.3        .034        .034
+          r =5        21701     21743.9        .085        .119
+          r =6        77349     77311.8        .018        .137
+                        p=1-exp(-SUM/2)= .06617
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits  5 to 12
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          971       944.3        .755        .755
+          r =5        21729     21743.9        .010        .765
+          r =6        77300     77311.8        .002        .767
+                        p=1-exp(-SUM/2)= .31849
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits  6 to 13
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          950       944.3        .034        .034
+          r =5        21740     21743.9        .001        .035
+          r =6        77310     77311.8        .000        .035
+                        p=1-exp(-SUM/2)= .01741
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits  7 to 14
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          936       944.3        .073        .073
+          r =5        21555     21743.9       1.641       1.714
+          r =6        77509     77311.8        .503       2.217
+                        p=1-exp(-SUM/2)= .66995
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits  8 to 15
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          944       944.3        .000        .000
+          r =5        21540     21743.9       1.912       1.912
+          r =6        77516     77311.8        .539       2.451
+                        p=1-exp(-SUM/2)= .70646
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits  9 to 16
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          946       944.3        .003        .003
+          r =5        21691     21743.9        .129        .132
+          r =6        77363     77311.8        .034        .166
+                        p=1-exp(-SUM/2)= .07949
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 10 to 17
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          964       944.3        .411        .411
+          r =5        21664     21743.9        .294        .705
+          r =6        77372     77311.8        .047        .751
+                        p=1-exp(-SUM/2)= .31319
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 11 to 18
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          949       944.3        .023        .023
+          r =5        21838     21743.9        .407        .431
+          r =6        77213     77311.8        .126        .557
+                        p=1-exp(-SUM/2)= .24304
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 12 to 19
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          928       944.3        .281        .281
+          r =5        21539     21743.9       1.931       2.212
+          r =6        77533     77311.8        .633       2.845
+                        p=1-exp(-SUM/2)= .75890
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 13 to 20
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          946       944.3        .003        .003
+          r =5        21707     21743.9        .063        .066
+          r =6        77347     77311.8        .016        .082
+                        p=1-exp(-SUM/2)= .04003
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 14 to 21
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          938       944.3        .042        .042
+          r =5        21705     21743.9        .070        .112
+          r =6        77357     77311.8        .026        .138
+                        p=1-exp(-SUM/2)= .06670
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 15 to 22
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          912       944.3       1.105       1.105
+          r =5        21819     21743.9        .259       1.364
+          r =6        77269     77311.8        .024       1.388
+                        p=1-exp(-SUM/2)= .50042
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 16 to 23
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          965       944.3        .454        .454
+          r =5        21789     21743.9        .094        .547
+          r =6        77246     77311.8        .056        .603
+                        p=1-exp(-SUM/2)= .26039
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 17 to 24
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          950       944.3        .034        .034
+          r =5        21754     21743.9        .005        .039
+          r =6        77296     77311.8        .003        .042
+                        p=1-exp(-SUM/2)= .02093
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 18 to 25
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          907       944.3       1.473       1.473
+          r =5        21785     21743.9        .078       1.551
+          r =6        77308     77311.8        .000       1.551
+                        p=1-exp(-SUM/2)= .53960
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 19 to 26
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          962       944.3        .332        .332
+          r =5        21991     21743.9       2.808       3.140
+          r =6        77047     77311.8        .907       4.047
+                        p=1-exp(-SUM/2)= .86779
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 20 to 27
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          905       944.3       1.636       1.636
+          r =5        21865     21743.9        .674       2.310
+          r =6        77230     77311.8        .087       2.397
+                        p=1-exp(-SUM/2)= .69831
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 21 to 28
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          902       944.3       1.895       1.895
+          r =5        21783     21743.9        .070       1.965
+          r =6        77315     77311.8        .000       1.965
+                        p=1-exp(-SUM/2)= .62570
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 22 to 29
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          966       944.3        .499        .499
+          r =5        21691     21743.9        .129        .627
+          r =6        77343     77311.8        .013        .640
+                        p=1-exp(-SUM/2)= .27381
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 23 to 30
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          928       944.3        .281        .281
+          r =5        21586     21743.9       1.147       1.428
+          r =6        77486     77311.8        .392       1.821
+                        p=1-exp(-SUM/2)= .59758
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 24 to 31
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          923       944.3        .481        .481
+          r =5        21853     21743.9        .547       1.028
+          r =6        77224     77311.8        .100       1.128
+                        p=1-exp(-SUM/2)= .43097
+        Rank of a 6x8 binary matrix,
+     rows formed from eight bits of the RNG o:\tmp\x32s.raw
+     b-rank test for bits 25 to 32
+                     OBSERVED   EXPECTED     (O-E)^2/E      SUM
+          r<=4          919       944.3        .678        .678
+          r =5        21842     21743.9        .443       1.120
+          r =6        77239     77311.8        .069       1.189
+                        p=1-exp(-SUM/2)= .44818
+   TEST SUMMARY, 25 tests on 100,000 random 6x8 matrices
+ These should be 25 uniform [0,1] random variables:
+     .848441     .677688     .201994     .066173     .318487
+     .017413     .669951     .706457     .079491     .313191
+     .243037     .758903     .040027     .066702     .500425
+     .260389     .020934     .539602     .867793     .698309
+     .625698     .273813     .597584     .430967     .448178
+   brank test summary for o:\tmp\x32s.raw
+       The KS test for those 25 supposed UNI's yields
+                    KS p-value= .849580
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::                   THE BITSTREAM TEST                          ::        
+     :: The file under test is viewed as a stream of bits. Call them  ::        
+     :: b1,b2,... .  Consider an alphabet with two "letters", 0 and 1 ::        
+     :: and think of the stream of bits as a succession of 20-letter  ::        
+     :: "words", overlapping.  Thus the first word is b1b2...b20, the ::        
+     :: second is b2b3...b21, and so on.  The bitstream test counts   ::        
+     :: the number of missing 20-letter (20-bit) words in a string of ::        
+     :: 2^21 overlapping 20-letter words.  There are 2^20 possible 20 ::        
+     :: letter words.  For a truly random string of 2^21+19 bits, the ::        
+     :: number of missing words j should be (very close to) normally  ::        
+     :: distributed with mean 141,909 and sigma 428.  Thus            ::        
+     ::  (j-141909)/428 should be a standard normal variate (z score) ::        
+     :: that leads to a uniform [0,1) p value.  The test is repeated  ::        
+     :: twenty times.                                                 ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+ THE OVERLAPPING 20-tuples BITSTREAM  TEST, 20 BITS PER WORD, N words
+   This test uses N=2^21 and samples the bitstream 20 times.
+  No. missing words should average  141909. with sigma=428.
+---------------------------------------------------------
+ tst no  1:  141028 missing words,   -2.06 sigmas from mean, p-value= .01974
+ tst no  2:  141983 missing words,     .17 sigmas from mean, p-value= .56833
+ tst no  3:  142156 missing words,     .58 sigmas from mean, p-value= .71781
+ tst no  4:  141855 missing words,    -.13 sigmas from mean, p-value= .44950
+ tst no  5:  141673 missing words,    -.55 sigmas from mean, p-value= .29042
+ tst no  6:  141388 missing words,   -1.22 sigmas from mean, p-value= .11160
+ tst no  7:  141969 missing words,     .14 sigmas from mean, p-value= .55544
+ tst no  8:  141052 missing words,   -2.00 sigmas from mean, p-value= .02258
+ tst no  9:  142160 missing words,     .59 sigmas from mean, p-value= .72096
+ tst no 10:  141925 missing words,     .04 sigmas from mean, p-value= .51460
+ tst no 11:  141991 missing words,     .19 sigmas from mean, p-value= .57567
+ tst no 12:  140927 missing words,   -2.30 sigmas from mean, p-value= .01086
+ tst no 13:  141877 missing words,    -.08 sigmas from mean, p-value= .46990
+ tst no 14:  141700 missing words,    -.49 sigmas from mean, p-value= .31239
+ tst no 15:  142271 missing words,     .85 sigmas from mean, p-value= .80095
+ tst no 16:  142605 missing words,    1.63 sigmas from mean, p-value= .94796
+ tst no 17:  142162 missing words,     .59 sigmas from mean, p-value= .72252
+ tst no 18:  141406 missing words,   -1.18 sigmas from mean, p-value= .11980
+ tst no 19:  141438 missing words,   -1.10 sigmas from mean, p-value= .13540
+ tst no 20:  141555 missing words,    -.83 sigmas from mean, p-value= .20387
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::             The tests OPSO, OQSO and DNA                      ::        
+     ::         OPSO means Overlapping-Pairs-Sparse-Occupancy         ::        
+     :: The OPSO test considers 2-letter words from an alphabet of    ::        
+     :: 1024 letters.  Each letter is determined by a specified ten   ::        
+     :: bits from a 32-bit integer in the sequence to be tested. OPSO ::        
+     :: generates  2^21 (overlapping) 2-letter words  (from 2^21+1    ::        
+     :: "keystrokes")  and counts the number of missing words---that  ::        
+     :: is 2-letter words which do not appear in the entire sequence. ::        
+     :: That count should be very close to normally distributed with  ::        
+     :: mean 141,909, sigma 290. Thus (missingwrds-141909)/290 should ::        
+     :: be a standard normal variable. The OPSO test takes 32 bits at ::        
+     :: a time from the test file and uses a designated set of ten    ::        
+     :: consecutive bits. It then restarts the file for the next de-  ::        
+     :: signated 10 bits, and so on.                                  ::        
+     ::                                                               ::        
+     ::     OQSO means Overlapping-Quadruples-Sparse-Occupancy        ::        
+     ::   The test OQSO is similar, except that it considers 4-letter ::        
+     :: words from an alphabet of 32 letters, each letter determined  ::        
+     :: by a designated string of 5 consecutive bits from the test    ::        
+     :: file, elements of which are assumed 32-bit random integers.   ::        
+     :: The mean number of missing words in a sequence of 2^21 four-  ::        
+     :: letter words,  (2^21+3 "keystrokes"), is again 141909, with   ::        
+     :: sigma = 295.  The mean is based on theory; sigma comes from   ::        
+     :: extensive simulation.                                         ::        
+     ::                                                               ::        
+     ::    The DNA test considers an alphabet of 4 letters::  C,G,A,T,::        
+     :: determined by two designated bits in the sequence of random   ::        
+     :: integers being tested.  It considers 10-letter words, so that ::        
+     :: as in OPSO and OQSO, there are 2^20 possible words, and the   ::        
+     :: mean number of missing words from a string of 2^21  (over-    ::        
+     :: lapping)  10-letter  words (2^21+9 "keystrokes") is 141909.   ::        
+     :: The standard deviation sigma=339 was determined as for OQSO   ::        
+     :: by simulation.  (Sigma for OPSO, 290, is the true value (to   ::        
+     :: three places), not determined by simulation.                  ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+ OPSO test for generator o:\tmp\x32s.raw
+  Output: No. missing words (mw), equiv normal variate (z), p-value (p)
+                                                           mw     z     p
+    OPSO for o:\tmp\x32s.raw using bits 23 to 32        142411  1.730  .9582
+    OPSO for o:\tmp\x32s.raw using bits 22 to 31        141518 -1.349  .0886
+    OPSO for o:\tmp\x32s.raw using bits 21 to 30        141817  -.318  .3751
+    OPSO for o:\tmp\x32s.raw using bits 20 to 29        141724  -.639  .2614
+    OPSO for o:\tmp\x32s.raw using bits 19 to 28        141431 -1.649  .0495
+    OPSO for o:\tmp\x32s.raw using bits 18 to 27        141825  -.291  .3856
+    OPSO for o:\tmp\x32s.raw using bits 17 to 26        142084   .602  .7265
+    OPSO for o:\tmp\x32s.raw using bits 16 to 25        141909  -.001  .4995
+    OPSO for o:\tmp\x32s.raw using bits 15 to 24        141438 -1.625  .0521
+    OPSO for o:\tmp\x32s.raw using bits 14 to 23        142121   .730  .7673
+    OPSO for o:\tmp\x32s.raw using bits 13 to 22        141678  -.798  .2125
+    OPSO for o:\tmp\x32s.raw using bits 12 to 21        141789  -.415  .3391
+    OPSO for o:\tmp\x32s.raw using bits 11 to 20        141758  -.522  .3009
+    OPSO for o:\tmp\x32s.raw using bits 10 to 19        141396 -1.770  .0384
+    OPSO for o:\tmp\x32s.raw using bits  9 to 18        141854  -.191  .4243
+    OPSO for o:\tmp\x32s.raw using bits  8 to 17        141842  -.232  .4082
+    OPSO for o:\tmp\x32s.raw using bits  7 to 16        141764  -.501  .3081
+    OPSO for o:\tmp\x32s.raw using bits  6 to 15        142166   .885  .8119
+    OPSO for o:\tmp\x32s.raw using bits  5 to 14        141578 -1.143  .1266
+    OPSO for o:\tmp\x32s.raw using bits  4 to 13        142086   .609  .7288
+    OPSO for o:\tmp\x32s.raw using bits  3 to 12        141943   .116  .5462
+    OPSO for o:\tmp\x32s.raw using bits  2 to 11        142252  1.182  .8813
+    OPSO for o:\tmp\x32s.raw using bits  1 to 10        141729  -.622  .2670
+ OQSO test for generator o:\tmp\x32s.raw
+  Output: No. missing words (mw), equiv normal variate (z), p-value (p)
+                                                           mw     z     p
+    OQSO for o:\tmp\x32s.raw using bits 28 to 32        142015   .358  .6399
+    OQSO for o:\tmp\x32s.raw using bits 27 to 31        141855  -.184  .4269
+    OQSO for o:\tmp\x32s.raw using bits 26 to 30        141805  -.354  .3618
+    OQSO for o:\tmp\x32s.raw using bits 25 to 29        142202   .992  .8394
+    OQSO for o:\tmp\x32s.raw using bits 24 to 28        141876  -.113  .4550
+    OQSO for o:\tmp\x32s.raw using bits 23 to 27        142121   .718  .7635
+    OQSO for o:\tmp\x32s.raw using bits 22 to 26        141417 -1.669  .0476
+    OQSO for o:\tmp\x32s.raw using bits 21 to 25        142172   .890  .8134
+    OQSO for o:\tmp\x32s.raw using bits 20 to 24        141013 -3.038  .0012
+    OQSO for o:\tmp\x32s.raw using bits 19 to 23        141542 -1.245  .1065
+    OQSO for o:\tmp\x32s.raw using bits 18 to 22        142036   .429  .6662
+    OQSO for o:\tmp\x32s.raw using bits 17 to 21        142287  1.280  .8998
+    OQSO for o:\tmp\x32s.raw using bits 16 to 20        141335 -1.947  .0258
+    OQSO for o:\tmp\x32s.raw using bits 15 to 19        141943   .114  .5454
+    OQSO for o:\tmp\x32s.raw using bits 14 to 18        141474 -1.476  .0700
+    OQSO for o:\tmp\x32s.raw using bits 13 to 17        141578 -1.123  .1307
+    OQSO for o:\tmp\x32s.raw using bits 12 to 16        142133   .758  .7758
+    OQSO for o:\tmp\x32s.raw using bits 11 to 15        142273  1.233  .8912
+    OQSO for o:\tmp\x32s.raw using bits 10 to 14        141832  -.262  .3966
+    OQSO for o:\tmp\x32s.raw using bits  9 to 13        141930   .070  .5279
+    OQSO for o:\tmp\x32s.raw using bits  8 to 12        142082   .585  .7208
+    OQSO for o:\tmp\x32s.raw using bits  7 to 11        142364  1.541  .9384
+    OQSO for o:\tmp\x32s.raw using bits  6 to 10        142108   .673  .7497
+    OQSO for o:\tmp\x32s.raw using bits  5 to  9        141811  -.333  .3694
+    OQSO for o:\tmp\x32s.raw using bits  4 to  8        141781  -.435  .3318
+    OQSO for o:\tmp\x32s.raw using bits  3 to  7        142198   .979  .8361
+    OQSO for o:\tmp\x32s.raw using bits  2 to  6        142348  1.487  .9315
+    OQSO for o:\tmp\x32s.raw using bits  1 to  5        141990   .273  .6078
+  DNA test for generator o:\tmp\x32s.raw
+  Output: No. missing words (mw), equiv normal variate (z), p-value (p)
+                                                           mw     z     p
+     DNA for o:\tmp\x32s.raw using bits 31 to 32        142317  1.203  .8854
+     DNA for o:\tmp\x32s.raw using bits 30 to 31        142363  1.338  .9096
+     DNA for o:\tmp\x32s.raw using bits 29 to 30        141461 -1.323  .0930
+     DNA for o:\tmp\x32s.raw using bits 28 to 29        141928   .055  .5220
+     DNA for o:\tmp\x32s.raw using bits 27 to 28        141610  -.883  .1886
+     DNA for o:\tmp\x32s.raw using bits 26 to 27        141736  -.511  .3046
+     DNA for o:\tmp\x32s.raw using bits 25 to 26        141762  -.435  .3319
+     DNA for o:\tmp\x32s.raw using bits 24 to 25        141463 -1.317  .0940
+     DNA for o:\tmp\x32s.raw using bits 23 to 24        141735  -.514  .3035
+     DNA for o:\tmp\x32s.raw using bits 22 to 23        142259  1.031  .8488
+     DNA for o:\tmp\x32s.raw using bits 21 to 22        142246   .993  .8397
+     DNA for o:\tmp\x32s.raw using bits 20 to 21        142416  1.495  .9325
+     DNA for o:\tmp\x32s.raw using bits 19 to 20        141766  -.423  .3362
+     DNA for o:\tmp\x32s.raw using bits 18 to 19        142230   .946  .8279
+     DNA for o:\tmp\x32s.raw using bits 17 to 18        141787  -.361  .3591
+     DNA for o:\tmp\x32s.raw using bits 16 to 17        142050   .415  .6609
+     DNA for o:\tmp\x32s.raw using bits 15 to 16        141908  -.004  .4984
+     DNA for o:\tmp\x32s.raw using bits 14 to 15        142040   .385  .6501
+     DNA for o:\tmp\x32s.raw using bits 13 to 14        141580  -.971  .1657
+     DNA for o:\tmp\x32s.raw using bits 12 to 13        142007   .288  .6134
+     DNA for o:\tmp\x32s.raw using bits 11 to 12        142052   .421  .6631
+     DNA for o:\tmp\x32s.raw using bits 10 to 11        141399 -1.505  .0661
+     DNA for o:\tmp\x32s.raw using bits  9 to 10        142064   .456  .6759
+     DNA for o:\tmp\x32s.raw using bits  8 to  9        141976   .197  .5780
+     DNA for o:\tmp\x32s.raw using bits  7 to  8        141827  -.243  .4041
+     DNA for o:\tmp\x32s.raw using bits  6 to  7        141554 -1.048  .1473
+     DNA for o:\tmp\x32s.raw using bits  5 to  6        142050   .415  .6609
+     DNA for o:\tmp\x32s.raw using bits  4 to  5        142151   .713  .7620
+     DNA for o:\tmp\x32s.raw using bits  3 to  4        142179   .795  .7868
+     DNA for o:\tmp\x32s.raw using bits  2 to  3        142025   .341  .6335
+     DNA for o:\tmp\x32s.raw using bits  1 to  2        141575  -.986  .1620
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::     This is the COUNT-THE-1's TEST on a stream of bytes.      ::        
+     :: Consider the file under test as a stream of bytes (four per   ::        
+     :: 32 bit integer).  Each byte can contain from 0 to 8 1's,      ::        
+     :: with probabilities 1,8,28,56,70,56,28,8,1 over 256.  Now let  ::        
+     :: the stream of bytes provide a string of overlapping  5-letter ::        
+     :: words, each "letter" taking values A,B,C,D,E. The letters are ::        
+     :: determined by the number of 1's in a byte::  0,1,or 2 yield A,::        
+     :: 3 yields B, 4 yields C, 5 yields D and 6,7 or 8 yield E. Thus ::        
+     :: we have a monkey at a typewriter hitting five keys with vari- ::        
+     :: ous probabilities (37,56,70,56,37 over 256).  There are 5^5   ::        
+     :: possible 5-letter words, and from a string of 256,000 (over-  ::        
+     :: lapping) 5-letter words, counts are made on the frequencies   ::        
+     :: for each word.   The quadratic form in the weak inverse of    ::        
+     :: the covariance matrix of the cell counts provides a chisquare ::        
+     :: test::  Q5-Q4, the difference of the naive Pearson sums of    ::        
+     :: (OBS-EXP)^2/EXP on counts for 5- and 4-letter cell counts.    ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+   Test results for o:\tmp\x32s.raw
+ Chi-square with 5^5-5^4=2500 d.of f. for sample size:2560000
+                               chisquare  equiv normal  p-value
+  Results fo COUNT-THE-1's in successive bytes:
+ byte stream for o:\tmp\x32s.raw  2500.57       .008      .503226
+ byte stream for o:\tmp\x32s.raw  2581.26      1.149      .874773
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::     This is the COUNT-THE-1's TEST for specific bytes.        ::        
+     :: Consider the file under test as a stream of 32-bit integers.  ::        
+     :: From each integer, a specific byte is chosen , say the left-  ::        
+     :: most::  bits 1 to 8. Each byte can contain from 0 to 8 1's,   ::        
+     :: with probabilitie 1,8,28,56,70,56,28,8,1 over 256.  Now let   ::        
+     :: the specified bytes from successive integers provide a string ::        
+     :: of (overlapping) 5-letter words, each "letter" taking values  ::        
+     :: A,B,C,D,E. The letters are determined  by the number of 1's,  ::        
+     :: in that byte::  0,1,or 2 ---> A, 3 ---> B, 4 ---> C, 5 ---> D,::        
+     :: and  6,7 or 8 ---> E.  Thus we have a monkey at a typewriter  ::        
+     :: hitting five keys with with various probabilities::  37,56,70,::        
+     :: 56,37 over 256. There are 5^5 possible 5-letter words, and    ::        
+     :: from a string of 256,000 (overlapping) 5-letter words, counts ::        
+     :: are made on the frequencies for each word. The quadratic form ::        
+     :: in the weak inverse of the covariance matrix of the cell      ::        
+     :: counts provides a chisquare test::  Q5-Q4, the difference of  ::        
+     :: the naive Pearson  sums of (OBS-EXP)^2/EXP on counts for 5-   ::        
+     :: and 4-letter cell counts.                                     ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+ Chi-square with 5^5-5^4=2500 d.of f. for sample size: 256000
+                      chisquare  equiv normal  p value
+  Results for COUNT-THE-1's in specified bytes:
+           bits  1 to  8  2481.82      -.257      .398559
+           bits  2 to  9  2519.84       .281      .610495
+           bits  3 to 10  2524.85       .351      .637362
+           bits  4 to 11  2559.54       .842      .800100
+           bits  5 to 12  2637.72      1.948      .974276
+           bits  6 to 13  2425.02     -1.060      .144495
+           bits  7 to 14  2506.11       .086      .534457
+           bits  8 to 15  2418.80     -1.148      .125421
+           bits  9 to 16  2548.74       .689      .754677
+           bits 10 to 17  2520.03       .283      .611490
+           bits 11 to 18  2575.03      1.061      .855669
+           bits 12 to 19  2496.46      -.050      .480016
+           bits 13 to 20  2463.05      -.523      .300638
+           bits 14 to 21  2467.04      -.466      .320559
+           bits 15 to 22  2404.67     -1.348      .088812
+           bits 16 to 23  2472.91      -.383      .350811
+           bits 17 to 24  2520.01       .283      .611430
+           bits 18 to 25  2488.87      -.157      .437485
+           bits 19 to 26  2430.95      -.977      .164399
+           bits 20 to 27  2546.01       .651      .742372
+           bits 21 to 28  2456.15      -.620      .267592
+           bits 22 to 29  2440.46      -.842      .199890
+           bits 23 to 30  2597.57      1.380      .916179
+           bits 24 to 31  2528.70       .406      .657587
+           bits 25 to 32  2480.24      -.279      .389958
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::               THIS IS A PARKING LOT TEST                      ::        
+     :: In a square of side 100, randomly "park" a car---a circle of  ::        
+     :: radius 1.   Then try to park a 2nd, a 3rd, and so on, each    ::        
+     :: time parking "by ear".  That is, if an attempt to park a car  ::        
+     :: causes a crash with one already parked, try again at a new    ::        
+     :: random location. (To avoid path problems, consider parking    ::        
+     :: helicopters rather than cars.)   Each attempt leads to either ::        
+     :: a crash or a success, the latter followed by an increment to  ::        
+     :: the list of cars already parked. If we plot n:  the number of ::        
+     :: attempts, versus k::  the number successfully parked, we get a::        
+     :: curve that should be similar to those provided by a perfect   ::        
+     :: random number generator.  Theory for the behavior of such a   ::        
+     :: random curve seems beyond reach, and as graphics displays are ::        
+     :: not available for this battery of tests, a simple characteriz ::        
+     :: ation of the random experiment is used: k, the number of cars ::        
+     :: successfully parked after n=12,000 attempts. Simulation shows ::        
+     :: that k should average 3523 with sigma 21.9 and is very close  ::        
+     :: to normally distributed.  Thus (k-3523)/21.9 should be a st-  ::        
+     :: andard normal variable, which, converted to a uniform varia-  ::        
+     :: ble, provides input to a KSTEST based on a sample of 10.      ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+           CDPARK: result of ten tests on file o:\tmp\x32s.raw
+            Of 12,000 tries, the average no. of successes
+                 should be 3523 with sigma=21.9
+            Successes: 3518    z-score:  -.228 p-value: .409702
+            Successes: 3525    z-score:   .091 p-value: .536382
+            Successes: 3509    z-score:  -.639 p-value: .261324
+            Successes: 3526    z-score:   .137 p-value: .554479
+            Successes: 3509    z-score:  -.639 p-value: .261324
+            Successes: 3501    z-score: -1.005 p-value: .157553
+            Successes: 3528    z-score:   .228 p-value: .590298
+            Successes: 3528    z-score:   .228 p-value: .590298
+            Successes: 3512    z-score:  -.502 p-value: .307734
+            Successes: 3567    z-score:  2.009 p-value: .977738
+ 
+           square size   avg. no.  parked   sample sigma
+             100.            3522.300       17.353
+            KSTEST for the above 10: p=  .499148
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::               THE MINIMUM DISTANCE TEST                       ::        
+     :: It does this 100 times::   choose n=8000 random points in a   ::        
+     :: square of side 10000.  Find d, the minimum distance between   ::        
+     :: the (n^2-n)/2 pairs of points.  If the points are truly inde- ::        
+     :: pendent uniform, then d^2, the square of the minimum distance ::        
+     :: should be (very close to) exponentially distributed with mean ::        
+     :: .995 .  Thus 1-exp(-d^2/.995) should be uniform on [0,1) and  ::        
+     :: a KSTEST on the resulting 100 values serves as a test of uni- ::        
+     :: formity for random points in the square. Test numbers=0 mod 5 ::        
+     :: are printed but the KSTEST is based on the full set of 100    ::        
+     :: random choices of 8000 points in the 10000x10000 square.      ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+               This is the MINIMUM DISTANCE test
+              for random integers in the file o:\tmp\x32s.raw
+     Sample no.    d^2     avg     equiv uni            
+           5    1.5606    .8068     .791637
+          10     .6498   1.0268     .479558
+          15     .1627    .9543     .150825
+          20    1.1880   1.1113     .696985
+          25    3.9640   1.1371     .981388
+          30     .3731   1.1798     .312704
+          35    1.9361   1.1572     .857130
+          40     .2100   1.1245     .190302
+          45     .1330   1.0719     .125116
+          50     .7546   1.0373     .531561
+          55    1.0964    .9997     .667778
+          60     .5868    .9797     .445530
+          65     .7519    .9333     .530294
+          70    1.2706    .9172     .721122
+          75     .2840    .8853     .248278
+          80     .8320    .8777     .566637
+          85     .7171    .8691     .513575
+          90     .0316    .8401     .031278
+          95     .9295    .8778     .607076
+         100     .0401    .8718     .039533
+     MINIMUM DISTANCE TEST for o:\tmp\x32s.raw
+          Result of KS test on 20 transformed mindist^2's:
+                                  p-value= .492926
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::              THE 3DSPHERES TEST                               ::        
+     :: Choose  4000 random points in a cube of edge 1000.  At each   ::        
+     :: point, center a sphere large enough to reach the next closest ::        
+     :: point. Then the volume of the smallest such sphere is (very   ::        
+     :: close to) exponentially distributed with mean 120pi/3.  Thus  ::        
+     :: the radius cubed is exponential with mean 30. (The mean is    ::        
+     :: obtained by extensive simulation).  The 3DSPHERES test gener- ::        
+     :: ates 4000 such spheres 20 times.  Each min radius cubed leads ::        
+     :: to a uniform variable by means of 1-exp(-r^3/30.), then a     ::        
+     ::  KSTEST is done on the 20 p-values.                           ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+               The 3DSPHERES test for file o:\tmp\x32s.raw
+ sample no:  1     r^3=  20.774     p-value= .49966
+ sample no:  2     r^3=  15.700     p-value= .40746
+ sample no:  3     r^3=  10.239     p-value= .28915
+ sample no:  4     r^3=  78.658     p-value= .92734
+ sample no:  5     r^3=  25.428     p-value= .57156
+ sample no:  6     r^3=  38.805     p-value= .72569
+ sample no:  7     r^3=  24.863     p-value= .56341
+ sample no:  8     r^3=   3.054     p-value= .09680
+ sample no:  9     r^3=   4.812     p-value= .14818
+ sample no: 10     r^3=  17.048     p-value= .43349
+ sample no: 11     r^3=  44.909     p-value= .77619
+ sample no: 12     r^3=   9.714     p-value= .27660
+ sample no: 13     r^3=  59.252     p-value= .86125
+ sample no: 14     r^3=  50.737     p-value= .81571
+ sample no: 15     r^3=  31.489     p-value= .64993
+ sample no: 16     r^3=  78.093     p-value= .92596
+ sample no: 17     r^3=  13.792     p-value= .36854
+ sample no: 18     r^3=  34.403     p-value= .68234
+ sample no: 19     r^3=   9.231     p-value= .26488
+ sample no: 20     r^3=  17.372     p-value= .43958
+  A KS test is applied to those 20 p-values.
+---------------------------------------------------------
+       3DSPHERES test for file o:\tmp\x32s.raw      p-value= .265256
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::      This is the SQEEZE test                                  ::        
+     ::  Random integers are floated to get uniforms on [0,1). Start- ::        
+     ::  ing with k=2^31=2147483647, the test finds j, the number of  ::        
+     ::  iterations necessary to reduce k to 1, using the reduction   ::        
+     ::  k=ceiling(k*U), with U provided by floating integers from    ::        
+     ::  the file being tested.  Such j's are found 100,000 times,    ::        
+     ::  then counts for the number of times j was <=6,7,...,47,>=48  ::        
+     ::  are used to provide a chi-square test for cell frequencies.  ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+            RESULTS OF SQUEEZE TEST FOR o:\tmp\x32s.raw
+         Table of standardized frequency counts
+     ( (obs-exp)/sqrt(exp) )^2
+        for j taking values <=6,7,8,...,47,>=48:
+     -.1    -2.0    -1.6      .0     -.2     -.3
+     -.5     -.5    -2.8      .2    -1.3     -.1
+      .6     2.9     -.2     -.3     -.4     -.3
+      .8     -.5    -1.9     1.8      .1      .4
+     -.5     -.4     2.7    -1.4      .3     -.2
+      .7    -1.3     -.4     -.3     -.1      .4
+     -.5    -1.7     -.4      .4     2.4    -1.0
+    -1.1
+           Chi-square with 42 degrees of freedom: 56.578
+              z-score=  1.591  p-value= .934254
+______________________________________________________________
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::             The  OVERLAPPING SUMS test                        ::        
+     :: Integers are floated to get a sequence U(1),U(2),... of uni-  ::        
+     :: form [0,1) variables.  Then overlapping sums,                 ::        
+     ::   S(1)=U(1)+...+U(100), S2=U(2)+...+U(101),... are formed.    ::        
+     :: The S's are virtually normal with a certain covariance mat-   ::        
+     :: rix.  A linear transformation of the S's converts them to a   ::        
+     :: sequence of independent standard normals, which are converted ::        
+     :: to uniform variables for a KSTEST. The  p-values from ten     ::        
+     :: KSTESTs are given still another KSTEST.                       ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+                Test no.  1      p-value  .575020
+                Test no.  2      p-value  .343907
+                Test no.  3      p-value  .581041
+                Test no.  4      p-value  .306547
+                Test no.  5      p-value  .373924
+                Test no.  6      p-value  .659522
+                Test no.  7      p-value  .131555
+                Test no.  8      p-value  .563936
+                Test no.  9      p-value  .921395
+                Test no. 10      p-value  .911699
+   Results of the OSUM test for o:\tmp\x32s.raw
+        KSTEST on the above 10 p-values:  .244460
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     ::     This is the RUNS test.  It counts runs up, and runs down, ::        
+     :: in a sequence of uniform [0,1) variables, obtained by float-  ::        
+     :: ing the 32-bit integers in the specified file. This example   ::        
+     :: shows how runs are counted:  .123,.357,.789,.425,.224,.416,.95::        
+     :: contains an up-run of length 3, a down-run of length 2 and an ::        
+     :: up-run of (at least) 2, depending on the next values.  The    ::        
+     :: covariance matrices for the runs-up and runs-down are well    ::        
+     :: known, leading to chisquare tests for quadratic forms in the  ::        
+     :: weak inverses of the covariance matrices.  Runs are counted   ::        
+     :: for sequences of length 10,000.  This is done ten times. Then ::        
+     :: repeated.                                                     ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+           The RUNS test for file o:\tmp\x32s.raw
+     Up and down runs in a sample of 10000
+_________________________________________________ 
+                 Run test for o:\tmp\x32s.raw:
+       runs up; ks test for 10 p's: .036923
+     runs down; ks test for 10 p's: .670716
+                 Run test for o:\tmp\x32s.raw:
+       runs up; ks test for 10 p's: .179201
+     runs down; ks test for 10 p's: .773075
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+     :: This is the CRAPS TEST. It plays 200,000 games of craps, finds::        
+     :: the number of wins and the number of throws necessary to end  ::        
+     :: each game.  The number of wins should be (very close to) a    ::        
+     :: normal with mean 200000p and variance 200000p(1-p), with      ::        
+     :: p=244/495.  Throws necessary to complete the game can vary    ::        
+     :: from 1 to infinity, but counts for all>21 are lumped with 21. ::        
+     :: A chi-square test is made on the no.-of-throws cell counts.   ::        
+     :: Each 32-bit integer from the test file provides the value for ::        
+     :: the throw of a die, by floating to [0,1), multiplying by 6    ::        
+     :: and taking 1 plus the integer part of the result.             ::        
+     :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+                Results of craps test for o:\tmp\x32s.raw
+  No. of wins:  Observed Expected
+                                98618    98585.86
+                  98618= No. of wins, z-score=  .144 pvalue= .55715
+   Analysis of Throws-per-Game:
+ Chisq=  17.56 for 20 degrees of freedom, p=  .38333
+               Throws Observed Expected  Chisq     Sum
+                  1    66699    66666.7    .016     .016
+                  2    37421    37654.3   1.446    1.461
+                  3    26891    26954.7    .151    1.612
+                  4    19377    19313.5    .209    1.821
+                  5    13909    13851.4    .239    2.061
+                  6     9943     9943.5    .000    2.061
+                  7     7283     7145.0   2.664    4.725
+                  8     5138     5139.1    .000    4.725
+                  9     3734     3699.9    .315    5.040
+                 10     2708     2666.3    .652    5.692
+                 11     1951     1923.3    .398    6.091
+                 12     1374     1388.7    .156    6.247
+                 13     1029     1003.7    .637    6.884
+                 14      666      726.1   4.981   11.865
+                 15      522      525.8    .028   11.893
+                 16      376      381.2    .070   11.962
+                 17      259      276.5   1.112   13.075
+                 18      196      200.8    .116   13.191
+                 19      150      146.0    .110   13.302
+                 20      117      106.2   1.095   14.397
+                 21      257      287.1   3.159   17.555
+            SUMMARY  FOR o:\tmp\x32s.raw
+                p-value for no. of wins: .557152
+                p-value for throws/game: .383330
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+ Results of DIEHARD battery of tests

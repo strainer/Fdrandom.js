@@ -1,0 +1,82 @@
+<html>
+
+<pre>
+<div id="log"></div>
+</pre>
+</html>
+
+<script>
+(function () {
+    var old = console.log;
+    tlogger = document.getElementById('log');
+    console.log = function (message) {
+        if (typeof message == 'object') {
+            tlogger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
+        } else {
+            tlogger.innerHTML += message + '<br />';
+        }
+    }
+})();
+
+</script>
+
+<script src='../dlib/mutil.js'></script>
+<script src='../dlib/Fdrandom.js'></script>
+<script src='../dlib/Testprngs.js'></script>
+<script src='../dlib/floatpresc.js'></script>
+<script src='./seedrandom.js'></script>
+
+<script>
+//~ console.log("-")
+//~ benchn(4,Math.random,5) //good balances and averages 
+
+
+dur=4
+
+benchn(dur,Math.random    ,5) 
+
+var myrng = new Math.seedrandom('hello.');
+
+benchn(dur,myrng    ,5)
+
+//~ pr(Fdrandom.i32q())
+//~ pr(Fdrandom.i32q())
+//~ pr(Fdrandom.i32q())
+//~ pr(Fdrandom.i32q())
+//~ benchn(3,Fdrandom.i32   ,5,"i32 ")  
+benchn(dur,Fdrandom.f53  ,5,"f53 ")  
+
+//~ benchn(dur,Math.random    ,dur,"Math.random ")  
+//~ benchn(dur,Fdrandom.i32  ,dur,"i32 ")  
+//~ benchn(dur,Fdrandom.i32z  ,dur,"i32z ")  
+
+//~ benchn(3,Fdrandom.i32z  ,dur,"i32z ") 
+
+//~ benchn(3,Fdrandom.f32a    ,dur,"f32a   " )
+//~ benchn(3,Fdrandom.f32    ,dur,"f32   " )
+//~ benchn(3,Fdrandom.f53    ,dur, "f53  " )
+benchn(3,Fdrandom.next    ,dur, "next  " )
+benchn(3,Fdrandom.f53a    ,dur,"f53a  " )
+
+//~ benchn(3,Fdrandom.f53bm    ,dur,"f53bm   " )
+//~ benchn(3,Fdrandom.f45bm    ,dur,"f45bm   " )
+//~ benchn(3,Fdrandom.i32us    ,dur,"i32us   " )
+
+//console.log("-")
+//benchn(4,Fdrandom.f32,1) //good balances and averages 
+//console.log("-")
+//benchn(4,Fdrandom.fbm,1) //good balances and averages 
+//console.log("-")
+//benchn(4,Fdrandom.dbm,1) //good balances and averages 
+//console.log("-")
+//benchn(4,Fdrandom.fus,1) //good balances and averages 
+//console.log("-")
+//benchn(4,Fdrandom.dus,1) //good balances and averages 
+//console.log("-")
+//benchn(4,Fdrandom.ius,1) //good balances and averages 
+//console.log("-")
+//benchn(10,Fdrandom.d64,5) //good balances and averages 
+
+
+</script>
+

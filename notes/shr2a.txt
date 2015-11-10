@@ -1,0 +1,47 @@
+SHR2A - A kind of small PRNG related to SHR3 
+--------------------------------------------
+
+This is a small 32bit prng similar to shr3,
+with one less shift-xor operation, and one extra addition.
+
+**It can pass diehard but fails badly in 2-dimensions.
+
+``` 
+ v= v ^ ( ( v << Sl ) + A )  
+ v= v ^ v>>>Sr
+```
+
+Dependant on the values of constants Sl, Sr and A : **v** traces
+psuedorandom walks through portions of its 32bit spaces.
+
+The walks of a few thousand parameter combinations were mined
+in a few hours, coming up with hundreds of walks that happen 
+to cover over 95% of the 32bit state space.
+
+Despite their small generation, long walks found in these formula which
+set reasonably complex addition values, often appear indestinguishable 
+from random streams except for a faint bias due to the likelyhood of uneven
+coverage of the numberspace, which shrinks as the proportion of coverage
+increases.
+
+These values produce walks over 99.9% of the state space.
+```
+  va^= (va<<7)+1498916339; va^= va>>>8   //period is 4294368480 
+	vb^= (vb<<6)+1973037067; vb^= vb>>>10  //period is 4294280630
+	vc^= (vc<<5)+1334203894; vc^= vc>>>12  //period is 4293793381  	  
+```
+
+The walks tend to be less apparently regular than the classic
+shr3 form**. It could be expected that the addition operation complicates 
+reverse formulation compared to the plain xorshift generator, 
+by equivalent of around a dozen cascading logic operations which the 
+addition of a suitable value can equate to. 
+However my understanding of this kind of analysis is light.
+
+For the purpose of providing high quality deterministic prngs for
+Fdrandom.js, the best discovered formulations were checked individually
+and combined by 'xor'ing to give longer period prngs with more
+confidence of deeper quality.
+
+This was was retired when an Alea like generator is much more
+efficient in floating point math at least.
