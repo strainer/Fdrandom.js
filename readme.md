@@ -185,7 +185,7 @@ uniformsum=p.usum(n,sigma,mu) //to scale and shift with sigma and mu
 var inray=["a","b","c","d","e"] 
 var instr="0123456789abcdef" 
 var outray =[1,2,3]
-var outstr ="
+var outstr =""
 
 p.mixup(inray,2,4) //mixes up elements 2 to 4
 p.mixup(instr,2,4) //mixes up chars at 2 to 4
