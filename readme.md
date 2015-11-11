@@ -39,7 +39,7 @@ Method	 | Speed % | Notes
  :------ | :-----: | :----------------------------
 f48      |   100   | Standard Number rands with 48bit resolution 
 next     |   100   | Alias of f48 (0>0.9999999999999999)                  
-fxs      |   50    | As f48 with 52 bits resolution (excessive)
+fxs      |   50    | As f48 with 53 bits resolution (excessive)
 f24      |   90    | Safe values for Float32array (0>0.99999994)
          |         |                               
 i32      |   90    | 32 bit signed integer values
