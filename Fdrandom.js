@@ -11,13 +11,13 @@ Fdrandom=newFdrnd();
 function newFdrnd(){
 	return (function () { 
 	
-    var va,vl,vs,qr,us,rb,ju,U,sv
-    plant(arguments)		
-    sv=getstate()
+		var va,vl,vs,qr,us,rb,ju,U,sv
+		plant(arguments)		
+		sv=getstate()
 		
-    function plant(sd)
+		function plant(sd)
 		{
-      va=0; vl=1; vs=1; qr=0.0; us=0.0; rb=1.0e+15
+			va=0; vl=1; vs=1; qr=0.0; us=0.0; rb=1.0e+15
 			ju=1; U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
 
 			sow(arguments)
@@ -47,9 +47,9 @@ function newFdrnd(){
 				if(sd.length)
 				{ for( i=0; i<sd.length; i++ ) sow(sd[i]) }
 			}
-    }
+		}
 		
-    function setstate(s) 
+		function setstate(s) 
 		{ for( var i=0; i<8; i++ ) U[i]=s[i]
 			ju=s[8];  va=s[9];  vl=s[10];  
 			vs=s[11]; qr=s[12]; us=s[13]; rb=s[14]; sv=s
@@ -59,11 +59,10 @@ function newFdrnd(){
 		{ return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7], 
 		           ju, va, vl, vs, qr, us, rb ] }
 
-    function pot() { return newFdrnd(arguments) }
-    
+		function pot() { return newFdrnd(arguments) }
+		
 		function repot(s) 
-		{ if(s){ plant(s) }
-		  else { setstate(sv) } 
+		{ if (s) { plant(s) } else { setstate(sv) } 
 			return this 
 		}
 		
@@ -79,28 +78,28 @@ function newFdrnd(){
 			ag.push(arguments)
 			return newFdrnd(ag)
 		}
-   
+	 
 
 		///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
 		function f48() 
 		{	                                       
-		  var c= 0.12810301030196883 * U[0] +
+			var c= 0.12810301030196883 * U[0] +
 			       15.378612015061215  * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
 			return U[ju]= c-( (U[0]=c)>>>0 )
 		}
 		
-    function fxs() 
+		function fxs() 
 		{	                                       
-      return ( (( ((f48()*0x39b00000000)>>>4)*
+			return ( (( ((f48()*0x39b00000000)>>>4)*
 			         0.06249999650753)+f48())*5.960464477540047e-08 )
 		}  
-    
+		
 		function f24() { return f48()*0.99999997019767  }
 
-    function rlz() ///flat lcg 
+		function rlz() ///flat lcg 
 		{ return vl = (vl*13229323)^3962102927  }
 
-    function shr2a() ///flawed shift register
+		function shr2a() ///flawed shift register
 		{ va^= (va<<7)+1498916339; return va^= va>>>8 }
 
 		function range(b,d)  { return ( f48()*(d-b) ) +b }
@@ -109,12 +108,12 @@ function newFdrnd(){
 			
 		function rndbit()
 		{ 
-		  if( (rb*=2)>1.0e+14 ){ rb= f48()*2 +1  } 
+			if( (rb*=2)>1.0e+14 ){ rb= f48()*2 +1  } 
 			return rb&1
 		}
 
 		function i32()  { return (f48()*0x1700000000)|0  }
-				
+
 		function ui32() { return (f48()*0x1700000000)>>>0  }
 		
 		function ui32gl() 
@@ -128,7 +127,7 @@ function newFdrnd(){
 		
 		function f48gz() /// signed float value gaming distribution
 		{ return (qr= (qr+(qr*0.5)+((f48()*0.25)+(f48()*0.2)))*0.5)-0.5 }
-				
+
 		function f48ld(c) 
 		{ 
 			qr+= ( c=c||0.333333 ) + f48()
@@ -142,7 +141,7 @@ function newFdrnd(){
 			for(var i=0; i<n; i++) sum=f48()-sum 
 			
 			if(sig === undefined) return sum
-      if(sig !== psig) 
+			if(sig !== psig) 
 			{ psig=sig; csig= sig*Math.sqrt(1/n) } //doesnt nail it
 			//sig wants converted to equivalent gaus for large n
 			
@@ -163,9 +162,9 @@ function newFdrnd(){
 			{ havnml=0
 				if(sig === undefined) return nml
 				return nml*sig+(mu||0) 
-			}else				  
+			}else
 			{ 
-			  do{
+				do{
 					p= 2*func()-1; q= 2*func()-1
 					w= p*p + q*q
 				} while ( w>=1 )
@@ -177,11 +176,11 @@ function newFdrnd(){
 				return q*w*sig+(mu||0);
 			}
 		}
-    											
-    function mixof(a,b,c,d,e)
+
+		function mixof(a,b,c,d,e)
 		{ return mixup(null,a,b,c,d,e) }
-																	
-    function mixup()
+
+		function mixup()
 		{ var gu=arguments, g=0, mxof=0, joinr=0
 			var Ai,Ao,So="",c=0,e=0,obn=0,odn=0
 			
@@ -193,61 +192,61 @@ function newFdrnd(){
 			
 			if(mxof)
 			{ odn=gu[g++] ; obn=Ai.length 
-        c= gu[g++] ||0
+				c= gu[g++] ||0
 				e= gu[g]   ||Ai.length-1 ; e++
-			  if(!Ao)
+				if(!Ao)
 				{ Ao=new Array(odn) } 
-		    else
-        { obn=Ao.length
-				  if(typeof Ao !=='string') joinr=null
-				  else { So=Ao; obn=0 }
+				else
+				{ obn=Ao.length
+					if(typeof Ao !=='string') joinr=null
+					else { So=Ao; obn=0 }
 					if(obn===0){ Ao=new Array(odn) } 
 				}
 				odn+=obn 
 				
-			  for(var i=obn;i<odn;i++) 
+				for(var i=obn;i<odn;i++) 
 				{ Ao[i]= Ai[ c+( f48()*(e-c) )>>>0 ] }
 			}
 			else //mixup
 			{
 				c= gu[g++] ||0
 				e= gu[g]   ||Ai.length-1 ; e++
-											
+			
 				if(Ao === undefined){ //do inplace   
-					Ao=Ai          
+					Ao=Ai
 				}else{
 					if(typeof Ao ==='string') 
 					{ 
 						So=Ao; joinr=1
-						Ao=new Array(e-c); e=Ao.length
+						Ao=new Array(e-c); e-=c
 						for(var p=0; p<e; p++) Ao[p]= Ai[p+c]
 						c=0; 	
 					}else{ //Ao is given array
 						joinr=null
 						obn=Ao.length
-																
+
 						if(obn===0) Ao=new Array(e-c)
 						var jc=c-obn
 						for(var p=obn; p<obn+e-c; p++) Ao[p]= Ai[jc+p]
-						c=obn; e=Ao.length;				
+						c=obn; e=Ao.length;
 					}
-				}			  
-							
+				}
+
 				var d,p,ep=e-1
 				while( c<ep ){
-					d= Math.floor( c+( f48() *(e-c) ) )   
-					p= Ao[c]; Ao[c++]=Ao[d]; Ao[d]=p						
-				}				
+					d= Math.floor( c+( f48() *(e-c) ) )  
+					p= Ao[c]; Ao[c++]=Ao[d]; Ao[d]=p
+				}
 			}
 			
 			if (joinr){ Ao=So+Ao.join("") }
 			return Ao
 		}
-				
+
 		return{
 		
 			pot: pot,  hot: hot, repot:repot,  
-			getstate: getstate,  setstate: setstate,			
+			getstate: getstate,  setstate: setstate,
 			
 			next: f48,  f48: f48,  
 			f24:f24,  
@@ -255,16 +254,16 @@ function newFdrnd(){
 			rndbit: rndbit,
 			range: range,  irange: irange,
 
-			i32: i32,  ui32: ui32,				
+			i32: i32,  ui32: ui32,
 			i32lz: rlz,  i32sh: shr2a,
 			f48gz: f48gz ,
 			ui32gl: ui32gl, ui32gh: ui32gh,  
 			i32gx: i32gx ,i32gy: i32gy,	
 			
-			f48ld: f48ld ,			
-			gaus: gaus, gausx: gausx, usum: usum ,			
-				
-			mixup: mixup,  mixof: mixof,							
+			f48ld: f48ld ,
+			gaus: gaus, gausx: gausx, usum: usum ,
+		
+			mixup: mixup,  mixof: mixof,
 		
 		}
 	}(arguments))
