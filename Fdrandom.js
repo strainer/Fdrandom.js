@@ -5,53 +5,67 @@
  */
 
 // Fast deterministic random lib
-// U=Fdrandom.next();  apot=Fdrandom.pot("seedtxt@ .org"); av=apot.next()
+// v=Fdrandom.next();  apot=Fdrandom.pot("seedtxt@ .org"); av=apot.next()
 
 Fdrandom=newFdrnd(); 
 function newFdrnd(){
 	return (function () { 
+	
+    var va,vl,vs,qr,us,rb,ju,U,sv
+    plant(arguments)		
+    sv=getstate()
 		
-    var va=0, vl=1, vs=1, qr=0.0, us=0.0, rb=1.0e+15
-		var ju=1, U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
+    function plant(sd)
+		{
+      va=0; vl=1; vs=1; qr=0.0; us=0.0; rb=1.0e+15
+			ju=1; U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
+
+			sow(arguments)
+			
+			for( i=0;i<98;i++) f48()
+			va=range(3206324,3259830)>>>0
+					
+			function sow(sd)   
+			{ var i				
+				if(typeof sd === 'number')
+				{ 
+					i= (sd<0)? Math.abs(sd)*0.567 : sd 
+					while(i>16)     i=i*0.0588 
+					while(i<1.0e-4) i=i*151515
+					U[0]=i; f48()
+					return
+				}
+				if(typeof sd === 'string')
+				{ for( i=0; i<sd.length; i++ )
+					{ U[0]=( 65537-sd.charCodeAt(i) )/6464; f48() }
+					return	
+				}
+				if(sd==null)
+				{ U[0]= U[0]*0.33 + 4.4 
+					f48(); return
+				}
+				if(sd.length)
+				{ for( i=0; i<sd.length; i++ ) sow(sd[i]) }
+			}
+    }
 		
-		plant(arguments) 
-		for( i=0;i<128;i++) f48()
-		va=range(3206324,3259830)>>>0
-
-		function plant(sd)   
-		{ var i
-			if(typeof sd === 'number')
-			{ 
-			  i= (sd<0)? Math.abs(sd)*0.567 : sd 
-			  while(i>16)     i=i*0.0588 
-			  while(i<1.0e-4) i=i*151515
-			  U[0]= i; fxs();
-				return
-			}
-			if(typeof sd === 'string')
-		  { for( i=0; i<sd.length; i++ )
-        { U[0]=( 65537-sd.charCodeAt(i) )/6464; fxs() }
-        return	
-			}
-			if(sd==null)
-			{ U[0]= U[0]*0.33 + 4.4 
-			  f48(); return
-      }
-			if(sd.length)
-		  { for( i=0; i<sd.length; i++ ) plant(sd[i])
-				return
-			}				
-		}
-
     function setstate(s) 
 		{ for( var i=0; i<8; i++ ) U[i]=s[i]
-			qr=s[8]; vs=s[9]; ju=s[10]; rb=s[11]
+			ju=s[8];  va=s[9];  vl=s[10];  
+			vs=s[11]; qr=s[12]; us=s[13]; rb=s[14]; sv=s
 		}
 
 		function getstate() 
-		{ return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7], qr,vs,ju,rb ] }
+		{ return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7], 
+		           ju, va, vl, vs, qr, us, rb ] }
 
     function pot() { return newFdrnd(arguments) }
+    
+		function repot(s) 
+		{ if(s){ plant(s) }
+		  else { setstate(sv) } 
+			return this 
+		}
 		
 		function hot() 
 		{ var ag
@@ -65,7 +79,7 @@ function newFdrnd(){
 			ag.push(arguments)
 			return newFdrnd(ag)
 		}
-
+   
 
 		///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
 		function f48() 
@@ -224,7 +238,7 @@ function newFdrnd(){
 				
 		return{
 		
-			pot: pot,  hot: hot,  
+			pot: pot,  hot: hot, repot:repot,  
 			getstate: getstate,  setstate: setstate,			
 			
 			next: f48,  f48: f48,  

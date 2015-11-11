@@ -5,7 +5,7 @@ Fast deterministic random functions for javascript.
 ### Features
 
 * Very efficient, high quality PRNG. 
-* Single 6Kb Unlicensed source.
+* Single 6Kb Unlicensed source file.
 * Integer, single and double precision float values.
 * Range, boolean, mixup, mixof functions.
 * Distribution options: 
@@ -55,20 +55,20 @@ Method	| Speed % | Notes
  :----- | :-----: | :------------------------------
 gaus    |   20    | Fast high quality gaussians        
 gausx   |   15    | Excess resolution employed           
-usum    |n*8=     | Custom Uniform sum 
+usum    | n*4= 20 | Custom Uniform sum 
 
 ### Other Distributions
 
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
 f48ld  |   90    | low discrepancy floats (custom spaced)        
-f48gz  |   80    | small value fluctuating game distribution 
-ui32gl |   80    | unsigned 1/4 bit density game dist.       
-ui32gh |   80    | unsigned 3/4 bit density game dist.      
-ui32gx |   80    | signed game dist.      
-ui32gy |   80    | signed game dist.      
-i32lz  |  150    | a simple lcg (fails many rnd tests)  
-i32sh  |   90    | a fast shift register generator 
+f48gz  |   70    | small value fluctuating game distribution 
+ui32gl |   60    | unsigned 1/4 bit density game dist.       
+ui32gh |   60    | unsigned 3/4 bit density game dist.      
+ui32gx |   60    | signed game dist.      
+ui32gy |   60    | signed game dist.      
+i32lz  |  130    | a simple lcg (fails many rnd tests)  
+i32sh  |   60    | a fast shift register generator 
            
 ### Other methods
 
@@ -76,13 +76,16 @@ Method | Speed % | Notes
  :---- | :-----: | :-------------------------------------
 mixup  |  fast   | Randomize order of elements in an array or string        
 mixof  |  fast   | Make a random mix of elements or chars length n   
-pot    |         | Clone Fdrandom with a seed    
-hot    |         | Clone Fdrandom using seeds from browser crypto  
-
+       |         |
+pot    | 0.005   | Clone and seed Fdrandom object (pot)    
+hot    | 0.005   | Clone Fdrandom using seeds from browser crypto  
+repot  | 5>0.5%  | Resets or reseeds an existing pot
+getstate|  5%    | Gets an array containg state of a pot
+setstate|  5%    | Sets state of pot with array (no reseeding)
 
 Speed & Quality
 ---------------
-The percentages in the above tables are very general as js engine
+The percentages in the above tables are very rough as js engine
 performance varies.
 
 `Math.random` on Chrome has detectable statistical bias and only 
@@ -95,23 +98,25 @@ It has yet to be tested by the most comprehensive means,
 but shows no issues so far.
 
 Fdrandoms default method:`Fdrandom.f48` runs at approximately 
-same speed as Chromes native Math.random and faster still on firefox. 
+same speed as Chromes native Math.random and faster on firefox. 
 It runs considerably faster than Firefoxes native Math.random.
-On Firefox even `gaus` runs about as fast as Math.random. 
+On Firefox even gaussian normal generation runs about 
+as fast as Math.random. 
 
-The algorithm was developed informed by J.Baagøe's Alea PRNG
+f48 algorithm was developed informed by J.Baagøe's PRNG `Alea` 
 which seems to be the fastest form of high quality prng for 
-javascript revealed to date. It uses different multipliers
+javascript revealed to date. f48 uses different multipliers
 in a slightly adjusted mechanism to output 16 more bits of 
 resolution per number than Alea v0.8 while achieving similar
 speed.
 
 Seeding Pots
 ------------
+`Fdrandom.repot(seed)` will reset or reseed a pot  
 `Fdrandom.pot(seed)` returns a clone of Fdrandom seeded by numbers
-and strings in all elements of the object `seed` sent.
+and strings in all elements of the object `seed`.
 To maximally seed the prng requires 9 or 10 completely unpredicatable 
-50 bit numbers or hundres of text characters. 
+50 bit numbers or hundres of text characters,(however is overkill). 
 Practical seeding can be achieved by sending an array containing
 public user strings, or private unique ids, or a single number or 
 nothing depending on the level of uniqueness desired.
@@ -119,23 +124,23 @@ nothing depending on the level of uniqueness desired.
 `Fdrandom.hot(seed)` returns an unpredictable clone which includes
 seeds from browser crypto if available, and date and Math.random
 if not available.
-
+ 
 Seeding pots with same data or setting same state of course
-produces identical random number streams.
+produces identical random number streams. Any difference in seeds 
+should result in completely unrelatable streams.
 
-Potmaking is a relatively slow operation (about 20,000 op/s) as
-the Fdrandom object gets cloned for each pot. 
-
-In performance critical contexts pots can be pre-initialised and 
-recycled if required. Getting and Setting pot states is very fast. 
+'Pot'ing is a relatively slow operation (about 20,000 op/s) as
+the Fdrandom object gets cloned for each pot. 'Repot'ing with
+a new seed is much faster and 'repot' without seed (resets)
+is very fast. 
 	
 Precision/Types
 ---------------
-i32 returns number values equivalent to signed 32 bit integers 
+`i32` returns number values equivalent to signed 32 bit integers 
 which can be reinterpreted as unsigned by the javascript idiom 
 of `val>>>0` for 'unsigning'  , `val|0` 're-signs' 
 
-ui32 methods return number values of unsigned int values
+`ui32` returns number values of unsigned int values
 
 The equal distribution float type methods return the 'unit interval'
 which should involve all possible values between 0 and 1 including both ends.
@@ -144,7 +149,7 @@ Fdrandom.js does too. This can help in formulas which need
 to avoid zero, eg. `something/(1-unitrandom)` avoids the possibility of
 division by zero when `unitrandom` cannot be 1.
 
-`fxs` returns JS Numbers (double floats) with all 52 bits of
+`fxs` returns JS Numbers (double floats) with all 53 bits of
 their maximum precision utilised.
 
 `f24` is designed to be cast to float32 arrays sometime, this 
@@ -179,10 +184,11 @@ random0or1 = p.rndbit()
 
 gaussiannormal=p.gaus()
 gaussianmath=p.gaus(sigma,mu) //sigma is ~scale, mu is offset
-uniformsum=p.usum(n)   //add n -0.5>0.5 randoms
+uniformsum=p.usum(n)   //add n*( -0.5 > 0.5 ) randoms
 uniformsum=p.usum(n,sigma,mu) //to scale and shift with sigma and mu
+gausgame=p.usum(4,1)    //a quick rough approximation of gaussian
 
-var inray=["a","b","c","d","e"] 
+var inray=["0","1","2","3","4","5","6","7","8","9","sha","la","la"] 
 var instr="0123456789abcdef" 
 var outray =[1,2,3]
 var outstr =""
@@ -190,16 +196,28 @@ var outstr =""
 p.mixup(inray,2,4) //mixes up elements 2 to 4
 p.mixup(instr,2,4) //mixes up chars at 2 to 4
 
-//mixes up chars at 2 to 4 into newstr
+//puts into newstr, mixup of chars at 2 to 4
 var newstr=p.mixup(instr,"",2,4) 
 
 //mixes up chars at 2 to 4 onto end of outray
 p.mixup(instr,outray,2,4) 
 
 //same onto end of outstr
-p.mixup(instr,outstr,2,4) 
+p.mixup(inray,outstr,2,4) 
 
-var hexstr=p.mixof(instr,"0x",8) 
-var decstr=p.mixof(instr,"",8,0,9) 
-...
+var hexstr=p.mixof(instr,"0x",8)   //like mixup but mix*of* 
+var decstr=p.mixof(inray,"",8,0,9) //8 of 0 to 9  
+
+//no output object will add to end of input object (inray)
+decstr=p.mixof(inray,8,0,9)    
+
+//make a random uuid:
+h=p.hot()
+uuidv4 = h.mixof(instr,8) +
+   "-" + h.mixof(instr,4) + 
+   "-4"+ h.mixof(instr,3) +
+   "-" + h.mixof("89ab",1) + h.mixof(instr,3) +
+   "-" + h.mixof(instr,12); 
+
+...  
 ```

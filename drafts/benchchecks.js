@@ -1,11 +1,27 @@
 require ('../dlib/mutil.js')
-require ('../dlib/Fdrandom.js')
+require ('../Fdrandom.js')
 require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
-require ('../dlib/mini.js')
 
 
-pr((false==null))
+
+//~ Fdrandom=Fdrandom.repot(0.10000000000003)
+//~ dolp(Fdrandom.f48,5)
+//~ pr("-")
+//~ Fdrandom=Fdrandom.repot(0.10000000000004)
+//~ dolp(Fdrandom.f48,5)
+//~ return
+
+instr="0123456789abcdef"
+h=Fdrandom.hot()
+UUIDv4 = h.mixof(instr,"",8) +
+   "-" + h.mixof(instr,"",4) + 
+   "-4"+ h.mixof(instr,"",3) +
+   "-" + h.mixof("89ab","",1) + h.mixof(instr,"",3) +
+   "-" + h.mixof(instr,"",12);
+	 
+pr(UUIDv4)
+
 return
 
 function dolp(f,x,a,b)
