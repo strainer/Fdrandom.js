@@ -12,15 +12,21 @@ require ('../dlib/floatpresc.js')
 //~ dolp(Fdrandom.f48,5)
 //~ return
 
+if(!"false"){ pr("oops") }
+
 instr="0123456789abcdef"
 h=Fdrandom.hot()
-UUIDv4 = h.mixof(instr,"",8) +
-   "-" + h.mixof(instr,"",4) + 
-   "-4"+ h.mixof(instr,"",3) +
-   "-" + h.mixof("89ab","",1) + h.mixof(instr,"",3) +
-   "-" + h.mixof(instr,"",12);
+UUIDv4 = h.mixof(instr,8) +
+   "-" + h.mixof(instr,4) + 
+   "-4"+ h.mixof(instr,3) +
+   "-" + h.mixof(instr,h.mixof("89ab",1),3) +
+   "-" + h.mixof(instr,12);
 	 
 pr(UUIDv4)
+
+pr(h.mixup("abcdef",0,2))
+pr(h.mixup("abcdef","QQ",0,2))
+pr(h.mixup("abcdef",[9,1],0,2))
 
 return
 

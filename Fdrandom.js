@@ -40,7 +40,7 @@ function newFdrnd(){
 					{ U[0]=( 65537-sd.charCodeAt(i) )/6464; f48() }
 					return	
 				}
-				if(sd==null)
+				if(!sd)
 				{ U[0]= U[0]*0.33 + 4.4 
 					f48(); return
 				}
@@ -180,54 +180,62 @@ function newFdrnd(){
     											
     function mixof(a,b,c,d,e)
 		{ return mixup(null,a,b,c,d,e) }
-													
+																	
     function mixup()
 		{ var gu=arguments, g=0, mxof=0, joinr=0
 			var Ai,Ao,So="",c=0,e=0,obn=0,odn=0
 			
-			if(gu[0]===null) { mxof=1; g++ }
+			if( !gu[0] ) { mxof=1; g++ }
 			Ai=gu[g++]
 
 			if(typeof Ai ==='string')   { Ai=Ai.split(""); joinr=1 }
 			if(typeof gu[g] !=='number'){ Ao=gu[g++] }
 			
-			if(mxof){ odn=gu[g++] ; obn=Ai.length }
-			c= gu[g++] ||0
-			e= gu[g]   ||Ai.length-1 ; e++
-										
-			if(Ao === undefined){ //do inplace   
-			  Ao=Ai          
-		  }else{
-				if(typeof Ao ==='string') 
-				{ So=Ao; joinr=1
-				  if(mxof)
-					{ Ao=new Array(odn) }    
-					else     
-					{ Ao=new Array(e-c); e=Ao.length
-					  for(var p=0; p<e; p++) Ao[p]= Ai[p+c]
-					  c=0; 
-					}
-				}else{ //Ao is given array
-					joinr=null
-          obn=Ao.length
-										
-					if(mxof){ if(obn===0) Ao=new Array(odn) }
-          else					
-					{ if(obn===0) Ao=new Array(e-c)
+			if(mxof)
+			{ odn=gu[g++] ; obn=Ai.length 
+        c= gu[g++] ||0
+				e= gu[g]   ||Ai.length-1 ; e++
+			  if(!Ao)
+				{ Ao=new Array(odn) } 
+		    else
+        { obn=Ao.length
+				  if(typeof Ao !=='string') joinr=null
+				  else { So=Ao; obn=0 }
+					if(obn===0){ Ao=new Array(odn) } 
+				}
+				odn+=obn 
+				
+			  for(var i=obn;i<odn;i++) 
+				{ Ao[i]= Ai[ c+( f48()*(e-c) )>>>0 ] }
+			}
+			else //mixup
+			{
+				c= gu[g++] ||0
+				e= gu[g]   ||Ai.length-1 ; e++
+											
+				if(Ao === undefined){ //do inplace   
+					Ao=Ai          
+				}else{
+					if(typeof Ao ==='string') 
+					{ 
+						So=Ao; joinr=1
+						Ao=new Array(e-c); e=Ao.length
+						for(var p=0; p<e; p++) Ao[p]= Ai[p+c]
+						c=0; 	
+					}else{ //Ao is given array
+						joinr=null
+						obn=Ao.length
+																
+						if(obn===0) Ao=new Array(e-c)
 						var jc=c-obn
 						for(var p=obn; p<obn+e-c; p++) Ao[p]= Ai[jc+p]
-						c=obn; e=Ao.length;
-          }					
-				}
-			}			  
-						
-			if(mxof)
-			{ odn+=obn 
-			  for(var i=obn;i<odn;i++) Ao[i]= Ai[ c+( f48()*(e-c) )>>>0 ] 					
-			}else{
+						c=obn; e=Ao.length;				
+					}
+				}			  
+							
 				var d,p,ep=e-1
 				while( c<ep ){
-					d= c + ( f48()*(e-c) )>>>0   
+					d= Math.floor( c+( f48() *(e-c) ) )   
 					p= Ao[c]; Ao[c++]=Ao[d]; Ao[d]=p						
 				}				
 			}
