@@ -213,11 +213,11 @@ decstr=p.mixof(inray,8,0,9)
 
 //make a random uuid:
 h=p.hot()
-uuidv4 = h.mixof(instr,8) +
-   "-" + h.mixof(instr,4) + 
-   "-4"+ h.mixof(instr,3) +
-   "-" + h.mixof("89ab",1) + h.mixof(instr,3) +
-   "-" + h.mixof(instr,12); 
+uuidv4 = h.mixof(instr,"",8) +
+   "-" + h.mixof(instr,"",4) + 
+   "-4"+ h.mixof(instr,"",3) +
+   "-" + h.mixof("89ab","",1) + h.mixof(instr,"",3) +
+   "-" + h.mixof(instr,"",12); 
 
 ...  
 ```
