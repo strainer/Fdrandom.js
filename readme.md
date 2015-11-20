@@ -39,7 +39,7 @@ Method	 | Speed % | Notes
  :------ | :-----: | :----------------------------
 f48      |   100   | Standard Number rands with 48bit resolution 
 next     |   100   | Alias of f48 (0>0.9999999999999999)                  
-fxs      |   50    | As f48 with 53 bits resolution (excessive)
+fxs      |   50    | As f48 with 53 bits resolution
 f24      |   90    | Safe values for Float32array (0>0.99999994)
          |         |                               
 i32      |   90    | 32 bit signed integer values
@@ -54,21 +54,23 @@ irange   |   70    | Uniformly distributed integers (inclusive)
 Method	| Speed % | Notes                           
  :----- | :-----: | :------------------------------
 gaus    |   20    | Fast high quality gaussians        
-gausx   |   15    | Excess resolution employed           
+gausx   |   15    | Possibly pointless extra resolution employed           
 usum    | n*4= 20 | Custom Uniform sum 
 
 ### Other Distributions
 
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
-f48ld  |   90    | low discrepancy floats (custom spaced)        
-f48gz  |   70    | small value fluctuating game distribution 
-ui32gl |   60    | unsigned 1/4 bit density game dist.       
-ui32gh |   60    | unsigned 3/4 bit density game dist.      
-ui32gx |   60    | signed game dist.      
-ui32gy |   60    | signed game dist.      
-i32lz  |  130    | a simple lcg (fails many rnd tests)  
-i32sh  |   60    | a fast shift register generator 
+fgskip |   90    | low discrepancy floats (custom spaced)        
+fgtrapez|   70   | trapezoid game distribution 
+fgthorn|   70    | thorn shaped game distribution 
+fgwedge|   70    | wedge shaped game distribution 
+uigless|   60    | unsigned 1/4 bit density game dist.       
+uigmore|   60    | unsigned 3/4 bit density game dist.      
+igmmode|   60    | signed multi modal game dist.      
+igbrist|   60    | signed bristly game dist.      
+ilcg   |  130    | a simple lcg (fails many rnd tests)  
+ishr2  |   60    | a fast shift register generator 
            
 ### Other methods
 
@@ -93,7 +95,7 @@ performance varies.
 `Math.random` on firefox is cryptographic but is slow.
 `Fdrandom.f48` has no detectable bias across over 10^16 outputs
 and each has at least 48 bits of resolution which are tested
-as passing george marsaglias old but substantial diehard test suite.
+as passing G Marsaglias old but substantial diehard test suite.
 It has yet to be tested by the most comprehensive means, 
 but shows no issues so far.
 
@@ -105,18 +107,17 @@ as fast as Math.random.
 
 f48 algorithm was developed informed by J.Baagøe's PRNG `Alea` 
 which seems to be the fastest form of high quality prng for 
-javascript revealed to date. f48 uses different multipliers
-in a slightly adjusted mechanism to output 16 more bits of 
-resolution per number than Alea v0.8 while achieving similar
-speed.
+javascript to date. f48 uses different multipliers in a slightly 
+adjusted mechanism to output 16 more bits of resolution per 
+number than Alea v0.8 while achieving similar speed.
 
 Seeding Pots
 ------------
-`Fdrandom.repot(seed)` will reset or reseed a pot  
+`Fdrandom.repot(seed)` will reset or reseed a pot.  
 `Fdrandom.pot(seed)` returns a clone of Fdrandom seeded by numbers
 and strings in all elements of the object `seed`.
 To maximally seed the prng requires 9 or 10 completely unpredicatable 
-50 bit numbers or hundres of text characters,(however is overkill). 
+50 bit numbers or hundres of text characters; however is overkill. 
 Practical seeding can be achieved by sending an array containing
 public user strings, or private unique ids, or a single number or 
 nothing depending on the level of uniqueness desired.
@@ -131,8 +132,8 @@ should result in completely unrelatable streams.
 
 'Pot'ing is a relatively slow operation (about 20,000 op/s) as
 the Fdrandom object gets cloned for each pot. 'Repot'ing with
-a new seed is much faster and 'repot' without seed (resets)
-is very fast. 
+a new seed is much faster. 'repot' without seed resets to
+first potted state and is very fast. 
 	
 Precision/Types
 ---------------

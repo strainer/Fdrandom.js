@@ -4,8 +4,7 @@
  * in homage to Human ingenuity against greed and hatred.
  */
 
-// Fast deterministic random lib
-// v=Fdrandom.next();  apot=Fdrandom.pot("seedtxt@ .org"); av=apot.next()
+/// Fast deterministic random lib
 
 Fdrandom=newFdrnd(); 
 function newFdrnd(){
@@ -78,16 +77,15 @@ function newFdrnd(){
 			ag.push(arguments)
 			return newFdrnd(ag)
 		}
-	 
 
 		///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
 		function f48() 
-		{	                                       
+		{	
 			var c= 0.12810301030196883 * U[0] +
 			       15.378612015061215  * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
 			return U[ju]= c-( (U[0]=c)>>>0 )
 		}
-		
+		    		
 		function fxs() 
 		{	                                       
 			return ( (( ((f48()*0x39b00000000)>>>4)*
@@ -96,43 +94,43 @@ function newFdrnd(){
 		
 		function f24() { return f48()*0.99999997019767  }
 
-		function rlz() ///flat lcg 
-		{ return vl = (vl*13229323)^3962102927  }
-
-		function shr2a() ///flawed shift register
-		{ va^= (va<<7)+1498916339; return va^= va>>>8 }
-
 		function range(b,d)  { return ( f48()*(d-b) ) +b }
 		
-		function irange(b,d) { return Math.floor( (f48()*(d-b) )+b ) }
+		function irange(b,d) { return Math.floor( (f48()*(d-b+1) )+b ) }
 			
+		function i32()  { return (f48()*0x1700000000)|0  }
+
+		function ui32() { return (f48()*0x1700000000)>>>0  }
+		
 		function rndbit()
 		{ 
 			if( (rb*=2)>1.0e+14 ){ rb= f48()*2 +1  } 
 			return rb&1
 		}
 
-		function i32()  { return (f48()*0x1700000000)|0  }
+		function ilcg() ///flat lcg 
+		{ return vl = (vl*13229323)^3962102927  }
 
-		function ui32() { return (f48()*0x1700000000)>>>0  }
-		
-		function ui32gl() 
+		function ishr2() ///flawed shift register
+		{ va^= (va<<7)+1498916339; return va^= va>>>8 }
+
+		function uigless() 
 		{ return (( ui32()&ui32() )>>>0)   }
-		function ui32gh() 
+		function uigmore() 
 		{ return (( ui32()|ui32() )>>>0)   }
-		function i32gx() 
+		function igbrist() 
 		{ return (( ui32()&ui32() )>>1) + (( ui32()|ui32() )>>1)  }
-		function i32gy() /// stepped peak values integer gaming
+		function igmmode() 
 		{ return (( ui32()&ui32() )>>1) - (( ui32()|ui32() )>>1)  }
-		
-		function f48gz() /// signed float value gaming distribution
-		{ return (qr= (qr+(qr*0.5)+((f48()*0.25)+(f48()*0.2)))*0.5)-0.5 }
-
-		function f48ld(c) 
-		{ 
-			qr+= ( c=c||0.333333 ) + f48()
-			return qr-= qr>>>0 
-		}
+    
+    function fgwedge(s)
+		{ return (s||1)*Math.abs(f48()-f48())-Math.abs(f48()-f48()) }
+    function fgthorn(s)
+		{ return (s||1)*(f48()-f48())*f48() }
+    function fgtrapez(s)
+		{ return (s||0.66666666)*(0.5+f48()-f48()*2) }
+    function fgskip(c) ///simple low discrepancy 
+		{ qr+= ( c=c||0.3333333333 )*0.5; qr+=(1-c)*f48(); return qr-= qr>>>0;  }
 		
 		var psig,csig
 		function usum(n,sig,mu)
@@ -142,19 +140,18 @@ function newFdrnd(){
 			
 			if(sig === undefined) return sum
 			if(sig !== psig) 
-			{ psig=sig; csig= sig*Math.sqrt(1/n) } //doesnt nail it
+			{ psig=sig; csig= sig*2/n*Math.sqrt(n) } //doesnt nail it
 			//sig wants converted to equivalent gaus for large n
 			
 			return (mu||0)+ sum*csig 
 		}
 
-		function gaus(sig,mu) 
-		{ return nrml(f48,sig,mu) }
+		function gaus(sig,mu) { return nrml(f48,sig,mu) }
 		
-		function gausx(sig,mu)
-		{ return nrml(fxs,sig,mu) }
+		function gausx(sig,mu){ return nrml(fxs,sig,mu) }
 		
 		var nml=0,havnml=0
+		
 		function nrml(func,sig,mu) /// G Marsaglias box muller polar method
 		{ var p,q,w
 		
@@ -244,27 +241,30 @@ function newFdrnd(){
 		}
 
 		return{
-		
-			pot: pot,  hot: hot, repot:repot,  
+			
+			pot: pot,  hot: hot,  repot:repot,  
 			getstate: getstate,  setstate: setstate,
 			
 			next: f48,  f48: f48,  
-			f24:f24,  
+			f24: f24,  
 			fxs: fxs,    
 			rndbit: rndbit,
 			range: range,  irange: irange,
 
 			i32: i32,  ui32: ui32,
-			i32lz: rlz,  i32sh: shr2a,
-			f48gz: f48gz ,
-			ui32gl: ui32gl, ui32gh: ui32gh,  
-			i32gx: i32gx ,i32gy: i32gy,	
-			
-			f48ld: f48ld ,
-			gaus: gaus, gausx: gausx, usum: usum ,
+
+			gaus: gaus,  gausx: gausx,  usum: usum ,
 		
 			mixup: mixup,  mixof: mixof,
-		
+
+			ilcg: ilcg,  ishr2: ishr2,
+			
+			uigless: uigless,  uigmore: uigmore,  
+			igbrist: igbrist,  igmmode: igmmode,	
+			
+			fgwedge: fgwedge,  fgtrapez: fgtrapez,
+			fgthorn: fgthorn,  fgskip: fgskip,
+					
 		}
 	}(arguments))
 }

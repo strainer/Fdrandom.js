@@ -89,7 +89,15 @@ bench = function (meth, bentime, meth_nm, meth_arg) {
 	gdone++;
 };
 
+var firstrun=1
+
 benchn = function(n,a,b,c,d){ 
+
+  if(firstrun)
+  { firstrun=false;
+    var k=bench(Math.sqrt,b,c,d)	
+	}
+	
   for(var i=0;i<n;i++) { bench(a,b,c,d);} 
 }
 
@@ -181,7 +189,7 @@ findhalf =function(fnc,reset,rept,ressq,acc, r0,r1,r2,r3,mino)
 	for (var g=0;g<rept;g++)
 	{
 	  pi=(pi+1); pi=pi%ps.length
-	  reset();
+	  //reset();
 		
 	  //~ var p=  ps[pi][0] + ((Math.random()+Math.random()+Math.random()-1.5)/(100))
 	  p=  r0 + Math.random()*(r1-r0)
@@ -263,7 +271,7 @@ function fnl(num, length) {
   return r;
 }
 
-distrib =function(f,rs,ai,ei,n,a,b,c)
+distrib =function(f,rs, ai,ei, n, a,b,c) //func rs  st fn divs
 {
   var dv=(ei-ai)/rs
 	
