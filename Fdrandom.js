@@ -107,7 +107,9 @@ function newFdrnd(){
 			if( (rb*=2)>1.0e+14 ){ rb= f48()*2 +1  } 
 			return rb&1
 		}
-
+    
+		function rndsign(){ return rndbit()===1?1:-1 }
+		
 		function ilcg() ///flat lcg 
 		{ return vl = (vl*13229323)^3962102927  }
 
@@ -123,12 +125,14 @@ function newFdrnd(){
 		function igmmode() 
 		{ return (( ui32()&ui32() )>>1) - (( ui32()|ui32() )>>1)  }
     
-    function fgwedge(s)
-		{ return (s||1)*Math.abs(f48()-f48())-Math.abs(f48()-f48()) }
-    function fgthorn(s)
-		{ return (s||1)*(f48()-f48())*f48() }
-    function fgtrapez(s)
-		{ return (s||0.66666666)*(0.5+f48()-f48()*2) }
+    function fgwedge(s,m)
+		{ return (m||0)+(s||1)*(Math.abs(f48()-f48())-Math.abs(f48()-f48())) }
+    function fgthorn(s,m)
+		{ return (m||0)+(s||1)*( f48()-f48() )*f48() }
+    function fgteat(s,m)
+		{ return (m||0)+(s||1)*( (0.5-f48())*f48()+f48()-0.5 ) }
+    function fgtrapez(s,m)
+		{ return (m||0)+(s||0.66666666)*(0.5+f48()-f48()*2) }
     function fgskip(c) ///simple low discrepancy 
 		{ qr+= ( c=c||0.3333333333 )*0.5; qr+=(1-c)*f48(); return qr-= qr>>>0;  }
 		
@@ -248,7 +252,7 @@ function newFdrnd(){
 			next: f48,  f48: f48,  
 			f24: f24,  
 			fxs: fxs,    
-			rndbit: rndbit,
+			rndbit: rndbit, rndsign:rndsign,
 			range: range,  irange: irange,
 
 			i32: i32,  ui32: ui32,
@@ -263,7 +267,7 @@ function newFdrnd(){
 			igbrist: igbrist,  igmmode: igmmode,	
 			
 			fgwedge: fgwedge,  fgtrapez: fgtrapez,
-			fgthorn: fgthorn,  fgskip: fgskip,
+			fgthorn: fgthorn,  fgskip: fgskip, fgteat:fgteat,
 					
 		}
 	}(arguments))

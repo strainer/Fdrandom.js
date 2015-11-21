@@ -46,6 +46,8 @@ i32      |   90    | 32 bit signed integer values
 ui32     |   90    | 32 bit unsigned integer values
          |         |                               
 rndbit   |   150   | 0 or 1 
+rndsign  |   130   | -1 or 1 
+         |         |
 range    |   90    | Uniformly distributed Numbers in range          
 irange   |   70    | Uniformly distributed integers (inclusive)              
 	
@@ -61,18 +63,19 @@ usum    | n*4= 20 | Custom Uniform sum
 
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
-fgskip |   90    | low discrepancy floats (custom spaced)        
-fgtrapez|   70   | trapezoid game distribution 
-fgthorn|   70    | thorn shaped game distribution 
-fgwedge|   70    | wedge shaped game distribution 
-uigless|   60    | unsigned 1/4 bit density game dist.       
-uigmore|   60    | unsigned 3/4 bit density game dist.      
-igmmode|   60    | signed multi modal game dist.      
-igbrist|   60    | signed bristly game dist.      
-ilcg   |  130    | a simple lcg (fails many rnd tests)  
-ishr2  |   60    | a fast shift register generator 
+fgskip |   90    | Low discrepancy floats (custom spaced)        
+fgtrapez|  50    | Trapezoid game distribution 
+fgthorn|   30    | Thorn shaped game distribution 
+fgwedge|   30    | Wedge shaped game distribution 
+fgteat |   30    | Teat shaped game distribution  
+uigless|   60    | Unsigned 1/4 bit density game dist.       
+uigmore|   60    | Unsigned 3/4 bit density game dist.      
+igmmode|   60    | Signed multi modal game dist.      
+igbrist|   60    | Signed bristly game dist.      
+ilcg   |  130    | A simple lcg (fails many rnd tests)  
+ishr2  |   60    | A fast shift register generator 
            
-### Other methods
+### Other Methods
 
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
