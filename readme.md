@@ -64,10 +64,10 @@ usum    | n*4= 20 | Custom Uniform sum
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
 fgskip |   90    | Low discrepancy floats (custom spaced)        
-fgtrapez|  50    | Trapezoid game distribution 
-fgthorn|   30    | Thorn shaped game distribution 
+fgminim|   30    | Most often minimal game distribution 
 fgwedge|   30    | Wedge shaped game distribution 
 fgteat |   30    | Teat shaped game distribution  
+fgtrapez|  50    | Trapezoid game distribution 
 uigless|   60    | Unsigned 1/4 bit density game dist.       
 uigmore|   60    | Unsigned 3/4 bit density game dist.      
 igmmode|   60    | Signed multi modal game dist.      
