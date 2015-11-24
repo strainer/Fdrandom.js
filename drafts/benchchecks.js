@@ -3,14 +3,17 @@ require ('../Fdrandom.js')
 require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
 
-
+//~ pr(-1==null)
 
 //~ Fdrandom=Fdrandom.repot(0.10000000000003)
 //~ dolp(Fdrandom.f48,5)
 //~ pr("-")
 //~ Fdrandom=Fdrandom.repot(0.10000000000004)
-pr(Infinity&1)
-return
+//~ console.log(arguments)
+
+//~ pr(Infinity&1)
+//~ pr(Fdrandom.rndsign())
+//~ return
 
 //~ Fdrandom.f48(Fdrandom.hot().dodo())
 //~ pr(Fdrandom.usum(100000000))
@@ -28,21 +31,24 @@ return
 //~ return
 //~ if(!"false"){ pr("oops") }
 
-//~ instr="0123456789abcdef"
-//~ h=Fdrandom.hot()
-//~ UUIDv4 = h.mixof(instr,8) +
-   //~ "-" + h.mixof(instr,4) + 
-   //~ "-4"+ h.mixof(instr,3) +
-   //~ "-" + h.mixof(instr,h.mixof("89ab",1),3) +
-   //~ "-" + h.mixof(instr,12);
+instr="0123456789abcdef"
+h=Fdrandom.hot()
+UUIDv4 = h.mixof(instr,8) +
+   "-" + h.mixof(instr,4) + 
+   "-4"+ h.mixof(instr,3) +
+   "-" + h.mixof(instr,h.mixof("89ab",1),3) +
+   "-" + h.mixof(instr,12);
 	 
-//~ pr(UUIDv4)
+pr(UUIDv4)
 
-//~ pr(h.mixup("abcdef",0,2))
-//~ pr(h.mixup("abcdef","QQ",0,2))
-//~ pr(h.mixup("abcdef",[9,1],0,2))
+pr(h.mixup("abcdef",0,2))
+pr(h.mixup("abcdef","QQ",0,2))
+pr(h.mixup("abcdef",[9,1],0,2))
 
-//~ return
+pr(h.mixof("abcdefg",1))
+pr(h.mixof("abcdefg",1))
+
+return
 
 function dolp(f,x,a,b)
 { for(var i=0;i<x;i++){ pr(f(a,b)) } }
