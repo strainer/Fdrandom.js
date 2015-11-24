@@ -23,11 +23,20 @@ require ('../dlib/floatpresc.js')
 //~ distrib(Fdrandom.ui32, 10, 0, 1000000, 100000)
 
 //~ return
+h=Fdrandom.hot()
+var t=0
+
+for(var c=0;c<1000000;c++)
+{ t+=h.rndbit() }
+
+pr(t/1000000)
 
 
+//~ checkperiod(Fdrandom.ishr2,1)
 
-
-//~ checkperiod(Fdrandom.f48,10)
+//~ dolx(Fdrandom.ishr2,100000)
+//~ dolp(Fdrandom.ishr2,100)
+return
 //~ return
 //~ if(!"false"){ pr("oops") }
 
@@ -48,10 +57,13 @@ pr(h.mixup("abcdef",[9,1],0,2))
 pr(h.mixof("abcdefg",1))
 pr(h.mixof("abcdefg",1))
 
-return
+//~ return
 
 function dolp(f,x,a,b)
 { for(var i=0;i<x;i++){ pr(f(a,b)) } }
+
+function dolx(f,x,a,b)
+{ for(var i=0;i<x;i++){ f(a,b) } }
 
 
 function testun(a)

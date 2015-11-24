@@ -102,12 +102,16 @@ function newFdrnd(){
 
 		function ui32() { return (f48()*0x1700000000)>>>0  }
 		
-		function rndsign(){ return rndbit()===1?1:-1 }
-
 		function rndbit()
 		{ 
-			if( (rb*=2)>1.0e+14 ){ rb= f48()*2 +1  } 
+			if( (rb*=2)>1.0e+14 ){ rb= f48() +0.5  } 
 			return rb&1
+		}
+
+		function rndsign()
+		{ 
+			if( (rb*=2)>1.0e+14 ){ rb= f48() +0.5  } 
+			return (rb&1)*2-1
 		}    
 		
 		function ilcg() ///flat lcg 

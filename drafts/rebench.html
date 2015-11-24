@@ -93,7 +93,7 @@ bench = function (meth, bentime, meth_nm, meth_arg) {
 			
 			bdtm=dtm; dtm=ctm-btm
 			
-			if (dtm==0){ nreps*=8; }
+			if (dtm==0){ donereps+=nreps; nreps*=8; }
 			else
 			{
 				if (nreps/(dtm)>(rt*0.9))
@@ -169,13 +169,15 @@ function runben() {
 	clearInterval(intervar)
 	//~ $("#log").fadeIn(100)
 	
+	h=Fdrandom.hot()
 	var dur=3,reps=1
 	var funz= [
 	 //~ [Math.random,"math.random "],
 	 //~ [Fdrandom.f48,"f48 "],
 	 //~ [Fdrandom.f24,"f24 "],
 	 //~ [Fdrandom.fxs,"fxs "],
-	 //~ [Fdrandom.rndbit,"rndbit "],
+	 [h.rndbit,"rndbit "],
+	 [h.rndsign,"rndsign "],
 	 //~ [Fdrandom.usum,"usum 1 ",1],
 	 //~ [Fdrandom.usum,"usum 2 ",2],
 	 //~ [Fdrandom.usum,"usum 3 ",3],
@@ -191,13 +193,13 @@ function runben() {
 	 //~ [Fdrandom.ui32,"ui32 "],
 	 //~ [Fdrandom.i32,"i32 "],
 	 //~ [Fdrandom.ilcg,"ilcg "],
-	 //~ [Fdrandom.ishr2,"ishr2 "],
+	 //~ [h.ishr2,"ishr2 "],
 	 //~ [Fdrandom.uigless,"uigless "],
 	 //~ [Fdrandom.uigmore,"uigmore "],
 	 //~ [Fdrandom.igbrist,"igbrist "],
 	 //~ [Fdrandom.igmmode,"igmmode "],
 	 //~ [Fdrandom.fgwedge,"fgwedge "],
-	 [Fdrandom.fgteat,"fgteat "],
+	 //~ [Fdrandom.fgteat,"fgteat "],
 	 //~ [Fdrandom.fgtrapez,"fgtrapez "],
 	 //~ [Fdrandom.fgthorn,"fgthorn "],
 	 //~ [Fdrandom.fgskip,"fgskip"],
@@ -229,6 +231,7 @@ function givesvg(func,d)
 		if(f>maxval) { maxval=f }
 		if(f<minval) { minval=f }
 	}
+	//~ var minval=0,maxval=0x100000000 
 	
 	var dist=maxval-minval
 	var mid=dist/2
