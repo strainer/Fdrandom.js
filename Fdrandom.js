@@ -131,7 +131,7 @@ function newFdrnd(){
 		
 		function fgwedge(s,m)
 		{ return (m||0)+(s||1)*(Math.abs(f48()-f48())-Math.abs(f48()-f48())) }
-		function fgminim(s,m)
+		function fgthorn(s,m)
 		{ return (m||0)+(s||1)*( f48()-f48() )*f48() }
 		function fgteat(s,m)
 		{ return (m||0)+(s||1)*( (0.5-f48())*f48()+f48()-0.5 ) }
@@ -268,7 +268,7 @@ function newFdrnd(){
 			igbrist: igbrist,  igmmode: igmmode,  
 			
 			fgwedge: fgwedge,  fgtrapez: fgtrapez,
-			fgminim: fgminim,  fgskip: fgskip, fgteat:fgteat,
+			fgthorn: fgthorn,  fgskip: fgskip, fgteat:fgteat,
 					
 		}
 	}(arguments))

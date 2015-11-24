@@ -43,11 +43,11 @@ next     |   100   | Alias of f48 (0>0.9999999999999999)
 fxs      |   50    | As f48 with 53 bits resolution
 f24      |   90    | Safe values for Float32array (0>0.99999994)
          |         |                               
-i32      |   90    | 32 bit signed integer values
-ui32     |   90    | 32 bit unsigned integer values
+i32      |   80    | 32 bit signed integer values
+ui32     |   80    | 32 bit unsigned integer values
          |         |                               
 rndbit   |   150   | 0 or 1 
-rndsign  |   130   | -1 or 1 
+rndsign  |   140   | -1 or 1 
          |         |
 range    |   90    | Uniformly distributed Numbers in range          
 irange   |   70    | Uniformly distributed integers (inclusive)              
@@ -57,15 +57,15 @@ irange   |   70    | Uniformly distributed integers (inclusive)
 Method	| Speed % | Notes                           
  :----- | :-----: | :------------------------------
 gaus    |   20    | Fast high quality gaussians        
-gausx   |   15    | Possibly pointless extra resolution employed           
-usum    | n*4= 20 | Custom Uniform sum 
+gausx   |   15    | Possibly needless extra resolution employed           
+usum    | 25@n=4  | Custom Uniform sum 
 
 ### Other Distributions
 
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
 fgskip |   90    | Low discrepancy floats (custom spaced)        
-fgminim|   30    | Most often minimal game distribution 
+fgthorn|   30    | Thorn shaped game distribution 
 fgwedge|   30    | Wedge shaped game distribution 
 fgteat |   30    | Teat shaped game distribution  
 fgtrapez|  50    | Trapezoid game distribution 
