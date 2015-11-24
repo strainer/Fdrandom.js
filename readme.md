@@ -15,6 +15,8 @@ Fast deterministic random functions for javascript.
   * Low discrepency Quasi random (more spaced apart)
   * Miscellaneous Gaming distributions
 
+[Graphs of distributions](http://strainer.github.io/Fdrandom.js/)
+
 Usage
 -----
 ```javascript 
