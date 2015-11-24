@@ -14,8 +14,7 @@ Fast deterministic random functions for javascript.
   * Normal approximated by Uniform Sum.
   * Low discrepency Quasi random (more spaced apart)
   * Miscellaneous Gaming distributions
-
-[Graphs of distributions](http://strainer.github.io/Fdrandom.js/)
+  * [Chart of distributions](http://strainer.github.io/Fdrandom.js/)
 
 Usage
 -----
@@ -208,16 +207,17 @@ var newstr=p.mixup(instr,"",2,4)
 //mixes up chars at 2 to 4 onto end of outray
 p.mixup(instr,outray,2,4) 
 
-//same onto end of outstr
-p.mixup(inray,outstr,2,4) 
+//all inray mixed onto end of outstr
+p.mixup(inray,outstr) 
 
 var hexstr=p.mixof(instr,"0x",8)   //like mixup but mix*of* 
 var decstr=p.mixof(inray,"",8,0,9) //8 of 0 to 9  
+var decchr=p.mixof(inray)          //1 of 0 to 9 as an element  
 
 //no output object will add to end of input object (inray)
 decstr=p.mixof(inray,8,0,9)    
 
-//make a random uuid:
+//eg. make a random uuid:
 h=p.hot()
 UUIDv4 = h.mixof(instr,8) +
    "-" + h.mixof(instr,4) + 
