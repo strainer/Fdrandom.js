@@ -5,16 +5,14 @@ Fast deterministic random functions for javascript.
 ### Features
 
 * Fast high quality PRNG. 
-* 7Kb Unlicensed source.
 * Integer, single and double precision float values.
 * Range, boolean, mixup, mixof functions.
-* Distribution options: 
-  * Unbiased uniform distribution. 
-  * Gaussian distribution by Polar Box Muller method, 
+* Distribution options: [Charts](http://strainer.github.io/Fdrandom.js/): 
+  * Unbiased uniform. 
+  * Gaussian distribution by Box Muller, Polar method, 
   * Normal approximated by Uniform Sum.
-  * Low discrepency Quasi random (more spaced apart)
-  * Miscellaneous Gaming distributions
-  * [Chart of distributions](http://strainer.github.io/Fdrandom.js/)
+  * Low discrepency / Quasi random (more spaced apart)
+  * Convenience Gaming distributions
 
 Usage
 -----
