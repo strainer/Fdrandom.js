@@ -1,7 +1,7 @@
 /**
  * @author strainer
  * This is free and unencumbered software released into the public domain  
- * in homage to Human ingenuity against greed and hatred.
+ * in homage to human ingenuity against greed and hatred.
  */
 
 /// Fast deterministic random lib
@@ -129,20 +129,20 @@ function newFdrnd(){
 		function igmmode() 
 		{ return (( ui32()&ui32() )>>1) - (( ui32()|ui32() )>>1)  }
 		
-		function fgwedge(s,m)
-		{ return (m||0)+(s||1)*(Math.abs(f48()-f48())-Math.abs(f48()-f48())) }
 		function fgthorn(s,m)
 		{ return (m||0)+(s||1)*( f48()-f48() )*f48() }
+		function fgwedge(s,m)
+		{ return (m||0)+(s||1)*(Math.abs(f48()-f48())-Math.abs(f48()-f48())) }
 		function fgteat(s,m)
 		{ return (m||0)+(s||1)*( (0.5-f48())*f48()+f48()-0.5 ) }
 		function fgtrapez(s,m)
 		{ return (m||0)+(s||0.66666666)*(0.5+f48()-f48()*2) }
 		function fgskip(c) ///simple low discrepancy 
-		{ qr+= ( c=c||0.3333333333 )*0.5; qr+=(1-c)*f48(); return qr-= qr>>>0;  }
+		{ qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48(); return qr-= qr>>>0;  }
 		
 		var psig,csig
 		function usum(n,sig,mu)
-		{ sig=1
+		{ 
 			var sum= (((n=n||2)&1)==1)? 0.5 : 0
 			for(var i=0; i<n; i++) sum=f48()-sum 
 			

@@ -6,37 +6,93 @@
 <script src='../Fdrandom.js'></script>
 <script src='../dlib/floatpresc.js'></script>
 <script src='../dlib/mutil.js'></script>
-</head>
 <style type="text/css">
-body
-{ background-color: #dddddd;
-  color:#111111;
-}
-
+body{ background-color: #dddddd; color:#111111; }
 td { padding:0 0.3em; }
- 
-svg {
-  background: #ffffff;
-}
+svg { background: #ffffff; }
 </style>
+</head>
+
 <body>
 <div id="log"></div>
 </body>
-</html>
 
+</html>
 
 <script>
 tlogger = document.getElementById('log');
+run()
 
-var hot=Fdrandom.hot()
-var a=[]
+var firstrun=1
+var runstep=0;
+var vgsc=1024*4
+var svgz=128
+var svgsc=1
+var opac = Math.sqrt(2000/vgsc)
+var dtsz=1.3*svgz/256
+var ddtsz=3.5*svgz/256
+var bdtsz=5*svgz/256
+
+function runben() {
+  
+	clearInterval(intervar)
+	//~ $("#log").fadeIn(100)
+	
+	h=Fdrandom.hot()
+	var dur=3,reps=1
+	var funz= [
+	 [Math.random,"math.random "],
+	 [Fdrandom.f48,"f48 "],
+	 //~ [Fdrandom.f24,"f24 "],
+	 //~ [Fdrandom.fxs,"fxs "],
+	 //~ [h.rndbit,"rndbit "],
+	 //~ [h.rndsign,"rndsign "],
+	 //~ [Fdrandom.usum,"usum 1 ",1],
+	 //~ [Fdrandom.usum,"usum 2 ",2],
+	 //~ [Fdrandom.usum,"usum 3 ",3],
+	 //~ [Fdrandom.usum,"usum 4 ",4],
+	 //~ [Fdrandom.usum,"usum 5 ",5],
+	 //~ [Fdrandom.usum,"usum 6 ",6],
+	 //~ [Fdrandom.usum,"usum 7 ",7],
+	 //~ [Fdrandom.usum,"usum 8 ",8],
+	 //~ [Fdrandom.usum,"usum 16 ",16],
+	 //~ [Fdrandom.usum,"usum 32 ",32],
+	 //~ [Fdrandom.gaus,"gaus "],
+	 //~ [Fdrandom.gausx,"gausx "],
+	 //~ [Fdrandom.ui32,"ui32 "],
+	 //~ [Fdrandom.i32,"i32 "],
+	 //~ [Fdrandom.ilcg,"ilcg "],
+	 //~ [h.ishr2,"ishr2 "],
+	 //~ [Fdrandom.uigless,"uigless "],
+	 //~ [Fdrandom.uigmore,"uigmore "],
+	 //~ [Fdrandom.igbrist,"igbrist "],
+	 //~ [Fdrandom.igmmode,"igmmode "],
+	 //~ [Fdrandom.fgwedge,"fgwedge "],
+	 //~ [Fdrandom.fgteat,"fgteat "],
+	 //~ [Fdrandom.fgtrapez,"fgtrapez "],
+	 //~ [Fdrandom.fgthorn,"fgthorn "],
+	 //~ [h.fgskip,"fgskip"],
+	 //~ [Fdrandom.fgskip,"fgskip"],
+
+	]
+				
+	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
+	
+	benchn(reps, funz[runstep][0], dur, funz[runstep][1], funz[runstep++][2] ) 
+
+  if(runstep<funz.length){ intervar=setInterval(runben, 250); }
+	
+}
+
+//~ var hot=Fdrandom.hot()
+//~ var a=[]
 //~ for(var t=0;t<1000000;t++)
 //~ { a.push(1*hot.mixof("0123456789","0.",6)) } 
-nn=1000000
-for(var t=0;t<nn;t++)
-{ a[t]=(t/nn) }
-hot.mixup(a)
-regurg(a)
+//~ nn=1000000
+//~ for(var t=0;t<nn;t++)
+//~ { a[t]=(t/nn) }
+//~ hot.mixup(a)
+//~ regurg(a)
 
 
 bench = function (meth, bentime, meth_nm, meth_arg) {
@@ -134,8 +190,6 @@ function nout(){
   Math.random()
 }
 
-var firstrun=1
-
 benchn = function(n,a,b,c,d){ 
 	var rexx='<br><br><table>';
 	
@@ -159,69 +213,11 @@ benchn = function(n,a,b,c,d){
 	tlogger.innerHTML += '</div>';
 }
 
+
 function run(){
 intervar=setInterval(runben, 250);
 }
 
-run()
-function runben() {
-  
-	clearInterval(intervar)
-	//~ $("#log").fadeIn(100)
-	
-	h=Fdrandom.hot()
-	var dur=3,reps=1
-	var funz= [
-	 //~ [Math.random,"math.random "],
-	 //~ [Fdrandom.f48,"f48 "],
-	 //~ [Fdrandom.f24,"f24 "],
-	 //~ [Fdrandom.fxs,"fxs "],
-	 //~ [h.rndbit,"rndbit "],
-	 //~ [h.rndsign,"rndsign "],
-	 //~ [Fdrandom.usum,"usum 1 ",1],
-	 //~ [Fdrandom.usum,"usum 2 ",2],
-	 //~ [Fdrandom.usum,"usum 3 ",3],
-	 //~ [Fdrandom.usum,"usum 4 ",4],
-	 //~ [Fdrandom.usum,"usum 5 ",5],
-	 //~ [Fdrandom.usum,"usum 6 ",6],
-	 //~ [Fdrandom.usum,"usum 7 ",7],
-	 //~ [Fdrandom.usum,"usum 8 ",8],
-	 //~ [Fdrandom.usum,"usum 16 ",16],
-	 //~ [Fdrandom.usum,"usum 32 ",32],
-	 [Fdrandom.gaus,"gaus "],
-	 [Fdrandom.gausx,"gausx "],
-	 //~ [Fdrandom.ui32,"ui32 "],
-	 //~ [Fdrandom.i32,"i32 "],
-	 //~ [Fdrandom.ilcg,"ilcg "],
-	 //~ [h.ishr2,"ishr2 "],
-	 //~ [Fdrandom.uigless,"uigless "],
-	 //~ [Fdrandom.uigmore,"uigmore "],
-	 //~ [Fdrandom.igbrist,"igbrist "],
-	 //~ [Fdrandom.igmmode,"igmmode "],
-	 //~ [Fdrandom.fgwedge,"fgwedge "],
-	 //~ [Fdrandom.fgteat,"fgteat "],
-	 //~ [Fdrandom.fgtrapez,"fgtrapez "],
-	 //~ [Fdrandom.fgthorn,"fgthorn "],
-	 //~ [Fdrandom.fgskip,"fgskip"],
-
-	]
-				
-	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
-	
-	benchn(reps, funz[runstep][0], dur, funz[runstep][1], funz[runstep++][2] ) 
-
-  if(runstep<funz.length){ intervar=setInterval(runben, 250); }
-	
-}
-
-var runstep=0;
-var vgsc=1024*4
-var svgz=128
-var svgsc=1
-var opac = Math.sqrt(2000/vgsc)
-var dtsz=1.3*svgz/256
-var ddtsz=3.5*svgz/256
-var bdtsz=5*svgz/256
 
 function givesvg(func,d)
 {
