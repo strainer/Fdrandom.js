@@ -45,10 +45,10 @@ f24      |   90    | Safe values for Float32array (0>0.99999994)
 i32      |   80    | 32 bit signed integer values
 ui32     |   80    | 32 bit unsigned integer values
          |         |                               
-rndbit   |   150   | 0 or 1 
-rndsign  |   140   | -1 or 1 
+rbit     |   150   | 0 or 1 
+rpole    |   140   | -1 or 1 
          |         |
-range    |   90    | Uniformly distributed Numbers in range          
+range    |   90    | Uniformly distributed numbers in range          
 irange   |   70    | Uniformly distributed integers (inclusive)              
 	
 ### Normal Distribution Prngs

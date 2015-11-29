@@ -102,13 +102,13 @@ function newFdrnd(){
 
 		function ui32() { return (f48()*0x1700000000)>>>0  }
 		
-		function rndbit()
+		function rbit()
 		{ 
 			if( (rb*=2)>1.0e+14 ){ rb= f48() +0.5  } 
 			return rb&1
 		}
 
-		function rndsign()
+		function rpole()
 		{ 
 			if( (rb*=2)>1.0e+14 ){ rb= f48() +0.5  } 
 			return (rb&1)*2-1
@@ -244,7 +244,7 @@ function newFdrnd(){
 			if(joinr) Ao=So+Ao.join("")
 			return Ao
 		}
-		
+
 		return{
 			
 			pot: pot,  hot: hot,  repot:repot,  
@@ -253,7 +253,7 @@ function newFdrnd(){
 			next: f48,  f48: f48,  
 			f24: f24,  
 			fxs: fxs,    
-			rndbit: rndbit, rndsign:rndsign,
+			rbit: rbit, rpole:rpole,
 			range: range,  irange: irange,
 
 			i32: i32,  ui32: ui32,
