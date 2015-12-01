@@ -187,26 +187,25 @@ function newFdrnd(){
 			
 			if(typeof Ai ==='string') { Ai=Ai.split("") } else joinr=0
 			if(typeof Ao !=='number') 
-      { if(Ao === undefined) { od=1; Ao=[] }
-        else{			
+			{ if(Ao === undefined) { od=1; Ao=[] }
+				else{			
 					ob=Ao.length
 					if(typeof Ao ==='string') 
 					{ So=Ao; ob=0 ; joinr=1 } else joinr=0
 					if(ob===0){ Ao=new Array(od||0) } 
-			  }
+				}
 			}
 			else
 			{ e=c; c=od; od=Ao||0; Ao=new Array(od) }
-      
+			
 			od+=ob
-      c= c||0
+			c= c||0
 			e= e||Ai.length-1 ; e++			
 			
 			for(var i=ob;i<od;i++) 
 			{ Ao[i]= Ai[ c+( f48()*(e-c) )>>>0 ] }
 		
-			if(joinr) { console.log("ddd"); Ao=So+Ao.join("") } 
-			return Ao
+			return joinr? So+Ao.join("") : Ao
 		}
 
 		function mixup(Ai,Ao,c,e)
@@ -215,7 +214,7 @@ function newFdrnd(){
 			if(typeof Ai ==='string') { Ai=Ai.split(""); joinr=1 }
 			if(typeof Ao !=='string' && typeof Ao !=='object' ) 
 			{ e=c; c=Ao; Ao=Ai }
-      
+			
 			c= c||0
 			e= e||Ai.length-1 ; e++
 			
@@ -241,8 +240,7 @@ function newFdrnd(){
 				p= Ao[c]; Ao[c++]=Ao[d]; Ao[d]=p
 			}
 		
-			if(joinr) Ao=So+Ao.join("")
-			return Ao
+			return joinr? So+Ao.join("") : Ao
 		}
 
 		return{
