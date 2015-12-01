@@ -183,16 +183,16 @@ function newFdrnd(){
 		}
 
 		function mixof(Ai,Ao,od,c,e)
-		{ var joinr=0,So="",ob=0
+		{ var joinr=1,So="",ob=0
 			
-			if(typeof Ai ==='string') { Ai=Ai.split(""); joinr=1 }
-			if(typeof Ao !=='number' ) 
+			if(typeof Ai ==='string') { Ai=Ai.split("") } else joinr=0
+			if(typeof Ao !=='number') 
       { if(Ao === undefined) { od=1; Ao=[] }
         else{			
 					ob=Ao.length
-					if(typeof Ao !=='string') joinr=null
-					else { So=Ao; ob=0 }
-					if(ob===0){ Ao=new Array(od) } 
+					if(typeof Ao ==='string') 
+					{ So=Ao; ob=0 ; joinr=1 } else joinr=0
+					if(ob===0){ Ao=new Array(od||0) } 
 			  }
 			}
 			else
@@ -205,7 +205,7 @@ function newFdrnd(){
 			for(var i=ob;i<od;i++) 
 			{ Ao[i]= Ai[ c+( f48()*(e-c) )>>>0 ] }
 		
-			if(joinr) Ao=So+Ao.join("") 
+			if(joinr) { console.log("ddd"); Ao=So+Ao.join("") } 
 			return Ao
 		}
 
