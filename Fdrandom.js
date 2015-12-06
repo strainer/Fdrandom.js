@@ -4,12 +4,10 @@
  * in homage to human ingenuity against greed and hatred.
  */
 
-/// Fast deterministic random lib
-'use strict'
-
-Fdrandom=newFdrnd() 
+Fdrandom=newFdrnd() /// Fast deterministic random lib
 
 function newFdrnd(){
+		
 	return (function () { 
 	
 		var va,vl,vs,qr,us,rb,ju,U,sv
@@ -23,7 +21,7 @@ function newFdrnd(){
 
 			sow(arguments)
 			
-			for( i=0;i<98;i++) f48()
+			for(var i=0;i<98;i++) f48()
 			va=range(3206324,3259830)>>>0
 	
 			function sow(sd)   
