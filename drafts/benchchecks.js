@@ -23,7 +23,16 @@ require ('../dlib/floatpresc.js')
 //~ distrib(Fdrandom.ui32, 10, 0, 1000000, 100000)
 
 //~ return
+
+//~ dolp(Fdrandom.ilcg,100)
+
 h=Fdrandom.hot()
+if(0) pr("issssssssssss")
+pr(h.mixof(["can","sha","i a","hey"],9))
+pr(h.mixof("asqwpuhgvoksqw jdiecn eufhfh fuowhfc sxkceebczsla","",30))
+
+return
+
 var t=0
 
 for(var c=0;c<1000000;c++)
@@ -37,7 +46,6 @@ pr(h.stagger([1,2,3,4,5,6,7,8,9,10,11,12,13]))
 //~ checkperiod(Fdrandom.ishr2,1)
 
 //~ dolx(Fdrandom.ishr2,100000)
-//~ dolp(Fdrandom.ishr2,100)
 return
 //~ return
 //~ if(!"false"){ pr("oops") }
