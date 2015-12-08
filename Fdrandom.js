@@ -1,14 +1,14 @@
-/**
- * @author Andrew Strain
- * This is free and unencumbered software released into the public domain  
- * in homage to human ingenuity against greed and hatred.
+// Fdrandom.js - Fast deterministic random lib
+/** @author Andrew Strain
+ ** This is free and unencumbered software released into the public domain  
+ ** in homage to human ingenuity against greed and hatred.
  */
 
-Fdrandom=newFdrnd() /// Fast deterministic random lib
+module.exports = newFdrnd() //Fdrandom=newFdrnd()
 
-function newFdrnd(){
+function newFdrnd(){ 'use strict'
 		
-	return (function () { 
+	return (function(){ 
 	
 		var va,vl,vs,qr,us,rb,ju,U,sv
 		plant(arguments)    
@@ -49,7 +49,7 @@ function newFdrnd(){
 		}
 		
 		function setstate(s) 
-		{	for( var i=0; i<8; i++ ) U[i]=s[i]
+		{	for(var i=0; i<8; i++ ) U[i]=s[i]
 			ju=s[8];  va=s[9];  vl=s[10];  
 			vs=s[11]; qr=s[12]; us=s[13]; rb=s[14]; sv=s
 		}
@@ -90,7 +90,7 @@ function newFdrnd(){
 		{ 
 			return ( (( ((f48()*0x39b00000000)>>>4)*
 			         0.06249999650753)+f48())*5.960464477540047e-08 )
-		}  
+		} 
 		
 		function f24() { return f48()*0.99999997019767  }
 
