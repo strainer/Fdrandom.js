@@ -1,0 +1,28 @@
+{
+  "name": "fdrandom",
+  "version": "1.0.0",
+  "description": "Max speed and quality deterministic random number generator, distributions and shuffle",
+  "main": "Fdrandom.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://strainer:azsplo0@github.com/strainer/Fdrandom.js.git"
+  },
+  "keywords": [
+    "prng",
+    "seedable",
+    "deterministic",
+    "gaussian",
+    "quasi",
+    "random",
+    "shuffle"
+  ],
+  "author": "Andrew Strain <AndrewInput@gmail.com> (https://github.com/strainer/)",
+  "license": "PDDL-1.0",
+  "bugs": {
+    "url": "https://github.com/strainer/Fdrandom.js/issues"
+  },
+  "homepage": "https://github.com/strainer/Fdrandom.js#readme"
+}
