@@ -3,11 +3,10 @@
  ** This is free and unencumbered software released into the public domain  
  ** in homage to human ingenuity against greed and hatred.
  */
+Fdrandom=newFdrnd();
+'use strict'
 
-module.exports = newFdrnd() //Fdrandom=newFdrnd()
-
-function newFdrnd(){ 'use strict'
-		
+function newFdrnd(){ 		
 	return (function(){ 
 	
 		var va,vl,vs,qr,us,rb,ju,U,sv
