@@ -4,8 +4,9 @@
   "description": "Max speed and quality deterministic random number generator, distributions and shuffle",
   "main": "Fdrandom.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "require("fdrandom"); Fdrandom.next()==0.7140652210025094"
   },
+	"tonicExample": "require("fdrandom"); Fdrandom.hot().mixof(['la','lah ',' La'],'Sha',10)",
   "repository": {
     "type": "git",
     "url": "git+https://strainer:azsplo0@github.com/strainer/Fdrandom.js.git"
