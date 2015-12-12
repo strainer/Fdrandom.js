@@ -1,5 +1,5 @@
 require ('../dlib/mutil.js')
-require ('../Fdrandom.js')
+Fdrandom=require ('../Fdrandom.js')
 require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
 
@@ -31,32 +31,32 @@ if(0) pr("issssssssssss")
 pr(h.mixof(["can","sha","i a","hey"],9))
 pr(h.mixof("asqwpuhgvoksqw jdiecn eufhfh fuowhfc sxkceebczsla","",30))
 
-return
+//~ return
 
 var t=0
 
 for(var c=0;c<1000000;c++)
-{ t+=h.rndbit() }
+{ t+=h.rbit() }
 
 pr(t/1000000)
 
 
 
-pr(h.stagger([1,2,3,4,5,6,7,8,9,10,11,12,13]))
+//~ pr(h.stagger([1,2,3,4,5,6,7,8,9,10,11,12,13]))
 //~ checkperiod(Fdrandom.ishr2,1)
 
 //~ dolx(Fdrandom.ishr2,100000)
-return
+//~ return
 //~ return
 //~ if(!"false"){ pr("oops") }
 
 instr="0123456789abcdef"
 h=Fdrandom.hot()
 UUIDv4 = h.mixof(instr,8) +
-   "-" + h.mixof(instr,4) + 
-   "-4"+ h.mixof(instr,3) +
-   "-" + h.mixof(instr,h.mixof("89ab",1),3) +
-   "-" + h.mixof(instr,12);
+	 "-" + h.mixof(instr,4) + 
+	 "-4"+ h.mixof(instr,3) +
+	 "-" + h.mixof(instr,h.mixof("89ab",1),3) +
+	 "-" + h.mixof(instr,12);
 	 
 pr(UUIDv4)
 
@@ -93,13 +93,13 @@ function testun(a)
 
 dieh=0
 if (dieh){
-  //~ Fdrandom.resetr()
+	//~ Fdrandom.resetr()
 	fname="dod"
 	savedata("o:/tmp/"+fname+"raw"
 	,function(){ return (Fdrandom.dodo()*0x100000000)>>>0 } 
 	,20000000)
-  diehard("o:/tmp/"+fname+"raw","111111111111111")
-  return
+	diehard("o:/tmp/"+fname+"raw","111111111111111")
+	return
 }
 
 //~ compfunc(Fdrandom.f32,Fdrandom_i.f32)
@@ -113,8 +113,8 @@ if(scandev){
 var minoutp=true
 var roughness=20000     //5@10
 var reps=3, stren=30, accur=0//(Math.sqrt(stren)*10000)/roughness
-var tsreset=Fdrandom.dodo(11,11)
-var tsfunc=Fdrandom.f47  
+//var tsreset=Fdrandom.dodo(11,11)
+var tsfunc=Fdrandom.f47 
 
 var ax=0.24999,ex=0.25,nx=3  //peak 0
 var ay=31.999999,ey=32.0,ny=3
@@ -154,9 +154,10 @@ stren=9; reps=2
 //~ return
 pr("~func~")
 //~ pr(Fdrandom.hot().rndbit())
+//~ benchn(4,Fdrandom.dummy  ,10,"dummy ")
 benchn(4,Math.random  ,10,"math ")
 benchn(4,Fdrandom.f48  ,10,"f48 ")
-benchn(4,Fdrandom.dodo  ,10,"dodo ")
+benchn(4,Fdrandom.rbit  ,10,"rbit ")
 //~ benchn(4,Math.random  ,10,"math ")
 //~ benchn(4,Fdrandom.rndbit  ,10,"rndbit ")
 //~ benchn(4,Fdrandom.f48  ,10,"f48 ")

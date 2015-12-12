@@ -1,16 +1,15 @@
 // Fdrandom.js - Fast deterministic random lib
 /** @author Andrew Strain
- ** This is free and unencumbered software released into the public domain  
+ ** This is free and unencumbered software released into the public domain 
  ** in homage to human ingenuity against greed and hatred.
  */
-Fdrandom=newFdrnd();
-'use strict'
 
-function newFdrnd(){ 		
+var newpot = function(){ 
 	return (function(){ 
-	
+		'use strict'
+
 		var va,vl,vs,qr,us,rb,ju,U,sv
-		plant(arguments)    
+		plant(arguments) 
 		sv=getstate()
 		
 		function plant(sd)
@@ -21,10 +20,10 @@ function newFdrnd(){
 			sow(arguments)
 			
 			for(var i=0;i<98;i++) f48()
-			va=range(3206324,3259830)>>>0
+			va=irange(3206324,3259829)
 	
-			function sow(sd)   
-			{	var i        
+			function sow(sd) 
+			{	var i 
 				if(typeof sd === 'number')
 				{ 
 					i= (sd<0)? Math.abs(sd)*0.567 : sd 
@@ -36,7 +35,7 @@ function newFdrnd(){
 				if(typeof sd === 'string')
 				{	for( i=0; i<sd.length; i++ )
 					{	U[0]=( 65537-sd.charCodeAt(i) )/6464; f48() }
-					return  
+					return 
 				}
 				if(!sd)
 				{	U[0]= U[0]*0.33 + 4.4 
@@ -49,15 +48,15 @@ function newFdrnd(){
 		
 		function setstate(s) 
 		{	for(var i=0; i<8; i++ ) U[i]=s[i]
-			ju=s[8];  va=s[9];  vl=s[10];  
+			ju=s[8];  va=s[9];  vl=s[10]; 
 			vs=s[11]; qr=s[12]; us=s[13]; rb=s[14]; sv=s
 		}
 
 		function getstate() 
 		{	return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7], 
-			         ju, va, vl, vs, qr, us, rb ] }
+							 ju, va, vl, vs, qr, us, rb ] }
 
-		function pot() { return newFdrnd(arguments) }
+		function pot() { return newpot(arguments) }
 		
 		function repot(s) 
 		{	if (s) { plant(s) } else { setstate(sv) } 
@@ -72,23 +71,23 @@ function newFdrnd(){
 				ag=[cO.getRandomValues(new Uint32Array(8))] }
 			else
 			{	ag=[(new Date()).getTime()-1.332e+12, 
-				    Math.random(), Math.random(), Math.random()] }
+						Math.random(), Math.random(), Math.random()] }
 			ag.push(arguments)
-			return newFdrnd(ag)
+			return newpot(ag)
 		}
 
 		///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
 		function f48() 
-		{  
+		{ 
 			var c= 0.12810301030196883 * U[0] +
-			       15.378612015061215  * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
+						 15.378612015061215  * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
 			return U[ju]= c-( (U[0]=c)>>>0 )
 		}
 		
 		function fxs() 
 		{ 
 			return ( (( ((f48()*0x39b00000000)>>>4)*
-			         0.06249999650753)+f48())*5.960464477540047e-08 )
+							 0.06249999650753)+f48())*5.960464477540047e-08 )
 		} 
 		
 		function f24() { return f48()*0.99999997019767  }
@@ -103,14 +102,14 @@ function newFdrnd(){
 		
 		function rbit()
 		{ 
-			if( (rb*=2)>1.0e+14 ){ rb= f48() +0.5  } 
+			if( (rb*=2)>1.0e+15 ){ rb= f48() +0.5  } 
 			return rb&1
 		}
 
 		function rpole()
 		{ 
-			if( (rb*=2)>1.0e+14 ){ rb= f48() +0.5  } 
-			return (rb&1)*2-1
+			if( (rb*=2)>1.0e+15 ){ rb= f48() +1.5  } 
+			return (rb&2)-1
 		} 
 		
 		function ilcg() ///flat lcg 
@@ -196,7 +195,7 @@ function newFdrnd(){
 			}
 			else
 			{	e=c; c=od; od=Ao||0; Ao=new Array(od) }
-      
+			
 			od+=ob
 			c= c||0
 			e= e||Ai.length-1 ; e++
@@ -213,7 +212,7 @@ function newFdrnd(){
 			if(typeof Ai ==='string') { Ai=Ai.split(""); joinr=1 }
 			if(typeof Ao !=='string' && typeof Ao !=='object' ) 
 			{	e=c; c=Ao; Ao=Ai }
-      
+			
 			c= c||0
 			e= e||Ai.length-1 ; e++
 			
@@ -222,7 +221,7 @@ function newFdrnd(){
 				So=Ao; joinr=1
 				Ao=new Array(e-c); e-=c
 				for(var p=0; p<e; p++) Ao[p]= Ai[p+c]
-				c=0;   
+				c=0; 
 			}else{ //Ao is given array
 				joinr=null
 				ob=Ao.length
@@ -235,7 +234,7 @@ function newFdrnd(){
 
 			var d,p,ep=e-1
 			while( c<ep ){
-				d= Math.floor( c+( f48() *(e-c) ) )  
+				d= Math.floor( c+( f48() *(e-c) ) ) 
 				p= Ao[c]; Ao[c++]=Ao[d]; Ao[d]=p
 			}
 		
@@ -244,12 +243,12 @@ function newFdrnd(){
 		
 		return{
 			
-			pot: pot,  hot: hot,  repot:repot,  
+			pot: pot,  hot: hot,  repot:repot, 
 			getstate: getstate,  setstate: setstate,
 			
-			next: f48,  f48: f48,  
-			f24: f24,  
-			fxs: fxs,    
+			next: f48,  f48: f48, 
+			f24: f24, 
+			fxs: fxs, 
 			rbit: rbit, rpole:rpole,
 			range: range,  irange: irange,
 			i32: i32,  ui32: ui32,
@@ -259,12 +258,26 @@ function newFdrnd(){
 			mixup: mixup,  mixof: mixof,
 			ilcg: ilcg,  ishr2: ishr2,
 			
-			uigless: uigless,  uigmore: uigmore,  
-			igbrist: igbrist,  igmmode: igmmode,  
+			uigless: uigless,  uigmore: uigmore, 
+			igbrist: igbrist,  igmmode: igmmode, 
 			
 			fgwedge: fgwedge,  fgtrapez: fgtrapez,
 			fgthorn: fgthorn,  fgskip: fgskip, fgteat:fgteat,
 			
 		}
 	}(arguments))
-};
+}
+
+//Export to node, amd, commonjs or global object
+if (typeof exports !== 'undefined') 
+{ if (typeof module !== 'undefined' && module.exports) {
+		exports = module.exports = newpot()
+	}
+	exports.Fdrandom = newpot()
+} else {
+	if (typeof define === 'function' && define.amd) 
+	{ define('Fdrandom', [], function() { return newpot() }) }
+	else
+	{ (1,eval)('this').Fdrandom = newpot() } //that eval gets global object 
+}
+
