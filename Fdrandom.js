@@ -8,7 +8,7 @@ var newpot = function(){
 	return (function(){ 
 		'use strict'
 
-		var va,vl,vs,qr,us,rb,ju,U,sv
+		var va,vl,vs,qr,us,rb,ju,U,sv,i
 		plant(arguments) 
 		sv=getstate()
 		
@@ -19,11 +19,11 @@ var newpot = function(){
 
 			sow(arguments)
 			
-			for(var i=0;i<98;i++) f48()
+			for( i=0;i<98;i++ ) f48()
 			va=irange(3206324,3259829)
 	
 			function sow(sd) 
-			{	var i 
+			{
 				if(typeof sd === 'number')
 				{ 
 					i= (sd<0)? Math.abs(sd)*0.567 : sd 
@@ -47,14 +47,14 @@ var newpot = function(){
 		}
 		
 		function setstate(s) 
-		{	for(var i=0; i<8; i++ ) U[i]=s[i]
+		{	for( i=0;i<8;i++ ) U[i]=s[i]
 			ju=s[8];  va=s[9];  vl=s[10]; 
 			vs=s[11]; qr=s[12]; us=s[13]; rb=s[14]; sv=s
 		}
 
 		function getstate() 
 		{	return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7], 
-							 ju, va, vl, vs, qr, us, rb ] }
+			         ju, va, vl, vs, qr, us, rb ] }
 
 		function pot() { return newpot(arguments) }
 		
@@ -71,7 +71,7 @@ var newpot = function(){
 				ag=[cO.getRandomValues(new Uint32Array(8))] }
 			else
 			{	ag=[(new Date()).getTime()-1.332e+12, 
-						Math.random(), Math.random(), Math.random()] }
+				    Math.random(), Math.random(), Math.random()] }
 			ag.push(arguments)
 			return newpot(ag)
 		}
@@ -80,15 +80,15 @@ var newpot = function(){
 		function f48() 
 		{ 
 			var c= 0.12810301030196883 * U[0] +
-						 15.378612015061215  * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
+			    15.378612015061215  * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
 			return U[ju]= c-( (U[0]=c)>>>0 )
 		}
 		
 		function fxs() 
 		{ 
 			return ( (( ((f48()*0x39b00000000)>>>4)*
-							 0.06249999650753)+f48())*5.960464477540047e-08 )
-		} 
+			        0.06249999650753)+f48())*5.960464477540047e-08 )
+		}
 		
 		function f24() { return f48()*0.99999997019767  }
 
@@ -142,11 +142,11 @@ var newpot = function(){
 		function usum(n,sig,mu)
 		{ 
 			var sum= (((n=n||2)&1)==1)? 0.5 : 0
-			for(var i=0; i<n; i++) sum=f48()-sum 
+			for( i=0;i<n;i++ ) sum=f48()-sum 
 			
 			if(sig === undefined) return sum
 			if(sig !== psig) 
-			{ psig=sig; csig= sig*2/n*Math.sqrt(n) } //doesnt nail it
+			{	psig=sig; csig= sig*2/n*Math.sqrt(n) } //doesnt nail it
 			//sig wants converted to equivalent gaus for large n
 			
 			return (mu||0)+ sum*csig 
@@ -249,7 +249,7 @@ var newpot = function(){
 			next: f48,  f48: f48, 
 			f24: f24, 
 			fxs: fxs, 
-			rbit: rbit, rpole:rpole,
+			rbit: rbit, rpole: rpole,
 			range: range,  irange: irange,
 			i32: i32,  ui32: ui32,
 			
@@ -268,16 +268,16 @@ var newpot = function(){
 	}(arguments))
 }
 
-//Export to node, amd, commonjs or global object
+//Export for node, amd, commonjs or global object
 if (typeof exports !== 'undefined') 
-{ if (typeof module !== 'undefined' && module.exports) {
+{	if (typeof module !== 'undefined' && module.exports) {
 		exports = module.exports = newpot()
 	}
 	exports.Fdrandom = newpot()
 } else {
 	if (typeof define === 'function' && define.amd) 
-	{ define('Fdrandom', [], function() { return newpot() }) }
+	{	define('Fdrandom', [], function() { return newpot() }) }
 	else
-	{ (1,eval)('this').Fdrandom = newpot() } //that eval gets global object 
+	{	(1,eval)('this').Fdrandom = newpot() } //that eval gets global object 
 }
 
