@@ -4,16 +4,15 @@
  ** in homage to human ingenuity against greed and hatred.
  */
 
-var newpot = function(){ 
-	return (function(){ 
+var newpot = function() { 
+	return (function() { 
 		'use strict'
 
 		var va,vl,vs,qr,us,rb,ju,U,sv,i
 		plant(arguments) 
 		sv=getstate()
 		
-		function plant(sd)
-		{
+		function plant(sd) {
 			va=0; vl=1; vs=1; qr=0.0; us=0.0; rb=1.0e+15
 			ju=1; U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
 
@@ -22,70 +21,69 @@ var newpot = function(){
 			for( i=0;i<98;i++ ) f48()
 			va=irange(3206324,3259829)
 	
-			function sow(sd) 
-			{
-				if(typeof sd === 'number')
-				{ 
+			function sow(sd) {
+				if(typeof sd === 'number') { 
 					i= (sd<0)? Math.abs(sd)*0.567 : sd 
 					while(i>16)     i=i*0.0588 
 					while(i<1.0e-4) i=i*151515
 					U[0]=i; f48()
 					return
 				}
-				if(typeof sd === 'string')
-				{	for( i=0; i<sd.length; i++ )
+				if(typeof sd === 'string') {
+					for( i=0; i<sd.length; i++ )
 					{	U[0]=( 65537-sd.charCodeAt(i) )/6464; f48() }
 					return 
 				}
-				if(!sd)
-				{	U[0]= U[0]*0.33 + 4.4 
-					f48(); return
+				if(!sd) { 
+					U[0]= U[0]*0.33 + 4.4; 
+					f48(); return 
 				}
 				if(sd.length)
 				{	for( i=0; i<sd.length; i++ ) sow(sd[i]) }
 			}
 		}
-		
-		function setstate(s) 
-		{	for( i=0;i<8;i++ ) U[i]=s[i]
+	
+		function setstate(s) {	
+			for( i=0;i<8;i++ ) U[i]=s[i]
 			ju=s[8];  va=s[9];  vl=s[10]; 
 			vs=s[11]; qr=s[12]; us=s[13]; rb=s[14]; sv=s
 		}
-
-		function getstate() 
-		{	return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7], 
-			         ju, va, vl, vs, qr, us, rb ] }
+	
+		function getstate() {
+			return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7], 
+			         ju, va, vl, vs, qr, us, rb ] 
+		}
 
 		function pot() { return newpot(arguments) }
 		
-		function repot(s) 
-		{	if (s) { plant(s) } else { setstate(sv) } 
+		function repot(s) {	
+			if (s) { plant(s) } else { setstate(sv) } 
 			return this 
 		}
 		
-		function hot() 
-		{	var ag
+		function hot() {	
+			var ag
 			if(typeof(window)!=='undefined' 
-			 && (window.crypto||window.msCrypto))
-			{	var cO = window.crypto||window.msCrypto
-				ag=[cO.getRandomValues(new Uint32Array(8))] }
-			else
-			{	ag=[(new Date()).getTime()-1.332e+12, 
-				    Math.random(), Math.random(), Math.random()] }
+			 && (window.crypto||window.msCrypto)) {	
+				 
+				var cO = window.crypto||window.msCrypto
+				ag=[cO.getRandomValues(new Uint32Array(8))] 
+			}else{
+			  ag=[(new Date()).getTime()-1.332e+12, 
+				    Math.random(), Math.random(), Math.random()] 
+			}
 			ag.push(arguments)
 			return newpot(ag)
 		}
 
 		///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
-		function f48() 
-		{ 
+		function f48() { 
 			var c= 0.12810301030196883 * U[0] +
 			    15.378612015061215  * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
 			return U[ju]= c-( (U[0]=c)>>>0 )
 		}
 		
-		function fxs() 
-		{ 
+		function dbl() { 
 			return ( (( ((f48()*0x39b00000000)>>>4)*
 			        0.06249999650753)+f48())*5.960464477540047e-08 )
 		}
@@ -100,14 +98,12 @@ var newpot = function(){
 
 		function ui32() { return (f48()*0x1700000000)>>>0  }
 		
-		function rbit()
-		{ 
+		function rbit() { 
 			if( (rb*=2)>1.0e+15 ){ rb= f48() +0.5  } 
 			return rb&1
 		}
 
-		function rpole()
-		{ 
+		function rpole() { 
 			if( (rb*=2)>1.0e+15 ){ rb= f48() +1.5  } 
 			return (rb&2)-1
 		} 
@@ -139,8 +135,7 @@ var newpot = function(){
 		{	qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48(); return qr-= qr>>>0;  }
 		
 		var psig,csig
-		function usum(n,sig,mu)
-		{ 
+		function usum(n,sig,mu) { 
 			var sum= (((n=n||2)&1)==1)? 0.5 : 0
 			for( i=0;i<n;i++ ) sum=f48()-sum 
 			
@@ -154,23 +149,22 @@ var newpot = function(){
 
 		function gaus(sig,mu) { return nrml(f48,sig,mu) }
 		
-		function gausx(sig,mu){ return nrml(fxs,sig,mu) }
+		function gausx(sig,mu){ return nrml(dbl,sig,mu) }
 		
 		var nml=0,havnml=0
 		
 		function nrml(func,sig,mu) /// G Marsaglias box muller polar method
 		{	var p,q,w
 		
-			if(havnml)
-			{	havnml=0
+			if(havnml){	
+				havnml=0
 				if(sig === undefined) return nml
 				return nml*sig+(mu||0) 
-			}else
-			{
-				do{
+			}else{
+				do {
 					p= 2*func()-1; q= 2*func()-1
 					w= p*p + q*q
-				} while ( w>=1 )
+				} while( w>=1 )
 
 				w = Math.sqrt(( -2.0*Math.log(w) ) /w)
 				nml = p*w; havnml=1
@@ -180,44 +174,45 @@ var newpot = function(){
 			}
 		}
 
-		function mixof(Ai,Ao,od,c,e)
-		{	var joinr=1,So="",ob=0
-			
+		function mixof(Ai,Ao,od,c,e) {
+			var joinr=1,So="",ob=0
 			if(typeof Ai ==='string') { Ai=Ai.split("") } else joinr=0
-			if(typeof Ao !=='number') 
-			{	if(Ao === undefined) { od=1; Ao=[] }
+			
+			if(typeof Ao !=='number') {	
+				if(Ao === undefined) { od=1; Ao=[] }
 				else{
 					ob=Ao.length
-					if(typeof Ao ==='string') 
-					{ So=Ao; ob=0 ; joinr=1 } else joinr=0
+					if(typeof Ao ==='string') { 
+						So=Ao; ob=0 ; joinr=1 
+					} else joinr=0
 					if(ob===0){ Ao=new Array(od||0) } 
 				}
+			}else { 
+				e=c; c=od; od=Ao||0; Ao=new Array(od) 
 			}
-			else
-			{	e=c; c=od; od=Ao||0; Ao=new Array(od) }
 			
 			od+=ob
 			c= c||0
 			e= e||Ai.length-1 ; e++
 			
-			for(var i=ob;i<od;i++) 
-			{	Ao[i]= Ai[ c+( f48()*(e-c) )>>>0 ] }
+			for(var i=ob;i<od;i++) {	
+				Ao[i]= Ai[ c+( f48()*(e-c) )>>>0 ] 
+			}
 		
 			return joinr? So+Ao.join("") : Ao
 		}
 
-		function mixup(Ai,Ao,c,e)
-		{	var joinr=0, So="", ob=0
-			
+		function mixup(Ai,Ao,c,e) {	
+			var joinr=0, So="", ob=0
 			if(typeof Ai ==='string') { Ai=Ai.split(""); joinr=1 }
+			
 			if(typeof Ao !=='string' && typeof Ao !=='object' ) 
 			{	e=c; c=Ao; Ao=Ai }
 			
 			c= c||0
 			e= e||Ai.length-1 ; e++
 			
-			if(typeof Ao ==='string') 
-			{
+			if(typeof Ao ==='string') {
 				So=Ao; joinr=1
 				Ao=new Array(e-c); e-=c
 				for(var p=0; p<e; p++) Ao[p]= Ai[p+c]
@@ -233,7 +228,7 @@ var newpot = function(){
 			}
 
 			var d,p,ep=e-1
-			while( c<ep ){
+			while( c<ep ) {
 				d= Math.floor( c+( f48() *(e-c) ) ) 
 				p= Ao[c]; Ao[c++]=Ao[d]; Ao[d]=p
 			}
@@ -248,7 +243,7 @@ var newpot = function(){
 			
 			next: f48,  f48: f48, 
 			f24: f24, 
-			fxs: fxs, 
+			dbl: dbl, 
 			rbit: rbit, rpole: rpole,
 			range: range,  irange: irange,
 			i32: i32,  ui32: ui32,
@@ -263,20 +258,19 @@ var newpot = function(){
 			
 			fgwedge: fgwedge,  fgtrapez: fgtrapez,
 			fgthorn: fgthorn,  fgskip: fgskip, fgteat:fgteat,
-			
 		}
+	
 	}(arguments))
 }
 
 //Export for node, amd, commonjs or global object
 if (typeof exports !== 'undefined') 
-{	if (typeof module !== 'undefined' && module.exports) {
-		exports = module.exports = newpot()
-	}
+{	if (typeof module !== 'undefined' && module.exports)
+	{	exports = module.exports = newpot() }
 	exports.Fdrandom = newpot()
 } else {
 	if (typeof define === 'function' && define.amd) 
-	{	define('Fdrandom', [], function() { return newpot() }) }
+	{	define('Fdrandom',[],function(){return newpot()} ) }
 	else
 	{	(1,eval)('this').Fdrandom = newpot() } //that eval gets global object 
 }

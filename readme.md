@@ -5,7 +5,7 @@ Fast deterministic random functions for Javascript.
 ### Features
 
 * Fast high quality PRNG. 
-* Integer, single and double precision float values.
+* Integer, single and dbl precision float values.
 * Range, boolean, mixup, mixof functions.
 * Distribution options: 
   * Unbiased uniforms. 
@@ -38,9 +38,9 @@ Method list
 Method	 | Speed % | Notes                         
  :------ | :-----: | :----------------------------
 f48      |   100   | Standard Number rands with 48bit resolution 
-next     |   100   | Alias of f48 (0>0.9999999999999999)                  
-fxs      |   50    | As f48 with 53 bits resolution
-f24      |   90    | Safe values for Float32array (0>0.99999994)
+next     |   100   | Alias of f48 (0 to 0.9999999999999999)                  
+dbl      |   50    | As f48 with 53 bits resolution
+f24      |   90    | Safe values for Float32array (0 to 0.99999994)
          |         |                               
 i32      |   80    | 32 bit signed integer values
 ui32     |   80    | 32 bit unsigned integer values
@@ -153,8 +153,8 @@ Fdrandom.js does too. This can help in formulas which need
 to avoid zero, eg. `something/(1-unitrandom)` avoids the possibility of
 division by zero when `unitrandom` cannot be 1.
 
-`fxs` returns JS Numbers (double floats) with all 53 bits of
-their maximum precision utilised.
+`dbl` returns JS Numbers (double precision float) with all 53 bits of
+their mantissa utilised.
 
 `f24` is designed to be cast to float32 arrays sometime, this 
 is the only reason to use it (for opengl etc). `f24` actually 
@@ -169,12 +169,6 @@ Diehard reports for the constituent generators are in the directory `reports`
 
 The `drafts` directory contains untidy code and node scripts
 used to discover and test the generators and methods.
-
-Project Version
----------------
-This is a belaboured but unfinnished release. Most functions have been tested 
-and tweaked but some errors will have not been spotted yet and notes and tools
-are in disarray.
 
 Examples
 --------
