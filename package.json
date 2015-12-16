@@ -4,7 +4,7 @@
   "description": "Max speed and quality deterministic random number generator, distributions and shuffle",
   "main": "Fdrandom.js",
   "scripts": {
-    "test": "require('fdrandom').next()==0.7140652210025094"
+    "test": "require('fdrandom').pot(0).next()==0.7924986336504407"
   },
 	"tonicExample": "require('fdrandom').hot().mixof( ['la','lah ',' La'], 'Sha', 10 )",
   "repository": {
