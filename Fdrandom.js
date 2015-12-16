@@ -4,7 +4,7 @@
  ** in homage to human ingenuity against greed and hatred.
  */
 
-var newpot = function(){ return (function(){
+var newFdrPot = function(){ return (function(){
 	'use strict'
 
 	var va,vl,vs,qr,us,rb,ju,U,sv,i
@@ -33,7 +33,7 @@ var newpot = function(){ return (function(){
 				{	U[0]=( 65537-sd.charCodeAt(i) )/6464; f48() }
 				return 
 			}
-			if(sd.length)
+			if((sd||i).length)
 			{	for( i=0; i<sd.length; i++ ) sow(sd[i]); return }
 			 
 			U[0]= U[0]*0.33 + 4.4 ; f48()
@@ -52,26 +52,29 @@ var newpot = function(){ return (function(){
 						 ju, va, vl, vs, qr, us, rb ] 
 	}
 
-	function pot() { return newpot(arguments) }
+	function pot() { return newFdrPot(arguments) }
 	
 	function repot(s) {	
 		if (s) { plant(s) } else { setstate(sv) }
 		return this 
 	}
 	
-	function hot() {	
-		var ag
+	function hot() {
+		var glob=(1,eval)
+		if(arguments.length===0 
+		 && typeof glob.FdrandomEntropy !== 'undefined') { 
+			return glob.FdrandomEntropy 
+		}
 		if(typeof(window)!=='undefined' 
 		 && (window.crypto||window.msCrypto)) {	
-			 
 			var cO = window.crypto||window.msCrypto
-			ag=[cO.getRandomValues(new Uint32Array(8))] 
+			var ag=[cO.getRandomValues(new Uint32Array(8))] 
 		}else{
 			ag=[(new Date()).getTime()-1.332e+12, 
 					Math.random(), Math.random(), Math.random()] 
 		}
 		ag.push(arguments)
-		return newpot(ag)
+		return glob.FdrandomEntropy = newFdrPot(ag)
 	}
 
 	///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
@@ -227,7 +230,7 @@ var newpot = function(){ return (function(){
 
 		var d,p,ep=e-1
 		while( c<ep ) {
-			d= Math.floor( c+( f48() *(e-c) ) ) 
+			d= Math.floor( c+( f48()*(e-c) ) ) 
 			p= Ao[c]; Ao[c++]=Ao[d]; Ao[d]=p
 		}
 	
@@ -260,12 +263,12 @@ var newpot = function(){ return (function(){
 //Export for node, amd, commonjs or global object
 if (typeof exports !== 'undefined') 
 {	if (typeof module !== 'undefined' && module.exports)
-	{	exports = module.exports = newpot() }
-	exports.Fdrandom = newpot()
+	{	exports = module.exports = newFdrPot() }
+	exports.Fdrandom = newFdrPot()
 } else {
 	if (typeof define === 'function' && define.amd) 
-	{	define( 'Fdrandom',[],function(){return newpot()} ) }
+	{	define( 'Fdrandom',[],function(){return newFdrPot()} ) }
 	else
-	{	(1,eval)('this').Fdrandom = newpot() } //that eval gets global object 
+	{	(1,eval)('this').Fdrandom = newFdrPot() } 
 }
 
