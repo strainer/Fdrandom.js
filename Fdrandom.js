@@ -23,8 +23,8 @@ var newFdrPot = function(){ return (function(){
 		function sow(sd) {
 			if(isFinite(sd)) { 
 				i= (sd<=0)? Math.abs(sd)+1.23 : sd 
-				while(i>16)     i=i*0.0019569471624266144
-				while(i<1.0e-4) i=i*511.11111111111111111
+				while(i>16)     i=i*0.0019560471624266144
+				while(i<1.0e-4) i=i*511.11110111111111111
 				U[0]=i; f48()
 				return
 			}
@@ -41,7 +41,7 @@ var newFdrPot = function(){ return (function(){
 		}
 	}
 
-	function setstate(s) {	
+	function setstate(s) {
 		for( i=0;i<8;i++ ) U[i]=s[i]
 		ju=s[8];  va=s[9];  vl=s[10] 
 		vs=s[11]; qr=s[12]; us=s[13]; rb=s[14]; sv=s
@@ -49,8 +49,8 @@ var newFdrPot = function(){ return (function(){
 
 	function getstate() {
 		return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7], 
-						 ju, va, vl, vs, qr, us, rb ] 
-	}
+		         ju, va, vl, vs, qr, us, rb ] 
+	} 
 
 	function pot() { return newFdrPot(arguments) }
 	
@@ -70,8 +70,7 @@ var newFdrPot = function(){ return (function(){
 			var cO = window.crypto||window.msCrypto
 			var ag=[cO.getRandomValues(new Uint32Array(8))] 
 		}else{
-			ag=[(new Date()).getTime()-1.332e+12, 
-					Math.random(), Math.random(), Math.random()] 
+			ag=[(new Date()).getTime()-1.332e+12, Math.random()] 
 		}
 		ag.push(arguments)
 		return glob.FdrandomEntropy = newFdrPot(ag)
@@ -80,13 +79,13 @@ var newFdrPot = function(){ return (function(){
 	///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
 	function f48() { 
 		var c= 0.12810301030196883 * U[0] +
-				15.378612015061215  * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
+		       15.378612015061215 * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
 		return U[ju]= c-( (U[0]=c)>>>0 )
 	}
 	
 	function dbl() { 
 		return ( (( ((f48()*0x39b00000000)>>>4)*
-						0.06249999650753)+f48())*5.960464477540047e-08 )
+		        0.06249999650753)+f48())*5.960464477540047e-08 )
 	}
 	
 	function f24() { return f48()*0.99999997019767 }
@@ -116,9 +115,9 @@ var newFdrPot = function(){ return (function(){
 	{	va^= (va<<7)+1498916339; return va^= va>>>8 }
 
 	function uigless() 
-	{	return (( ui32()&ui32() )>>>0)   }
+	{	return (( ui32()&ui32() )>>>0)  }
 	function uigmore() 
-	{	return (( ui32()|ui32() )>>>0)   }
+	{	return (( ui32()|ui32() )>>>0)  }
 	function igbrist() 
 	{	return (( ui32()&ui32() )>>1) + (( ui32()|ui32() )>>1)  }
 	function igmmode() 
@@ -196,14 +195,14 @@ var newFdrPot = function(){ return (function(){
 		c= c||0
 		e= e||Ai.length-1 ; e++
 		
-		for( i=ob;i<od;i++ ) {	
+		for( i=ob;i<od;i++ ) {
 			Ao[i]= Ai[ c+( f48()*(e-c) )>>>0 ] 
 		}
 	
-		return joinr? So+Ao.join("") : Ao
+		return joinr? Ao=So+Ao.join("") : Ao
 	}
 
-	function mixup(Ai,Ao,c,e) {	
+	function mixup(Ai,Ao,c,e) {
 		var joinr=0, So="", ob=0
 		if(typeof Ai ==='string') { Ai=Ai.split(""); joinr=1 }
 		
@@ -234,9 +233,35 @@ var newFdrPot = function(){ return (function(){
 			p= Ao[c]; Ao[c++]=Ao[d]; Ao[d]=p
 		}
 	
-		return joinr? So+Ao.join("") : Ao
+		return joinr? Ao=So+Ao.join("") : Ao
+	}
+
+	function scramble(Ai,Ao,divs) {
+    if(typeof Ai ==='number') {
+	    Ai=new Array(Ai)
+	    for(var c=0;c<Ai.length;c++) Ai[c]=c
+	  }
+	  
+    var n=Ai.length
+    var dvn= Math.ceil(n/divs)
+    var c=0
+    var Ax=[]
+    while(c<n) {
+	    mixup(Ai,Ax,c, (c+=dvn,c>n?n-1:c-1) )
+	  }	
+	  
+	  c=dvn*(Math.ceil(divs/2)+0.5)
+	  
+	  i=0
+	  while(i<n){
+			Ao[i]=Ax[c]
+			c=(c+dvn+(i++))%n
+	  }
+	  
+	  return Ao
 	}
 	
+		
 	return{
 		pot: pot,  hot: hot,  repot:repot, 
 		getstate: getstate,  setstate: setstate,
@@ -256,6 +281,8 @@ var newFdrPot = function(){ return (function(){
 		
 		fgwedge: fgwedge,  fgtrapez: fgtrapez,
 		fgthorn: fgthorn,  fgskip: fgskip, fgteat:fgteat,
+	  
+	  scramble:scramble
 	}
 
 }(arguments))}
