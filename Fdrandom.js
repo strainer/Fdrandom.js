@@ -164,15 +164,15 @@ var newFdrPot = function(){ return (function(){
   
   function gausx(sig,mu){ return nrml(dbl,sig,mu) }
   
-  var nml=0,havnml=0
+  var nml=0
   
   function nrml(func,sig,mu) /// G Marsaglias box muller polar method
   { var p,q,w
   
-    if(havnml){ 
-      havnml=0
-      if(sig === undefined) return nml
-      return nml*sig+(mu||0) 
+    if(nml){ 
+      q = nml ; nml=0
+      if(sig) return q *sig +(mu||0)
+      return q
     }else{
       do {
         p= 2*func()-1; q= 2*func()-1
@@ -180,10 +180,10 @@ var newFdrPot = function(){ return (function(){
       } while( w>=1 )
 
       w = Math.sqrt(( -2.0*Math.log(w) ) /w)
-      nml = p*w; havnml=1
+      nml = p*w;
       
-      if(sig === undefined) return q*w 
-      return q*w*sig+(mu||0);
+      if(sig) return q*w*sig+(mu||0)
+      return q*w 
     }
   }
 
