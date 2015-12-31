@@ -20,6 +20,14 @@ svg { background: #ffffff; }
 </html>
 
 <script>
+
+var gu=0
+for(var u=0;u<1000000;u++)
+{ gu=Fdrandom.f48()-gu }
+pr("wop ",gu)
+
+
+
 tlogger = document.getElementById('log');
 run()
 
@@ -41,8 +49,8 @@ function runben() {
 	h=Fdrandom.hot()
 	var dur=3,reps=1
 	var funz= [
-	 [Math.random,"math.random "],
-	 [Fdrandom.f48,"f48 "],
+	 //~ [Math.random,"math.random "],
+	 //~ [Fdrandom.f48,"f48 "],
 	 //~ [Fdrandom.f24,"f24 "],
 	 //~ [Fdrandom.fxs,"fxs "],
 	 //~ [h.rndbit,"rndbit "],
@@ -57,7 +65,7 @@ function runben() {
 	 //~ [Fdrandom.usum,"usum 8 ",8],
 	 //~ [Fdrandom.usum,"usum 16 ",16],
 	 //~ [Fdrandom.usum,"usum 32 ",32],
-	 //~ [Fdrandom.gaus,"gaus "],
+	 [Fdrandom.gaus,"gaus "],
 	 //~ [Fdrandom.gausx,"gausx "],
 	 //~ [Fdrandom.ui32,"ui32 "],
 	 //~ [Fdrandom.i32,"i32 "],
@@ -67,15 +75,17 @@ function runben() {
 	 //~ [Fdrandom.uigmore,"uigmore "],
 	 //~ [Fdrandom.igbrist,"igbrist "],
 	 //~ [Fdrandom.igmmode,"igmmode "],
-	 //~ [Fdrandom.fgwedge,"fgwedge "],
-	 //~ [Fdrandom.fgteat,"fgteat "],
-	 //~ [Fdrandom.fgtrapez,"fgtrapez "],
-	 //~ [Fdrandom.fgthorn,"fgthorn "],
+	 [Fdrandom.fgthorn,"fgthorn "],
+	 [Fdrandom.fgwedge,"fgwedge "],
+	 [Fdrandom.fgnorm,"fgnorm "],
+	 [Fdrandom.fgteat,"fgteat "],
+	 [Fdrandom.fgtrapez,"fgtrapez "],
+	 [Fdrandom.fgskip,"fgskip "],
 	 //~ [h.fgskip,"fgskip"],
 	 //~ [Fdrandom.fgskip,"fgskip"],
 
 	]
-				
+ 			
 	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
 	
 	benchn(reps, funz[runstep][0], dur, funz[runstep][1], funz[runstep++][2] ) 

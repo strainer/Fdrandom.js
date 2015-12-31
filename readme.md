@@ -4,15 +4,15 @@ Fast deterministic random functions for Javascript.
 
 ### Features
 
-* Fast high quality PRNG. 
-* Integer, single and dbl precision float values.
+* Fast tested PRNG.  
+* Integer, single and double precision float values.
 * Range, boolean, mixup, mixof functions.
 * Distribution options: 
   * Unbiased uniforms. 
   * Gaussian distribution by Box Muller polar method. 
   * Normal approximated by Uniform Sum.
   * Low discrepency / Quasi random (custom spaced walk)
-  * Convenience gaming distributions
+  * Convenience gaming distributions like range normal shapes
   * [Charts](http://strainer.github.io/Fdrandom.js/)
 	
 Usage
@@ -37,9 +37,9 @@ Method list
 
 Method	 | Speed % | Notes                         
  :------ | :-----: | :----------------------------
-f48      |   100   | Standard Number rands with 48bit resolution 
-next     |   100   | Alias of f48 (0 to 0.9999999999999999)                  
-dbl      |   50    | As f48 with 53 bits resolution
+next     |   100   | Standard randoms with 48bit resolution
+f48      |   100   | Alias of next (0 to 0.9999999999999999)  
+dbl      |   50    | As next/f48 with 53 bits resolution
 f24      |   90    | Safe values for Float32array (0 to 0.99999994)
          |         |                               
 i32      |   80    | 32 bit signed integer values
@@ -66,6 +66,7 @@ Method | Speed % | Notes
 fgskip |   90    | Low discrepancy floats (custom spaced)        
 fgthorn|   30    | Thorn shaped game distribution 
 fgwedge|   30    | Wedge shaped game distribution 
+fgnorm |   30    | Normal curve shaped game distribution 
 fgteat |   30    | Teat shaped game distribution  
 fgtrapez|  50    | Trapezoid game distribution 
 uigless|   60    | Unsigned 1/4 bit density game dist.       
@@ -186,6 +187,13 @@ uniformsum=p.usum(n)   //add n*( -0.5 > 0.5 ) randoms
 uniformsum=p.usum(n,sigma,mu) //to scale and shift with sigma and mu
 gausgame=p.usum(4,1)    //a quick rough approximation of gaussian
 
+normgame=fgnorm()     //approx gaussian shape range -1 to 1
+normgame=fgnorm(2,4.5)  //same shape range 2 to 4.5
+oftenmid=fgthorn()      //sharp peak in middle, range -1 to 1
+oftenmid=fgthorn(p,q)   //same shape range p to q
+                        //see Charts for gaming distributions
+
+
 var inray=["0","1","2","3","4","5","6","7","8","9","sha","la","la"] 
 var instr="0123456789abcdef" 
 var outray =[1,2,3]
@@ -217,6 +225,5 @@ UUIDv4 = h.mixof(instr,8) +
    "-4"+ h.mixof(instr,3) +
    "-" + h.mixof(instr,h.mixof("89ab",1),3) +
    "-" + h.mixof(instr,12); 
-
 ...  
 ```
