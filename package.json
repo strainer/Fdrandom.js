@@ -1,12 +1,12 @@
 {
   "name": "fdrandom",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Max speed and quality deterministic random number generator, distributions and shuffle",
   "main": "Fdrandom.js",
   "scripts": {
     "test": "require('fdrandom').pot(0).next()==0.7924986336504407"
   },
-	"tonicExample": "require('fdrandom').hot().mixof( ['la','lah ',' La'], 'Sha', 10 )",
+  "tonicExample": "require('fdrandom').hot().mixof( ['la','lah ',' La'], 'Sha', 10 )",
   "repository": {
     "type": "git",
     "url": "git+https://strainer:azsplo0@github.com/strainer/Fdrandom.js.git"
