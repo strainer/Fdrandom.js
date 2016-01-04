@@ -12,8 +12,8 @@ var newFdrPot = function(){ return (function(){
   sv=getstate()
   
   function plant(sd) {
-    va=0; vl=1; vs=1; qr=0.0; us=0.0; rb=1.0e+15
-    ju=1; U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
+    va=0, vl=1, vs=1, qr=0.0, us=0.0, rb=1.0e+15
+    ju=1, U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
 
     sow(arguments)
     
@@ -81,8 +81,8 @@ var newFdrPot = function(){ return (function(){
     var c= 0.12810301030196883 * U[0] +
            15.378612015061215 * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
     return U[ju]= c-( (U[0]=c)>>>0 )
-  }
-  
+  } 
+    
   function dbl() { 
     return ( (( ((f48()*0x39b00000000)>>>4)*
             0.06249999650753)+f48())*5.960464477540047e-08 )
@@ -123,28 +123,36 @@ var newFdrPot = function(){ return (function(){
   function igmmode() 
   { return (( ui32()&ui32() )>>1) - (( ui32()|ui32() )>>1)  }
   
-  function fgthorn(b,d){ 
+  function gbowl(b,d){ 
+    b= (b===undefined)?-1:b; d= (d===undefined)?1:d; var c=f48()
+    return b+ (d-b)* (1.5+(1.5-c*(c+f48()))*rpole())*0.33333333333333 
+  }
+  function gspire(b,d){ 
+    b= (b===undefined)?-1:b; d= (d===undefined)?1:d; 
+    return b+ (d-b)*(0.5+(0.5-f48())*f48()) 
+  }
+  function gthorn(b,d){ 
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     return b+ (d-b)* 0.5* (1+ (f48()-f48())*f48() ) 
   }
-  function fgwedge(b,d){ 
+  function gwedge(b,d){ 
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     return b+ (d-b)* 0.5* 
     (1+ (Math.abs(f48()-f48())-Math.abs(f48()-f48()))) 
   }
-  function fgnorm(b,d){
+  function gnorm(b,d){
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     return b+ (d-b)* 0.2* (f48()+f48()+f48()+f48()+f48())
   }
-  function fgteat(b,d){
+  function gteat(b,d){
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     return b+ (d-b)* 0.5* (0.5 + (0.5-f48())*f48()+f48()) 
   }
-  function fgtrapez(b,d){
+  function gtrapez(b,d){
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d 
     return b+ (d-b)* (0.5+ 0.333333* (0.5+f48()-f48()*2)) 
   }
-  function fgskip(c) ///simple low discrepancy 
+  function gskip(c) ///simple low discrepancy 
   { qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48(); return qr-= qr>>>0; }
   
   var psig,csig
@@ -211,7 +219,7 @@ var newFdrPot = function(){ return (function(){
     for( var i=ob;i<od;i++ ){
       Ao[i]= Ai[ c+( f48()*(e-c) )>>>0 ] 
     }
-  
+    
     return joinr? Ao=So+Ao.join("") : Ao
   }
 
@@ -250,25 +258,30 @@ var newFdrPot = function(){ return (function(){
   }
     
   return{
-    pot: pot,  hot: hot,  repot:repot, 
-    getstate: getstate,  setstate: setstate,
+     pot: pot   ,hot: hot  ,repot: repot 
+    ,getstate: getstate    ,setstate: setstate
     
-    next: f48,  f48: f48,  f24: f24, dbl: dbl, fxs: dbl, 
-    i32: i32,  ui32: ui32,
-    rbit: rbit, rndbit:rbit, rpole: rpole, rndsign:rpole,
-    range: range,  irange: irange,
+    ,next: f48  ,f48: f48  ,dbl: dbl
+    ,f24: f24   ,fxs: dbl 
+    ,i32: i32   ,ui32: ui32
     
-    gaus: gaus,  gausx: gausx,  usum: usum ,
-  
-    mixup: mixup,  mixof: mixof,
-    ilcg: ilcg,  ishr2: ishr2,
+    ,rbit: rbit ,rndbit:rbit  ,rpole: rpole  ,rndsign:rpole
+    ,range: range  ,irange: irange
     
-    uigless: uigless,  uigmore: uigmore, 
-    igbrist: igbrist,  igmmode: igmmode, 
+    ,gaus: gaus    ,gausx: gausx   ,usum: usum 
     
-    fgwedge: fgwedge,  fgtrapez: fgtrapez, fgnorm:fgnorm,
-    fgthorn: fgthorn,  fgskip: fgskip, fgteat:fgteat
+    ,mixup: mixup  ,mixof: mixof
+    ,ilcg: ilcg    ,ishr2: ishr2
     
+    ,uigless: uigless  ,uigmore: uigmore 
+    ,igbrist: igbrist  ,igmmode: igmmode 
+    
+    ,fgwedge: gwedge  ,fgtrapez: gtrapez  ,fgnorm:gnorm
+    ,fgthorn: gthorn  ,fgskip:   gskip    ,fgteat:gteat
+    
+    ,gwedge: gwedge  ,gtrapez: gtrapez  ,gnorm:gnorm
+    ,gthorn: gthorn  ,gskip:   gskip    ,gteat:gteat
+    ,gbowl: gbowl    ,gspire:  gspire
   }
 
 }(arguments))}

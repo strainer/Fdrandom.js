@@ -4,16 +4,16 @@ require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
 
 
-pr(Fdrandom.f48())
-for(var i=0;i<300000000;i++) {
-  Fdrandom.f48()	
-}	
-pr(Fdrandom.f48())
+//~ pr(Fdrandom.f48())
+//~ for(var i=0;i<300000000;i++) {
+  //~ Fdrandom.f48()	
+//~ }	
+//~ pr(Fdrandom.f48())
 
 //~ pr(-1==null)
 
 //~ Fdrandom=Fdrandom.repot(0.10000000000003)
-//~ dolp(Fdrandom.f48,5)
+dolp(function(){return Fdrandom.f48()}  ,555)
 //~ pr("-")
 //~ Fdrandom=Fdrandom.repot(0.10000000000004)
 //~ console.log(arguments)

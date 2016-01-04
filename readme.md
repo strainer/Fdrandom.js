@@ -63,12 +63,14 @@ usum    | 25@n=4  | Custom Uniform sum
 
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
-fgskip |   90    | Low discrepancy floats (custom spaced)        
-fgthorn|   30    | Thorn shaped game distribution 
-fgwedge|   30    | Wedge shaped game distribution 
-fgnorm |   30    | Normal curve shaped game distribution 
-fgteat |   30    | Teat shaped game distribution  
-fgtrapez|  50    | Trapezoid game distribution 
+gskip  |   90    | Low discrepancy floats (custom spaced)        
+gnorm  |   30    | Normal curve shaped game distribution 
+gbowl  |   50    | Bowl shaped game distribution 
+gspire |   50    | Spire shaped game distribution 
+gthorn |   30    | Thorn shaped game distribution 
+gwedge |   30    | Wedge shaped game distribution 
+gteat  |   30    | Teat shaped game distribution  
+gtrapez|   50    | Trapezoid game distribution 
 uigless|   60    | Unsigned 1/4 bit density game dist.       
 uigmore|   60    | Unsigned 3/4 bit density game dist.      
 igmmode|   60    | Signed multi modal game dist.      
@@ -187,8 +189,8 @@ uniformsum=p.usum(n)   //add n*( -0.5 > 0.5 ) randoms
 uniformsum=p.usum(n,sigma,mu) //to scale and shift with sigma and mu
 gausgame=p.usum(4,1)    //a quick rough approximation of gaussian
 
-normgame=fgnorm()     //approx gaussian shape range -1 to 1
-normgame=fgnorm(2,4.5)  //same shape range 2 to 4.5
+normgame=gnorm()     //approx gaussian shape range -1 to 1
+normgame=gnorm(2,4.5)  //same shape range 2 to 4.5
 oftenmid=fgthorn()      //sharp peak in middle, range -1 to 1
 oftenmid=fgthorn(p,q)   //same shape range p to q
                         //see Charts for gaming distributions
