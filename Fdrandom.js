@@ -60,10 +60,10 @@ var newFdrPot = function(){ return (function(){
   }
   
   function hot() {
-    var glob=(1,eval)
+    var glo=(1,eval)
     if(arguments.length===0 
-     && typeof glob.FdrandomEntropy !== 'undefined'){ 
-      return glob.FdrandomEntropy 
+     && typeof glo.FdrandomHotPot !== 'undefined'){ 
+      return glo.FdrandomHotPot 
     }
     if(typeof(window)!=='undefined' 
      && (window.crypto||window.msCrypto)){ 
@@ -73,7 +73,7 @@ var newFdrPot = function(){ return (function(){
       ag=[(new Date()).getTime()-1.332e+12, Math.random()] 
     }
     ag.push(arguments)
-    return glob.FdrandomEntropy = newFdrPot(ag)
+    return glo.FdrandomHotPot = newFdrPot(ag)
   }
 
   ///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
@@ -84,7 +84,7 @@ var newFdrPot = function(){ return (function(){
   } 
   
   function f48s(){
-	  return (rbit()==0)?f48():(f48()+f48()+f48())*0.33333
+	  return (rbit()===0)?f48():(f48()+f48()+f48())*0.33333
 	}
 	
   function dbl() { 
