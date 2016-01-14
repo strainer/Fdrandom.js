@@ -21,6 +21,8 @@ svg { background: #ffffff; }
 
 <script>
 
+var oddc={}
+
 var gu=0
 for(var u=0;u<1000000;u++)
 { gu=Fdrandom.f48()-gu }
@@ -50,9 +52,13 @@ function runben() {
 	var dur=3,reps=1
 	var funz= [
 	 //~ [Math.random,"math.random "],
+	 [Math.random,"math.random "],
+	 //~ [Fdrandom.f48s,"f48s "],
 	 //~ [Fdrandom.f48,"f48 "],
+	 [Fdrandom.f48s,"f48s "],
 	 //~ [Fdrandom.f24,"f24 "],
 	 //~ [Fdrandom.fxs,"fxs "],
+	 [Fdrandom.dbl,"dbl "],
 	 //~ [h.rndbit,"rndbit "],
 	 //~ [h.rndsign,"rndsign "],
 	 //~ [Fdrandom.usum,"usum 1 ",1],
@@ -75,8 +81,8 @@ function runben() {
 	 //~ [Fdrandom.uigmore,"uigmore "],
 	 //~ [Fdrandom.igbrist,"igbrist "],
 	 //~ [Fdrandom.igmmode,"igmmode "],
-	 [Fdrandom.gbowl,"gbowl "],
-	 [Fdrandom.gthorn,"gthorn "],
+	 //~ [Fdrandom.gbowl,"gbowl "],
+	 //~ [Fdrandom.gthorn,"gthorn "],
 	 //~ [Fdrandom.gnorm,"gnorm "],
 	 //~ [Fdrandom.gteat,"fgteat "],
 	 //~ [Fdrandom.gtrapez,"gtrapez "],
@@ -88,7 +94,7 @@ function runben() {
  			
 	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
 	
-	benchn(reps, funz[runstep][0], dur, funz[runstep][1], funz[runstep++][2] ) 
+	benchn(reps=1, funz[runstep][0], dur=1, funz[runstep][1], funz[runstep++][2] ) 
 
   if(runstep<funz.length){ intervar=setInterval(runben, 250); }
 	
@@ -216,10 +222,10 @@ benchn = function(n,a,b,c,d){
 	//~ $("#log").hide()
 	tlogger.innerHTML += rexx;
 	tlogger.innerHTML += '<div style="float:left; background-color: #fff;">';
-	tlogger.appendChild (givesvg(a,d));
+	tlogger.appendChild (twodim_distsvg(a,d));
 	tlogger.innerHTML += '</div>';
 	tlogger.innerHTML += '<div style="float:left; background-color: #fff;">';
-	tlogger.appendChild (givesvg2(c,a,d));
+	tlogger.appendChild (fltline_svg(c,a,d));
 	tlogger.innerHTML += '</div>';
 }
 
@@ -229,16 +235,22 @@ intervar=setInterval(runben, 250);
 }
 
 
-function givesvg(func,d)
+function twodim_distsvg(func,d)
 {
-	var minval=0,maxval=0 
-	for(var i=0;i<vgsc*5;i++)
+	var minval=0,maxval=0,tval=0,fb=0 
+	for(var i=0;i<vgsc*8;i++)
 	{ var f=func(d)
 		if(f>maxval) { maxval=f }
 		if(f<minval) { minval=f }
+		tval+=Math.abs(f-fb)
+		fb=f
 	}
-	//~ var minval=0,maxval=0x100000000 
 	
+	tval=tval/(vgsc*8)
+
+  oddc.minval=minval,oddc.maxval=maxval
+  ,oddc.tval=tval,oddc.fb=fb
+  
 	var dist=maxval-minval
 	var mid=dist/2
 	var widefac=svgz/dist
@@ -303,20 +315,14 @@ function givesvg(func,d)
 	return svg
 }
 
-function givesvg2(fnm,func,d)
+function fltline_svg(fnm,func,d)
 {
-	
-	//~ alert("d is "+d)
 	var minval=0,maxval=0,tval=0,fb=0 
-	for(var i=0;i<vgsc*5;i++)
-	{ var f=func(d)
-		if(f>maxval) { maxval=f }
-		if(f<minval) { minval=f }
-		tval+=Math.abs(f-fb)
-		fb=f
-	}
-	
-	var tval=tval/(vgsc*5)
+
+	minval=oddc.minval,
+	maxval=oddc.maxval,
+  tval=oddc.tval,
+  fb=oddc.fb
 	
 	if(Math.abs(minval*16)<1)
 	{ minval=0; }
@@ -342,12 +348,12 @@ function givesvg2(fnm,func,d)
 	var svg = document.createElementNS(svgns, "svg");
   
 		
-	svg.setAttribute("width", svgsc*svgz*2)
+	svg.setAttribute("width", svgsc*svgz)
 	svg.setAttribute("height", svgsc*svgz)
 	//svg.setAttribute("transform", "scale("+svgsc+" "+svgsc+")");
 	
-  var sx=svgz, sy=mid*highfac
-	var nn=vgsc*50, nw=50
+  var sx=svgz/2, sy=mid*highfac
+	var nn=vgsc*40, nw=50
 	var hh=0
 
   appsvg(svg,"rect",sx,sy,bdtsz,bdtsz,"red",0.7)
@@ -361,12 +367,12 @@ function givesvg2(fnm,func,d)
 		sy+=(func(d)-mid)*kh
 		
 		
-		if(sx>(svgz*2)){sx=0}else if(sx<0){sx=svgz*2}
+		if(sx>(svgz)){sx=0}else if(sx<0){sx=svgz}
 		if(sy<0){sy=svgz}else if(sy>svgz){sy=0}
 		
 		if ((i%nw)!=0){ continue }
 	  
-		appsvg(svg,"rect",sx,sy,dtsz,dtsz,"black",opac/5)
+		appsvg(svg,"rect",sx,sy,dtsz,dtsz,"black",opac/4)
 
 	}
 	

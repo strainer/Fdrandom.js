@@ -79,10 +79,14 @@ var newFdrPot = function(){ return (function(){
   ///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
   function f48() { 
     var c= 0.12810301030196883 * U[0] +
-           15.378612015061215 * (1.0000000000000037-U[ju=(ju===7?1:ju+1)])
-    return U[ju]= c-( (U[0]=c)>>>0 )
+           15.378612015061215 * (1.0000000000000037-(U[ju=(ju===7?1:ju+1)]))
+    return U[ju]= c-( (U[0]=c) >>>0 )
   } 
-    
+  
+  function f48s(){
+	  return (rbit()==0)?f48():(f48()+f48()+f48())*0.33333
+	}
+	
   function dbl() { 
     return ( (( ((f48()*0x39b00000000)>>>4)*
             0.06249999650753)+f48())*5.960464477540047e-08 )
@@ -258,10 +262,10 @@ var newFdrPot = function(){ return (function(){
   }
     
   return{
-     pot: pot   ,hot: hot  ,repot: repot 
+     pot: pot   ,hot: hot  ,repot: repot  ,reset: repot
     ,getstate: getstate    ,setstate: setstate
     
-    ,next: f48  ,f48: f48  ,dbl: dbl
+    ,next: f48  ,f48: f48  ,dbl: dbl, f48s:f48s
     ,f24: f24   ,fxs: dbl 
     ,i32: i32   ,ui32: ui32
     

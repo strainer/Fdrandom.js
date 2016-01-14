@@ -4,6 +4,29 @@ require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
 
 
+var a=0.0000000000000005
+var b=1.0000000000000005
+var c=a+b+1
+
+pr(a,b,c)
+
+dolp(function(){return Fdrandom.f48()}  ,50)
+
+
+
+return
+
+
+//U[ju]= c-( (U[0]=c) >>>0 )
+var c=-12.239246
+var l
+
+var k= -2.1|0 
+
+pr(c,k,l)
+
+
+return
 //~ pr(Fdrandom.f48())
 //~ for(var i=0;i<300000000;i++) {
   //~ Fdrandom.f48()	
@@ -13,7 +36,7 @@ require ('../dlib/floatpresc.js')
 //~ pr(-1==null)
 
 //~ Fdrandom=Fdrandom.repot(0.10000000000003)
-dolp(function(){return Fdrandom.f48()}  ,555)
+return
 //~ pr("-")
 //~ Fdrandom=Fdrandom.repot(0.10000000000004)
 //~ console.log(arguments)
@@ -41,21 +64,21 @@ dolp(function(){return Fdrandom.f48()}  ,555)
 //~ console.log(a)
 
 //~ pr(Fdrandom.pot(0.00000000000007).next())
-return
+//~ return
 
-h=Fdrandom.hot()
-if(0) pr("issssssssssss")
-pr(h.mixof(["can","sha","i a","hey"],9))
-pr(h.mixof("asqwpuhgvoksqw jdiecn eufhfh fuowhfc sxkceebczsla","",30))
+//~ h=Fdrandom.hot()
+//~ if(0) pr("issssssssssss")
+//~ pr(h.mixof(["can","sha","i a","hey"],9))
+//~ pr(h.mixof("asqwpuhgvoksqw jdiecn eufhfh fuowhfc sxkceebczsla","",30))
 
 //~ return
 
-var t=0
+//~ var t=0
 
-for(var c=0;c<1000000;c++)
-{ t+=h.rbit() }
+//~ for(var c=0;c<1000000;c++)
+//~ { t+=h.rbit() }
 
-pr(t/1000000)
+//~ pr(t/1000000)
 
 
 
@@ -67,22 +90,22 @@ pr(t/1000000)
 //~ return
 //~ if(!"false"){ pr("oops") }
 
-instr="0123456789abcdef"
-h=Fdrandom.hot()
-UUIDv4 = h.mixof(instr,8) +
-	 "-" + h.mixof(instr,4) + 
-	 "-4"+ h.mixof(instr,3) +
-	 "-" + h.mixof(instr,h.mixof("89ab",1),3) +
-	 "-" + h.mixof(instr,12);
+//~ instr="0123456789abcdef"
+//~ h=Fdrandom.hot()
+//~ UUIDv4 = h.mixof(instr,8) +
+	 //~ "-" + h.mixof(instr,4) + 
+	 //~ "-4"+ h.mixof(instr,3) +
+	 //~ "-" + h.mixof(instr,h.mixof("89ab",1),3) +
+	 //~ "-" + h.mixof(instr,12);
 	 
-pr(UUIDv4)
+//~ pr(UUIDv4)
 
-pr(h.mixup("abcdef",0,2))
-pr(h.mixup("abcdef","QQ",0,2))
-pr(h.mixup("abcdef",[9,1],0,2))
+//~ pr(h.mixup("abcdef",0,2))
+//~ pr(h.mixup("abcdef","QQ",0,2))
+//~ pr(h.mixup("abcdef",[9,1],0,2))
 
-pr(h.mixof("abcdefg",1))
-pr(h.mixof("abcdefg",1))
+//~ pr(h.mixof("abcdefg",1))
+//~ pr(h.mixof("abcdefg",1))
 
 //~ return
 
@@ -127,17 +150,17 @@ if (dieh){
 scandev=true
 if(scandev){ 
 
-var minoutp=true
+var minoutp=false
 var roughness=20000     //5@10
-var reps=3, stren=30, accur=0//(Math.sqrt(stren)*10000)/roughness
+var reps=1, stren=40, accur=0//(Math.sqrt(stren)*10000)/roughness
 //var tsreset=Fdrandom.dodo(11,11)
 var tsfunc=Fdrandom.f47 
 
-var ax=0.24999,ex=0.25,nx=3  //peak 0
-var ay=31.999999,ey=32.0,ny=3
+var ax=0.24999,ex=0.25,nx=1  //peak 0
+var ay=31.999999,ey=32.0,ny=1
 
 //ax=null;ex=null;nx=null; ay=null;ey=null;ny=null
-stren=9; reps=2
+stren=33; reps=2
 //~ pr(Fdrandom.dodo())
 //~ pr(Fdrandom.dodo())
 //~ pr(Fdrandom.dodo())
@@ -145,14 +168,20 @@ stren=9; reps=2
 
 //~ return
 
-//~ scanrange( Fdrandom.f48,  tsreset, 1,stren,accur, ax,ex,nx, ay,ey,ny, minoutp )
+pr("math")
+scanrange( Math.random,  Fdrandom.f48s, 1,stren,accur, ax,ex,nx, ay,ey,ny, minoutp )
+pr("f48old")
+scanrange( Fdrandom.f48s,  Fdrandom.f48s, 1,stren,accur, ax,ex,nx, ay,ey,ny, minoutp )
+pr("f48")
+scanrange( Fdrandom.f48,  Fdrandom.f48, 1,stren,accur, ax,ex,nx, ay,ey,ny, minoutp )
+pr("--------------")
 //~ scanrange( Fdrandom.dodo,  tsreset, reps,stren,accur, ax,ex,nx, ay,ey,ny, minoutp )
 //~ pr(Fdrandom.dodo())
 //~ pr(Fdrandom.dodo())
 //~ pr(Fdrandom.dodo())
 //~ pr(Fdrandom.dodo())
 //~ pr(Fdrandom.dodo())
-
+return
 //~ return
 //~ var reps=200000000 //1 minute each
 //~ var reps=100000000 //1 minute each
@@ -200,3 +229,13 @@ return
 return
 }
 
+// p(no collision) = 1- ( n^2 / 2M ) 
+// n is instances, M is states
+// 
+// f48 state space approx 2^350 
+// extreme unlikely collision, p 0.999999999999999
+// 0.999999999999999 = 1 - (n^2/ 14*2^50)
+// 0.0000000000000001 = (n^2/ 14*2^50)
+// 0.0000000000000001 * 14*2^50 =  n^2
+// math.sqrt(0.0000000000000001 * math.pow(2,350)) =  n = 4.8e+044
+// 
