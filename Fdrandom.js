@@ -4,45 +4,66 @@
  ** in homage to human ingenuity against greed and hatred.
  */
 
-var newFdrPot = function(){ return (function(){
+var newFdrPot = function(){ return (function(sd){
   'use strict'
 
   var va,vl,vs,qr,us,rb,ju,U,sv,i
-  plant(arguments) 
-  sv=getstate()
+  plant(sd) 
   
+  sv=getstate()
+    
   function plant(sd) {
-    va=0, vl=1, vs=1, qr=0.0, us=0.0, rb=1.0e+15
+    va=1000, vl=1, vs=1, qr=0.0, us=0.0, rb=2.0e+15
     ju=1, U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
 
-    sow(arguments)
+    sow(sd)
     
     for( i=0;i<98;i++ ) f48()
     va=irange(3206324,3259829)
 
     function sow(sd) {
-      if(isFinite(sd)){ 
-        i= (sd<=0)? Math.abs(sd)+1.23 : sd 
-        while(i>16)     i=i*0.0019560471624266144
-        while(i<1.0e-4) i=i*511.11110111111111111
-        U[0]=i; f48()
+	    
+	    var r,t 
+
+      if(isFinite(sd)){
+        r= (sd<=0)? Math.abs(sd)+1.23 : sd 
+        while(r>16)     r=r*0.0019560471624266144
+        while(r<1.0e-4) r=r*511.11110111111111111
+        U[0]=r; f48()
         return
       }
-      if(typeof sd === 'string'){
-        for( i=0; i<sd.length; i++ )
-        {  U[0]=( 65537-sd.charCodeAt(i) )/6464; f48() }
+   
+      if( (t=typeof sd) === 'string'){
+        t=sd.length; if(t>va*100){ t=va*100; va=(va/2)|0 }
+        for( r=0; r<t; r++ )
+        {  U[0]=( 65537-sd.charCodeAt(r) )/6464; f48() }
         return 
       }
-      if((sd||i).length)
-      {  for( i=0; i<sd.length; i++ ) sow(sd[i]); return }
+      
+	    if(va--<1){ return }   
+
+      if(t==='object')
+      { for(r in sd) { sow(r);sow(sd[r]) } return }
+	    
+	    if(t==='array')
+      { for( r=0; r<sd.length; r++ ){ sow(sd[r]) } return }
        
       U[0]= U[0]*0.33 + 4.4 ; f48()
+      
       return 
     }
   }
 
+	function checkfloat() 
+	{ var p=newFdrPot([3,2],2450,"~fez",{c:0.1})
+		for( i=0;i<1000000;i++,p.dbl() ){}
+		return p.dbl()===0.42154089015565205
+	}
+	
+	function version() { return "v1.1.0" }
+
   function setstate(s) {
-    for( var i=0;i<8;i++ ) U[i]=s[i]
+    for( i=0;i<8;i++ ) U[i]=s[i]
     ju=s[8];  va=s[9];  vl=s[10] 
     vs=s[11]; qr=s[12]; us=s[13]; rb=s[14]; sv=s
   }
@@ -60,10 +81,8 @@ var newFdrPot = function(){ return (function(){
   }
   
   function hot() {
-    var glo=(1,eval)
-    if(arguments.length===0 
-     && typeof glo.FdrandomHotPot !== 'undefined'){ 
-      return glo.FdrandomHotPot 
+    if(arguments.length===0 && typeof hotFdrandomPot === 'object'){ 
+      return hotFdrandomPot 
     }
     if(typeof(window)!=='undefined' 
      && (window.crypto||window.msCrypto)){ 
@@ -73,7 +92,7 @@ var newFdrPot = function(){ return (function(){
       ag=[(new Date()).getTime()-1.332e+12, Math.random()] 
     }
     ag.push(arguments)
-    return glo.FdrandomHotPot = newFdrPot(ag)
+    return hotFdrandomPot = newFdrPot(ag)
   }
 
   ///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
@@ -82,10 +101,6 @@ var newFdrPot = function(){ return (function(){
            15.378612015061215 * (1.0000000000000037-(U[ju=(ju===7?1:ju+1)]))
     return U[ju]= c-( (U[0]=c) >>>0 )
   } 
-  
-  function f48s(){
-	  return (rbit()===0)?f48():(f48()+f48()+f48())*0.33333
-	}
 	
   function dbl() { 
     return ( (( ((f48()*0x39b00000000)>>>4)*
@@ -103,13 +118,13 @@ var newFdrPot = function(){ return (function(){
   function ui32() { return (f48()*0x1700000000)>>>0 }
   
   function rbit() { 
-    if( (rb*=2)>1.0e+15 ) rb= f48() +0.5 
-    return rb&1
+    if( rb<1.1258999e+15 ) return (rb*=2)&1
+    return (rb= dbl() +0.5) &1 
   }
 
   function rpole() { 
-    if( (rb*=2)>1.0e+15 ) rb= f48() +1.5
-    return (rb&2)-1
+    if( rb<1.1258999e+15 ) return ((rb*=2)&2)-1
+    return ( (rb= dbl() +1.5) &2) -1
   } 
   
   function ilcg() ///flat lcg 
@@ -117,6 +132,11 @@ var newFdrPot = function(){ return (function(){
 
   function ishr2() ///flawed shift register
   { va^= (va<<7)+1498916339; return va^= va>>>8  }
+
+  function ishp(){ 
+    vl = (vl*13229323)^3962102927
+	  return vl^((vl<<7)+1498916339) 
+	}
 
   function uigless() 
   { return (( ui32()&ui32() )>>>0)  }
@@ -147,7 +167,20 @@ var newFdrPot = function(){ return (function(){
   function gnorm(b,d){
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     return b+ (d-b)* 0.2* (f48()+f48()+f48()+f48()+f48())
+  } 
+  function lrange(a,b,d){
+    a= (a===undefined)?0.5:a; b= (b===undefined)?-1:b; d= (d===undefined)?1:d
+		
+		if(a>0.5){
+	    if (f48()>(a-0.5)*2) return f48()*2-1
+	  }else{
+		  if (f48()<(a)*2) return f48()*2-1
+		}
+    var c=(f48()*1.333+f48()+f48()*0.66666)*0.3333333-0.5
+    c= (a>0.5)?c:((c>0)?0.5-c:-0.5-c)
+    return b+ (d-b)* (c+0.5)
   }
+  
   function gteat(b,d){
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     return b+ (d-b)* 0.5* (0.5 + (0.5-f48())*f48()+f48()) 
@@ -156,6 +189,7 @@ var newFdrPot = function(){ return (function(){
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d 
     return b+ (d-b)* (0.5+ 0.333333* (0.5+f48()-f48()*2)) 
   }
+
   function gskip(c) ///simple low discrepancy 
   { qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48(); return qr-= qr>>>0; }
   
@@ -263,19 +297,20 @@ var newFdrPot = function(){ return (function(){
     
   return{
      pot: pot   ,hot: hot  ,repot: repot  ,reset: repot
-    ,getstate: getstate    ,setstate: setstate
+    ,getstate: getstate    ,setstate:  setstate
+    ,version: version      ,checkfloat: checkfloat 
     
-    ,next: f48  ,f48: f48  ,dbl: dbl, f48s:f48s
+    ,next: f48  ,f48: f48  ,dbl: dbl
     ,f24: f24   ,fxs: dbl 
     ,i32: i32   ,ui32: ui32
     
     ,rbit: rbit ,rndbit:rbit  ,rpole: rpole  ,rndsign:rpole
-    ,range: range  ,irange: irange
+    ,range: range  ,irange: irange ,lrange:lrange
     
     ,gaus: gaus    ,gausx: gausx   ,usum: usum 
     
     ,mixup: mixup  ,mixof: mixof
-    ,ilcg: ilcg    ,ishr2: ishr2
+    ,ilcg: ilcg    ,ishr2: ishr2   ,ishp: ishp
     
     ,uigless: uigless  ,uigmore: uigmore 
     ,igbrist: igbrist  ,igmmode: igmmode 
@@ -283,18 +318,21 @@ var newFdrPot = function(){ return (function(){
     ,fgwedge: gwedge  ,fgtrapez: gtrapez  ,fgnorm:gnorm
     ,fgthorn: gthorn  ,fgskip:   gskip    ,fgteat:gteat
     
-    ,gwedge: gwedge  ,gtrapez: gtrapez  ,gnorm:gnorm
-    ,gthorn: gthorn  ,gskip:   gskip    ,gteat:gteat
-    ,gbowl: gbowl    ,gspire:  gspire
+    ,gbowl: gbowl     ,gspire: gspire  ,gthorn: gthorn 
+    ,gwedge: gwedge   ,gnorm: gnorm    
+    ,gteat: gteat     ,gtrapez: gtrapez 
+    ,gskip: gskip
   }
 
 }(arguments))}
 
-//Export for node, amd, commonjs or global object
+var hotFdrandomPot 
+
+//Hopefuly exports to node, amd, commonjs or global object
 if (typeof exports !== 'undefined') 
 { if (typeof module !== 'undefined' && module.exports)
   { exports = module.exports = newFdrPot() }
-  exports.Fdrandom = newFdrPot()
+  else { exports.Fdrandom = newFdrPot() }
 } else {
   if (typeof define === 'function' && define.amd) 
   { define( 'Fdrandom',[],function(){return newFdrPot()} ) }

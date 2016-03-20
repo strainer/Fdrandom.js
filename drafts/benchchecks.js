@@ -4,14 +4,37 @@ require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
 
 
-var a=0.0000000000000005
-var b=1.0000000000000005
-var c=a+b+1
+//~ var a=0.0000000000000005
+//~ var b=1.0000000000000005
+//~ var c=a+b+1
 
-pr(a,b,c)
+//~ pr(a,b,c)
 
-dolp(function(){return Fdrandom.f48()}  ,50)
+//~ dolp(function(){return Fdrandom.f48()}  ,50)
+//~ pr(isFinite("123"))
 
+p=Fdrandom.pot(-Infinity)
+pr(p.checkfloat())
+//~ console.log(p.dbl())
+//~ console.log(p.checkfloat())
+
+//~ console.log(p.hot().dbl())
+//~ console.log(p.hot().dbl())
+
+
+//var p=Fdrandom.pot([3,2],1641,"~fez",{c:0.1})
+
+//~ function getop(x) 
+//~ { var p=Fdrandom.pot([3,2],x,"~fez",{c:0.1})
+	//~ for( var i=0;i<1000000;i++,p.dbl() ){}
+	//~ return p.dbl()
+//~ }
+
+//~ var z=0
+//~ for(var i=1 ; i<3000;i++)
+//~ { var f=getop(i*7);
+	//~ if(f>z){ z=f;console.log(i*7,z) }
+//~ }
 
 
 return

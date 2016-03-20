@@ -6,7 +6,7 @@ Fast deterministic random functions for Javascript.
 
 * Fast tested PRNG.  
 * Integer, single and double precision float values.
-* Range, boolean, mixup, mixof functions.
+* Range, loaded, boolean, mixup, mixof functions.
 * Distribution options: 
   * Unbiased uniforms. 
   * Gaussian distribution by Box Muller polar method. 
@@ -50,6 +50,7 @@ rpole    |   140   | -1 or 1
          |         |
 range    |   90    | Uniformly distributed numbers in range          
 irange   |   70    | Uniformly distributed integers (inclusive)              
+lrange   |   30    | Mid/end loaded numbers in range
 	
 ### Normal Distribution Prngs
 
@@ -65,6 +66,7 @@ Method | Speed % | Notes
  :---- | :-----: | :-------------------------------------
 gskip  |   90    | Low discrepancy floats (custom spaced)        
 gnorm  |   30    | Normal curve shaped game distribution 
+gload  |   30    | P=1 Normal, 0.5 Uniform, 0 'Anti'-normal 
 gbowl  |   50    | Bowl shaped game distribution 
 gspire |   50    | Spire shaped game distribution 
 gthorn |   30    | Thorn shaped game distribution 
@@ -181,7 +183,12 @@ p=Fdrandom.pot()
 
 oneToTenFloat=  p.range(1,10)  //end is not (quite) inclusive
 oneToTenInteger=p.irange(1,10) //end is inclusive
-random0or1 = p.rndbit()
+
+MinusOneToOne_FlatDist=p.lrange(0.5) //loaded range first param 
+MinusOneToOne_EndBias=p.lrange(0.4)  //sets a loading factor
+TwoToFive_MidBias=p.lrange(0.4,2,5) //0= High ends, 0.5=Flat, 1=High Mid
+
+random0or1 = p.rndbit()  //random bit
 
 gaussiannormal=p.gaus()
 gaussianmath=p.gaus(sigma,mu) //sigma is ~scale, mu is offset
@@ -189,12 +196,11 @@ uniformsum=p.usum(n)   //add n*( -0.5 > 0.5 ) randoms
 uniformsum=p.usum(n,sigma,mu) //to scale and shift with sigma and mu
 gausgame=p.usum(4,1)    //a quick rough approximation of gaussian
 
-normgame=gnorm()     //approx gaussian shape range -1 to 1
+normgame=gnorm()       //approx gaussian shape range -1 to 1
 normgame=gnorm(2,4.5)  //same shape range 2 to 4.5
-oftenmid=fgthorn()      //sharp peak in middle, range -1 to 1
-oftenmid=fgthorn(p,q)   //same shape range p to q
-                        //see Charts for gaming distributions
-
+oftenmid=gthorn()      //sharp peak in middle, range -1 to 1
+oftenmid=gthorn(p,q)   //same shape over range p to q
+                       //see [Charts](http://strainer.github.io/Fdrandom.js/) for gaming distributions
 
 var inray=["0","1","2","3","4","5","6","7","8","9","sha","la","la"] 
 var instr="0123456789abcdef" 
