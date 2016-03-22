@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="stylesheets/github-light.css">
     <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src='javascripts/Fdrandom.js'></script>
+    <script src='javascripts/Foochart.js'></script>
+		<style type="text/css">
+			td { padding:0 0.1em; }
+			svg { background: #ffffff; }
+		</style>
+
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -31,24 +38,29 @@
       </header>
       <section>
         <h2>
-<a id="distribution-graphs-and-benchmarks" class="anchor" href="#distribution-graphs-and-benchmarks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Distribution Graphs and Benchmarks</h2>
+<a id="distribution-graphs-and-benchmarks" class="anchor" href="#distribution-graphs-and-benchmarks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Benchmark and Graph 35 Random Functions</h2>
 
-<p>Speeds are with Firefox 42 on 2.1Ghz Core2 Laptop</p>
 
-<p><img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/p1.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/p2.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/p3.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/p4.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/p5.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/pe.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/p6.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/p7.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/p8.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/p9.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/pa.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/pb.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/pc.png" alt="distribution chart">
-<img src="https://raw.githubusercontent.com/strainer/Fdrandom.js/hubimg/reports/pd.png" alt="distribution chart"></p>
+<div id="dash" style="text-align:center; margin:0px auto; width:100%;">
+  
+  <button onclick="gogo()">Run Charts</button> 
+
+  <select id="selectedsize">
+		<option value="small">Small</option>
+		<option value="large">Large</option>
+	</select>
+
+  <select id="seed">
+		<option value="def">Default Seed</option>
+		<option value="hot">Random Seed</option>
+	</select>
+
+  <div id="floatfail" style="display:none;">&nbsp;warning:float compliancy check failed</div>
+</div>
+
+<div id="log"></div>
+
+
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
