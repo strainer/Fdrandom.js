@@ -3,7 +3,8 @@ Fdrandom=require ('../Fdrandom.js')
 require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
 
-
+//~ Fdrandom.pot()
+//~ Fdrandom.pot(1)
 //~ var a=0.0000000000000005
 //~ var b=1.0000000000000005
 //~ var c=a+b+1
@@ -12,9 +13,12 @@ require ('../dlib/floatpresc.js')
 
 //~ dolp(function(){return Fdrandom.f48()}  ,50)
 //~ pr(isFinite("123"))
+pr(Fdrandom.f48())
+pr(Fdrandom.pot().f48())
+pr(Fdrandom.pot(1).f48())
 
-p=Fdrandom.pot(-Infinity)
-pr(p.checkfloat())
+//p=Fdrandom.pot(-Infinity)
+pr(Fdrandom.checkfloat())
 //~ console.log(p.dbl())
 //~ console.log(p.checkfloat())
 

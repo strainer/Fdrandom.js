@@ -15,6 +15,23 @@
 
 <body>
 
+<div id="dash" style="text-align:center; margin:0px auto; width:100%;">
+  
+  <button onclick="gogo()">Run Charts</button> 
+
+  <select id="selectedsize">
+		<option value="small">Small</option>
+		<option value="large">Large</option>
+	</select>
+
+  <select id="seed">
+		<option value="def">Default Seed</option>
+		<option value="hot">Random Seed</option>
+	</select>
+
+  <div id="floatfail" style="display:none;">&nbsp;warning:float compliancy check failed</div>
+</div>
+
 <div id="log"></div>
 
 </body>
@@ -22,6 +39,10 @@
 </html>
 
 <script>
+
+if(!Fdrandom.checkfloat()){
+  document.getElementById('floatfail').style.display="block";	
+}
 
 var fnstats={}
 var firstrun=1
@@ -36,12 +57,41 @@ var bdtsz=5*svgz/256
 
 var tlogger = document.getElementById('log')
 
-var intervar=setInterval(chartfuncs, 250)
+var intervar
+var Fd
+
+function gogo(){
+  
+  var d = document.getElementById("seed").value;
+  if ( d==='hot' ) { Fd=Fdrandom.hot() } else { Fd=Fdrandom.pot() }
+  
+  d = document.getElementById("selectedsize").value;
+
+  svgz=200; if (d==='large') svgz=384
+  
+	opac = Math.sqrt(2000/vgsc)
+	dtsz=1.1*svgz/256
+	ddtsz=3.5*svgz/256
+	bdtsz=5*svgz/256
+  
+  var de = document.getElementById("log"); 
+  de.outerHTML = ""; delete de
+
+  var iDiv = document.createElement('div');
+  iDiv.id = 'log';
+  document.getElementById('dash').appendChild(iDiv);
+
+  tlogger = iDiv
+  runstep=0
+  
+  intervar=setInterval(chartfuncs, 250)
+}
+
 
 function chartfuncs() {
   
 	clearInterval(intervar)	
-	Fd=Fdrandom.hot()
+	
 	var dur=3,reps=1
 	var funz= [
 	 [Math.random,"math.random "],
@@ -50,8 +100,6 @@ function chartfuncs() {
 	 [Fd.f24,"f24 "],
 	 [Fd.rndbit,"rndbit "],
 	 [Fd.rndsign,"rndsign "],
-	 //~ [Fd.rndbit,"rndbit "],
-	 //~ [Fd.rndsign,"rndsign "],
 	 [Fd.usum,"usum 1 ",1],
 	 [Fd.usum,"usum 2 ",2],
 	 [Fd.usum,"usum 3 ",3],
@@ -89,14 +137,12 @@ function chartfuncs() {
 	 [Fd.lrange,"lrange 0.25",0.25],
 	 [Fd.lrange,"lrange 0.10",0.10],
 	 [Fd.lrange,"lrange 0",0],
-	 //~ [Fd.fgskip,"fgskip"],
-	 //~ [Fd.fgskip,"fgskip"],
 
 	]
  			
 	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
 	
-	chartf(reps=1, funz[runstep][0], dur=1, funz[runstep][1], funz[runstep++][2] ) 
+	chartf(reps=1, funz[runstep][0], dur=2.5, funz[runstep][1], funz[runstep++][2] ) 
 
   if(runstep<funz.length){ intervar=setInterval(chartfuncs, 250); }
 	
@@ -129,6 +175,7 @@ chartf = function(n,a,b,c,d){
 	
 	cc.innerHTML +=rexx
 	
+	Fd.repot()
 	cc.appendChild(twodim_dist_canv(a,d))
 	cc.appendChild(fltline_cnv(c,a,d))
 	
@@ -360,8 +407,8 @@ function twodim_dist_canv(func,d)
 	var distn=48
 	var distel=svgz
 	var dst=[]
-	var colz=[ "#503","#090","#503","#090","#503","#090","#503",
-	           "#052","#703","#052","#703","#052","#703","#052", ]
+	var colz=[ "#403","#080","#403","#080","#403","#080","#403",
+	           "#052","#7a0033","#052","#7a0033","#052","#7a0033","#052", ]
 	var colcn=0;
 	
 	for(i=0;i<distel;i++){ dst[i]=0; }

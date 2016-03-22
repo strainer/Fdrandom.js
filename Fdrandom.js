@@ -6,7 +6,7 @@
 
 var newFdrPot = function(){ return (function(sd){
   'use strict'
-
+  
   var va,vl,vs,qr,us,rb,ju,U,sv,i
   plant(sd) 
   
@@ -29,14 +29,14 @@ var newFdrPot = function(){ return (function(sd){
         r= (sd<=0)? Math.abs(sd)+1.23 : sd 
         while(r>16)     r=r*0.0019560471624266144
         while(r<1.0e-4) r=r*511.11110111111111111
-        U[0]=r; f48()
+        U[0]=r*0.9999999; f48()
         return
       }
    
       if( (t=typeof sd) === 'string'){
-        t=sd.length; if(t>va*100){ t=va*100; va=(va/2)|0 }
+        t=sd.length; if(t>va*100){ t=va*100; va=(va/2)|0+2 }
         for( r=0; r<t; r++ )
-        {  U[0]=( 65537-sd.charCodeAt(r) )/6464; f48() }
+        {  U[0]=( 65537-sd.charCodeAt(r) )/6464.10101; f48() }
         return 
       }
       
@@ -57,7 +57,7 @@ var newFdrPot = function(){ return (function(sd){
 	function checkfloat() 
 	{ var p=newFdrPot([3,2],2450,"~fez",{c:0.1})
 		for( i=0;i<1000000;i++,p.dbl() ){}
-		return p.dbl()===0.42154089015565205
+		return p.dbl() === 0.7635647353645889
 	}
 	
 	function version() { return "v1.1.0" }
@@ -331,11 +331,11 @@ var hotFdrandomPot
 //Hopefuly exports to node, amd, commonjs or global object
 if (typeof exports !== 'undefined') 
 { if (typeof module !== 'undefined' && module.exports)
-  { exports = module.exports = newFdrPot() }
-  else { exports.Fdrandom = newFdrPot() }
+  { exports = module.exports = newFdrPot({}) }
+  else { exports.Fdrandom = newFdrPot({}) }
 } else {
   if (typeof define === 'function' && define.amd) 
-  { define( 'Fdrandom',[],function(){return newFdrPot()} ) }
+  { define( 'Fdrandom',[],function(){return newFdrPot({})} ) }
   else
-  { (1,eval)('this').Fdrandom = newFdrPot() } 
+  { (1,eval)('this').Fdrandom = newFdrPot({}) } 
 }
