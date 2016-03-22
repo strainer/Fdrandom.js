@@ -12,7 +12,7 @@ Fast deterministic random functions for Javascript.
   * Gaussian distribution by Box Muller polar method. 
   * Normal approximated by Uniform Sum.
   * Low discrepency / Quasi random (custom spaced walk)
-  * Convenience gaming distributions like range normal shapes
+  * Convenience gaming distributions
   * [Charts](http://strainer.github.io/Fdrandom.js/)
 	
 Usage
@@ -92,6 +92,9 @@ hot    | 0.005   | Clone Fdrandom using seeds from browser crypto
 repot  | 5>0.5%  | Resets or reseeds an existing pot
 getstate|  5%    | Gets an array containg state of a pot
 setstate|  5%    | Sets state of pot with array (no reseeding)
+        |        | 
+version |        | prints version
+checkfloat|      | checks float math is compliant for expected output
 
 Speed & Quality
 ---------------
