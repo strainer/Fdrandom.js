@@ -88,7 +88,7 @@ function chartfuncs() {
 	 [Fd.lrange,"lrange 1.0",1.0],
 	 [Fd.lrange,"lrange 0.90",0.90],
 	 [Fd.lrange,"lrange 0.75",0.75],
-	 [Fd.lrange,"lrange 0.63",0.75],
+	 [Fd.lrange,"lrange 0.63",0.63],
 	 [Fd.lrange,"lrange 0.55",0.55],
 	 [Fd.lrange,"lrange 0.50",0.50],
 	 [Fd.lrange,"lrange 0.45",0.45],
@@ -102,7 +102,7 @@ function chartfuncs() {
 	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
 	
 	chartf(reps=1, funz[runstep][0], dur=2.5, funz[runstep][1], funz[runstep++][2] ) 
-
+  //
   if(runstep<funz.length){ intervar=setInterval(chartfuncs, 250); }
 	
 }
@@ -128,7 +128,7 @@ chartf = function(n,a,b,c,d){
 	cc.style.float="left"
 	cc.style.margin="5px"
 	
-	var rexx='<table>';
+	var rexx='<table style="margin-bottom: 2px;">';
 	for(var i=0;i<n;i++) { rexx+=benchf(a,b,c,d); }
 	rexx+= '</table>';
 	
