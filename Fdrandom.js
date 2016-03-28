@@ -282,7 +282,7 @@ var newFdrPot = function(){ return (function(sd){
       joinr=null
       ob=Ao.length
 
-      if(ob===0) Ao=new Array(e-c)
+      if(ob===0){ Ao=new Array(e-c) }
       var jc=c-ob
       for( i=ob; i<ob+e-c; i++) Ao[i]= Ai[jc+i]
       c=ob; e=Ao.length;
