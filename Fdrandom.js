@@ -13,7 +13,7 @@ var newFdrPot = function(){ return (function(sd){
   sv=getstate()
     
   function plant(sd) {
-	  
+    
     va=1000, vl=1, vs=1, qr=0.0, us=0.0, rb=2.0e+15
     ju=1, U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
 
@@ -23,8 +23,8 @@ var newFdrPot = function(){ return (function(sd){
     va=irange(3206324,3259829)
 
     function sow(sd) {
-	    
-	    var r,t 
+      
+      var r,t 
 
       if(isFinite(sd)){
         r= (sd<=0)? Math.abs(sd)+1.23 : sd 
@@ -41,12 +41,12 @@ var newFdrPot = function(){ return (function(sd){
         return 
       }
       
-	    if(va--<1){ return }   
+      if(va--<1){ return }   
 
       if(t==='object')
       { for(r in sd) { sow(r);sow(sd[r]) } return }
-	    
-	    if(t==='array')
+      
+      if(t==='array')
       { for( r=0; r<sd.length; r++ ){ sow(sd[r]) } return }
        
       U[0]= U[0]*0.33 + 4.4 ; f48()
@@ -55,13 +55,13 @@ var newFdrPot = function(){ return (function(sd){
     }
   }
 
-	function checkfloat() 
-	{ var p=newFdrPot([3,2],2450,"~fez",{c:0.1})
-		for( i=0;i<1000000;i++,p.dbl() ){}
-		return p.dbl() === 0.7635647353645889
-	}
-	
-	function version() { return "v1.2.0" }
+  function checkfloat() 
+  { var p=newFdrPot([3,2],2450,"~fez",{c:0.1})
+    for( i=0;i<1000000;i++,p.dbl() ){}
+    return p.dbl() === 0.7635647353645889
+  }
+  
+  function version() { return "v1.2.0" }
 
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
@@ -102,7 +102,7 @@ var newFdrPot = function(){ return (function(sd){
            15.378612015061215 * (1.0000000000000037-(U[ju=(ju===7?1:ju+1)]))
     return U[ju]= c-( (U[0]=c) >>>0 )
   } 
-	
+
   function dbl() { 
     return ( (( ((f48()*0x39b00000000)>>>4)*
             0.06249999650753)+f48())*5.960464477540047e-08 )
@@ -136,8 +136,8 @@ var newFdrPot = function(){ return (function(sd){
 
   function ishp(){ 
     vl = (vl*13229323)^3962102927
-	  return vl^((vl<<7)+1498916339) 
-	}
+    return vl^((vl<<7)+1498916339) 
+  }
 
   function uigless() 
   { return (( ui32()&ui32() )>>>0)  }
@@ -171,12 +171,12 @@ var newFdrPot = function(){ return (function(sd){
   } 
   function lrange(a,b,d){
     a= (a===undefined)?0.5:a; b= (b===undefined)?-1:b; d= (d===undefined)?1:d
-		
-		if(a>0.5){
-	    if (f48()>(a-0.5)*2) return f48()*2-1
-	  }else{
-		  if (f48()<(a)*2) return f48()*2-1
-		}
+    
+    if(a>0.5){
+      if (f48()>(a-0.5)*2) return f48()*2-1
+    }else{
+      if (f48()<(a)*2) return f48()*2-1
+    }
     var c=(f48()*1.333+f48()+f48()*0.66666)*0.3333333-0.5
     c= (a>0.5)?c:((c>0)?0.5-c:-0.5-c)
     return b+ (d-b)* (c+0.5)
