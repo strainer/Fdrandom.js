@@ -13,7 +13,7 @@ Fast deterministic random functions for Javascript.
   * Normal approximated by Uniform Sum.
   * Low discrepency / Quasi random (custom spaced walk)
   * Convenience gaming distributions
-  * [Charts](http://strainer.github.io/Fdrandom.js/)
+  * [Demo Charts](http://strainer.github.io/Fdrandom.js/)
 	
 Usage
 -----
@@ -189,7 +189,7 @@ oneToTenInteger=p.irange(1,10) //end is inclusive
 
 MinusOneToOne_FlatDist=p.lrange(0.5) //loaded range first param 
 MinusOneToOne_EndBias=p.lrange(0.4)  //sets a loading factor
-TwoToFive_MidBias=p.lrange(0.4,2,5) //0= High ends, 0.5=Flat, 1=High Mid
+TwoToFive_MidBias=p.lrange(0.6,2,5) //0= High ends, 0.5=Flat, 1=High Mid
 
 random0or1 = p.rndbit()  //random bit
 

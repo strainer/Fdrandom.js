@@ -1,12 +1,12 @@
 {
   "name": "fdrandom",
-  "version": "1.0.4",
-  "description": "Max speed and quality deterministic random number generator, distributions and shuffle",
+  "version": "1.1.1",
+  "description": "Fast deterministic random methods. Includes Uniform, Gaussian, gaming distributions and shuffles",
   "main": "Fdrandom.js",
   "scripts": {
-    "test": "require('fdrandom').pot(0).next()==0.7924986336504407"
-  },
-  "tonicExample": "require('fdrandom').hot().mixof( ['la','lah ',' La'], 'Sha', 10 )",
+    "test": "require('fdrandom').checkfloat()"
+  }, 
+  "tonicExample": "require('fdrandom').hot().mixof( ['ba','wum',' Galoo'], 'Chum', 6 )",
   "repository": {
     "type": "git",
     "url": "git+https://strainer:azsplo0@github.com/strainer/Fdrandom.js.git"
@@ -16,7 +16,8 @@
     "seedable",
     "deterministic",
     "gaussian",
-    "quasi",
+    "normal",
+    "game",
     "random",
     "shuffle"
   ],
