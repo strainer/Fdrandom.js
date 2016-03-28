@@ -14,9 +14,11 @@ var dtsz=1.1*svgz/256
 var ddtsz=3.5*svgz/256
 var bdtsz=5*svgz/256
 var starttime
-var tmstamp	
-if(typeof performance!=='undefined')
-{ tmstamp=performance }else{ tmstamp=Date }
+
+
+//var t1 = Date.now();
+//var t2 = new Date().getTime();
+
 
 
 var tlogger = document.getElementById('log')
@@ -48,7 +50,7 @@ function gogo(){
   tlogger = iDiv
   runstep=0
   
-  starttime=tmstamp.now()
+  starttime=performance.now()
   
   intervar=setInterval(chartfuncs, 250)
 }
@@ -185,7 +187,7 @@ benchf = function (meth, bentime, meth_nm, meth_arg) {
 	for (var w=0;w<4;w++)
 	{	
 		var qreps=0,qtime=0,nreps=100000, repfac=1
-		atm= tmstamp.now(); rt=9999999999999
+		atm= performance.now(); rt=9999999999999
 		ctm = atm, dtm=0
 
 		while(ctm-atm<bentime){
@@ -197,7 +199,7 @@ benchf = function (meth, bentime, meth_nm, meth_arg) {
 			}
 			
 			
-			btm= tmstamp.now();
+			btm= performance.now();
 			
 			if(typeof meth_arg !== 'undefined'){
 				for(i=0;i<nreps;i++)	{ retv+=meth(meth_arg) } 
@@ -205,7 +207,7 @@ benchf = function (meth, bentime, meth_nm, meth_arg) {
 				for(i=0;i<nreps;i++)	{ retv+=meth() }
 			}
 			
-			ctm= tmstamp.now();		
+			ctm= performance.now();		
 			
 			bdtm=dtm; dtm=ctm-btm
 			
