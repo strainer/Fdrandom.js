@@ -25,11 +25,12 @@ var tlogger = document.getElementById('log')
 
 var intervar
 var Fd
+var isHot
 
 function gogo(){
   
-  var d = document.getElementById("seed").value;
-  if ( d==='hot' ) { Fd=Fdrandom.hot() } else { Fd=Fdrandom.pot() }
+  isHot = ('hot'===document.getElementById("seed").value)
+  if ( isHot ) { Fd=Fdrandom.hot() } else { Fd=Fdrandom.pot() }
   
   d = document.getElementById("selectedsize").value;
 
@@ -160,7 +161,8 @@ chartf = function(n,a,b,c,d){
 	
 	cc.innerHTML +=rexx
 	
-	Fd.repot()
+	if ( !isHot ) Fd.repot()
+	
 	cc.appendChild(twodim_dist_canv(a,d))
 	cc.appendChild(fltline_cnv(c,a,d))
 	
