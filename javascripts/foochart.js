@@ -13,6 +13,8 @@ var opac = Math.sqrt(2000/vgsc)
 var dtsz=1.1*svgz/256
 var ddtsz=3.5*svgz/256
 var bdtsz=5*svgz/256
+var starttime
+
 
 var tlogger = document.getElementById('log')
 
@@ -43,6 +45,8 @@ function gogo(){
   tlogger = iDiv
   runstep=0
   
+  starttime=performance.now()
+  
   intervar=setInterval(chartfuncs, 250)
 }
 
@@ -54,7 +58,7 @@ function chartfuncs() {
 	var dur=3,reps=1
 	var funz= [
 	 [Math.random,"math.random "],
-	 [Fd.f48,"Fdrandom.f48 "],
+	 [Fd.next,"Fdrandom.next "],
 	 [Fd.dbl,"Fdrandom.dbl "],
 	 [Fd.f24,"f24 "],
 	 [Fd.rndbit,"rndbit "],
@@ -104,6 +108,17 @@ function chartfuncs() {
 	chartf(reps=1, funz[runstep][0], dur=2.5, funz[runstep][1], funz[runstep++][2] ) 
   //
   if(runstep<funz.length){ intervar=setInterval(chartfuncs, 250); }
+  else
+  {
+	  var tottime=performance.now()-starttime
+	  var pp=document.createElement('p')
+	  pp.innerHTML="Total test time is "+(tottime/1000).toFixed(2)+" secs"
+	  pp.style.textAlign="center"
+	  pp.style.clear="both"
+	  pp.style.margin="0 auto"
+	  pp.style.width="25%"
+	  tlogger.appendChild(pp)
+	}
 	
 }
 
@@ -126,9 +141,15 @@ chartf = function(n,a,b,c,d){
 	
 	var cc=document.createElement('div')
 	cc.style.float="left"
-	cc.style.margin="5px"
+	if(svgz>200) { 
+		var bwidth=window.screen["availWidth"]||0
+		bwidth=((bwidth-svgz*2.1)/2)|0
+		bwidth=(bwidth>0)?bwidth:0
+		cc.style.margin="5px "+bwidth+"px"; }
+	else
+	{ cc.style.margin="5px 5px" }
 	
-	var rexx='<table style="margin-bottom: 2px;">';
+	var rexx='<table style="margin-bottom: 2px; width:'+svgz*2+'px">';
 	for(var i=0;i<n;i++) { rexx+=benchf(a,b,c,d); }
 	rexx+= '</table>';
 	
@@ -233,12 +254,10 @@ function fmtplace(i){
 }
 function fltline_cnv(fnm,func,d)
 {
-	var minval=0,maxval=0,tval=0,fb=0 
-
-	minval=fnstats.minval,
-	maxval=fnstats.maxval,
-  tval=fnstats.tval,
-  fb=fnstats.fb
+	var minval=fnstats.minval
+	var maxval=fnstats.maxval
+  var tval=fnstats.tval
+  var fb=fnstats.fb
 	
 	if(Math.abs(minval*16)<1)
 	{ minval=0; }
@@ -270,8 +289,7 @@ function fltline_cnv(fnm,func,d)
   canv.style.background="#fff";
   
   var ctx = canv.getContext("2d");
-	
-	
+		
   var sx=svgz/2, sy=mid*highfac
 	var nn=vgsc*200, nw=50
 	var hh=0
@@ -330,7 +348,7 @@ var cid=0;
 
 function twodim_dist_canv(func,d)
 {
-	var minval=0,maxval=0,tval=0,fb=0 
+	var minval=Infinity,maxval=-Infinity,tval=0,fb=0 
 	for(var i=0;i<vgsc*8;i++)
 	{ var f=func(d)
 		if(f>maxval) { maxval=f }
