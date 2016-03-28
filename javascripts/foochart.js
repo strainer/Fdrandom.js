@@ -14,6 +14,9 @@ var dtsz=1.1*svgz/256
 var ddtsz=3.5*svgz/256
 var bdtsz=5*svgz/256
 var starttime
+var tmstamp	
+if(typeof performance!=='undefined')
+{ tmstamp=performance }else{ tmstamp=Date }
 
 
 var tlogger = document.getElementById('log')
@@ -45,7 +48,7 @@ function gogo(){
   tlogger = iDiv
   runstep=0
   
-  starttime=performance.now()
+  starttime=tmstamp.now()
   
   intervar=setInterval(chartfuncs, 250)
 }
@@ -172,12 +175,7 @@ benchf = function (meth, bentime, meth_nm, meth_arg) {
 	
 	var qqtlen=1
 	if(typeof meth_arg!=='undefined')
-	{ qqtlen=1 }
-	
-	var tmstamp	
-	if(typeof performance!=='undefined')
-	{ tmstamp=performance }else{ tmstamp=Date }
-		
+	{ qqtlen=1 }		
 	
 	var i = 0, retv= 0,retvsum=0,donereps=0;
 	var minret=0xffffffff>>>0, maxret=0
