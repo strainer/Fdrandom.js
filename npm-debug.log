@@ -1,0 +1,107 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.2
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'O:\\hub\\lead\\fdrandom',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\Dell\AppData\Roaming\npm-cache\fdrandom\1.1.1\package.tgz not in flight; packing
+9 verbose tar pack [ 'C:\\Users\\Dell\\AppData\\Roaming\\npm-cache\\fdrandom\\1.1.1\\package.tgz',
+9 verbose tar pack   'O:\\hub\\lead\\fdrandom' ]
+10 verbose tarball C:\Users\Dell\AppData\Roaming\npm-cache\fdrandom\1.1.1\package.tgz
+11 verbose folder O:\hub\lead\fdrandom
+12 info prepublish fdrandom@1.1.1
+13 verbose addLocalTarball adding from inside cache C:\Users\Dell\AppData\Roaming\npm-cache\fdrandom\1.1.1\package.tgz
+14 silly cache afterAdd fdrandom@1.1.1
+15 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\fdrandom\1.1.1\package\package.json not in flight; writing
+16 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\fdrandom\1.1.1\package\package.json written
+17 silly publish { name: 'fdrandom',
+17 silly publish   version: '1.1.1',
+17 silly publish   description: 'Fast deterministic random methods. Includes Uniform, Gaussian, gaming distributions and shuffles',
+17 silly publish   main: 'Fdrandom.js',
+17 silly publish   scripts: { test: 'require(\'fdrandom\').checkfloat()' },
+17 silly publish   tonicExample: 'require(\'fdrandom\').hot().mixof( [\'ba\',\'wum\',\' Galoo\'], \'Chum\', 6 )',
+17 silly publish   repository:
+17 silly publish    { type: 'git',
+17 silly publish      url: 'git+https://strainer:azsplo0@github.com/strainer/Fdrandom.js.git' },
+17 silly publish   keywords:
+17 silly publish    [ 'prng',
+17 silly publish      'seedable',
+17 silly publish      'deterministic',
+17 silly publish      'gaussian',
+17 silly publish      'normal',
+17 silly publish      'game',
+17 silly publish      'random',
+17 silly publish      'shuffle' ],
+17 silly publish   author:
+17 silly publish    { name: 'Andrew Strain',
+17 silly publish      email: 'AndrewInput@gmail.com',
+17 silly publish      url: 'https://github.com/strainer/' },
+17 silly publish   license: 'PDDL-1.0',
+17 silly publish   bugs: { url: 'https://github.com/strainer/Fdrandom.js/issues' },
+17 silly publish   homepage: 'https://github.com/strainer/Fdrandom.js#readme',
+17 silly publish   readme: 'Fdrandom.js\r\n===========\r\nFast deterministic random functions for Javascript.\r\n\r\n### Features\r\n\r\n* Fast tested PRNG.  \r\n* Integer, single and double precision float values.\r\n* Range, loaded, boolean, mixup, mixof functions.\r\n* Distribution options: \r\n  * Unbiased uniforms. \r\n  * Gaussian distribution by Box Muller polar method. \r\n  * Normal approximated by Uniform Sum.\r\n  * Low discrepency / Quasi random (custom spaced walk)\r\n  * Convenience gaming distributions\r\n  * [Demo Charts](http://strainer.github.io/Fdrandom.js/)\r\n\t\r\nUsage\r\n-----\r\n```javascript \r\n<script src=\'Fdrandom.js\'></script>\r\n\r\ndouble_value  = Fdrandom.next()     // 0 to 0.9999999999999999\r\nsigned_int_value = Fdrandom.i32()   // -2147483648 to 2147483647\r\nunsigned_int_value = Fdrandom.ui32()// 0 to 4294967295\r\n\r\nseparate_seeded_generator = Fdrandom.pot(seed)\r\nint_val = separate_seeded_generator.i32()\r\narandhex = Fdrandom.hot().mixof("0123456789abcdef","0x",8)\r\nautoseeded = Fdrandom.hot()\r\n```\t\r\n\t\r\nMethod list\t\r\n-----------\r\n\r\n### Equal Distribution Prngs\r\n\r\nMethod\t | Speed % | Notes                         \r\n :------ | :-----: | :----------------------------\r\nnext     |   100   | Standard randoms with 48bit resolution\r\nf48      |   100   | Alias of next (0 to 0.9999999999999999)  \r\ndbl      |   50    | As next/f48 with 53 bits resolution\r\nf24      |   90    | Safe values for Float32array (0 to 0.99999994)\r\n         |         |                               \r\ni32      |   80    | 32 bit signed integer values\r\nui32     |   80    | 32 bit unsigned integer values\r\n         |         |                               \r\nrbit     |   150   | 0 or 1 \r\nrpole    |   140   | -1 or 1 \r\n         |         |\r\nrange    |   90    | Uniformly distributed numbers in range          \r\nirange   |   70    | Uniformly distributed integers (inclusive)              \r\nlrange   |   30    | Mid/end loaded numbers in range\r\n\t\r\n### Normal Distribution Prngs\r\n\r\nMethod\t| Speed % | Notes                           \r\n :----- | :-----: | :------------------------------\r\ngaus    |   20    | Fast high quality gaussians        \r\ngausx   |   15    | Possibly needless extra resolution employed           \r\nusum    | 25@n=4  | Custom Uniform sum \r\n\r\n### Other Distributions\r\n\r\nMethod | Speed % | Notes                                  \t\t\t\t\t\r\n :---- | :-----: | :-------------------------------------\r\ngskip  |   90    | Low discrepancy floats (custom spaced)        \r\ngnorm  |   30    | Normal curve shaped game distribution \r\ngload  |   30    | P=1 Normal, 0.5 Uniform, 0 \'Anti\'-normal \r\ngbowl  |   50    | Bowl shaped game distribution \r\ngspire |   50    | Spire shaped game distribution \r\ngthorn |   30    | Thorn shaped game distribution \r\ngwedge |   30    | Wedge shaped game distribution \r\ngteat  |   30    | Teat shaped game distribution  \r\ngtrapez|   50    | Trapezoid game distribution \r\nuigless|   60    | Unsigned 1/4 bit density game dist.       \r\nuigmore|   60    | Unsigned 3/4 bit density game dist.      \r\nigmmode|   60    | Signed multi modal game dist.      \r\nigbrist|   60    | Signed bristly game dist.      \r\nilcg   |  130    | A simple lcg (fails many rnd tests)  \r\nishr2  |   60    | A fast shift register generator \r\n           \r\n### Other Methods\r\n\r\nMethod | Speed % | Notes                                  \t\t\t\t\t\r\n :---- | :-----: | :-------------------------------------\r\nmixup  |  fast   | Randomize order of elements in an array or string        \r\nmixof  |  fast   | Make a random mix of elements or chars length n   \r\n       |         |\r\npot    | 0.005   | Clone and seed Fdrandom object (pot)    \r\nhot    | 0.005   | Clone Fdrandom using seeds from browser crypto  \r\nrepot  | 5>0.5%  | Resets or reseeds an existing pot\r\ngetstate|  5%    | Gets an array containg state of a pot\r\nsetstate|  5%    | Sets state of pot with array (no reseeding)\r\n        |        | \r\nversion |        | prints version\r\ncheckfloat|      | checks float math is compliant for expected output\r\n\r\nSpeed & Quality\r\n---------------\r\nThe percentages in the above tables are very rough as js engine\r\nperformance varies.\r\n\r\n`Math.random` on Chrome has detectable statistical bias and only \r\n32 bits of resolution but is fast. \r\n`Math.random` on firefox is cryptographic but is slow.\r\n`Fdrandom.f48` has no detectable bias across over 10^16 outputs\r\nand each has at least 48 bits of resolution which are tested\r\nas passing G Marsaglias old but substantial diehard test suite.\r\nIt has yet to be tested by the most comprehensive means, \r\nbut shows no issues so far.\r\n\r\nFdrandoms default method:`Fdrandom.f48` runs at approximately \r\nsame speed as Chromes native Math.random and faster on firefox. \r\nIt runs considerably faster than Firefoxes native Math.random.\r\nOn Firefox even gaussian normal generation runs about \r\nas fast as Math.random. \r\n\r\nf48 algorithm was developed informed by J.Baag�e\'s PRNG `Alea` \r\nwhich seems to be the fastest form of high quality prng for \r\njavascript to date. f48 uses different multipliers in a slightly \r\nadjusted mechanism to output 16 more bits of resolution per \r\nnumber than Alea v0.8 while achieving similar speed.\r\n\r\nSeeding Pots\r\n------------\r\n`Fdrandom.repot(seed)` will reset or reseed a pot.  \r\n`Fdrandom.pot(seed)` returns a clone of Fdrandom seeded by numbers\r\nand strings in all elements of the object `seed`.\r\nTo maximally seed the prng requires 9 or 10 completely unpredicatable \r\n50 bit numbers or hundres of text characters; however is overkill. \r\nPractical seeding can be achieved by sending an array containing\r\npublic user strings, or private unique ids, or a single number or \r\nnothing depending on the level of uniqueness desired.\r\n\r\n`Fdrandom.hot(seed)` returns an unpredictable clone which includes\r\nseeds from browser crypto if available, and date and Math.random\r\nif not available.\r\n \r\nSeeding pots with same data or setting same state of course\r\nproduces identical random number streams. Any difference in seeds \r\nshould result in completely unrelatable streams.\r\n\r\n\'Pot\'ing is a relatively slow operation (about 20,000 op/s) as\r\nthe Fdrandom object gets cloned for each pot. \'Repot\'ing with\r\na new seed is much faster. \'repot\' without seed resets to\r\nfirst potted state and is very fast. \r\n\t\r\nPrecision/Types\r\n---------------\r\n`i32` returns number values equivalent to signed 32 bit integers \r\nwhich can be reinterpreted as unsigned by the javascript idiom \r\nof `val>>>0` for \'unsigning\'  , `val|0` \'re-signs\' \r\n\r\n`ui32` returns number values of unsigned int values\r\n\r\nThe equal distribution float type methods return the \'unit interval\'\r\nwhich should involve all possible values between 0 and 1 including both ends.\r\nHowever math random libraries usually stop just short of 1, so\r\nFdrandom.js does too. This can help in formulas which need\r\nto avoid zero, eg. `something/(1-unitrandom)` avoids the possibility of\r\ndivision by zero when `unitrandom` cannot be 1.\r\n\r\n`dbl` returns JS Numbers (double precision float) with all 53 bits of\r\ntheir mantissa utilised.\r\n\r\n`f24` is designed to be cast to float32 arrays sometime, this \r\nis the only reason to use it (for opengl etc). `f24` actually \r\nhas 48 bits of precision but stops short of 1 just enough to not\r\nround to 1 when cast into float32 array. Because the float32 type \r\nonly has 24 bits of practical precision, this can introduce a tiny \r\nbut noticable bias to the sum of millions of output values.\r\n\t\r\nBenchmarking and Testing\r\n------------------------\r\nDiehard reports for the constituent generators are in the directory `reports`\r\n\r\nThe `drafts` directory contains untidy code and node scripts\r\nused to discover and test the generators and methods.\r\n\r\nExamples\r\n--------\r\n```javascript\r\n\r\np=Fdrandom.pot()\r\n\r\noneToTenFloat=  p.range(1,10)  //end is not (quite) inclusive\r\noneToTenInteger=p.irange(1,10) //end is inclusive\r\n\r\nMinusOneToOne_FlatDist=p.lrange(0.5) //loaded range first param \r\nMinusOneToOne_EndBias=p.lrange(0.4)  //sets a loading factor\r\nTwoToFive_MidBias=p.lrange(0.6,2,5) //0= High ends, 0.5=Flat, 1=High Mid\r\n\r\nrandom0or1 = p.rndbit()  //random bit\r\n\r\ngaussiannormal=p.gaus()\r\ngaussianmath=p.gaus(sigma,mu) //sigma is ~scale, mu is offset\r\nuniformsum=p.usum(n)   //add n*( -0.5 > 0.5 ) randoms\r\nuniformsum=p.usum(n,sigma,mu) //to scale and shift with sigma and mu\r\ngausgame=p.usum(4,1)    //a quick rough approximation of gaussian\r\n\r\nnormgame=gnorm()       //approx gaussian shape range -1 to 1\r\nnormgame=gnorm(2,4.5)  //same shape range 2 to 4.5\r\noftenmid=gthorn()      //sharp peak in middle, range -1 to 1\r\noftenmid=gthorn(p,q)   //same shape over range p to q\r\n                       //see [Charts](http://strainer.github.io/Fdrandom.js/) for gaming distributions\r\n\r\nvar inray=["0","1","2","3","4","5","6","7","8","9","sha","la","la"] \r\nvar instr="0123456789abcdef" \r\nvar outray =[1,2,3]\r\nvar outstr =""\r\n\r\np.mixup(inray,2,4) //mixes up elements 2 to 4\r\np.mixup(instr,2,4) //mixes up chars at 2 to 4\r\n\r\n//puts into newstr, mixup of chars at 2 to 4\r\nvar newstr=p.mixup(instr,"",2,4) \r\n\r\n//mixes up chars at 2 to 4 onto end of outray\r\np.mixup(instr,outray,2,4) \r\n\r\n//all inray mixed onto end of outstr\r\np.mixup(inray,outstr) \r\n\r\nvar hexstr=p.mixof(instr,"0x",8)   //like mixup but mix*of* \r\nvar decstr=p.mixof(inray,"",8,0,9) //8 of 0 to 9  \r\nvar decchr=p.mixof(inray)          //1 of 0 to 9 as an element  \r\n\r\n//no output object will add to end of input object (inray)\r\ndecstr=p.mixof(inray,8,0,9)    \r\n\r\n//eg. make a random uuid:\r\nh=p.hot()\r\nUUIDv4 = h.mixof(instr,8) +\r\n   "-" + h.mixof(instr,4) + \r\n   "-4"+ h.mixof(instr,3) +\r\n   "-" + h.mixof(instr,h.mixof("89ab",1),3) +\r\n   "-" + h.mixof(instr,12); \r\n...  \r\n```',
+17 silly publish   readmeFilename: 'readme.md',
+17 silly publish   gitHead: 'd2d07dc5bf8d949660c672606c0dc6367b31e1b2',
+17 silly publish   _id: 'fdrandom@1.1.1',
+17 silly publish   _shasum: '1698b0693da834ae0e43b972490ee18211b52504',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name fdrandom
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/fdrandom
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading C:\Users\Dell\AppData\Roaming\npm-cache\fdrandom\1.1.1\package.tgz
+25 verbose request uri https://registry.npmjs.org/fdrandom
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 11:21:28 PM
+28 verbose request using bearer token for auth
+29 verbose request id 73952f8a546da292
+30 http request PUT https://registry.npmjs.org/fdrandom
+31 http 403 https://registry.npmjs.org/fdrandom
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=300',
+32 verbose headers   'content-length': '95',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Mon, 28 Mar 2016 22:21:36 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-lcy1120-LCY',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1459203692.565701,VS0,VE4219' }
+33 verbose request invalidating C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\fdrandom on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: "You cannot publish over the previously published version 1.1.1." : fdrandom
+35 verbose stack     at makeError (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:264:12)
+35 verbose stack     at CachingRegistryClient.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:252:14)
+35 verbose stack     at Request._callback (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:172:14)
+35 verbose stack     at Request.self.callback (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:198:22)
+35 verbose stack     at emitTwo (events.js:87:13)
+35 verbose stack     at Request.emit (events.js:172:7)
+35 verbose stack     at Request.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1063:14)
+35 verbose stack     at emitOne (events.js:82:20)
+35 verbose stack     at Request.emit (events.js:169:7)
+35 verbose stack     at IncomingMessage.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1009:12)
+36 verbose statusCode 403
+37 verbose pkgid fdrandom
+38 verbose cwd O:\hub\lead\fdrandom
+39 error Windows_NT 6.0.6002
+40 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+41 error node v4.2.2
+42 error npm  v2.14.7
+43 error code E403
+44 error "You cannot publish over the previously published version 1.1.1." : fdrandom
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]

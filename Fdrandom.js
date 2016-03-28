@@ -61,7 +61,7 @@ var newFdrPot = function(){ return (function(sd){
 		return p.dbl() === 0.7635647353645889
 	}
 	
-	function version() { return "v1.1.1" }
+	function version() { return "v1.2.0" }
 
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
