@@ -13,6 +13,8 @@ var newFdrPot = function(){ return (function(sd){
   sv=getstate()
     
   function plant(sd) {
+	  
+	  console.log(JSON.stringify(sd))
     va=1000, vl=1, vs=1, qr=0.0, us=0.0, rb=2.0e+15
     ju=1, U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
 
@@ -76,7 +78,7 @@ var newFdrPot = function(){ return (function(sd){
   function pot() { return newFdrPot(arguments) }
   
   function repot(s) { 
-    if (s) { plant(s) } else { setstate(sv) }
+    if (s) { plant({"0":{"0":s}}) } else { setstate(sv) }
     return this 
   }
   
