@@ -49,7 +49,7 @@ var newFdrPot = function(){ return (function(sd){
       if(t==='array')
       { for( r=0; r<sd.length; r++ ){ sow(sd[r]) } return }
        
-      U[0]= U[0]*0.33 + 4.4 ; f48()
+      U[0]= U[0]*0.33 + va*0.0044 ; f48()
       
       return 
     }
@@ -245,13 +245,13 @@ var newFdrPot = function(){ return (function(sd){
         if(typeof Ao ==='string'){ 
           So=Ao; ob=0; joinr=1 
         } else joinr=0
-        if(ob===0) Ao=new Array(od||0) 
+        if(ob===0) Ao=new Array(od||1) 
       }
     }else{ 
-      e=c; c=od; od=Ao||0; Ao=new Array(od) 
+      e=c; c=od; od=Ao||1; Ao=new Array(od) 
     }
     
-    od+=ob
+    od =(od||1)+ob
     c= c||0
     e= e||Ai.length-1 ; e++
     
