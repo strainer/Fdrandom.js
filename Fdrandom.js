@@ -23,45 +23,50 @@ var newFdrPot = function(){ return (function(sd){
     va=irange(3206324,3259829)
 
     function sow(sd) {
+      var t=typeof(sd) , r 
       
-      var r,t 
-
-      if(isFinite(sd)){
-        r= (sd<=0)? Math.abs(sd)+1.23 : sd 
-        while(r>16)     r=r*0.0019560471624266144
-        while(r<1.0e-4) r=r*511.11110111111111111
-        U[0]=r*0.9999999; f48()
-        return
-      }
-   
-      if( (t=typeof sd) === 'string'){
-        t=sd.length; if(t>va*100){ t=va*100; va=(va/2)|0+2 }
+      if(t === 'string'){
+        t=sd.length; if(t>va*100){ t=va*100; va-- }
         for( r=0; r<t; r++ )
-        {  U[0]=( 65537-sd.charCodeAt(r) )/6464.10101; f48() }
+        {  U[0]=( U[0]+65537-sd.charCodeAt(r) )/6474.10101; f48() }
         return 
       }
       
-      if(va--<1){ return }   
+      if(va<0){ return }
+      
+      if(t === 'object')
+      { va--
+        if(sd.constructor === Array)
+        { U[0]*=0.95; for( r=0; r<sd.length; r++ ){ sow(sd[r]) } return }
+        if(sd === null) { U[0]*=0.97; return }
+        U[0]*=0.93;
+        for(r in sd) { sow(r);sow(sd[r]) } 
+        return 
+      }
+      
+      if(isFinite(sd)){
+        r= (sd<=0)? Math.abs(sd)+1.234 : sd 
+        while(r>16)     r=r*0.0019560471624266144
+        while(r<1.0e-4) r=r*511.11110111111111111
+        U[0]=U[0]*0.1 + r*0.8999999; f48() 
+        return
+      }
+   
+      if(t === 'boolean') { U[0]*=0.93; if(sd){ f48() } return }
+      if(t === 'function'){ U[0]*=0.91; sow(sd.name); return }
+      if(t === 'symbol')  { U[0]*=0.89 }
 
-      if(t==='object')
-      { for(r in sd) { sow(r);sow(sd[r]) } return }
-      
-      if(t==='array')
-      { for( r=0; r<sd.length; r++ ){ sow(sd[r]) } return }
-       
-      U[0]= U[0]*0.33 + va*0.0044 ; f48()
-      
-      return 
+      f48(); return 
     }
   }
 
   function checkfloat() 
   { var p=newFdrPot([3,2],2450,"~fez",{c:0.1})
     for( i=0;i<1000000;i++,p.dbl() ){}
-    return p.dbl() === 0.7635647353645889
+    return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v1.2.0" }
+  function version() { return "v1.3.0" }
 
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
