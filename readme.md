@@ -50,7 +50,7 @@ rpole    |   140   | -1 or 1
          |         |
 range    |   90    | Uniformly distributed numbers in range          
 irange   |   70    | Uniformly distributed integers (inclusive)              
-lrange   |   30    | Mid/end loaded numbers in range
+lrange   |   30    | Middle/end loaded numbers in range
 	
 ### Normal Distribution Prngs
 
@@ -58,7 +58,7 @@ Method	| Speed % | Notes
  :----- | :-----: | :------------------------------
 gaus    |   20    | Fast high quality gaussians        
 gausx   |   15    | Possibly needless extra resolution employed           
-usum    | 25@n=4  | Custom Uniform sum 
+usum    | 25@n=4  | Custom uniform sum 
 
 ### Other Distributions
 
@@ -78,7 +78,7 @@ uigmore|   60    | Unsigned 3/4 bit density game dist.
 igmmode|   60    | Signed multi modal game dist.      
 igbrist|   60    | Signed bristly game dist.      
 ilcg   |  130    | A simple lcg (fails many rnd tests)  
-ishr2  |   60    | A fast shift register generator 
+ishr2  |   60    | A fast flawed shift register generator 
            
 ### Other Methods
 
@@ -132,25 +132,27 @@ To maximally seed the prng requires 9 or 10 completely unpredicatable
 Practical seeding can be achieved by sending an array containing
 public user strings, or private unique ids, or a single number or 
 nothing depending on the level of uniqueness desired.
-
+ 
 `Fdrandom.hot(seed)` returns an unpredictable clone which includes
 seeds from browser crypto if available, and date and Math.random
 if not available.
  
-Seeding pots with same data or setting same state of course
-produces identical random number streams. Any difference in seeds 
-should result in completely unrelatable streams.
+Seeding pots with same data or setting same state produces identical 
+random number streams. Any difference in seeds should result in completely 
+unrelatable streams.
+
+Seeding digests all elements of any array or object up 1000 deep 
+and strings up to 100000 char so might be used with repot() to
+effectively hash objects.
 
 'Pot'ing is a relatively slow operation (about 20,000 op/s) as
 the Fdrandom object gets cloned for each pot. 'Repot'ing with
-a new seed is much faster. 'repot' without seed resets to
+a new seed is 5x faster. 'repot' without seed resets to
 first potted state and is very fast. 
-	
+
 Precision/Types
 ---------------
-`i32` returns number values equivalent to signed 32 bit integers 
-which can be reinterpreted as unsigned by the javascript idiom 
-of `val>>>0` for 'unsigning'  , `val|0` 're-signs' 
+`i32` returns number values equivalent to signed 32 bit integers  
 
 `ui32` returns number values of unsigned int values
 
@@ -187,11 +189,11 @@ p=Fdrandom.pot()
 oneToTenFloat=  p.range(1,10)  //end is not (quite) inclusive
 oneToTenInteger=p.irange(1,10) //end is inclusive
 
-MinusOneToOne_FlatDist=p.lrange(0.5) //loaded range first param 
-MinusOneToOne_EndBias=p.lrange(0.4)  //sets a loading factor
+MinusOneToOne_FlatDist=p.lrange(0.5) //loaded range. 
+MinusOneToOne_EndBias=p.lrange(0.4) //First param sets a loading factor
 TwoToFive_MidBias=p.lrange(0.6,2,5) //0= High ends, 0.5=Flat, 1=High Mid
 
-random0or1 = p.rndbit()  //random bit
+random0or1 = p.rbit()  //random bit
 
 gaussiannormal=p.gaus()
 gaussianmath=p.gaus(sigma,mu) //sigma is ~scale, mu is offset
@@ -223,10 +225,12 @@ p.mixup(instr,outray,2,4)
 p.mixup(inray,outstr) 
 
 var hexstr=p.mixof(instr,"0x",8)   //like mixup but mix*of* 
-var decstr=p.mixof(inray,"",8,0,9) //8 of 0 to 9  
-var decchr=p.mixof(inray)          //1 of 0 to 9 as an element  
+var decstr=p.mixof(inray,"",8,3,7) //string of 8 elements 3 to 7  
+var mxdarr=p.mixof(inray)          //1 element of all
+var mxdstr=p.mixof(instr,2)        //2 of instr as a string  
+var mxdarr=p.mixof(instr,[],2)     //2 of instr as elements
 
-//no output object will add to end of input object (inray)
+//no output string or array will add to end of input array (inray)
 decstr=p.mixof(inray,8,0,9)    
 
 //eg. make a random uuid:

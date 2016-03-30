@@ -13,17 +13,32 @@ require ('../dlib/floatpresc.js')
 
 //~ dolp(function(){return Fdrandom.f48()}  ,50)
 //~ pr(isFinite("123"))
-pr(Fdrandom.f48())
+//~ pr(Fdrandom.f48())
 
-pr(Fdrandom.pot().f48())
-pr(Fdrandom.pot(1).f48())
+//~ pr(Fdrandom.pot().f48())
+//~ pr(Fdrandom.pot(1).f48())
+//~ 
+pr(typeof 0)
 
+var y=new Array(3)
+
+y["w"]="w"
+
+
+pr(Fdrandom.pot([0,0]).f48())
+
+for (var h=0; h<100000; h++)
+{ (Fdrandom.repot([[0],0,"adsklfdewiufhwsfewgergfedshtrhht",{"wewddqwccwefw":1231243,"wewddqwccwefw":1231243,"wewddqwccwefw":1231243,"wewddqwccwefw":1231243}]).f48()) }
+
+//pr(Fdrandom.pot((1,eval)('this')).f48())
 //p=Fdrandom.pot(-Infinity)
 pr(Fdrandom.checkfloat())
+return
+
 
 p=Fdrandom.pot()
 pr(p.next())
-p=Fdrandom.repot()
+p=Fdrandom.hot()
 pr(p.next())
 pr(p.ishp())
 pr(p.ishp())
@@ -39,8 +54,13 @@ pr(p.ishp())
 pr(p.ishp())
 pr(p.ishp())
 pr(p.ishp())
+
+var tt=[0,1,2,3,4,5]
+var decchr=p.mixof(tt,5,3)
+pr(JSON.stringify(decchr))
+pr(tt)
 //~ console.log(p.dbl())
-//~ console.log(p.checkfloat())
+console.log(p.checkfloat())
 
 //~ console.log(p.hot().dbl())
 //~ console.log(p.hot().dbl())
