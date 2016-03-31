@@ -91,7 +91,11 @@ function chartfuncs() {
 	clearInterval(intervar)	
 	
 	var dur=3,reps=1
+	
+	
+	
 	var funz= [
+	 [function(){ return Fd.lrange(0.5,-10,10) },"visk "],
 	 [Math.random,"math.random "],
 	 [Fd.f48,"Fdrandom.f48 "],
 	 [Fd.dbl,"Fdrandom.dbl "],
@@ -141,8 +145,8 @@ function chartfuncs() {
 	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
 	
 	chartf(reps=1, funz[runstep][0], dur=2.5, funz[runstep][1], funz[runstep++][2] ) 
-
-  if(runstep<funz.length){ intervar=setInterval(chartfuncs, 250); }
+  //funz.length
+  if(runstep<2){ intervar=setInterval(chartfuncs, 250); }
 	
 }
 

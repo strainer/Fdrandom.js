@@ -178,9 +178,9 @@ var newFdrPot = function(){ return (function(sd){
     a= (a===undefined)?0.5:a; b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     
     if(a>0.5){
-      if (f48()>(a-0.5)*2) return f48()*2-1
+      if (f48()>a*2-1) return f48()*(d-b) +b
     }else{
-      if (f48()<(a)*2) return f48()*2-1
+      if (f48()<a*2) return f48()*(d-b) +b
     }
     var c=(f48()*1.333+f48()+f48()*0.66666)*0.3333333-0.5
     c= (a>0.5)?c:((c>0)?0.5-c:-0.5-c)
