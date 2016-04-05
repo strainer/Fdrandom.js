@@ -1,6 +1,6 @@
 {
   "name": "fdrandom",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Fast deterministic random methods. Includes Uniform, Gaussian, gaming distributions and shuffles",
   "main": "Fdrandom.js",
   "scripts": {
