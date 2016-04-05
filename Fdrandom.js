@@ -66,7 +66,7 @@ var newFdrPot = function(){ return (function(sd){
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v1.3.0" }
+  function version() { return "v1.4.1" }
 
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
@@ -272,24 +272,26 @@ var newFdrPot = function(){ return (function(sd){
     if(typeof Ai ==='string'){ Ai=Ai.split(""); joinr=1 }
     
     if(typeof Ao !=='string' && typeof Ao !=='object' ) 
-    {  e=c; c=Ao; Ao=Ai }
-    
-    c= c||0
-    e= e||Ai.length-1 ; e++
-    
-    if(typeof Ao ==='string'){
-      So=Ao; joinr=1
-      Ao=new Array(e-c); e-=c
-      for( i=0;i<e;i++ ) Ao[i]= Ai[i+c]
-      c=0; 
-    }else{ //Ao is given array
-      joinr=null
-      ob=Ao.length
+    { e=1+(c||(Ai.length-1)) ; c=Ao||0; Ao=Ai }
+    else
+    {
+      c= c||0 ; e= 1+(e||(Ai.length-1))
+			
+			if(typeof Ao ==='string'){
+				So=Ao; joinr=1
+				Ao=new Array(e-c); e-=c
+				for( i=0;i<e;i++ ) Ao[i]= Ai[i+c]
+				c=0; 
+			}else{ //Ao is given array
+			
+				joinr=null
+				ob=Ao.length
 
-      if(ob===0) Ao=new Array(e-c)
-      var jc=c-ob
-      for( i=ob; i<ob+e-c; i++) Ao[i]= Ai[jc+i]
-      c=ob; e=Ao.length;
+				if(ob===0) Ao=new Array(e-c)
+				var jc=c-ob
+				for( i=ob; i<ob+e-c; i++) Ao[i]= Ai[jc+i]
+				c=ob; e=Ao.length
+			}
     }
 
     var d,p,ep=e-1

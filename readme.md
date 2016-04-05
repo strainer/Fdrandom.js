@@ -212,10 +212,12 @@ var instr="0123456789abcdef"
 var outray =[1,2,3]
 var outstr =""
 
+//mixup(in,[out],[in_start=0],[in_fin=len]) //mixes inplace or add to out
+
 p.mixup(inray,2,4) //mixes up elements 2 to 4
 p.mixup(instr,2,4) //mixes up chars at 2 to 4
 
-//puts into newstr, mixup of chars at 2 to 4
+//return in a string mixed up chars from 2 to 4
 var newstr=p.mixup(instr,"",2,4) 
 
 //mixes up chars at 2 to 4 onto end of outray
@@ -224,14 +226,12 @@ p.mixup(instr,outray,2,4)
 //all inray mixed onto end of outstr
 p.mixup(inray,outstr) 
 
+//mixof (in,[out=intype],[n=1],[in_st=0],[in_fn=len])
+
 var hexstr=p.mixof(instr,"0x",8)   //like mixup but mix*of* 
 var decstr=p.mixof(inray,"",8,3,7) //string of 8 elements 3 to 7  
 var mxdarr=p.mixof(inray)          //1 element of all
-var mxdstr=p.mixof(instr,2)        //2 of instr as a string  
-var mxdarr=p.mixof(instr,[],2)     //2 of instr as elements
-
-//no output string or array will add to end of input array (inray)
-decstr=p.mixof(inray,8,0,9)    
+var mxdarr=p.mixof(instr,[],2)     //2 of instr as array
 
 //eg. make a random uuid:
 h=p.hot()
