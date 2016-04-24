@@ -186,39 +186,39 @@ Examples
 
 p=Fdrandom.pot()
 
-oneToTenFloat=  p.range(1,10)  //end is not (quite) inclusive
+oneToTenFloat = p.range(1,10)  //end is not (quite) inclusive
 oneToTenInteger=p.irange(1,10) //end is inclusive
 
-MinusOneToOne_FlatDist=p.lrange(0.5) //loaded range. 
-MinusOneToOne_EndBias=p.lrange(0.4) //First param sets a loading factor
-TwoToFive_MidBias=p.lrange(0.6,2,5) //0= High ends, 0.5=Flat, 1=High Mid
+minusOneToOne_FlatDist =p.lrange(0.5) //loaded range. 
+minusOneToOne_EndBias =p.lrange(0.4) //First param sets a loading factor
+twoToFive_MidBias = p.lrange(0.6,2,5) //0= High ends, 0.5=Flat, 1=High Mid
 
 random0or1 = p.rbit()  //random bit
 
-gaussiannormal=p.gaus()
-gaussianmath=p.gaus(sigma,mu) //sigma is ~scale, mu is offset
-uniformsum=p.usum(n)   //add n*( -0.5 > 0.5 ) randoms
-uniformsum=p.usum(n,sigma,mu) //to scale and shift with sigma and mu
-gausgame=p.usum(4,1)    //a quick rough approximation of gaussian
+gaussianNormal = p.gaus()
+gaussianMath = p.gaus(sigma,mu) //sigma is ~scale, mu is offset
+uniformSum = p.usum(n)   //add n*( -0.5 > 0.5 ) randoms
+uniformSum = p.usum(n,sigma,mu) //to scale and shift with sigma and mu
+gausGame = p.usum(4,1)    //a quick rough approximation of gaussian
 
-normgame=gnorm()       //approx gaussian shape range -1 to 1
-normgame=gnorm(2,4.5)  //same shape range 2 to 4.5
-oftenmid=gthorn()      //sharp peak in middle, range -1 to 1
-oftenmid=gthorn(p,q)   //same shape over range p to q
-                       //see [Charts](http://strainer.github.io/Fdrandom.js/) for gaming distributions
+normGame = gnorm()      //approx gaussian shape range -1 to 1
+normGame = gnorm(2,4.5) //same shape range 2 to 4.5
+oftenMid = gthorn()     //sharp peak in middle, range -1 to 1
+oftenMid = gthorn(p,q)  //same shape over range p to q
+                      //see [Charts](http://strainer.github.io/Fdrandom.js/) for gaming distributions
 
-var inray=["0","1","2","3","4","5","6","7","8","9","sha","la","la"] 
-var instr="0123456789abcdef" 
-var outray =[1,2,3]
-var outstr =""
+inray =["0","1","2","3","4","5","6","7","8","9","sha","la","la"] 
+instr ="0123456789abcdef" 
+outray=[1,2,3]
+outstr=""
 
-//mixup(in,[out],[in_start=0],[in_fin=len]) //mixes inplace or add to out
+//mixup(in,[out=in],[in_start=0],[in_fin=len]) //mixes inplace or add to out
 
 p.mixup(inray,2,4) //mixes up elements 2 to 4
 p.mixup(instr,2,4) //mixes up chars at 2 to 4
 
 //return in a string mixed up chars from 2 to 4
-var newstr=p.mixup(instr,"",2,4) 
+newstr = p.mixup(instr,"",2,4) 
 
 //mixes up chars at 2 to 4 onto end of outray
 p.mixup(instr,outray,2,4) 
@@ -228,10 +228,10 @@ p.mixup(inray,outstr)
 
 //mixof (in,[out=intype],[n=1],[in_st=0],[in_fn=len])
 
-var hexstr=p.mixof(instr,"0x",8)   //like mixup but mix*of* 
-var decstr=p.mixof(inray,"",8,3,7) //string of 8 elements 3 to 7  
-var mxdarr=p.mixof(inray)          //1 element of all
-var mxdarr=p.mixof(instr,[],2)     //2 of instr as array
+hexstr = p.mixof(instr,"0x",8)   //like mixup but mix*of* 
+decstr = p.mixof(inray,"",8,3,7) //string of 8 elements 3 to 7  
+mxdarr = p.mixof(inray)          //1 element of all
+mxdarr = p.mixof(instr,[],2)     //2 of instr as array
 
 //eg. make a random uuid:
 h=p.hot()
