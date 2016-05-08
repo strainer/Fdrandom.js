@@ -303,6 +303,133 @@ var newFdrPot = function(){ return (function(sd){
     return joinr? Ao=So+Ao.join("") : Ao
   }
     
+    
+  //options
+  //by position or by value
+  //if non numeric, by position
+  //
+  //sep or autosep
+  //order inc or 0
+  //loop limit or no
+  //reuse output index
+  //
+  //
+
+//	antisort(in,[,"index"][,source increment=1][,sep=auto][,maxloop=auto]) returns input array shuffled randomly with sequential elements moderately separated by numeric value or by source index if sepcificed or non numeric.
+
+	  
+  function aindex(Ai,Ao,vd,sepa,lim) //antisort
+  {    
+    var inp=false
+    if( typeof Ai !=='object' ){}
+    if( typeof Ao !=='object' )
+    { inp=true, lim=sepa, sepa=vd, vd=Ao }
+    
+    if( !Ao||Ao.length>Ai.length ) Ao=new Array(Ai.length)
+    
+    var t=aindex(Ai,vd,sep,lim)
+
+    for(var i=0; i<Ao.length; i++) Ao[i]=Ai[t[i]]
+    if(inp) Ai=Ao
+    return Ao
+    
+  }
+  
+//  aindex(in [,"index"][,source increment=1][,sep=auto][,maxloop=auto]) returns index of array antisorted by numeric value or element "index" if specified or non numeric . eg. for shuffling a playlist
+
+
+  function antisort(Ai,A,vd,sepa,lim)
+  {    
+    if( typeof A !=='object' )
+    { lim=sepa, sepa=vd, vd=A, A=mixup(Ai) }
+    else
+    { A=mixup(Ai,[]) }
+    
+    var an=A.length
+    var anl=an>50?50:an-1
+    var anm=an>350?350:an-1
+    
+    if(an<3) return A
+    
+    var kd=0,sep
+    if(!sepa){	    
+			sepa=true
+			for(var i=1;i<anm;i++)
+			{ kd+=Math.abs(A[i-1]-A[i])
+				   +Math.abs(A[i]-A[(i+3)%an])
+				   +Math.abs(A[i]-A[(an-i)%an]) }    			
+			sep=kd/(anm*9.5)
+    }else{ sep=sepa,sepa=false }
+    var sep2=sep/2
+    
+    var ov=an*3+2000000, ova=ov
+    vd=vd||0 ; var ve=vd*2    
+
+    var swps=0,ovz=0    
+    console.log("sep",sep,"ov",ov)
+
+    var tt=0,tq=0
+
+    var t=0, j=0, jr=0, jm=0, c=irange(1,an-1), ch=an+3, jm=0
+		    
+    while( ch>0 && ov>0 )  //ch is checked
+    { 
+	    var ib=c%an, ic=(ib+1)%an, id=(ic+1)%an, ie=(id+1)%an, d=1, stick=0
+	    	    
+	    if(Math.abs(A[ic]-A[id]+vd)<sep)
+	    { stick=1, jm=irange(2,anm)+ic, jr=jm+anl, d=-2  
+        while ( stick && jm<jr )
+        { j=jm%an				 
+				  if( Math.abs(A[id]-A[j]+vd)>sep && Math.abs(A[ie]-A[j]+ve)>sep2 ){ //cd  jd
+				  	swps++, stick=0, 
+				  	t=A[ic], A[ic]=A[j], A[j]=t				  	
+				  	if(jm-ic+2>ch){ ch=jm-ic+2 }
+				  	tt++, tq+=(jm-jr+anl)/anl
+				  }
+				  jm++;
+        }				
+				if(stick){ ovz++,t=A[ic],A[ic]=A[ie],A[ie]=t, d=-2, ch+=2 }
+        if(sepa) { sep*= (5-((jm-jr+anl-1.45)/anl))*0.2, sep2=sep*0.5 }
+        
+        //1.65 has occasional overruns
+        
+      }else{ //cd are good
+				 
+				if(ov<1000000) {sep*=0.99997,sep2*=0.99997} 
+				
+				if( ov>300000 && Math.abs(A[ic]-A[ie]+ve)<sep2 )  
+				{ stick=1, jm=irange(2,anm)+ic, jr=jm+anl     
+					while ( stick && jm<jr )
+					{ var j=jm%an
+			
+						if(Math.abs(A[id]-A[j]+vd)>sep      //ce
+						 &&Math.abs(A[ic]-A[j]+ve)>sep2)    //de
+						{ 
+							swps++,stick=0
+							t=A[ie], A[ie]=A[j], A[j]=t
+							if(jm-ic+2>ch){ ch=jm-ic+2 }
+						}
+						jm++
+					}
+				}
+      }
+	    c=c+d; ch=ch-d 
+	    ov-- 
+    }//checkpoints cleared
+    		
+    console.log("tq",tq/tt,"ovz",ovz,"ch",ch,"ov",ov,"sep",sep,"swps",swps)
+    
+    return A
+  }
+  
+  function bulk(A,f,b,c,d)
+  { if( typeof A !=='object' )  { A=new Array( isFinite(A)?A:1 )  }
+    f=f||f48 
+    var i=0,n=A.length
+    while( i<n ) A[i++]=f(b,c,d);
+    return A
+  }
+  
   return{
      pot: pot   ,hot: hot  ,repot: repot  ,reset: repot
     ,getstate: getstate    ,setstate:  setstate
@@ -317,8 +444,8 @@ var newFdrPot = function(){ return (function(sd){
     
     ,gaus: gaus    ,gausx: gausx   ,usum: usum 
     
-    ,mixup: mixup  ,mixof: mixof
-    ,ilcg: ilcg    ,ishr2: ishr2   ,ishp: ishp
+    ,mixup: mixup  ,mixof: mixof   ,antisort:antisort  ,bulk:bulk
+    ,ilcg: ilcg    ,ishr2: ishr2   ,ishp:  ishp
     
     ,uigless: uigless  ,uigmore: uigmore 
     ,igbrist: igbrist  ,igmmode: igmmode 
@@ -327,7 +454,7 @@ var newFdrPot = function(){ return (function(sd){
     ,fgthorn: gthorn  ,fgskip:   gskip    ,fgteat:gteat
     
     ,gbowl: gbowl     ,gspire: gspire  ,gthorn: gthorn 
-    ,gwedge: gwedge   ,gnorm: gnorm    
+    ,gwedge: gwedge   ,gnorm: gnorm 
     ,gteat: gteat     ,gtrapez: gtrapez 
     ,gskip: gskip
   }
