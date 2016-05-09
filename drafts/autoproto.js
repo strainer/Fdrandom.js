@@ -329,7 +329,7 @@ var newFdrPot = function(){ return (function(sd){
     var Ax= new Array(Av.length);
     for(var i=0;i<Av.length;i++){ Ax[i]=i }
     
-    if(!csep) Ax=mixup(Ax)
+    if(!csep) Ax=mixup(Ax) //??? this identicall but...
     
     var an=Ax.length
     var and=an>50?50:an-1
@@ -350,7 +350,7 @@ var newFdrPot = function(){ return (function(sd){
 
     if(an<10){ asep=false }
     
-    var ov=an*6+10000, ova=ov*0.33, ovb=ova*0.66
+    var ov=an*6+300000, ova=ov*0.33, ovb=ova*0.66
     vd=vd||0
 
     var tt=0,tq=0, swps=0 ,ovz=0 ; console.log("vd",vd,"csep",csep,"bsep",bsep,"ov",ov,"ova",ova,"ovb",ovb)
@@ -443,7 +443,7 @@ var newFdrPot = function(){ return (function(sd){
 
     if(an<10){ asep=false }
     
-    var ov=an*6+10000, ova=ov*0.33, ovb=ova*0.66
+    var ov=an*6+300000, ova=ov*0.33, ovb=ova*0.66
     vd=vd||0
 
     var tt=0,tq=0, swps=0 ,ovz=0 ; console.log("vd",vd,"csep",csep,"bsep",bsep,"ov",ov,"ova",ova,"ovb",ovb)
