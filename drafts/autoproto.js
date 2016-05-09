@@ -319,86 +319,86 @@ var newFdrPot = function(){ return (function(sd){
 //  aindex(in array or length [,"index"][,source increment=1][,csep=auto][,maxloop=auto]) returns index of array antisorted by numeric value or element "index" if specified or non numeric . eg. for shuffling a playlist
 
 
-  function aindex(Av,vd,csep,lim)
+  function aindex(Av,sq,sep,lim)
   {    
-    if( typeof Av !=='object' ) //if csep dont mixup
-    { Av= new Array(Av); vd=vd||1
+    if( typeof Av !=='object' ) //if sep dont mixup
+    { Av= new Array(Av); sq=sq||1
 	    for(var i=0;i<Av.length;i++) Av[i]=i
-	  }else{ vd=vd||0 }
+	  }else{ sq=sq||0 }
     
     var Ax= new Array(Av.length);
     for(var i=0;i<Av.length;i++){ Ax[i]=i }
     
-    if(!csep) Ax=mixup(Ax) //??? this identicall but...
+    if(!sep) Ax=mixup(Ax) //??? this identicall but...
     
-    var an=Ax.length
-    var and=an>50?50:an-1
-    var ane=an>350?350:an-1
+    var ne=Ax.length
+    var nc=ne>50?50:ne-1
+    var nd=ne>350?350:ne-1
     
-    if(an<1) return Ax
-    if(an==2){ if ((vd<0)^(Av[Ax[1]]>Av[Ax[0]])){ return [Ax[1],Ax[0]] }else{ return Ax } }
+    if(ne<1) return Ax
+    if(ne==2){ if ((sq<0)^(Av[Ax[1]]>Av[Ax[0]])){ return [Ax[1],Ax[0]] }else{ return Ax } }
          
     var asep=false, bsep
-    if( typeof csep ==='undefined' ){	    
+    if( typeof sep ==='undefined' ){	    
 			var kd=0; asep=true
-			for(var i=1;i<ane;i++)
+			for(var i=1;i<nd;i++)
 			{ kd+=Math.abs(Av[i-1]-Av[i])
-				   +Math.abs(Av[i]-Av[(i+3)%an])
-				   +Math.abs(Av[i]-Av[(an-i)%an]) }    			
-			csep=bsep=kd/(ane*9)
+				   +Math.abs(Av[i]-Av[(i+3)%ne])
+				   +Math.abs(Av[i]-Av[(ne-i)%ne]) }    			
+			sep=bsep=kd/(nd*9)
     }
 
-    if(an<10){ asep=false }
+    if(ne<10){ asep=false }
     
-    var ov=an*6+300000, ova=ov*0.33, ovb=ova*0.66
-    vd=vd||0
+    var ov=ne*6+300000, ova=ov*0.33, ovb=ova*0.66
+    sq=sq||0
 
-    var tt=0,tq=0, swps=0 ,ovz=0 ; console.log("vd",vd,"csep",csep,"bsep",bsep,"ov",ov,"ova",ova,"ovb",ovb)
+    var tt=0,tq=0, swps=0 ,ovz=0 ; console.log("sq",sq,"sep",sep,"bsep",bsep,"ov",ov,"ova",ova,"ovb",ovb)
 
-    var t=0, j=0, jr=0, jm=0, c=irange(1,an-1), ch=an+3, jm=0
+    var t=0, j=0, jr=0, jm=0, c=irange(1,ne-1), ch=ne+3, jm=0
 		    
     while( ch>0 && ov>0 )  
     { 
-	    var ib=c%an, ic=ib+1, id=ib+2, ie=ib+3
-	    if(ie>=an){ ie=ie-an,id=id%an,ic=ic%an }
+	    var ib=c%ne, ic=ib+1, id=ib+2, ie=ib+3
+	    if(ie>=ne){ ie=ie-ne,id=id%ne,ic=ic%ne }
 	    
 	    var stick=0 ,d=1	    
 	    
-	    if(asep){ csep=bsep*range(0.83333,1.2) }
+	    if(asep){ sep=bsep*range(0.83333,1.2) }
 	    
-	    //console.log(ic,id,Ax[ic],Ax[id],Math.abs(Ax[ic]-Ax[id]+vd),csep)
-	    if(Math.abs(Av[Ax[ic]]-Av[Ax[id]]+vd)<=csep)
-	    { jm=irange(2,ane)+ic, jr=jm+and, stick=1, d=-2   
+	    //console.log(ic,id,Ax[ic],Ax[id],Math.abs(Ax[ic]-Ax[id]+sq),sep)
+	    if(Math.abs(Av[Ax[ic]]-Av[Ax[id]]+sq)<=sep)
+	    { jm=irange(2,nd)+ic, jr=jm+nc, stick=1, d=-2   
         while ( stick && jm<jr )
-        { j=jm%an				 
-				  if( Math.abs(Av[Ax[id]]-Av[Ax[j]]+vd)>csep 
-				   && Math.abs(Av[Ax[(j+1)%an]]-Av[Ax[ic]]+vd)>csep
-				   && Math.abs(Av[Ax[ie]]-Av[Ax[j]]+vd)>csep*0.5
+        { j=jm%ne				 
+				  if( Math.abs(Av[Ax[id]]-Av[Ax[j]]+sq)>sep 
+				   && Math.abs(Av[Ax[(j+1)%ne]]-Av[Ax[ic]]+sq)>sep
+				   && Math.abs(Av[Ax[ie]]-Av[Ax[j]]+sq)>sep*0.5
 				  ){ //cd  jd
 				  	swps++, stick=0, 
 				  	t=Ax[ic], Ax[ic]=Ax[j], Ax[j]=t				  	
 				  	if(jm-ic+2>ch){ ch=jm-ic+2 }
-				  	tt++, tq+=(jm-jr+and)/and
+				  	tt++, tq+=(jm-jr+nc)/nc
 				  }
 				  jm++;
         }				
 				if(stick)
-				{ ovz++,d=3, ch=an+4, t=Ax[id], Ax[id]=Ax[ib], Ax[ib]=t 
+				{ ovz++,d=3, ch=ne+4, t=Ax[id], Ax[id]=Ax[ib], Ax[ib]=t 
         }
-        if(asep) { bsep*= (5-((jm-jr+and-2.15)/and))*0.2 } 
+        if(asep) { bsep*= (5-((jm-jr+nc-2.15)/nc))*0.2 } 
         
       }else{ //cd are good
 				 
 				if(ov<ova) {bsep*=0.99997} 
 				
-				if( Math.abs(Av[Ax[ic]]-Av[Ax[ie]]+vd)<=csep*0.5-1.0e-300 )  
-				{ stick=1, jm=irange(2,ane)+ic, jr=jm+and     
+				if( ov>ovb && Math.abs(Av[Ax[ic]]-Av[Ax[ie]]+sq)<=sep*0.5-1.0e-100 )  
+				{ stick=1, jm=irange(2,nd)+ic, jr=jm+nc     
 					while ( stick && jm<jr )
-					{ var j=jm%an
+					{ var j=jm%ne
 			
-						if(Math.abs(Av[Ax[id]]-Av[Ax[j]]+vd)>csep      //ce
-						 &&Math.abs(Av[Ax[(j+1)%an]]-Av[Ax[ie]]+vd)>csep
-						 &&Math.abs(Av[Ax[ic]]-Av[Ax[j]]+vd)>csep*0.5)    //de
+						if(Math.abs(Av[Ax[id]]-Av[Ax[j]]+sq)>sep      //ce
+						 &&Math.abs(Av[Ax[(j+1)%ne]]-Av[Ax[ie]]+sq)>sep
+						 &&Math.abs(Av[Ax[ic]]-Av[Ax[j]]+sq)>sep*0.5)    //de
 						{ 
 							swps++,stick=0
 							t=Ax[ie], Ax[ie]=Ax[j], Ax[j]=t
@@ -412,102 +412,25 @@ var newFdrPot = function(){ return (function(sd){
 	    ov-- 
     }//checkpoints cleared
     		
-    console.log("tq",tq/tt,"ovz",ovz,"ch",ch,"ov",ov,"csep",csep,"swps",swps)
+    console.log("tq",tq/tt,"ovz",ovz,"ch",ch,"ov",ov,"sep",sep,"swps",swps)
     
     return Ax
   }
 
-  function antisort(Ai,A,vd,csep,lim)
-  {    
+  function antisort(Ai,A,vd,sep,lim)
+  { var c=0,e=Ai.length, Ao 
     if( typeof A !=='object' ) //if csep dont mixup
-    { lim=csep, csep=vd, vd=A, A=mixup(Ai); }
-    else
-    { A=mixup(Ai,[]) }
+    { lim=sep, sep=vd, vd=A 
+	    Ao= new Array(e)
+	  }else{ Ao=A, c=A.length }
+	  
+	  var K=aindex(Ai,vd,sep,lim)
+	  
+	  for(var i=0;i<e;i++)
+	  { Ao[c+i]=Ai[K[i]] }
     
-    var an=A.length
-    var and=an>50?50:an-1
-    var ane=an>350?350:an-1
-    
-    if(an<1) return A
-    if(an==2){ if ((vd<0)^(A[1]>A[0])){ return [A[1],A[0]] }else{ return A } }
-         
-    var asep=false, bsep
-    if( typeof csep ==='undefined' ){	    
-			var kd=0; asep=true
-			for(var i=1;i<ane;i++)
-			{ kd+=Math.abs(A[i-1]-A[i])
-				   +Math.abs(A[i]-A[(i+3)%an])
-				   +Math.abs(A[i]-A[(an-i)%an]) }    			
-			csep=bsep=kd/(ane*9)
-    }
-
-    if(an<10){ asep=false }
-    
-    var ov=an*6+300000, ova=ov*0.33, ovb=ova*0.66
-    vd=vd||0
-
-    var tt=0,tq=0, swps=0 ,ovz=0 ; console.log("vd",vd,"csep",csep,"bsep",bsep,"ov",ov,"ova",ova,"ovb",ovb)
-
-    var t=0, j=0, jr=0, jm=0, c=irange(1,an-1), ch=an+3, jm=0
-		    
-    while( ch>0 && ov>0 )  
-    { 
-	    var ib=c%an, ic=ib+1, id=ib+2, ie=ib+3
-	    if(ie>=an){ ie=ie-an,id=id%an,ic=ic%an }
-	    
-	    var stick=0 ,d=1	    
-	    
-	    if(asep){ csep=bsep*range(0.83333,1.2) }
-	    
-	    //console.log(ic,id,A[ic],A[id],Math.abs(A[ic]-A[id]+vd),csep)
-	    if(Math.abs(A[ic]-A[id]+vd)<=csep)
-	    { jm=irange(2,ane)+ic, jr=jm+and, stick=1, d=-2   
-        while ( stick && jm<jr )
-        { j=jm%an				 
-				  if( Math.abs(A[id]-A[j]+vd)>csep 
-				   && Math.abs(A[(j+1)%an]-A[ic]+vd)>csep
-				   && Math.abs(A[ie]-A[j]+vd)>csep*0.5
-				  ){ //cd  jd
-				  	swps++, stick=0, 
-				  	t=A[ic], A[ic]=A[j], A[j]=t				  	
-				  	if(jm-ic+2>ch){ ch=jm-ic+2 }
-				  	tt++, tq+=(jm-jr+and)/and
-				  }
-				  jm++;
-        }				
-				if(stick)
-				{ ovz++,d=3, ch=an+4, t=A[id], A[id]=A[ib], A[ib]=t 
-        }
-        if(asep) { bsep*= (5-((jm-jr+and-2.15)/and))*0.2 } 
-        
-      }else{ //cd are good
-				 
-				if(ov<ova) {bsep*=0.99997} 
-				
-				if( Math.abs(A[ic]-A[ie]+vd)<=csep*0.5-1.0e-300 )  
-				{ stick=1, jm=irange(2,ane)+ic, jr=jm+and     
-					while ( stick && jm<jr )
-					{ var j=jm%an
-			
-						if(Math.abs(A[id]-A[j]+vd)>csep      //ce
-						 &&Math.abs(A[(j+1)%an]-A[ie]+vd)>csep
-						 &&Math.abs(A[ic]-A[j]+vd)>csep*0.5)    //de
-						{ 
-							swps++,stick=0
-							t=A[ie], A[ie]=A[j], A[j]=t
-							if(jm-ic+2>ch){ ch=jm-ic+2 }
-						}
-						jm++
-					}
-				}
-      }
-	    c=c+d; ch=ch-d 
-	    ov-- 
-    }//checkpoints cleared
-    		
-    console.log("tq",tq/tt,"ovz",ovz,"ch",ch,"ov",ov,"csep",csep,"swps",swps)
-    
-    return A
+    if( typeof A !=='object' ) Ai=Ao
+    return Ao
   }
   
   function bulk(A,f,b,c,d)
