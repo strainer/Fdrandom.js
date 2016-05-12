@@ -6,7 +6,7 @@
   "scripts": {
     "test": "require('fdrandom').checkfloat()"
   }, 
-  "tonicExample": "require('fdrandom').hot().antisort(false,["the","be","that","not","to","be","or","is","to","question"],0,3)",
+  "tonicExample": "require('fdrandom').hot().antisort(false,['the','be','that','not','to','be','or','is','to','question'],0,3)",
   "repository": {
     "type": "git",
     "url": "git+https://strainer:azsplo0@github.com/strainer/Fdrandom.js.git"
