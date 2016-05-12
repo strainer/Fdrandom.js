@@ -7,7 +7,7 @@
 var newFdrPot = function(){ return (function(sd){
   'use strict'
   
-  var va,vl,vs,qr,us,rb,ju,U,sv,i
+  var va,vl,vs,qr,us,rb,ju,U,sv,i,ar
   plant(sd) 
   
   sv=getstate()
@@ -66,7 +66,7 @@ var newFdrPot = function(){ return (function(sd){
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v1.4.1" }
+  function version() { return "v2.0.0" }
 
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
@@ -196,8 +196,11 @@ var newFdrPot = function(){ return (function(sd){
     return b+ (d-b)* (0.5+ 0.333333* (0.5+f48()-f48()*2)) 
   }
 
-  function gskip(c) ///simple low discrepancy 
-  { qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48(); return qr-= qr>>>0; }
+  function gskip(c,b,d)  
+  { qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48() 
+	  d= (d===undefined)?1:d
+	  return (b||0)+(d-(b||0))*(qr-= qr>>>0) 
+	}
   
   var psig,csig
   function usum(n,sig,mu) { 
@@ -274,24 +277,21 @@ var newFdrPot = function(){ return (function(sd){
     if(typeof Ao !=='string' && typeof Ao !=='object' ) 
     { e=1+(c||(Ai.length-1)) ; c=Ao||0; Ao=Ai }
     else
-    {
-      c= c||0 ; e= 1+(e||(Ai.length-1))
-			
-			if(typeof Ao ==='string'){
-				So=Ao; joinr=1
-				Ao=new Array(e-c); e-=c
-				for( i=0;i<e;i++ ) Ao[i]= Ai[i+c]
-				c=0; 
-			}else{ //Ao is given array
-			
-				joinr=null
-				ob=Ao.length
+    { c= c||0 ; e= 1+(e||(Ai.length-1))
+      if(typeof Ao ==='string'){
+        So=Ao; joinr=1
+        Ao=new Array(e-c); e-=c
+        for( i=0;i<e;i++ ) Ao[i]= Ai[i+c]
+        c=0; 
+      }else{ //Ao is given array
+        joinr=null
+        ob=Ao.length
 
-				if(ob===0) Ao=new Array(e-c)
-				var jc=c-ob
-				for( i=ob; i<ob+e-c; i++) Ao[i]= Ai[jc+i]
-				c=ob; e=Ao.length
-			}
+        if(ob===0) Ao=new Array(e-c)
+        var jc=c-ob
+        for( i=ob; i<ob+e-c; i++) Ao[i]= Ai[jc+i]
+        c=ob; e=Ao.length
+      }
     }
 
     var d,p,ep=e-1
@@ -302,137 +302,136 @@ var newFdrPot = function(){ return (function(sd){
   
     return joinr? Ao=So+Ao.join("") : Ao
   }
+      
+  function aindex(mx,Ai,sq,sep,lim){
+    var Av,i
+    if( typeof mx !=='boolean'){ lim=sep,sep=sq,sq=Ai,Ai=mx, mx=true }
+    if( typeof Ai !=='object' || !isFinite(Ai[0])
+     ||(typeof sep ==='string' && sep!=="auto")){ 
+	    Av= new Array((Ai>0)?Ai:Ai.length)
+	    if( typeof sq ==='undefined') sq=1
+	    sep=(sep==="")?undefined:sep
+		  for( i=0;i<Av.length;i++ ) Av[i]=i
+	  }else{ Av=Ai,sq=sq||0 }
     
-    
-  //options
-  //by position or by value
-  //if non numeric, by position
-  //
-  //sep or autosep
-  //order inc or 0
-  //loop limit or no
-  //reuse output index
-  //
-  //
+    var ne=Av.length, nc=ne>50?50:ne-1, nd=ne>350?350:ne-1
 
-//	antisort(in,[,"index"][,source increment=1][,sep=auto][,maxloop=auto]) returns input array shuffled randomly with sequential elements moderately separated by numeric value or by source index if sepcificed or non numeric.
-
-	  
-  function aindex(Ai,Ao,vd,sepa,lim) //antisort
-  {    
-    var inp=false
-    if( typeof Ai !=='object' ){}
-    if( typeof Ao !=='object' )
-    { inp=true, lim=sepa, sepa=vd, vd=Ao }
-    
-    if( !Ao||Ao.length>Ai.length ) Ao=new Array(Ai.length)
-    
-    var t=aindex(Ai,vd,sep,lim)
-
-    for(var i=0; i<Ao.length; i++) Ao[i]=Ai[t[i]]
-    if(inp) Ai=Ao
-    return Ao
-    
-  }
-  
-//  aindex(in [,"index"][,source increment=1][,sep=auto][,maxloop=auto]) returns index of array antisorted by numeric value or element "index" if specified or non numeric . eg. for shuffling a playlist
-
-
-  function antisort(Ai,A,vd,sepa,lim)
-  {    
-    if( typeof A !=='object' )
-    { lim=sepa, sepa=vd, vd=A, A=mixup(Ai) }
-    else
-    { A=mixup(Ai,[]) }
-    
-    var an=A.length
-    var anl=an>50?50:an-1
-    var anm=an>350?350:an-1
-    
-    if(an<3) return A
-    
-    var kd=0,sep
-    if(!sepa){	    
-			sepa=true
-			for(var i=1;i<anm;i++)
-			{ kd+=Math.abs(A[i-1]-A[i])
-				   +Math.abs(A[i]-A[(i+3)%an])
-				   +Math.abs(A[i]-A[(an-i)%an]) }    			
-			sep=kd/(anm*9.5)
-    }else{ sep=sepa,sepa=false }
-    var sep2=sep/2
-    
-    var ov=an*3+2000000, ova=ov
-    vd=vd||0 ; var ve=vd*2    
-
-    var swps=0,ovz=0    
-    console.log("sep",sep,"ov",ov)
-
-    var tt=0,tq=0
-
-    var t=0, j=0, jr=0, jm=0, c=irange(1,an-1), ch=an+3, jm=0
-		    
-    while( ch>0 && ov>0 )  //ch is checked
-    { 
-	    var ib=c%an, ic=(ib+1)%an, id=(ic+1)%an, ie=(id+1)%an, d=1, stick=0
-	    	    
-	    if(Math.abs(A[ic]-A[id]+vd)<sep)
-	    { stick=1, jm=irange(2,anm)+ic, jr=jm+anl, d=-2  
-        while ( stick && jm<jr )
-        { j=jm%an				 
-				  if( Math.abs(A[id]-A[j]+vd)>sep && Math.abs(A[ie]-A[j]+ve)>sep2 ){ //cd  jd
-				  	swps++, stick=0, 
-				  	t=A[ic], A[ic]=A[j], A[j]=t				  	
-				  	if(jm-ic+2>ch){ ch=jm-ic+2 }
-				  	tt++, tq+=(jm-jr+anl)/anl
-				  }
-				  jm++;
-        }				
-				if(stick){ ovz++,t=A[ic],A[ic]=A[ie],A[ie]=t, d=-2, ch+=2 }
-        if(sepa) { sep*= (5-((jm-jr+anl-1.45)/anl))*0.2, sep2=sep*0.5 }
+    var Ax= new Array(ne); for(var i=0;i<ne;i++) Ax[i]=i
         
-        //1.65 has occasional overruns
+    if(ne<1) return Ax
+    if(mx) mixup(Ax)
+    if(ne==2){ 
+      if ((sq<0)^(Av[Ax[1]]>Av[Ax[0]]))
+      { return [Ax[1],Ax[0]] }else{ return Ax } 
+    }
+         
+    var usep=false, bsep=(sep===0)?"zero":sep, csep=sep*0.5
+    if( typeof sep ==='undefined' || sep==="auto" ){      
+      var kd=0, np=(ne*0.33)|0, nq=1+(ne*0.66)|0 
+      for( i=0;i<nd;i++){
+        kd+=Math.abs(Av[i]-Av[(np+i)%ne])
+           +Math.abs(Av[(np+i)%ne]-Av[(nq+i)%ne])
+           +Math.abs(Av[(ne+nq-i)%ne]-Av[(ne-i)%ne]) 
+      }          
+      usep=true, sep=bsep=kd/(nd*10), csep=sep*0.5
+    }
+    if(ne<10) usep=false
+    //console.log("#sep",sep)
+    if(!lim){ lim=(ne+500000)*0.001 }
+    var ti=lim*8000, te=ti*0.3 
+    
+    var t=0, j=0, jr=0, jm=0, c=irange(1,ne-1), ch=ne+3, jm=0, lw=false
+    
+    var swps=0,sticks=0,lp=0 
+    while( ch>0 && ti>0 ) { 
+      
+      var ib=(c=c<0?c+ne:c)%ne, ic=ib+1, id=ib+2, ie=ib+3
+      if(ie>=ne){ ie=ie-ne,id=id%ne,ic=ic%ne }
+      
+      var stick=0 ,d=1      
+      
+      if(usep){ sep=bsep*range(0.83333,1.2),csep=sep*0.5 }
+
+      if(Math.abs(Av[Ax[ic]]-Av[Ax[id]]+sq)<sep){ 
+        jm=irange(2,nd)+ic, jr=jm+nc, stick=1, d=-2, lw=ti<te
+        while ( stick && jm<jr ){ 
+          j=jm%ne         
+          if( Math.abs(Av[Ax[id]]-Av[Ax[j]]+sq)>=sep 
+           && Math.abs(Av[Ax[(j+1)%ne]]-Av[Ax[ic]]+sq)>=sep
+           && (lw || Math.abs(Av[Ax[ie]]-Av[Ax[j]]+sq)>=csep) 
+          ){ 
+            stick=0, t=Ax[ic], Ax[ic]=Ax[j], Ax[j]=t            
+            if(jm-ic+2>ch){ ch=jm-ic+2 }
+            swps++
+          }
+          jm++;
+        }        
+        var f=(jm-jr+nc)*0.5; ti-=f
+        if(stick){ sticks++, t=Ax[ib], Ax[ib]=Ax[ic], Ax[ic]=t }
+        if(usep) { bsep*= (66-((f-2)/nc))*0.0151466 } 
+        //~ if(usep) { bsep*= (10-((f)/nc))*0.10019 } 
         
-      }else{ //cd are good
-				 
-				if(ov<1000000) {sep*=0.99997,sep2*=0.99997} 
-				
-				if( ov>300000 && Math.abs(A[ic]-A[ie]+ve)<sep2 )  
-				{ stick=1, jm=irange(2,anm)+ic, jr=jm+anl     
-					while ( stick && jm<jr )
-					{ var j=jm%an
-			
-						if(Math.abs(A[id]-A[j]+vd)>sep      //ce
-						 &&Math.abs(A[ic]-A[j]+ve)>sep2)    //de
-						{ 
-							swps++,stick=0
-							t=A[ie], A[ie]=A[j], A[j]=t
-							if(jm-ic+2>ch){ ch=jm-ic+2 }
-						}
-						jm++
-					}
-				}
+      }else{ 
+        if( ti>te && Math.abs(Av[Ax[ic]]-Av[Ax[ie]]+sq)<csep )  
+        { stick=1, jm=irange(2,nd)+ic, jr=jm+nc     
+          while ( stick && jm<jr ){ 
+            j=jm%ne
+            if(Math.abs(Av[Ax[id]]-Av[Ax[j]]+sq)>=sep
+             &&Math.abs(Av[Ax[(j+1)%ne]]-Av[Ax[ie]]+sq)>=sep
+             &&Math.abs(Av[Ax[ic]]-Av[Ax[j]]+sq)>=csep)
+            { 
+              stick=0,t=Ax[ie], Ax[ie]=Ax[j], Ax[j]=t
+              if(jm-ic+2>ch){ ch=jm-ic+2 }
+            }
+            jm++
+          }
+          ti-=(jm-jr+nc)*0.5
+        }
       }
-	    c=c+d; ch=ch-d 
-	    ov-- 
-    }//checkpoints cleared
-    		
-    console.log("tq",tq/tt,"ovz",ovz,"ch",ch,"ov",ov,"sep",sep,"swps",swps)
+      c=c+d, ch=ch-d, ti-- ,lp++ 
+    }
+    //console.log("lp",lp,"c",c,"ch",ch,"ti",ti,"sw",swps,"st",sticks,"usep",usep,"sep",sep,"bsep",bsep,"sq",sq)
+    if(usep){ ar=(ti>te)?bsep*0.81:(ti<1)?0:-bsep*0.8 }
+    else{ ar=(ti>te)?sep:(ti<1)?0:-sep }
     
-    return A
+    return Ax
   }
   
-  function bulk(A,f,b,c,d)
-  { if( typeof A !=='object' )  { A=new Array( isFinite(A)?A:1 )  }
-    f=f||f48 
-    var i=0,n=A.length
+  function aresult(A,sq){ 
+    if(!A) { return ar }
+	  var c,df=Infinity; sq=sq||0
+    for(var i=0;i<A.length;i++){
+      c=Math.abs(A[i]-(A[(i+1)%A.length]-sq)); if(c<df) df=c 
+	  }
+	  return (ar>0)?df:-df    
+  }
+
+  function antisort(mx,Ai,A,sq,sep,lim){
+    if( typeof mx !=='boolean'){ lim=sep,sep=sq,sq=A,A=Ai,Ai=mx,mx=true }
+    var c=0, e=Ai.length, Ao=[], K
+    if( typeof A !=='object' )
+    { lim=sep, sep=sq, sq=A, Ao= new Array(e) }
+    else{ Ao=A, c=A.length }
+    
+    if( typeof sep ==='string' && sep!=="auto" )
+    { K=aindex(mx,Ai.length,sq,sep,lim) }
+    else{ K=aindex(mx,Ai,sq,sep,lim) }
+    //pr(K)
+    for(var i=0;i<e;i++) Ao[c+i]=Ai[K[i]]
+    if( typeof A !=='object' ){ for(var i=0;i<e;i++) Ai[i]=Ao[c+i] }
+    return Ao
+  }
+	  
+  function bulk(A,f,b,c,d){
+    if( typeof A !=='object' ){ A=new Array( isFinite(A)?A:1 )  }
+    var i=0,n=A.length; f=f||f48 
     while( i<n ) A[i++]=f(b,c,d);
     return A
   }
   
   return{
      pot: pot   ,hot: hot  ,repot: repot  ,reset: repot
-    ,getstate: getstate    ,setstate:  setstate
+    ,getstate: getstate    ,setstate:   setstate
     ,version: version      ,checkfloat: checkfloat 
     
     ,next: f48  ,f48: f48  ,dbl: dbl
@@ -442,10 +441,11 @@ var newFdrPot = function(){ return (function(sd){
     ,rbit: rbit ,rndbit:rbit  ,rpole: rpole  ,rndsign:rpole
     ,range: range  ,irange: irange ,lrange:lrange
     
-    ,gaus: gaus    ,gausx: gausx   ,usum: usum 
+    ,gaus: gaus    ,gausx: gausx   ,usum: usum
     
-    ,mixup: mixup  ,mixof: mixof   ,antisort:antisort  ,bulk:bulk
-    ,ilcg: ilcg    ,ishr2: ishr2   ,ishp:  ishp
+    ,mixup: mixup  ,mixof: mixof    ,bulk:bulk
+    ,aindex:aindex ,aresult:aresult ,antisort:antisort 
+    ,ilcg: ilcg   ,ishr2: ishr2    ,ishp:  ishp
     
     ,uigless: uigless  ,uigmore: uigmore 
     ,igbrist: igbrist  ,igmmode: igmmode 

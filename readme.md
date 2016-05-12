@@ -6,7 +6,7 @@ Fast deterministic random functions for Javascript.
 
 * Fast tested PRNG.  
 * Integer, single and double precision float values.
-* Range, loaded, boolean, mixup, mixof functions.
+* Range, loaded, boolean, mix and antisort functions.
 * Distribution options: 
   * Unbiased uniforms. 
   * Gaussian distribution by Box Muller polar method. 
@@ -86,10 +86,13 @@ Method | Speed % | Notes
  :---- | :-----: | :-------------------------------------
 mixup  |  fast   | Randomize order of elements in an array or string        
 mixof  |  fast   | Make a random mix of elements or chars length n   
-       |         |
-pot    | 0.005   | Clone and seed Fdrandom object (pot)    
-hot    | 0.005   | Clone Fdrandom using seeds from browser crypto  
-repot  | 5>0.5%  | Resets or reseeds an existing pot
+antisort| medium | Special staggered random shuffle. 
+aindex  | medium | Return an antisorting index of array      
+aresult |        | Report the minimum delta achieved by previous antisort
+        |        |
+pot     | 0.005  | Clone and seed Fdrandom object (pot)    
+hot     | 0.005  | Clone Fdrandom using seeds from browser crypto  
+repot   | 5>0.5% | Resets or reseeds an existing pot
 getstate|  5%    | Gets an array containg state of a pot
 setstate|  5%    | Sets state of pot with array (no reseeding)
         |        | 
@@ -101,26 +104,25 @@ Speed & Quality
 The percentages in the above tables are very rough as js engine
 performance varies.
 
-`Math.random` on Chrome has detectable statistical bias and only 
-32 bits of resolution but is fast. 
-`Math.random` on firefox is cryptographic but is slow.
+Fdrandoms default method:`Fdrandom.f48` runs at about 
+same speed as Chromes native Math.random. On Firefox it runs faster 
+than native Math.random.
+
 `Fdrandom.f48` has no detectable bias across over 10^16 outputs
 and each has at least 48 bits of resolution which are tested
 as passing G Marsaglias old but substantial diehard test suite.
 It has yet to be tested by the most comprehensive means, 
 but shows no issues so far.
 
-Fdrandoms default method:`Fdrandom.f48` runs at approximately 
-same speed as Chromes native Math.random and faster on firefox. 
-It runs considerably faster than Firefoxes native Math.random.
-On Firefox even gaussian normal generation runs about 
-as fast as Math.random. 
+`Math.random` on Chrome has detectable statistical bias and only 
+32 bits of resolution. Firefoxs `Math.random` has cryptographic 
+quality but is slow.
 
-f48 algorithm was developed informed by J.Baagøe's PRNG `Alea` 
-which seems to be the fastest form of high quality prng for 
-javascript to date. f48 uses different multipliers in a slightly 
-adjusted mechanism to output 16 more bits of resolution per 
-number than Alea v0.8 while achieving similar speed.
+f48 algorithm is informed by J.Baagoe's PRNG `Alea` which 
+seems to be the fastest form of high quality prng for javascript 
+to date. f48 uses different multipliers in a slightly adjusted 
+mechanism to output 16 more bits of resolution per number than 
+Alea v0.8 while achieving similar speed.
 
 Seeding Pots
 ------------
@@ -128,7 +130,7 @@ Seeding Pots
 `Fdrandom.pot(seed)` returns a clone of Fdrandom seeded by numbers
 and strings in all elements of the object `seed`.
 To maximally seed the prng requires 9 or 10 completely unpredicatable 
-50 bit numbers or hundres of text characters; however is overkill. 
+50 bit numbers or hundres of text characters. 
 Practical seeding can be achieved by sending an array containing
 public user strings, or private unique ids, or a single number or 
 nothing depending on the level of uniqueness desired.
@@ -142,12 +144,12 @@ random number streams. Any difference in seeds should result in completely
 unrelatable streams.
 
 Seeding digests all elements of any array or object up 1000 deep 
-and strings up to 100000 char so might be used with repot() to
+and strings up to 100,000 char so might be used with repot() to
 effectively hash objects.
 
-'Pot'ing is a relatively slow operation (about 20,000 op/s) as
+'Pot'ing is a relatively slow operation (about 50,000 op/s) as
 the Fdrandom object gets cloned for each pot. 'Repot'ing with
-a new seed is 5x faster. 'repot' without seed resets to
+a new seed is much faster. 'repot' without seed resets to
 first potted state and is very fast. 
 
 Precision/Types
@@ -156,20 +158,15 @@ Precision/Types
 
 `ui32` returns number values of unsigned int values
 
-The equal distribution float type methods return the 'unit interval'
-which should involve all possible values between 0 and 1 including both ends.
-However math random libraries usually stop just short of 1, so
-Fdrandom.js does too. This can help in formulas which need
-to avoid zero, eg. `something/(1-unitrandom)` avoids the possibility of
-division by zero when `unitrandom` cannot be 1.
+`f48`  alias `next` returns JS Numbers (double precision float) with 
+48 bits of precision in range 0 to 0.9999999999999999
 
-`dbl` returns JS Numbers (double precision float) with all 53 bits of
-their mantissa utilised.
+`dbl` returns JS Numbers with all 53 bits of their mantissa utilised.
 
 `f24` is designed to be cast to float32 arrays sometime, this 
 is the only reason to use it (for opengl etc). `f24` actually 
-has 48 bits of precision but stops short of 1 just enough to not
-round to 1 when cast into float32 array. Because the float32 type 
+has 48 bits of precision but scales short of 1 enough to not
+round up when cast into float32 array. Because the float32 type 
 only has 24 bits of practical precision, this can introduce a tiny 
 but noticable bias to the sum of millions of output values.
 	
@@ -205,9 +202,10 @@ normGame = gnorm()      //approx gaussian shape range -1 to 1
 normGame = gnorm(2,4.5) //same shape range 2 to 4.5
 oftenMid = gthorn()     //sharp peak in middle, range -1 to 1
 oftenMid = gthorn(p,q)  //same shape over range p to q
-                      //see [Charts](http://strainer.github.io/Fdrandom.js/) for gaming distributions
-
-inray =["0","1","2","3","4","5","6","7","8","9","sha","la","la"] 
+```
+see [Charts](http://strainer.github.io/Fdrandom.js/) for gaming distributions
+```
+inray =["0","1","2","3","4","5","6","sha","la","la"] 
 instr ="0123456789abcdef" 
 outray=[1,2,3]
 outstr=""
@@ -240,5 +238,61 @@ UUIDv4 = h.mixof(instr,8) +
    "-4"+ h.mixof(instr,3) +
    "-" + h.mixof(instr,h.mixof("89ab",1),3) +
    "-" + h.mixof(instr,12); 
+
+mediaShuffleIndex=p.aindex(medialist) //an antisorting index length of input
+mediaList=p.antisort(medialist,[])    //medialist shuffled by its antisort
+hardShuffleIndex =p.aindex(100)  //100 long antisorting index for small window sampling
+
+//bulk(in_array|length[,function=f48][,param1][,param2][,param3]) returns array of func(,,)
+arrayOfFunc= p.bulk(100 ,p.irange ,1 ,6) //array of 100 dicerolls
+
 ...  
 ```
+
+Antisorting
+-----------
+
+`aHardShuffleIndex = p.aindex(orderedListLength)`
+
+As much as sorting involves moving most similar items together into a simple 
+incremental pattern; "antisorting" could be moving items out of a simple pattern 
+and ensuring the most similar members are not placed close to each other.
+
+An obvious use for this is media playlist shuffling.
+It might also be used to tweak the sampling of ordered data when using a small
+window/sample size.
+ 
+Functions `antisort` and `aindex` are designed for this: 
+ `antisort` hard-shuffles arrays out of order. 
+ `aindex` returns an 'antisorted index' for accessing arrays out of order.
+
+They can work on the indices of elements (which assumes they are already sorted)
+or on the elements numeric values (such as song number, song quality, age, size)
+The array will be quite randomly shuffled and items of similar value (or position)
+will not be placed next to each other.
+
+The minimum distance ensured between consecutive values is generated automatically and works out as approximately 9% of the total range. Also, half the 'immediate-neighbour' distance is ensured between '2-doors-away' neighbours. 
+So for an antisort of a simple list 0 to 100, the min separation between consecutive elements would be 9 or 10 ,and between 2-away elements will be 4 or 5.
+
+The functions can try to antisort any array of numeric values, but the minimum separation
+drops when the values are less diverse. The algorithm is basically a random shuffle
+followed by fuzzy checking and swapping values until all are clear. It takes a second or two to antisort a few million awkward values and will time out if data is not diverse enough to be separated by its fuzzy process.
+
+`aresult` returns the approximate value of the minimum separation achieved by the 
+previous antisort. If '2-away' separation was abandoned aresult() returns negative value of '1-away'. If no separation was achieved it returns 0.
+
+The intented step of the input can be set eg -10 for `[50,40,30,20,10]` (avoid 30,20 in result). Default is 1 for index antishuffling (1,2,3,4,5 all collide) 
+
+The target separation can be forced:
+
+`q=p.antisort(array,step,septarget)`
+`q=p.aindex(songsSortedByNumberByAlbum,1,albumLength*2)`
+
+Setting over 10% separation risks failure and timeout. If septarget is an empty string `""` numeric values are ignored and the array it antisorted by its positions.
+
+These functions parameters are specified in the plain text Fdrandom.api. Charts of its typical distribution are included at the bottom of the [test charts](http://strainer.github.io/Fdrandom.js/) page. 
+
+Version History
+---------------
+1.9.0 - Added antisorting
+1.4.1 - Revised seeding

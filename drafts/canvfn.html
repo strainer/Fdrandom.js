@@ -42,6 +42,26 @@ if(!Fdrandom.checkfloat()){
   document.getElementById('floatfail').style.display="block";	
 }
 
+
+
+var rcount=0
+var rar=new Array(1000000)
+
+for(var u=0;u<rar.length;u++){ rar[u]=u }
+var cc
+
+var fdd=Fdrandom.pot()
+fdd.antisort(rar)
+//~ for(var u=0;u<rar.length-1;u++){ rar[u]=rar[u]-rar[u+1] }
+
+var retarray= function()
+//~ { return rar[rcount=(rcount++)%(rcount.length)] }
+{ rcount=rcount==999999?0:rcount+1; return rar[rcount] }
+
+var retarray2= function()
+//~ { return rar[rcount=(rcount++)%(rcount.length)] }
+{ return rar[rcount]-rar[rcount=rcount==999999?0:rcount+1] }
+
 var fnstats={}
 var firstrun=1
 var runstep=0
@@ -95,7 +115,7 @@ function chartfuncs() {
 	
 	
 	var funz= [
-	 [function(){ return Fd.lrange(0.5,-10,10) },"visk "],
+	 //[function(){ return Fd.lrange(0.5,-10,10) },"visk "],
 	 [Math.random,"math.random "],
 	 [Fd.f48,"Fdrandom.f48 "],
 	 [Fd.dbl,"Fdrandom.dbl "],
@@ -114,39 +134,41 @@ function chartfuncs() {
 	 //~ [Fd.usum,"usum 32 ",32],
 	 [Fd.gaus,"gaus "],
 	 //~ [Fd.gausx,"gausx "],
-	 [Fd.ui32,"ui32 "],
-	 [Fd.i32,"i32 "],
-	 [Fd.ilcg,"ilcg "],
-	 [Fd.ishr2,"ishr2 "],
-	 [Fd.ishp,"ishp "],
-	 [Fd.gskip,"gskip "],
-	 [Fd.gskip,"gskip 0.2",0.2],
-	 [Fd.gskip,"gskip 0.8",0.8],
-	 [Fd.gbowl,"gbowl "],
-	 [Fd.gtrapez,"gtrapez "],
-	 [Fd.gteat,"gteat "],
-	 [Fd.gthorn,"gthorn "],
-	 [Fd.gspire,"gspire "],
-	 [Fd.gnorm,"gnorm "],
-	 [Fd.lrange,"lrange 1.0",1.0],
-	 [Fd.lrange,"lrange 0.90",0.90],
-	 [Fd.lrange,"lrange 0.75",0.75],
-	 [Fd.lrange,"lrange 0.63",0.75],
-	 [Fd.lrange,"lrange 0.55",0.55],
-	 [Fd.lrange,"lrange 0.50",0.50],
-	 [Fd.lrange,"lrange 0.45",0.45],
-	 [Fd.lrange,"lrange 0.37",0.37],
-	 [Fd.lrange,"lrange 0.25",0.25],
-	 [Fd.lrange,"lrange 0.10",0.10],
-	 [Fd.lrange,"lrange 0",0],
-
+	// [Fd.ui32,"ui32 "],
+	// [Fd.i32,"i32 "],
+	// [Fd.ilcg,"ilcg "],
+	// [Fd.ishr2,"ishr2 "],
+	// [Fd.ishp,"ishp "],
+	// [Fd.gskip,"gskip "],
+	// [Fd.gskip,"gskip 0.2",0.2],
+	// [Fd.gskip,"gskip 0.8",0.8],
+	// [Fd.gbowl,"gbowl "],
+	// [Fd.gtrapez,"gtrapez "],
+	// [Fd.gteat,"gteat "],
+	// [Fd.gthorn,"gthorn "],
+	// [Fd.gspire,"gspire "],
+	// [Fd.gnorm,"gnorm "],
+	// [Fd.lrange,"lrange 1.0",1.0],
+	// [Fd.lrange,"lrange 0.90",0.90],
+	// [Fd.lrange,"lrange 0.75",0.75],
+	// [Fd.lrange,"lrange 0.63",0.75],
+	// [Fd.lrange,"lrange 0.55",0.55],
+	// [Fd.lrange,"lrange 0.50",0.50],
+	// [Fd.lrange,"lrange 0.45",0.45],
+	// [Fd.lrange,"lrange 0.37",0.37],
+	// [Fd.lrange,"lrange 0.25",0.25],
+	// [Fd.lrange,"lrange 0.10",0.10],
+	// [Fd.lrange,"lrange 0",0],
+   [retarray,"antisort index"],
+	 [retarray2,"antisort delta "],	 
 	]
  			
 	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
 	
 	chartf(reps=1, funz[runstep][0], dur=2.5, funz[runstep][1], funz[runstep++][2] ) 
-  //funz.length
-  if(runstep<2){ intervar=setInterval(chartfuncs, 250); }
+  //
+  if(runstep<funz.length){ intervar=setInterval(chartfuncs, 250); }
+  //~ if(runstep<2){ intervar=setInterval(chartfuncs, 250); }
 	
 }
 

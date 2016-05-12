@@ -1,0 +1,59 @@
+checkfloat() returns true if host platforms float math is compliant for expected results
+version() returns version
+
+pot([seeding variable or object]) returns a seeded new instance of fdrandom 
+repot([seeding variable or object]) resets or reseeds this instance of fdrandom 
+hot([extra seeds]) returns a randomly seeded new instance of fdrandom 
+
+getstate() returns array of parents state for setstate
+setstate(state_array) sets state with state array returned by getstate  
+
+f48() returns 48bit precision equally distributed variates 0 to 0.9999999999999999 
+dbl() returns 53bit precision equally distributed variates 0 to 0.9999999999999999
+f24() returns 48bit precision equally distributed variates 0 to 0.99999994
+
+range(a,b) returns equally distributed reals in range a to <b
+irange(a,b) returns equally distributed integer in range a to b inclusive
+gnorm([a=-1][,b=1]) returns approximate normally distributed reals in range a to b 
+
+lrange(L [,a=-1][,b=1]) returns loaded distribution through range a to b where L=0:High ends|0.5=Flat|1=Middle peaked  
+
+i32()  returns signed integer randoms    
+ui32() returns unsigned integer randoms    
+
+rbit() returns random 0 or 1
+rpole() returns random -1 or 1     
+
+ilcg() returns signed 32bit integer ok but weak lcg randoms 
+ishr2() returns slightly patterned 32bit shift register randoms   
+ishp() returns fast good quality 32bit integer randoms    
+
+uigless() returns unsigned ints in a patterned distribution favouring low values
+uigmore() returns unsigned ints in a patterned distribution favouring high values
+igbrist() returns signed ints in a patterned distribution peaking in values
+igmmode() returns signed ints in patterned unsymetric but balanced distribution
+
+gbowl([a=-1][,b=1]) returns bowl shaped distribution in range a to b      
+gspire([a=-1][,b=1]) returns spire shaped distribution in range a to b
+gthorn([a=-1][,b=1]) returns thorn shaped distribution in range a to b
+gwedge([a=-1][,b=1]) returns wedge shaped distribution in range a to b
+gteat([a=-1][,b=1]) returns teat shaped distribution in range a to b
+gtrapez([a=-1][,b=1]) returns trapeziod shaped distribution in range a to b
+
+gskip([skip=f48()/3][,a=0][,b=1]) returns quasirandom reals cycling a to b, skipping variably or by skip as factor of range
+
+usum(n,sig,mu) returns uniform sum of n equal distributed randoms
+gaus(sig,mu) returns gaussion variates sig=sigma, mu = mu
+gausx(sig,mu) returns extra precision gaussion variates sig=sigma, mu = mu
+
+mixof (in [,out=intype][,n=1][,in_start=0][,in_fin=len]) returns new or given output array or string consisting of n randomly choosen elements from elements|chars in_start to in_fin 
+
+mixup(in [,out=in][,inStart=0][,fin=inLen]) shuffles positions of array or string, inplace or adds to end of out array or string. Returns the input or output string|array.
+
+antisort([premix=true,] inArray or length [,outArray=inArray][,source step=auto][,sep="auto"][,bogoMilliSecTimeout=auto]) returns input array shuffled randomly with sequential elements separated by approx 10% numeric range or by 10% source-index-range if sep="" or data is not finite.
+
+aindex([premix=true,] Array [,source increment=1][,sep="auto"][,bogoMilliSecTimeout=auto]) returns index of array antisorted by numeric value or element "index" if specified or non numeric . eg. for shuffling a playlist
+
+aresult() returns separation achieved on last antisort. Signless but returns negative if only direct neighbours could be separated.
+
+bulk(in_array|new_array_len [,func=f48][,func param][,func param][,func param]) returns the input or a new array filled with func,params
