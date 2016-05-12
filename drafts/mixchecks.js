@@ -74,7 +74,7 @@ var sq=1
 //~ var t=h.antisort(bs,0,4)
 console.log("antisorting:")
 
-for(i=0;i<300000;i++)
+for(i=0;i<3;i++)
 { var tt=h.aindex(true,1000) 
 	if(!(h.aresult()>0)) pr(h.aresult())
 }

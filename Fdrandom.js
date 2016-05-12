@@ -336,13 +336,11 @@ var newFdrPot = function(){ return (function(sd){
       usep=true, sep=bsep=kd/(nd*10), csep=sep*0.5
     }
     if(ne<10) usep=false
-    //console.log("#sep",sep)
     if(!lim){ lim=(ne+500000)*0.001 }
     var ti=lim*8000, te=ti*0.3 
     
     var t=0, j=0, jr=0, jm=0, c=irange(1,ne-1), ch=ne+3, jm=0, lw=false
     
-    var swps=0,sticks=0,lp=0 
     while( ch>0 && ti>0 ) { 
       
       var ib=(c=c<0?c+ne:c)%ne, ic=ib+1, id=ib+2, ie=ib+3
@@ -362,14 +360,12 @@ var newFdrPot = function(){ return (function(sd){
           ){ 
             stick=0, t=Ax[ic], Ax[ic]=Ax[j], Ax[j]=t            
             if(jm-ic+2>ch){ ch=jm-ic+2 }
-            swps++
           }
           jm++;
         }        
         var f=(jm-jr+nc)*0.5; ti-=f
-        if(stick){ sticks++, t=Ax[ib], Ax[ib]=Ax[ic], Ax[ic]=t }
+        if(stick){ t=Ax[ib], Ax[ib]=Ax[ic], Ax[ic]=t }
         if(usep) { bsep*= (66-((f-2)/nc))*0.0151466 } 
-        //~ if(usep) { bsep*= (10-((f)/nc))*0.10019 } 
         
       }else{ 
         if( ti>te && Math.abs(Av[Ax[ic]]-Av[Ax[ie]]+sq)<csep )  
@@ -388,9 +384,8 @@ var newFdrPot = function(){ return (function(sd){
           ti-=(jm-jr+nc)*0.5
         }
       }
-      c=c+d, ch=ch-d, ti-- ,lp++ 
+      c=c+d, ch=ch-d, ti-- 
     }
-    //console.log("lp",lp,"c",c,"ch",ch,"ti",ti,"sw",swps,"st",sticks,"usep",usep,"sep",sep,"bsep",bsep,"sq",sq)
     if(usep){ ar=(ti>te)?bsep*0.81:(ti<1)?0:-bsep*0.8 }
     else{ ar=(ti>te)?sep:(ti<1)?0:-sep }
     
