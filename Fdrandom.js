@@ -7,7 +7,7 @@
 var newFdrPot = function(){ return (function(sd){
   'use strict'
   
-  var va,vl,vs,qr,us,rb,ju,U,sv,i
+  var va,vl,vs,qr,us,rb,ju,U,sv,i,ar
   plant(sd) 
   
   sv=getstate()
@@ -66,7 +66,7 @@ var newFdrPot = function(){ return (function(sd){
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v1.3.0" }
+  function version() { return "v2.0.0" }
 
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
@@ -178,9 +178,9 @@ var newFdrPot = function(){ return (function(sd){
     a= (a===undefined)?0.5:a; b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     
     if(a>0.5){
-      if (f48()>(a-0.5)*2) return f48()*2-1
+      if (f48()>a*2-1) return f48()*(d-b) +b
     }else{
-      if (f48()<(a)*2) return f48()*2-1
+      if (f48()<a*2) return f48()*(d-b) +b
     }
     var c=(f48()*1.333+f48()+f48()*0.66666)*0.3333333-0.5
     c= (a>0.5)?c:((c>0)?0.5-c:-0.5-c)
@@ -196,8 +196,11 @@ var newFdrPot = function(){ return (function(sd){
     return b+ (d-b)* (0.5+ 0.333333* (0.5+f48()-f48()*2)) 
   }
 
-  function gskip(c) ///simple low discrepancy 
-  { qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48(); return qr-= qr>>>0; }
+  function gskip(c,b,d)  
+  { qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48() 
+	  d= (d===undefined)?1:d
+	  return (b||0)+(d-(b||0))*(qr-= qr>>>0) 
+	}
   
   var psig,csig
   function usum(n,sig,mu) { 
@@ -272,24 +275,23 @@ var newFdrPot = function(){ return (function(sd){
     if(typeof Ai ==='string'){ Ai=Ai.split(""); joinr=1 }
     
     if(typeof Ao !=='string' && typeof Ao !=='object' ) 
-    {  e=c; c=Ao; Ao=Ai }
-    
-    c= c||0
-    e= e||Ai.length-1 ; e++
-    
-    if(typeof Ao ==='string'){
-      So=Ao; joinr=1
-      Ao=new Array(e-c); e-=c
-      for( i=0;i<e;i++ ) Ao[i]= Ai[i+c]
-      c=0; 
-    }else{ //Ao is given array
-      joinr=null
-      ob=Ao.length
+    { e=1+(c||(Ai.length-1)) ; c=Ao||0; Ao=Ai }
+    else
+    { c= c||0 ; e= 1+(e||(Ai.length-1))
+      if(typeof Ao ==='string'){
+        So=Ao; joinr=1
+        Ao=new Array(e-c); e-=c
+        for( i=0;i<e;i++ ) Ao[i]= Ai[i+c]
+        c=0; 
+      }else{ //Ao is given array
+        joinr=null
+        ob=Ao.length
 
-      if(ob===0) Ao=new Array(e-c)
-      var jc=c-ob
-      for( i=ob; i<ob+e-c; i++) Ao[i]= Ai[jc+i]
-      c=ob; e=Ao.length;
+        if(ob===0) Ao=new Array(e-c)
+        var jc=c-ob
+        for( i=ob; i<ob+e-c; i++) Ao[i]= Ai[jc+i]
+        c=ob; e=Ao.length
+      }
     }
 
     var d,p,ep=e-1
@@ -300,10 +302,131 @@ var newFdrPot = function(){ return (function(sd){
   
     return joinr? Ao=So+Ao.join("") : Ao
   }
+      
+  function aindex(mx,Ai,sq,sep,lim){
+    var Av,i
+    if( typeof mx !=='boolean'){ lim=sep,sep=sq,sq=Ai,Ai=mx, mx=true }
+    if( typeof Ai !=='object' || !isFinite(Ai[0])
+     ||(typeof sep ==='string' && sep!=="auto")){ 
+	    Av= new Array((Ai>0)?Ai:Ai.length)
+	    if( typeof sq ==='undefined') sq=1
+	    sep=(sep==="")?undefined:sep
+		  for( i=0;i<Av.length;i++ ) Av[i]=i
+	  }else{ Av=Ai,sq=sq||0 }
     
+    var ne=Av.length, nc=ne>50?50:ne-1, nd=ne>350?350:ne-1
+
+    var Ax= new Array(ne); for(var i=0;i<ne;i++) Ax[i]=i
+        
+    if(ne<1) return Ax
+    if(mx) mixup(Ax)
+    if(ne==2){ 
+      if ((sq<0)^(Av[Ax[1]]>Av[Ax[0]]))
+      { return [Ax[1],Ax[0]] }else{ return Ax } 
+    }
+         
+    var usep=false, bsep=(sep===0)?"zero":sep, csep=sep*0.5
+    if( typeof sep ==='undefined' || sep==="auto" ){      
+      var kd=0, np=(ne*0.33)|0, nq=1+(ne*0.66)|0 
+      for( i=0;i<nd;i++){
+        kd+=Math.abs(Av[i]-Av[(np+i)%ne])
+           +Math.abs(Av[(np+i)%ne]-Av[(nq+i)%ne])
+           +Math.abs(Av[(ne+nq-i)%ne]-Av[(ne-i)%ne]) 
+      }          
+      usep=true, sep=bsep=kd/(nd*10), csep=sep*0.5
+    }
+    if(ne<10) usep=false
+    if(!lim){ lim=(ne+500000)*0.001 }
+    var ti=lim*8000, te=ti*0.3 
+    
+    var t=0, j=0, jr=0, jm=0, c=irange(1,ne-1), ch=ne+3, jm=0, lw=false
+    
+    while( ch>0 && ti>0 ) { 
+      
+      var ib=(c=c<0?c+ne:c)%ne, ic=ib+1, id=ib+2, ie=ib+3
+      if(ie>=ne){ ie=ie-ne,id=id%ne,ic=ic%ne }
+      
+      var stick=0 ,d=1      
+      
+      if(usep){ sep=bsep*range(0.83333,1.2),csep=sep*0.5 }
+
+      if(Math.abs(Av[Ax[ic]]-Av[Ax[id]]+sq)<sep){ 
+        jm=irange(2,nd)+ic, jr=jm+nc, stick=1, d=-2, lw=ti<te
+        while ( stick && jm<jr ){ 
+          j=jm%ne         
+          if( Math.abs(Av[Ax[id]]-Av[Ax[j]]+sq)>=sep 
+           && Math.abs(Av[Ax[(j+1)%ne]]-Av[Ax[ic]]+sq)>=sep
+           && (lw || Math.abs(Av[Ax[ie]]-Av[Ax[j]]+sq)>=csep) 
+          ){ 
+            stick=0, t=Ax[ic], Ax[ic]=Ax[j], Ax[j]=t            
+            if(jm-ic+2>ch){ ch=jm-ic+2 }
+          }
+          jm++;
+        }        
+        var f=(jm-jr+nc)*0.5; ti-=f
+        if(stick){ t=Ax[ib], Ax[ib]=Ax[ic], Ax[ic]=t }
+        if(usep) { bsep*= (66-((f-2)/nc))*0.0151466 } 
+        
+      }else{ 
+        if( ti>te && Math.abs(Av[Ax[ic]]-Av[Ax[ie]]+sq)<csep )  
+        { stick=1, jm=irange(2,nd)+ic, jr=jm+nc     
+          while ( stick && jm<jr ){ 
+            j=jm%ne
+            if(Math.abs(Av[Ax[id]]-Av[Ax[j]]+sq)>=sep
+             &&Math.abs(Av[Ax[(j+1)%ne]]-Av[Ax[ie]]+sq)>=sep
+             &&Math.abs(Av[Ax[ic]]-Av[Ax[j]]+sq)>=csep)
+            { 
+              stick=0,t=Ax[ie], Ax[ie]=Ax[j], Ax[j]=t
+              if(jm-ic+2>ch){ ch=jm-ic+2 }
+            }
+            jm++
+          }
+          ti-=(jm-jr+nc)*0.5
+        }
+      }
+      c=c+d, ch=ch-d, ti-- 
+    }
+    if(usep){ ar=(ti>te)?bsep*0.81:(ti<1)?0:-bsep*0.8 }
+    else{ ar=(ti>te)?sep:(ti<1)?0:-sep }
+    
+    return Ax
+  }
+  
+  function aresult(A,sq){ 
+    if(!A) { return ar }
+	  var c,df=Infinity; sq=sq||0
+    for(var i=0;i<A.length;i++){
+      c=Math.abs(A[i]-(A[(i+1)%A.length]-sq)); if(c<df) df=c 
+	  }
+	  return (ar>0)?df:-df    
+  }
+
+  function antisort(mx,Ai,A,sq,sep,lim){
+    if( typeof mx !=='boolean'){ lim=sep,sep=sq,sq=A,A=Ai,Ai=mx,mx=true }
+    var c=0, e=Ai.length, Ao=[], K
+    if( typeof A !=='object' )
+    { lim=sep, sep=sq, sq=A, Ao= new Array(e) }
+    else{ Ao=A, c=A.length }
+    
+    if( typeof sep ==='string' && sep!=="auto" )
+    { K=aindex(mx,Ai.length,sq,sep,lim) }
+    else{ K=aindex(mx,Ai,sq,sep,lim) }
+    //pr(K)
+    for(var i=0;i<e;i++) Ao[c+i]=Ai[K[i]]
+    if( typeof A !=='object' ){ for(var i=0;i<e;i++) Ai[i]=Ao[c+i] }
+    return Ao
+  }
+	  
+  function bulk(A,f,b,c,d){
+    if( typeof A !=='object' ){ A=new Array( isFinite(A)?A:1 )  }
+    var i=0,n=A.length; f=f||f48 
+    while( i<n ) A[i++]=f(b,c,d);
+    return A
+  }
+  
   return{
      pot: pot   ,hot: hot  ,repot: repot  ,reset: repot
-    ,getstate: getstate    ,setstate:  setstate
+    ,getstate: getstate    ,setstate:   setstate
     ,version: version      ,checkfloat: checkfloat 
     
     ,next: f48  ,f48: f48  ,dbl: dbl
@@ -313,10 +436,11 @@ var newFdrPot = function(){ return (function(sd){
     ,rbit: rbit ,rndbit:rbit  ,rpole: rpole  ,rndsign:rpole
     ,range: range  ,irange: irange ,lrange:lrange
     
-    ,gaus: gaus    ,gausx: gausx   ,usum: usum 
+    ,gaus: gaus    ,gausx: gausx   ,usum: usum
     
-    ,mixup: mixup  ,mixof: mixof
-    ,ilcg: ilcg    ,ishr2: ishr2   ,ishp: ishp
+    ,mixup: mixup  ,mixof: mixof    ,bulk:bulk
+    ,aindex:aindex ,aresult:aresult ,antisort:antisort 
+    ,ilcg: ilcg   ,ishr2: ishr2    ,ishp:  ishp
     
     ,uigless: uigless  ,uigmore: uigmore 
     ,igbrist: igbrist  ,igmmode: igmmode 
@@ -325,7 +449,7 @@ var newFdrPot = function(){ return (function(sd){
     ,fgthorn: gthorn  ,fgskip:   gskip    ,fgteat:gteat
     
     ,gbowl: gbowl     ,gspire: gspire  ,gthorn: gthorn 
-    ,gwedge: gwedge   ,gnorm: gnorm    
+    ,gwedge: gwedge   ,gnorm: gnorm 
     ,gteat: gteat     ,gtrapez: gtrapez 
     ,gskip: gskip
   }
