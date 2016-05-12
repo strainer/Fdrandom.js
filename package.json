@@ -19,7 +19,8 @@
     "normal",
     "game",
     "random",
-    "shuffle"
+    "shuffle",
+    "antisort"
   ],
   "author": "Andrew Strain <AndrewInput@gmail.com> (https://github.com/strainer/)",
   "license": "PDDL-1.0",
