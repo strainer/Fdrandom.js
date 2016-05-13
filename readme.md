@@ -254,8 +254,8 @@ Antisorting
 
 `aHardShuffleIndex = p.aindex(orderedListLength)`
 
-As much as sorting involves moving most similar items together into a simple 
-incremental pattern; "antisorting" could be moving items out of a simple pattern 
+As much as sorting entails moving most similar items together into a simple 
+incremental pattern; "antisorting" can be moving items out of a simple pattern 
 and ensuring the most similar members are not placed close to each other.
 
 An obvious use for this is media playlist shuffling.
@@ -263,36 +263,36 @@ It might also be used to tweak the sampling of ordered data when using a small
 window/sample size.
  
 Functions `antisort` and `aindex` are designed for this: 
- `antisort` hard-shuffles arrays out of order. 
- `aindex` returns an 'antisorted index' for accessing arrays out of order.
+* `antisort(inarray, ..opts)` hard-shuffles arrays out of order. 
+* `aindex(array or len, ..opts)` returns an 'antisorted index' for accessing arrays out of order.
 
-They can work on the indices of elements (which assumes they are already sorted)
-or on the elements numeric values (such as song number, song quality, age, size)
+They can work on the indices of elements; which works on any array of the specified length which is already ordered, or on the elements numeric values such as song number, song quality, age, size; which works on those values particular distribution. 
 The array will be quite randomly shuffled and items of similar value (or position)
 will not be placed next to each other.
 
 The minimum distance ensured between consecutive values is generated automatically and works out as approximately 9% of the total range. Also, half the 'immediate-neighbour' distance is ensured between '2-doors-away' neighbours. 
-So for an antisort of a simple list 0 to 100, the min separation between consecutive elements would be 9 or 10 ,and between 2-away elements will be 4 or 5.
+So for an antisort of a simple list 0 to 100, the min separation between consecutive elements would be 9 or 10 ,and separation between '2-away' elements will be 4 or 5.
 
 The functions can try to antisort any array of numeric values, but the minimum separation
 drops when the values are less diverse. The algorithm is basically a random shuffle
 followed by fuzzy checking and swapping values until all are clear. It takes a second or two to antisort a few million awkward values and will time out if data is not diverse enough to be separated by its fuzzy process.
 
-`aresult` returns the approximate value of the minimum separation achieved by the 
-previous antisort. If '2-away' separation was abandoned aresult() returns negative value of '1-away'. If no separation was achieved it returns 0.
+`aresult()` returns the approximate value of the minimum separation achieved by the 
+previous antisort. If '2-away' separation was abandoned `aresult()` returns the value of '1-away' separation negated. If no separation was achieved it returns 0.
 
-The intented step of the input can be set eg -10 for `[50,40,30,20,10]` (avoid 30,20 in result). Default is 1 for index antishuffling (1,2,3,4,5 all collide) 
+The intented step increment of the input order can be set eg `-10` for `[50,40,30,20,10]` (eg. to avoid 30,20 in result). Default is +1 for index antishuffling (eg. 1,2,3,4,5 all collide) 
 
 The target separation can be forced:
+```
+  q=p.antisort(array,step,sepTarget)
+  q=p.aindex(songsSortedByNumberByAlbum,1,albumLength*2)
+```
+Setting over 10% separation risks failure and timeout. If sepTarget is an empty string `""` numeric values are ignored and the array is simply antisorted by its positions.
 
-`q=p.antisort(array,step,septarget)`
-`q=p.aindex(songsSortedByNumberByAlbum,1,albumLength*2)`
-
-Setting over 10% separation risks failure and timeout. If septarget is an empty string `""` numeric values are ignored and the array it antisorted by its positions.
-
-These functions parameters are specified in the plain text Fdrandom.api. Charts of its typical distribution are included at the bottom of the [test charts](http://strainer.github.io/Fdrandom.js/) page. 
+More functions parameters are specified in the plain text Fdrandom.api. Charts of its typical distribution are included right at the bottom of the [test charts page](http://strainer.github.io/Fdrandom.js/). 
 
 Version History
 ---------------
-1.9.0 - Added antisorting
-1.4.1 - Revised seeding
+* 2.0.1 - Augmented aresult()
+* 2.0.0 - Added antisorting
+* 1.4.1 - Revised seeding

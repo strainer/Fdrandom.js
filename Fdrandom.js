@@ -66,7 +66,7 @@ var newFdrPot = function(){ return (function(sd){
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.0.0" }
+  function version() { return "v2.0.1" }
 
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
@@ -392,11 +392,16 @@ var newFdrPot = function(){ return (function(sd){
     return Ax
   }
   
-  function aresult(A,sq){ 
+  function aresult(A,Av,sq){ 
     if(!A) { return ar }
-	  var c,df=Infinity; sq=sq||0
-    for(var i=0;i<A.length;i++){
-      c=Math.abs(A[i]-(A[(i+1)%A.length]-sq)); if(c<df) df=c 
+    var c, n=A.length, df=Infinity
+    if( typeof Av !=='object' ){
+      sq=Av||0
+      for(i=0;i<n;i++)
+      { c=Math.abs(A[i]-(A[(i+1)%n]-sq)); if(c<df)df=c }
+    }else{
+	    for(i=0;i<n;i++)
+	    { c=Math.abs(Av[A[i]]-(Av[A[(i+1)%n]]-sq||0)); if(c<df)df=c }
 	  }
 	  return (ar>0)?df:-df    
   }
@@ -412,8 +417,8 @@ var newFdrPot = function(){ return (function(sd){
     { K=aindex(mx,Ai.length,sq,sep,lim) }
     else{ K=aindex(mx,Ai,sq,sep,lim) }
     //pr(K)
-    for(var i=0;i<e;i++) Ao[c+i]=Ai[K[i]]
-    if( typeof A !=='object' ){ for(var i=0;i<e;i++) Ai[i]=Ao[c+i] }
+    for(i=0;i<e;i++) Ao[c+i]=Ai[K[i]]
+    if( typeof A !=='object' ){ for(i=0;i<e;i++) Ai[i]=Ao[c+i] }
     return Ao
   }
 	  
