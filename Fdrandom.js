@@ -66,7 +66,7 @@ var newFdrPot = function(){ return (function(sd){
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.0.0" }
+  function version() { return "v2.0.2" }
 
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
@@ -303,14 +303,15 @@ var newFdrPot = function(){ return (function(sd){
     return joinr? Ao=So+Ao.join("") : Ao
   }
       
-  function aindex(mx,Ai,sq,sep,lim){
+  function aindex(mx,Ai,sq,sep,lim,x){
     var Av,i
-    if( typeof mx !=='boolean'){ lim=sep,sep=sq,sq=Ai,Ai=mx, mx=true }
+    if( typeof mx !=='boolean')
+    { x=lim,lim=sep,sep=sq,sq=Ai,Ai=mx,mx=true }
     if( typeof Ai !=='object' || !isFinite(Ai[0])
-     ||(typeof sep ==='string' && sep!=="auto")){ 
+     ||(typeof sep ==='string' && sep==="pos")){ 
 	    Av= new Array((Ai>0)?Ai:Ai.length)
 	    if( typeof sq ==='undefined') sq=1
-	    sep=(sep==="")?undefined:sep
+	    if(sep ==="pos"){ sep=lim,lim=x }
 		  for( i=0;i<Av.length;i++ ) Av[i]=i
 	  }else{ Av=Ai,sq=sq||0 }
     
@@ -386,34 +387,38 @@ var newFdrPot = function(){ return (function(sd){
       }
       c=c+d, ch=ch-d, ti-- 
     }
+    
     if(usep){ ar=(ti>te)?bsep*0.81:(ti<1)?0:-bsep*0.8 }
-    else{ ar=(ti>te)?sep:(ti<1)?0:-sep }
+    else{ ar=(ti>te)?bsep:(ti<1)?0:-bsep }
     
     return Ax
   }
   
-  function aresult(A,sq){ 
+  function aresult(A,Av,sq){ 
     if(!A) { return ar }
-	  var c,df=Infinity; sq=sq||0
-    for(var i=0;i<A.length;i++){
-      c=Math.abs(A[i]-(A[(i+1)%A.length]-sq)); if(c<df) df=c 
+    var c, n=A.length, df=Infinity
+    if( typeof Av !=='object' ){
+      for(i=0;i<n;i++)
+      { c=Math.abs(A[i]-A[(i+1)%n]+(Av||0)); if(c<df)df=c }
+    }else{
+	    for(i=0;i<n;i++)
+	    { c=Math.abs(Av[A[i]]-Av[A[(i+1)%n]]+(sq||0)); if(c<df)df=c }
 	  }
-	  return (ar>0)?df:-df    
+	  return (ar>0||ar==="zero")?df:-df    
   }
 
-  function antisort(mx,Ai,A,sq,sep,lim){
-    if( typeof mx !=='boolean'){ lim=sep,sep=sq,sq=A,A=Ai,Ai=mx,mx=true }
+  function antisort(mx,Ai,A,sq,sep,lim,x){
+    if( typeof mx !=='boolean')
+    { x=lim,lim=sep,sep=sq,sq=A,A=Ai,Ai=mx,mx=true }
     var c=0, e=Ai.length, Ao=[], K
     if( typeof A !=='object' )
-    { lim=sep, sep=sq, sq=A, Ao= new Array(e) }
+    { x=lim,lim=sep,sep=sq,sq=A,Ao= new Array(e) }
     else{ Ao=A, c=A.length }
     
-    if( typeof sep ==='string' && sep!=="auto" )
-    { K=aindex(mx,Ai.length,sq,sep,lim) }
-    else{ K=aindex(mx,Ai,sq,sep,lim) }
-    //pr(K)
-    for(var i=0;i<e;i++) Ao[c+i]=Ai[K[i]]
-    if( typeof A !=='object' ){ for(var i=0;i<e;i++) Ai[i]=Ao[c+i] }
+    K=aindex(mx,Ai,sq,sep,lim,x)
+   
+    for(i=0;i<e;i++) Ao[c+i]=Ai[K[i]]
+    if( typeof A !=='object' ){ for(i=0;i<e;i++) Ai[i]=Ao[c+i] }
     return Ao
   }
 	  
