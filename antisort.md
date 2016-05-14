@@ -24,8 +24,10 @@ The functions can try to antisort *any* array of numeric values, but the minimum
 
 It takes a second or two to antisort a few million awkward values and will time-out if data is not diverse enough to be separated by its fuzzy process.
 
-`antisort([1,1,1,1,2,2,2,2])` will return `[1,2,1,2,1,2,1,2]` or `[2,1,2,1...]`
-`antisort([1,1,1,2,2,2,2,2])` will timeout trying to fit the extra 2
+```
+antisort([1,1,1,1,2,2,2,2]) //will return [1,2,1,2,1,2,1,2] or [2,1,2,1...]
+antisort([1,1,1,2,2,2,2,2]) //will timeout trying to fit the extra 2
+```
 
 `aresult()` returns the approximate value of the minimum separation achieved by the 
 previous antisort. If '2-away' separation was not achieved `aresult()` returns a negative value of '1-away' separation (negated). If no separation was achieved it returns 0.
