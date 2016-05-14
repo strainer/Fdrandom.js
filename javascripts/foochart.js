@@ -72,20 +72,25 @@ function chartfuncs() {
    [Fd.next,"Fdrandom.next "],
    [Fd.dbl,"Fdrandom.dbl "],
    [Fd.f24,"f24 "],
+  
    [Fd.rbit,"rbit "],
    [Fd.rpole,"rpole "],
+  
    [Fd.usum,"usum 1 ",1],
    [Fd.usum,"usum 2 ",2],
    [Fd.usum,"usum 3 ",3],
    [Fd.usum,"usum 4 ",4],
    [Fd.usum,"usum 5 ",5],
+   
    //~ [Fd.usum,"usum 6 ",6],
    //~ [Fd.usum,"usum 7 ",7],
    //~ [Fd.usum,"usum 8 ",8],
    //~ [Fd.usum,"usum 16 ",16],
    //~ [Fd.usum,"usum 32 ",32],
+  
    [Fd.gaus,"gaus "],
    //~ [Fd.gausx,"gausx "],
+  
    [Fd.ui32,"ui32 "],
    [Fd.i32,"i32 "],
    [Fd.ilcg,"ilcg "],
@@ -127,7 +132,7 @@ function chartfuncs() {
   //~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
   if(runstep==38){ 
     antip=Fd.aindex(1000000)
-    rough=Fd.mixof(Fd.bulk( 50,function(){return Fd.irange(0,1000)} ),1000000)
+    rough=Fd.mixof(Fd.bulk( 500,function(){return Fd.irange(0,1000)} ),1000000)
     antiq=Fd.antisort(rough,[])
   }
   
@@ -384,7 +389,7 @@ function twodim_dist_canv(func,d)
   fnstats.minval=minval,fnstats.maxval=maxval
   ,fnstats.tval=tval,fnstats.fb=fb
   
-  var dist=maxval-minval
+  var dist=(maxval-minval)
   var mid=dist/2
   var widefac=svgz/dist
   var highfac=svgz/dist
@@ -410,13 +415,14 @@ function twodim_dist_canv(func,d)
              "#052","#7a0033","#052","#7a0033","#052","#7a0033","#052", ]
   var colcn=0;
   
-  for(i=0;i<distel;i++){ dst[i]=0; }
+  for(i=0;i<distel+1;i++){ dst[i]=0; }
   
   for (i = 0; i < vgsc*6; i++) {
     var xx=(func(d)-minval)
-    dst[((xx)/dist*(distel))>>>0]++
+    dst[((xx)/(dist)*(distel-1.1))>>>0]++
+    
     var yy=(func(d)-minval)
-    dst[((yy)/dist*(distel))>>>0]++
+    dst[((yy)/(dist)*(distel-1.1))>>>0]++
     tcnt+=2;
 
     colcn=(colcn==13)?0:colcn+1
@@ -426,10 +432,11 @@ function twodim_dist_canv(func,d)
     
   }  
 
+  //~ console.log(dst)
   for (i = 0; i < vgsc*31; i++)
   {
     var yy=(func(d)-minval)
-    dst[((yy)/dist*(distel))>>>0]++
+    dst[((yy)/dist*(distel-1.1))>>>0]++
     tcnt++;
   }
 
@@ -441,8 +448,8 @@ function twodim_dist_canv(func,d)
   
   for (i = 0; i < distel; i++) {
     
-    xx= i*0.99
-    yy= svgz- (dst[i]/gm)*svgz
+    xx= i*((svgz-2)/svgz)
+    yy= svgz-dtsz*0.5-(dst[i]/gm)*(svgz-dtsz*0.5)
     
     ctx.fillStyle = "#006"
     ctx.fillRect(xx,yy,ddtsz,ddtsz)
