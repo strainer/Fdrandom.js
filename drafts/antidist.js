@@ -19,7 +19,7 @@ for(wlen=1; wlen<10000; wlen=wlen+1+(wlen/5)|0+((wlen*Math.sqrt(wlen+40)/40)|0))
   for(j=0;j<jn;j++){
   
     sum=0
-    dat=h.mixof(h.bulk( 150,function(){return h.range(0,1000)} ),dlen)
+    dat=h.mixof(h.bulk( 150,h.range,0,1000 ),dlen)
     dat.sort(function(a, b){return a-b})
     det=h.mixup(dat,[])
     
