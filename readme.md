@@ -144,12 +144,12 @@ random number streams. Any difference in seeds should result in completely
 unrelatable streams.
 
 Seeding digests all elements of any array or object up 1000 deep 
-and strings up to 100,000 char so might be used with repot() to
-effectively hash objects.
+and strings up to 100,000 char. It could be used with repot() to
+effectively hash objects but is somewhat slow for that.
 
 'Pot'ing is a relatively slow operation (about 50,000 op/s) as
 the Fdrandom object gets cloned for each pot. 'Repot'ing with
-a new seed is much faster. 'repot' without seed resets to
+a new seed is much faster. 'repot' without a seed resets to
 first potted state and is very fast. 
 
 Precision/Types
@@ -187,16 +187,16 @@ oneToTenFloat = p.range(1,10)  //end is not (quite) inclusive
 oneToTenInteger=p.irange(1,10) //end is inclusive
 
 minusOneToOne_FlatDist =p.lrange(0.5) //loaded range. 
-minusOneToOne_EndBias =p.lrange(0.4) //First param sets a loading factor
+minusOneToOne_EndBias =p.lrange(0.4)  //First param sets a loading factor
 twoToFive_MidBias = p.lrange(0.6,2,5) //0= High ends, 0.5=Flat, 1=High Mid
 
 random0or1 = p.rbit()  //random bit
 
 gaussianNormal = p.gaus()
 gaussianMath = p.gaus(sigma,mu) //sigma is ~scale, mu is offset
-uniformSum = p.usum(n)   //add n*( -0.5 > 0.5 ) randoms
+uniformSum = p.usum(n)          //add n*( -0.5 > 0.5 ) randoms
 uniformSum = p.usum(n,sigma,mu) //to scale and shift with sigma and mu
-gausGame = p.usum(4,1)    //a quick rough approximation of gaussian
+gausGame = p.usum(4,1)          //a quick rough approximation of gaussian
 
 normGame = gnorm()      //approx gaussian shape range -1 to 1
 normGame = gnorm(2,4.5) //same shape range 2 to 4.5
@@ -239,13 +239,11 @@ UUIDv4 = h.mixof(instr,8) +
    "-" + h.mixof(instr,h.mixof("89ab",1),3) +
    "-" + h.mixof(instr,12); 
 
-mediaShuffleIndex=p.aindex(medialist) //an antisorting index length of input
-mediaList=p.antisort(medialist,[])    //medialist shuffled by its antisort
-hardShuffleIndex =p.aindex(100)  //100 long antisorting index for small window sampling
+mediaShuffleIndex= p.aindex(medialist)  //an antisorting index same length as input
+mediaListCopy= p.antisort(medialist,[]) //a medialist shuffled by its antisort
+hardShuffleIndex= p.aindex(100)  //100 long a-s index for small window sampling
 
-//bulk(in_array|length[,function=f48][,param1][,param2][,param3]) returns array of func(,,)
 arrayOfFunc= p.bulk(100 ,p.irange ,1 ,6) //array of 100 dicerolls
-
 ...  
 ```
 
@@ -254,7 +252,7 @@ Antisorting
 
 `aHardShuffleIndex = p.aindex(orderedListLength)`
 
-As much as sorting entails moving most similar items together into a simple 
+In as much as sorting entails moving most similar items together into a simple 
 incremental pattern; "antisorting" can be moving items out of a simple pattern 
 and ensuring the most similar members are not placed close to each other.
 
@@ -266,33 +264,11 @@ Functions `antisort` and `aindex` are designed for this:
 * `antisort(inarray, ..opts)` hard-shuffles arrays out of order. 
 * `aindex(array or len, ..opts)` returns an 'antisorted index' for accessing arrays out of order.
 
-They can work on the indices of elements; which works on any array of the specified length which is already ordered, or on the elements numeric values such as song number, song quality, age, size; which works on those values particular distribution. 
-The array will be quite randomly shuffled and items of similar value (or position)
-will not be placed next to each other.
-
-The minimum distance ensured between consecutive values is generated automatically and works out as approximately 9% of the total range. Also, half the 'immediate-neighbour' distance is ensured between '2-doors-away' neighbours. 
-So for an antisort of a simple list 0 to 100, the min separation between consecutive elements would be 9 or 10 ,and separation between '2-away' elements will be 4 or 5.
-
-The functions can try to antisort any array of numeric values, but the minimum separation
-drops when the values are less diverse. The algorithm is basically a random shuffle
-followed by fuzzy checking and swapping values until all are clear. It takes a second or two to antisort a few million awkward values and will time out if data is not diverse enough to be separated by its fuzzy process.
-
-`aresult()` returns the approximate value of the minimum separation achieved by the 
-previous antisort. If '2-away' separation was abandoned `aresult()` returns the value of '1-away' separation negated. If no separation was achieved it returns 0.
-
-The intented step increment of the input order can be set eg `-10` for `[50,40,30,20,10]` (eg. to avoid 30,20 in result). Default is +1 for index antishuffling (eg. 1,2,3,4,5 all collide) 
-
-The target separation can be forced:
-```
-  q=p.antisort(array,step,sepTarget)
-  q=p.aindex(songsSortedByNumberByAlbum,1,albumLength*2)
-```
-Setting over 10% separation risks failure and timeout. If sepTarget is an empty string `""` numeric values are ignored and the array is simply antisorted by its positions.
-
-More functions parameters are specified in the plain text Fdrandom.api. Charts of its typical distribution are included right at the bottom of the [test charts page](http://strainer.github.io/Fdrandom.js/). 
+File `antisort.md` contains more notes on antisorting. 
 
 Version History
 ---------------
-* 2.0.1 - Augmented aresult()
-* 2.0.0 - Added antisorting
-* 1.4.1 - Revised seeding
+* 2.0.2 - improved aindex parameters
+* 2.0.1 - augmented aresult()
+* 2.0.0 - added antisorting
+* 1.4.1 - revised seeding

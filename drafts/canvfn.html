@@ -3,7 +3,7 @@
 <!-- <input type="button" onclick="run()" value="run()">   -->
 <!-- <input type="button" onclick="stop()" value="stop()"> -->
 <head>
-<script src='../Fdrandom.min.js'></script>
+<script src='../Fdrandom.js'></script>
 <style type="text/css">
   body{ background-color: #dddddd; color:#111111; }
   td { padding:0 0.1em; }
@@ -50,8 +50,15 @@ var rcount=0
 var returnAVal= function(A)
 { rcount=rcount==999999?0:rcount+1; return A[rcount] }
 
+var returnBVal= function(A)
+{ var k=rcount*2; if(k>999999) k-=999999 
+	rcount=rcount==999999?0:rcount+1;
+	return A[k]
+}
+
 var returnADelt= function(A)
 { return A[rcount]-A[rcount=rcount==999999?0:rcount+1] }
+
 
 var fnstats={}
 var firstrun=1
@@ -84,7 +91,7 @@ function gogo(){
 	bdtsz=5*svgz/256
   
   antip=Fd.aindex(1000000)
-  rough=Fd.mixof(Fd.bulk( 15,function(){return Fd.irange(0,1000)} ),1000000)
+  rough=Fd.mixof(Fd.bulk( 1000,function(){return Fd.irange(0,10000)} ),1000000)
   antiq=Fd.antisort(rough,[])
   
   var de = document.getElementById("log"); 
@@ -153,11 +160,12 @@ function chartfuncs() {
 	// [Fd.lrange,"lrange 0.10",0.10],
 	// [Fd.lrange,"lrange 0",0],
    [returnAVal,"flat aindex",antip],
-	 [returnADelt,"flat aindex delta ",antip],	 
-   [returnAVal,"rough source",rough],
-   [returnADelt,"rough delta",rough],
-   [returnAVal,"rough anitsorted",antiq],
-	 [returnADelt,"a-rough delta ",antiq],	 
+   [returnBVal,"fl-aindx 2n",antip],
+	 [returnADelt,"fl-aindx delta ",antip],	 
+   [returnAVal,"rough rnd",rough],
+   [returnAVal,"rg antisorted",antiq],
+   [returnBVal,"rg a-sorted 2n",antiq],
+	 [returnADelt,"rg a-sorted delta ",antiq],	 
 	]
  			
 	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]

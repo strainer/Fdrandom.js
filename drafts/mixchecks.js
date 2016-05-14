@@ -1,17 +1,78 @@
 require ('../dlib/mutil.js')
 //~ Fdrandom=require ('../Fdrandom.min.js')
-Fdrandom=require ('../Fdrandom.js')
+Fdrandom=require ('../Fdrandom.min.js')
 //~ Fdrandom=require ('./autoproto.js')
 require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
 
 h=Fdrandom.hot()
 
-p=Fdrandom.pot()
+Fd=p=Fdrandom.pot()
 pp=Fdrandom.pot()
 po=Fdrandom.pot()
 q=Fdrandom.pot()
 r=Fdrandom.pot()
+
+/////////////////////////////////
+/*
+function avsamp(A,s)
+{ sm=0; n=A.length; w=p.irange(0,n-s)
+	for(i=0;i<s;i++) sm+=A[w+i]
+	return sm/s
+}
+
+
+console.log("Mean error sampling (of mean)")
+console.log("win-len    rnd-inx    rnd-inx     a-inx     ae/re")
+
+dlen=10000,jn=30
+for(wlen=1; wlen<100; wlen=wlen+1+(wlen/7)|0+(wlen/10)|0)
+{
+  raw=0,aso=0,mix=0
+  for(j=0;j<jn;j++){
+  
+    sum=0
+    //dat=h.mixof(p.bulk( 15,function(){return h.range(0,1000)} ),dlen)
+    dat=h.bulk( dlen,function(){return h.range(0,1000)} )
+    for(var i=0;i<dlen;i++)
+    { sum+=dat[i] }
+    ave=sum/dlen
+    
+    dsum=0
+    for(x=0;x<500;x++)
+    { dsum+=Math.abs(avsamp(dat,wlen)-ave)/ave }
+    raw+=dsum/500
+
+    h.mixup(dat)
+
+    dsum=0
+    for(x=0;x<500;x++)
+    { dsum+=Math.abs(avsamp(dat,wlen)-ave)/ave }
+    mix+=dsum/500
+    
+    p.antisort(dat,0,"pos")
+    
+    dsum=0
+    for(x=0;x<500;x++)
+    { dsum+=Math.abs(avsamp(dat,wlen)-ave)/ave }
+    aso+=dsum/500
+  }
+    
+  console.log("  ",wlen,"    ",(raw/jn).toFixed(4),"    ",(mix/jn).toFixed(4)
+             ,"    ",(aso/jn).toFixed(4),"    ",(aso/raw).toFixed(4))
+}
+
+return
+
+*/
+
+/////////////////////////
+
+
+//~ var dat=h.antisort( h.bulk( 100000,function(){return h.irange(0,100)} ) )
+
+
+
 
 //~ if("bob"==="bob") pr("boo")
 
@@ -36,6 +97,21 @@ while(ss--){
 
 //pr(h.antisort(false,["the","be","that","not","to","be","or","is","to","question"],0,3))
 */
+
+rough=Fd.mixof(Fd.bulk( 1000,function(){return Fd.irange(0,10000)} ),1000000)
+antiq=Fd.antisort(rough,[])
+pr(Fd.aresult())
+pr(antiq[0])
+return
+
+var uu=[ 10, 20, 30, 40, 50, 60]
+var tt=h.antisort(false,uu,[],10,"pos",10)
+pr(tt)
+pr(uu)
+pr("res:",h.aresult())
+pr("res:",h.aresult(tt))
+return
+
 
 
 function compA(Aa,Ab,sq){
@@ -97,6 +173,14 @@ pr("res:",h.aresult(tu,1))
 //~ compA(tt,bs)
 //~ compA(tu,tt,sq)
 return
+
+
+//antisort([premix:boolean,] inArray or length [,outArray=inArray][,orderIncrement=auto][,sep="auto"][,bogoMilliSecTimeout=auto]) returns input array shuffled randomly with sequential elements separated by approx 10% numeric range or by 10% source-index-range if sep="" or data is not finite.
+
+//aindex([premix:boolean,] Array [,orderIncrement=auto][,sep="auto"][,bogoMilliSecTimeout=auto]) returns index of array antisorted by numeric value or element "index" if specified or non numeric . eg. for shuffling a playlist
+
+
+
 
 //~ pr(bs[0],bs[1],bs[2],bs[3],bs[4],bs[5],bs[6],bs[7],bs[8],bs[9])
 pr(tt[0],tt[1],tt[2],tt[3],tt[4],tt[5],tt[6],tt[7],tt[8],tt[9])

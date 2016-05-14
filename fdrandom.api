@@ -50,9 +50,9 @@ mixof (in [,out=intype][,n=1][,in_start=0][,in_fin=len]) returns new or given ou
 
 mixup(in [,out=in][,inStart=0][,fin=inLen]) shuffles positions of array or string, inplace or adds to end of out array or string. Returns the input or output string|array.
 
-antisort([premix=true,] inArray or length [,outArray=inArray][,orderIncrement=auto][,sep="auto"][,bogoMilliSecTimeout=auto]) returns input array shuffled randomly with sequential elements separated by approx 10% numeric range or by 10% source-index-range if sep="" or data is not finite.
+antisort([premix:boolean,] inArray or length [,outArray=inArray][,orderIncrement=auto][,posmode=off|"pos"][,sep="auto"][,bogoMilliSecTimeout=auto]) returns input array shuffled randomly with sequential elements separated by approx 10% numeric range or by 10% source-index-range if "pos" set or first element is not finite.
 
-aindex([premix=true,] Array [,orderIncrement=auto][,sep="auto"][,bogoMilliSecTimeout=auto]) returns index of array antisorted by numeric value or element "index" if specified or non numeric . eg. for shuffling a playlist
+aindex([premix:boolean,] Array [,orderIncrement=auto][,posmode=off|"pos"][,sep="auto"][,bogoMilliSecTimeout=auto]) returns index of array antisorted by numeric value or element "index" if specified or non numeric. eg. for shuffling a playlist
 
 aresult([indexArray][,valueArray][,orderIncrement]) returns estimated minimum separation achieved on last antisort. Signless but returns negative if only direct neighbours could be separated. If relevant arrays are supplied the definite value is calculated. 
 
