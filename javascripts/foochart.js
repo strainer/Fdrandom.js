@@ -21,8 +21,14 @@ var intervar,Fd,isHot
 
 var antip,antiq,rough,rcount=0
 
+
 var returnAVal= function(A)
 { rcount=rcount==999999?0:rcount+1; return A[rcount] }
+var returnBVal= function(A)
+{ var k=rcount*2; if(k>999999) k-=999999 
+	rcount=rcount==999999?0:rcount+1;
+	return A[k]
+}
 var returnADelt= function(A)
 { return A[rcount]-A[rcount=rcount==999999?0:rcount+1] }
 
@@ -71,8 +77,8 @@ function chartfuncs() {
    [Fd.usum,"usum 1 ",1],
    [Fd.usum,"usum 2 ",2],
    [Fd.usum,"usum 3 ",3],
-   //~ [Fd.usum,"usum 4 ",4],
-   //~ [Fd.usum,"usum 5 ",5],
+   [Fd.usum,"usum 4 ",4],
+   [Fd.usum,"usum 5 ",5],
    //~ [Fd.usum,"usum 6 ",6],
    //~ [Fd.usum,"usum 7 ",7],
    //~ [Fd.usum,"usum 8 ",8],
@@ -109,12 +115,13 @@ function chartfuncs() {
    [Fd.lrange,"lrange 0.25",0.25],
    [Fd.lrange,"lrange 0.10",0.10],
    [Fd.lrange,"lrange 0",0],
-   [returnAVal,"aindex",antip],
-   [returnADelt,"aindex delta ",antip],   
-   [returnAVal,"Rough Source",rough],
-   [returnAVal,"RS antisort",antiq],
-   [returnADelt,"RS-delta",rough],
-   [returnADelt,"RS-dt anti",antiq],
+   [returnAVal,"flat aindex",antip],
+   [returnBVal,"fl-aindx 2n",antip],
+   [returnADelt,"fl-aindx delta ",antip],	 
+   [returnAVal,"rough rnd",rough],
+   [returnAVal,"rg antisorted",antiq],
+   [returnBVal,"rg a-sorted 2n",antiq],
+   [returnADelt,"rg a-sorted delta ",antiq],	 
   ]
        
   //~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
