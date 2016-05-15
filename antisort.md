@@ -1,22 +1,21 @@
 Antisorting
 -----------
 
-In as much as sorting entails moving most similar items together into a simple 
-incremental pattern, "antisorting" describes moving items out of a simple pattern 
-and ensuring the most similar members are not placed close to each other.
+In as much as sorting entails moving most *similar items together* into a simple 
+incremental pattern, "antisorting" might describe the opposite - moving items out of a simple pattern and ensuring the most similar items are *not placed close to each other*.
 
-An obvious use for this is media playlist shuffling where listeners can take
-exception to tracks playing coincidentaly bearby. It might also be used to tweak 
+An obvious use for this is media playlist shuffling where people can take
+exception to tracks playing coincidentally close. It might also be used to tweak 
 the sampling of ordered data when using a small window/sample size.
  
 Functions `antisort` and `aindex` are designed for this: 
 * `antisort(inarray, ..opts)` 'super-shuffles' arrays out of order. 
 * `aindex(array or length, ..opts)` returns an 'antisorted index' for accessing arrays out of order.
  
-The functions can target elements input indices (which works on any ordered array of the same length ), or elements numeric values such as song numbers, song quality ratings, ages or sizes (which works on the particular distribution of those values). The output will be quite randomly shuffled or indexed except items of similar value (or position) will not be located next to each other. The algorithm used is basically a random shuffle followed by fuzzy checking and swapping values until all are clear.
+The functions can re-arrange by elements input indices (which works on any ordered arrays of the same length), or by elements numeric values such as song quality ratings, ages or sizes (which works on the particular distribution of those values). The output will be quite randomly shuffled or indexed **except** items of similar value (or source position) will not be located next to each other. The algorithm used is basically a random shuffle followed by fuzzy checking and swapping values until all are clear.
 
 The minimum distance ensured between consecutive values is generated automatically and works out as approximately 9% of the total range. Half the 'immediate-neighbour' distance is also ensured between '2-doors-away' neighbours. 
-So for an antisort of a simple list running 0 to 100 eg `antiList=pot.aindex(100)`, the auto minimum separation between consecutive elements will be 8 or 9 ,and min separation between '2-away' elements will be 4 or 5.
+So for an antisort of a simple list running 0 to 100 eg `antiList=pot.aindex(100)`, the auto-minimum-separation between consecutive elements will be 8 or 9 ,and min-separation between '2-away' elements will be 4 or 5.
 
 The functions can try to antisort any array of numeric values, the minimum separation drops when the values are less diverse (or smaller).  
 
@@ -39,7 +38,7 @@ h= p.aindex(vals.length)
 exact= p.aresult(h)  //dont pass index array to compute result of inplace antisort. 
 ```
  
-The intented step increment of the input order can be set eg `-10` for `[50,40,30,20,10]` (eg. to avoid 30,20,.. in result). Default is +1 for positional a-sorting (eg. 1,2,3,4,5 all collide) 
+The intended step increment of the input order can be set eg `-10` for `[50,40,30,20,10]` (eg. to avoid 30,20,.. in result). Default is +1 for positional a-sorting (eg. 1,2,3,4,5 all collide) 
 
 The target separation can be forced instead of automatic:
 ```
@@ -50,19 +49,18 @@ Setting over 10% separation risks failure and timeout. If sepTarget is `"pos"` n
 
 Timeout can be set in 'bogoMilliSeconds' eg.
 ` q=p.aindex(numericArray,0,"pos",30,1000)`
-- tries to separate by 30 of the indices of input array for about 1 second on a modest
-cpu.
+- tries to separate inpos by 30 for about 1 second on a modest cpu.
 ` q=p.aindex(numericArray,0,"pos","auto",1000)`
 - same with auto separation.
 
-Functions parameters are specified in the plain text Fdrandom.api.
+Functions parameters are specified in the plain text `Fdrandom.api`
 
 A small test of effect on sampling:
 -----------------------------------
 
 When numeric data is antisorted its distribution over position is somewhat smoothed.
 
-Summarizing: `drafts/antidist.js`
+Summarizing test code: `drafts/antidist.js`
 
 For a small test 10,000 random repetitions of 150 random numbers are generated: 
 ```
@@ -70,8 +68,7 @@ tdata=h.mixof( h.bulk(  150, h.range, 0, 1000 }  ), 10000 )
 //and sorted... 
 tdata.sort( function(a, b){return a-b} )
 ```
-This creates some unevenly distributed test data, its sum and average is calculated.
-Then the average of n randomly choosen samples is calculated, many times, and the error between the random-sampling-average / full-average is calculated. Then `tdata` was antisorted by position and the same small window sample errors are calculated.   
+This creates some unevenly distributed sorted test data, its sum and average is calculated. Then the average of n randomly chosen samples is calculated, many times, and the error between the random-sampling-average / full-average is calculated. Then `tdata` is antisorted by position and the same small window sample errors are calculated.   
 
 Output:
 
@@ -93,18 +90,18 @@ window-len | rand-smp-err | asort-win-err |   aw/rs %
   3967     |    0.0056    |    0.0055     |    97.9
   6813     |    0.0032    |    0.0029     |    88.9 
 
-In this test case mean estimation was up to 30% more accurate when
+In this test case estimation of mean was up to 30% more accurate when
 selecting samples by a-index than by random. Put another way about 25%
 fewer aindex-accessed samples where required to achieve the same
 accuracy as randomly-accessed samples. This relationship held for
 the test case until sample sizes where surprisingly large (over 100)
 
-Besides this statistical interest, a more reliably mixed up shuffle function 
+Besides this statistical curiosity, a more reliably mixed up shuffle function 
 can surely have its uses. I expect it is not in more common use because it seems
 rather fiddly to design and implement.
 
-Charts of the antisort functions typical distribution are included at the bottom of the [test charts page](http://strainer.github.io/Fdrandom.js/), where the 1 and 2-away separation and lack of other basic patterning is confirmed. 
+Charts of the antisort functions typical distribution are included at the bottom of the [test charts page](http://strainer.github.io/Fdrandom.js/), where the results 1 and 2-away separation and lack of other basic patterning is confirmed. 
 
-Apologies and to anyone wishing to port these functions. They grew disgracefuly organic but are tested and quick and I cant bear to untangle them.
+Apologies and to anyone wishing to port these functions. They grew disgracefully organic but are tested and quick and I cant bear to untangle them for a bit.
 
-Public Domain Project - *Andrew Strain 2016*
+Public Domain Project - Andrew Strain 2016

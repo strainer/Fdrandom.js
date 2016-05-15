@@ -13,6 +13,7 @@ po=Fdrandom.pot()
 q=Fdrandom.pot()
 r=Fdrandom.pot()
 
+
 /////////////////////////////////
 /*
 function avsamp(A,s)

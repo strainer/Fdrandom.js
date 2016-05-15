@@ -1,12 +1,12 @@
 {
   "name": "fdrandom",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Fast deterministic random methods. Includes Uniform, Gaussian, gaming distributions, shuffles and antisort",
   "main": "Fdrandom.js",
   "scripts": {
     "test": "require('fdrandom').checkfloat()"
   }, 
-  "tonicExample": "require('fdrandom').hot().antisort(false,['the','be','that','not','to','be','or','is','to','question'],0,3)",
+  "tonicExample": "require('fdrandom').hot().antisort(false,['the','be','that','not','to','be','or','is','to','question'],0,3).join(' ')",
   "repository": {
     "type": "git",
     "url": "git+https://strainer:azsplo0@github.com/strainer/Fdrandom.js.git"

@@ -38,7 +38,7 @@ Method list
 Method	 | Speed % | Notes                         
  :------ | :-----: | :----------------------------
 next     |   100   | Standard randoms with 48bit resolution
-f48      |   100   | Alias of next (0 to 0.9999999999999999)  
+f48      |   100   | Alias of next (0 to 0.999999999999998)  
 dbl      |   50    | As next/f48 with 53 bits resolution
 f24      |   90    | Safe values for Float32array (0 to 0.99999994)
          |         |                               
@@ -80,20 +80,24 @@ igbrist|   60    | Signed bristly game dist.
 ilcg   |  130    | A simple lcg (fails many rnd tests)  
 ishr2  |   60    | A fast flawed shift register generator 
            
-### Other Methods
+### Pick'n Mix
 
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
-mixup  |  fast   | Randomize order of elements in an array or string        
-mixof  |  fast   | Make a random mix of elements or chars length n   
-antisort| medium | Special staggered random shuffle. 
+mixof  |  fast   | Make a mix of elements or chars length n   
+mixup  |  fast   | Randomly mix up order of elements in an array or string        
+antisort| medium | Specialy mix up order of elements in an array. 
 aindex  | medium | Return an antisorting index of array      
-aresult |        | Report the minimum delta achieved by previous antisort
-        |        |
+aresult |        | Report the minimum delta achieved by antisort
+
+### Instantiation
+
+Method  |Speed % | Notes
+ :----- | :-----:| :-------------------------------------
 pot     | 0.005  | Clone and seed Fdrandom object (pot)    
 hot     | 0.005  | Clone Fdrandom using seeds from browser crypto  
 repot   | 5>0.5% | Resets or reseeds an existing pot
-getstate|  5%    | Gets an array containg state of a pot
+getstate|  5%    | Gets an array containing state of a pot
 setstate|  5%    | Sets state of pot with array (no reseeding)
         |        | 
 version |        | prints version
@@ -102,13 +106,11 @@ checkfloat|      | checks float math is compliant for expected output
 Speed & Quality
 ---------------
 The percentages in the above tables are very rough as js engine
-performance varies.
-
-Fdrandoms default method:`Fdrandom.f48` runs at about 
+performance varies. Fdrandoms default method:`f48` runs at about 
 same speed as Chromes native Math.random. On Firefox it runs faster 
-than native Math.random.
+than Math.random.
 
-`Fdrandom.f48` has no detectable bias across over 10^16 outputs
+`f48` alias `next` has no detectable bias across over 10^16 outputs
 and each has at least 48 bits of resolution which are tested
 as passing G Marsaglias old but substantial diehard test suite.
 It has yet to be tested by the most comprehensive means, 
@@ -116,7 +118,7 @@ but shows no issues so far.
 
 `Math.random` on Chrome has detectable statistical bias and only 
 32 bits of resolution. Firefoxs `Math.random` has cryptographic 
-quality but is slow.
+quality but is a bit slower.
 
 f48 algorithm is informed by J.Baagoe's PRNG `Alea` which 
 seems to be the fastest form of high quality prng for javascript 
@@ -140,8 +142,8 @@ seeds from browser crypto if available, and date and Math.random
 if not available.
  
 Seeding pots with same data or setting same state produces identical 
-random number streams. Any difference in seeds should result in completely 
-unrelatable streams.
+random number streams. Any difference in seeds should result in very 
+different streams.
 
 Seeding digests all elements of any array or object up 1000 deep 
 and strings up to 100,000 char. It could be used with repot() to
@@ -158,10 +160,9 @@ Precision/Types
 
 `ui32` returns number values of unsigned int values
 
-`f48`  alias `next` returns JS Numbers (double precision float) with 
-48 bits of precision in range 0 to 0.9999999999999999
-
-`dbl` returns JS Numbers with all 53 bits of their mantissa utilised.
+`f48`  alias `next` returns JS Numbers with 48 bits of precision in range 0 to 0.999999999999998 
+                                   
+`dbl` returns JS Numbers with all 53 bits of their mantissa utilised (0 to 0.999999999999999**9**).
 
 `f24` is designed to be cast to float32 arrays sometime, this 
 is the only reason to use it (for opengl etc). `f24` actually 
@@ -239,10 +240,12 @@ UUIDv4 = h.mixof(instr,8) +
    "-" + h.mixof(instr,h.mixof("89ab",1),3) +
    "-" + h.mixof(instr,12); 
 
+//antisorting
 mediaShuffleIndex= p.aindex(medialist)  //an antisorting index same length as input
 mediaListCopy= p.antisort(medialist,[]) //a medialist shuffled by its antisort
-hardShuffleIndex= p.aindex(100)  //100 long a-s index for small window sampling
+hardShuffleIndex= p.aindex(100)         //a generic antisort index 100 long
 
+//bulk results in array
 arrayOfFunc= p.bulk(100 ,p.irange ,1 ,6) //array of 100 dicerolls
 ...  
 ```
@@ -250,25 +253,22 @@ arrayOfFunc= p.bulk(100 ,p.irange ,1 ,6) //array of 100 dicerolls
 Antisorting
 -----------
 
-`aHardShuffleIndex = p.aindex(orderedListLength)`
+In as much as sorting entails moving most *similar items together* into a simple 
+incremental pattern, "antisorting" might describe the opposite - moving items out of a simple pattern and ensuring the most similar items are *not placed close to each other*.
 
-In as much as sorting entails moving most similar items together into a simple 
-incremental pattern; "antisorting" can be moving items out of a simple pattern 
-and ensuring the most similar members are not placed close to each other.
-
-An obvious use for this is media playlist shuffling.
-It might also be used to tweak the sampling of ordered data when using a small
-window/sample size.
+An obvious use for this is media playlist shuffling where people can take
+exception to tracks playing coincidentally close. It might also be used to tweak 
+the sampling of ordered data when using a small window/sample size.
  
 Functions `antisort` and `aindex` are designed for this: 
-* `antisort(inarray, ..opts)` hard-shuffles arrays out of order. 
-* `aindex(array or len, ..opts)` returns an 'antisorted index' for accessing arrays out of order.
+* `antisort(inarray, ..opts)` 'super-shuffles' arrays out of order. 
+* `aindex(array or length, ..opts)` returns an 'antisorted index' for accessing arrays out of order.
 
 File `antisort.md` contains more notes on antisorting. 
 
 Version History
 ---------------
-* 2.0.2 - improved aindex parameters
+* 2.0.3 - improved aindex parameters
 * 2.0.1 - augmented aresult()
 * 2.0.0 - added antisorting
 * 1.4.1 - revised seeding
