@@ -198,9 +198,9 @@ var newFdrPot = function(){ return (function(sd){
 
   function gskip(c,b,d)  
   { qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48() 
-	  d= (d===undefined)?1:d
-	  return (b||0)+(d-(b||0))*(qr-= qr>>>0) 
-	}
+    d= (d===undefined)?1:d
+    return (b||0)+(d-(b||0))*(qr-= qr>>>0) 
+  }
   
   var psig,csig
   function usum(n,sig,mu) { 
@@ -309,11 +309,11 @@ var newFdrPot = function(){ return (function(sd){
     { x=lim,lim=sep,sep=sq,sq=Ai,Ai=mx,mx=true }
     if( typeof Ai !=='object' || !isFinite(Ai[0])
      ||(typeof sep ==='string' && sep==="pos")){ 
-	    Av= new Array((Ai>0)?Ai:Ai.length)
-	    if( typeof sq ==='undefined') sq=1
-	    if(sep ==="pos"){ sep=lim,lim=x }
-		  for( i=0;i<Av.length;i++ ) Av[i]=i
-	  }else{ Av=Ai,sq=sq||0 }
+      Av= new Array((Ai>0)?Ai:Ai.length)
+      if( typeof sq ==='undefined') sq=1
+      if(sep ==="pos"){ sep=lim,lim=x }
+      for( i=0;i<Av.length;i++ ) Av[i]=i
+    }else{ Av=Ai,sq=sq||0 }
     
     var ne=Av.length, nc=ne>50?50:ne-1, nd=ne>350?350:ne-1
 
@@ -331,8 +331,8 @@ var newFdrPot = function(){ return (function(sd){
       var kd=0, np=(ne*0.33)|0, nq=1+(ne*0.66)|0 
       for( i=0;i<nd;i++){
         kd+=Math.abs(Av[i]-Av[(np+i)%ne])
-           +Math.abs(Av[(np+i)%ne]-Av[(nq+i)%ne])
-           +Math.abs(Av[(ne+nq-i)%ne]-Av[(ne-i)%ne]) 
+          + Math.abs(Av[(np+i)%ne]-Av[(nq+i)%ne])
+          + Math.abs(Av[(ne+nq-i)%ne]-Av[(ne-i)%ne]) 
       }          
       usep=true, sep=bsep=kd/(nd*10), csep=sep*0.5
     }
@@ -401,10 +401,10 @@ var newFdrPot = function(){ return (function(sd){
       for(i=0;i<n;i++)
       { c=Math.abs(A[i]-A[(i+1)%n]+(Av||0)); if(c<df)df=c }
     }else{
-	    for(i=0;i<n;i++)
-	    { c=Math.abs(Av[A[i]]-Av[A[(i+1)%n]]+(sq||0)); if(c<df)df=c }
-	  }
-	  return (ar>0||ar==="zero")?df:-df    
+      for(i=0;i<n;i++)
+      { c=Math.abs(Av[A[i]]-Av[A[(i+1)%n]]+(sq||0)); if(c<df)df=c }
+    }
+    return (ar>0||ar==="zero")?df:-df    
   }
 
   function antisort(mx,Ai,A,sq,sep,lim,x){
@@ -421,7 +421,7 @@ var newFdrPot = function(){ return (function(sd){
     if( typeof A !=='object' ){ for(i=0;i<e;i++) Ai[i]=Ao[c+i] }
     return Ao
   }
-	  
+    
   function bulk(A,f,b,c,d){
     if( typeof A !=='object' ){ A=new Array( isFinite(A)?A:1 )  }
     var i=0,n=A.length; f=f||f48 
