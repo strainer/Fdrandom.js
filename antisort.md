@@ -38,7 +38,7 @@ h= p.aindex(vals.length)
 exact= p.aresult(h)  //dont pass index array to compute result of inplace antisort. 
 ```
  
-The intended step increment of the input order can be set eg `-10` for `[50,40,30,20,10]` (eg. to avoid 30,20,.. in result). Default is +1 for positional a-sorting (eg. 1,2,3,4,5 all collide) 
+The intended step increment of the input order can be set eg `-10` for `[50,40,30,20,10]` (to avoid 30,20,.. in result). Default is +1 for positional a-sorting (1,2,3,4,5 all collide) 
 
 The target separation can be forced instead of automatic:
 ```
@@ -47,16 +47,16 @@ The target separation can be forced instead of automatic:
 ```
 Setting over 10% separation risks failure and timeout. If sepTarget is `"pos"` numeric values are ignored and the array is antisorted by its positions.
 
-Timeout can be set in 'bogoMilliSeconds' eg.
-` q=p.aindex(numericArray,0,"pos",30,1000)`
-- tries to separate inpos by 30 for about 1 second on a modest cpu.
-` q=p.aindex(numericArray,0,"pos","auto",1000)`
-- same with auto separation.
-
+Timeout can be set in 'bogoMilliSeconds':
+``` 
+\\tries to separate inpos by 30 for about 1 second on a modest cpu.
+q=p.aindex(numericArray,0,"pos",30,1000)`
+\\ same with auto separation.
+q=p.aindex(numericArray,0,"pos","auto",1000)`
+```
 Functions parameters are specified in the plain text `Fdrandom.api`
 
-A small test of effect on sampling:
------------------------------------
+### A small test of effect on sampling:
 
 When numeric data is antisorted its distribution over position is somewhat smoothed.
 
@@ -101,7 +101,5 @@ can surely have its uses. I expect it is not in more common use because it seems
 rather fiddly to design and implement.
 
 Charts of the antisort functions typical distribution are included at the bottom of the [test charts page](http://strainer.github.io/Fdrandom.js/), where the results 1 and 2-away separation and lack of other basic patterning is confirmed. 
-
-Apologies and to anyone wishing to port these functions. They grew disgracefully organic but are tested and quick and I cant bear to untangle them for a bit.
 
 Public Domain Project - Andrew Strain 2016
