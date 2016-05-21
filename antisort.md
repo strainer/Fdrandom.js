@@ -1,13 +1,13 @@
 Antisorting
 -----------
 
-In as much as sorting entails moving most *similar items together* into a simple 
-incremental pattern, "antisorting" might describe the opposite - moving items out of a simple pattern and ensuring the most similar items are *not placed close to each other*.
+The best shuffle algorithms are efficient and use a good quality random number generator to achieve an equal probability for every possible rearrangement of the data - so every output sequence has an unbiased chance of being produced. This is ideal for many applications of shuffling, however beyond the archetypal 'card game' example - in data processing contexts - a perfectly linear shuffle may often not be the optimum kind. 
 
-An obvious use for this is media playlist shuffling where people can take
-exception to tracks playing coincidentally close. It might also be used to tweak 
-the sampling of ordered data when using a small window/sample size.
- 
+The standard random shuffle is routinely used to *put data out of order* and when that is the goal it has a weakness in that it can also put data *into* any order including the simple linear one that is input. That may be unlikely to happen when the set is large, but it can still arrange smaller parts into unsought order.  
+
+In as much as sorting implies moving the most similar items together into a simple 
+incremental pattern, "antisorting" could mean the opposite - moving items out of a simple pattern ensuring the most similar items are *not placed close to each other*.
+
 Functions `antisort` and `aindex` are designed for this: 
 * `antisort(inarray, ..opts)` 'super-shuffles' arrays out of order. 
 * `aindex(array or length, ..opts)` returns an 'antisorted index' for accessing arrays out of order.
@@ -15,11 +15,9 @@ Functions `antisort` and `aindex` are designed for this:
 The functions can re-arrange by elements input indices (which works on any ordered arrays of the same length), or by elements numeric values such as song quality ratings, ages or sizes (which works on the particular distribution of those values). The output will be quite randomly shuffled or indexed **except** items of similar value (or source position) will not be located next to each other. The algorithm used is basically a random shuffle followed by fuzzy checking and swapping values until all are clear.
 
 The minimum distance ensured between consecutive values is generated automatically and works out as approximately 9% of the total range. Half the 'immediate-neighbour' distance is also ensured between '2-doors-away' neighbours. 
-So for an antisort of a simple list running 0 to 100 eg `antiList=pot.aindex(100)`, the auto-minimum-separation between consecutive elements will be 8 or 9 ,and min-separation between '2-away' elements will be 4 or 5.
+So for an antisort of a simple list running 0 to 100 eg `antiList=pot.aindex(100)`, the auto-minimum-separation between consecutive elements will be 8 or 9, and min-separation between '2-away' elements will be 4 or 5. The minimum separation drops when the input values are less diverse (or smaller).  
 
-The functions can try to antisort any array of numeric values, the minimum separation drops when the values are less diverse (or smaller).  
-
-It takes a second or two to antisort a few million awkward values and will time-out if data is not diverse enough to be separated by its fuzzy process.
+For diverse values the functions do not take much longer than a standard shuffle, to antisort a few million awkward values takes a second or two and will time-out if data is not diverse enough to be separated by its fuzzy process.
 
 ```
 antisort([1,1,1,1,2,2,2,2]) //will return [1,2,1,2,1,2,1,2] or [2,1,2,1...]
@@ -60,7 +58,7 @@ Functions parameters are specified in the plain text `Fdrandom.api`
 
 When numeric data is antisorted its distribution over position is somewhat smoothed.
 
-Summarizing test code: `drafts/antidist.js`
+Summarizing test code in: `drafts/antidist.js`
 
 For a small test 10,000 random repetitions of 150 random numbers are generated: 
 ```
@@ -68,7 +66,7 @@ tdata=h.mixof( h.bulk(  150, h.range, 0, 1000 }  ), 10000 )
 //and sorted... 
 tdata.sort( function(a, b){return a-b} )
 ```
-This creates some unevenly distributed sorted test data, its sum and average is calculated. Then the average of n randomly chosen samples is calculated, many times, and the error between the random-sampling-average / full-average is calculated. Then `tdata` is antisorted by position and the same small window sample errors are calculated.   
+This creates some unevenly distributed sorted test data, its sum and average is calculated. Then the average of n randomly chosen samples is calculated, many times, and the error between the random-sampling-average / full-average is calculated. Then `tdata` is antisorted by position and the same small-window-sample-errors are calculated.   
 
 Output:
 
@@ -97,8 +95,7 @@ accuracy as randomly-accessed samples. This relationship held for
 the test case until sample sizes where surprisingly large (over 100)
 
 Besides this statistical curiosity, a more reliably mixed up shuffle function 
-can surely have its uses. I expect it is not in more common use because it seems
-rather fiddly to design and implement.
+can surely have its uses. 
 
 Charts of the antisort functions typical distribution are included at the bottom of the [test charts page](http://strainer.github.io/Fdrandom.js/), where the results 1 and 2-away separation and lack of other basic patterning is confirmed. 
 
