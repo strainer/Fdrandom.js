@@ -20,7 +20,7 @@ Usage
 ```javascript 
 <script src='Fdrandom.js'></script>
 
-double_value  = Fdrandom.next()     // 0 to 0.9999999999999999
+double_value  = Fdrandom.next()     // 0 to 0.999999999999998
 signed_int_value = Fdrandom.i32()   // -2147483648 to 2147483647
 unsigned_int_value = Fdrandom.ui32()// 0 to 4294967295
 
@@ -39,7 +39,7 @@ Method	 | Speed % | Notes
  :------ | :-----: | :----------------------------
 next     |   100   | Standard randoms with 48bit resolution
 f48      |   100   | Alias of next (0 to 0.999999999999998)  
-dbl      |   50    | As next/f48 with 53 bits resolution
+dbl      |   50    | Same as next/f48 with 53 bits resolution
 f24      |   90    | Safe values for Float32array (0 to 0.99999994)
          |         |                               
 i32      |   80    | 32 bit signed integer values
@@ -59,14 +59,13 @@ Method	| Speed % | Notes
 gaus    |   20    | Fast high quality gaussians        
 gausx   |   15    | Possibly needless extra resolution employed           
 usum    | 25@n=4  | Custom uniform sum 
+gnorm   |   30    | Normal curve shaped game distribution 
 
 ### Other Distributions
 
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
 gskip  |   90    | Low discrepancy floats (custom spaced)        
-gnorm  |   30    | Normal curve shaped game distribution 
-gload  |   30    | P=1 Normal, 0.5 Uniform, 0 'Anti'-normal 
 gbowl  |   50    | Bowl shaped game distribution 
 gspire |   50    | Spire shaped game distribution 
 gthorn |   30    | Thorn shaped game distribution 
@@ -112,9 +111,8 @@ than Math.random.
 
 `f48` alias `next` has no detectable bias across over 10^16 outputs
 and each has at least 48 bits of resolution which are tested
-as passing G Marsaglias old but substantial diehard test suite.
-It has yet to be tested by the most comprehensive means, 
-but shows no issues so far.
+as passing G Marsaglias old but substantial `diehard` test suite.
+It has yet to be tested by the latest means, but shows no issues so far.
 
 `Math.random` on Chrome has detectable statistical bias and only 
 32 bits of resolution. Firefoxs `Math.random` has cryptographic 
@@ -164,19 +162,18 @@ Precision/Types
                                    
 `dbl` returns JS Numbers with all 53 bits of their mantissa utilised (0 to 0.999999999999999**9**).
 
-`f24` is designed to be cast to float32 arrays sometime, this 
-is the only reason to use it (for opengl etc). `f24` actually 
-has 48 bits of precision but scales short of 1 enough to not
-round up when cast into float32 array. Because the float32 type 
-only has 24 bits of practical precision, this can introduce a tiny 
-but noticable bias to the sum of millions of output values.
+`f24` is designed to be cast to float32 arrays sometime, this is the only reason 
+to use it (for opengl etc). `f24` has 48 bits of precision but scales short of 1 
+enough to not round-up when cast into float32 array. Because the float32 type only 
+has 24 bits of practical precision, this can introduce a tiny but noticable bias to 
+the sum of millions of output values.
 	
 Benchmarking and Testing
 ------------------------
-Diehard reports for the constituent generators are in the directory `reports`
+Diehard reports for the generators are in the directory `reports`
 
-The `drafts` directory contains untidy code and node scripts
-used to discover and test the generators and methods.
+The `drafts` directory contains untidy code and node scripts used to discover and 
+test the generators and methods.
 
 Examples
 --------
@@ -184,14 +181,15 @@ Examples
 
 p=Fdrandom.pot()
 
-oneToTenFloat = p.range(1,10)  //end is not (quite) inclusive
-oneToTenInteger=p.irange(1,10) //end is inclusive
+oneToTenFloat = p.range(1,10)    //end is not (quite) inclusive
+oneToTenInteger=p.irange(1,10)   //end is inclusive
 
 minusOneToOne_FlatDist =p.lrange(0.5) //loaded range. 
 minusOneToOne_EndBias =p.lrange(0.4)  //First param sets a loading factor
 twoToFive_MidBias = p.lrange(0.6,2,5) //0= High ends, 0.5=Flat, 1=High Mid
 
-random0or1 = p.rbit()  //random bit
+random0or1 = p.rbit()   //random bit
+random0or1 = p.rpole()  //random -1 or 1
 
 gaussianNormal = p.gaus()
 gaussianMath = p.gaus(sigma,mu) //sigma is ~scale, mu is offset
@@ -204,7 +202,9 @@ normGame = gnorm(2,4.5) //same shape range 2 to 4.5
 oftenMid = gthorn()     //sharp peak in middle, range -1 to 1
 oftenMid = gthorn(p,q)  //same shape over range p to q
 ```
-see [Charts](http://strainer.github.io/Fdrandom.js/) for gaming distributions
+See the [Charts](http://strainer.github.io/Fdrandom.js/) for gaming distributions
+
+###Mixing functions:
 ```
 inray =["0","1","2","3","4","5","6","sha","la","la"] 
 instr ="0123456789abcdef" 
@@ -241,28 +241,27 @@ UUIDv4 = h.mixof(instr,8) +
    "-" + h.mixof(instr,12); 
 
 //antisorting
-mediaShuffleIndex= p.aindex(medialist)  //an antisorting index same length as input
-mediaListCopy= p.antisort(medialist,[]) //a medialist shuffled by its antisort
-hardShuffleIndex= p.aindex(100)         //a generic antisort index 100 long
+playShuffleIndex= p.aindex(medialist)    //antisorting index same length as input
+playListCopied= p.antisort(medialist,[]) //a playlist shuffled by its antisort
+hardShuffleIndex= p.aindex(100)          //a generic antisort-index 100 long
 
 //bulk results in array
 arrayOfFunc= p.bulk(100 ,p.irange ,1 ,6) //array of 100 dicerolls
 ...  
 ```
 
-Antisorting
+Antisorting 
 -----------
 
-In as much as sorting entails moving most *similar items together* into a simple 
-incremental pattern, "antisorting" might describe the opposite - moving items out of a simple pattern and ensuring the most similar items are *not placed close to each other*.
+In as much as sorting implies moving the most similar items together into a simple 
+incremental pattern, "antisorting" could mean the opposite - moving items out of a 
+simple pattern while ensuring the most similar items are *not* placed close to each other.
 
-An obvious use for this is media playlist shuffling where people can take
-exception to tracks playing coincidentally close. It might also be used to tweak 
-the sampling of ordered data when using a small window/sample size.
- 
 Functions `antisort` and `aindex` are designed for this: 
-* `antisort(inarray, ..opts)` 'super-shuffles' arrays out of order. 
+* `antisort(inarray, ..opts)` quasi-randomly shuffles arrays out of order. 
 * `aindex(array or length, ..opts)` returns an 'antisorted index' for accessing arrays out of order.
+ 
+The functions can re-arrange by elements input indices (which works on any ordered arrays of the same length), or by elements numeric values such as song quality ratings, ages or sizes (which works on the particular distribution of those values). The output is quite randomly shuffled or indexed **except** items of similar value (or source position) are not placed next to each other. The algorithm used is basically a random shuffle followed by dithered checking and swapping values until all are clear.
 
 File `antisort.md` contains more notes on antisorting. 
 
