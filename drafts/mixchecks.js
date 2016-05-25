@@ -13,13 +13,20 @@ po=Fdrandom.pot()
 q=Fdrandom.pot()
 r=Fdrandom.pot()
 
+d=h.aindex(10000000)
+d=h.mixup(d)
+return
 
+pr(h.antisort([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],0,5,10000))
+pr(h.antisort([0,0,0,0,0,5,5,5,5,5,5,11,11,11,11,11],0,5,10000))
+pr(h.aresult())
+return
 /////////////////////////////////
 /*
 function avsamp(A,s)
 { sm=0; n=A.length; w=p.irange(0,n-s)
-	for(i=0;i<s;i++) sm+=A[w+i]
-	return sm/s
+  for(i=0;i<s;i++) sm+=A[w+i]
+  return sm/s
 }
 
 
@@ -82,18 +89,18 @@ var ss=0000000
 var e=["to","be","or","not","to","be","that","is","the","question"]
 var yyy=e.join(" ")
 while(ss--){
-	h.mixup(e)
-	var y=h.antisort(false,e,[],0,3).join(" ")
-	//pr(y)	
+  h.mixup(e)
+  var y=h.antisort(false,e,[],0,3).join(" ")
+  //pr(y)	
   if( y===yyy )
   { pr(ss,e); 
-	  
-	  var count=0;
-	  while(h.antisort(false,e,[],0,3).join(" ")!==yyy)
-	  { count++ }
-	  pr(count)
+    
+    var count=0;
+    while(h.antisort(false,e,[],0,3).join(" ")!==yyy)
+    { count++ }
+    pr(count)
 
-	} 
+  } 
 }
 
 //pr(h.antisort(false,["the","be","that","not","to","be","or","is","to","question"],0,3))
@@ -116,7 +123,7 @@ return
 
 
 function compA(Aa,Ab,sq){
-	sq=sq||0
+  sq=sq||0
   if(Ab){
     console.log("checking elements..")
     for(var i=0;i<Aa.length;i++)
@@ -127,15 +134,15 @@ function compA(Aa,Ab,sq){
       }
       if(p!=q) console.log(c,"differs")
     }
-    console.log("elements checked")    
-	}
-	
-	var df=Infinity
+    console.log("elements checked") 
+  }
+  
+  var df=Infinity
   for(var i=0;i<Aa.length;i++)
   { var c=Math.abs(Aa[i]-(Aa[(i+1)%Aa.length]-sq))
-	  if (c<df) df=c
-	}
-	console.log("diff",df)
+    if (c<df) df=c
+  }
+  console.log("diff",df)
 }
  
  
@@ -153,7 +160,7 @@ console.log("antisorting:")
 
 for(i=0;i<3;i++)
 { var tt=h.aindex(true,1000) 
-	if(!(h.aresult()>0)) pr(h.aresult())
+  if(!(h.aresult()>0)) pr(h.aresult())
 }
 
 //~ var tt=p.antisort(false,bs,[],0,"")

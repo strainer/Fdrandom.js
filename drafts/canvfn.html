@@ -74,12 +74,15 @@ var bdtsz=5*svgz/256
 var tlogger = document.getElementById('log')
 
 var intervar
-var Fd
+var Fd,Fd2
 
 function gogo(){
   
   var d = document.getElementById("seed").value;
-  if ( d==='hot' ) { Fd=Fdrandom.hot() } else { Fd=Fdrandom.pot() }
+  if ( d==='hot' ) 
+  { Fd=Fdrandom.hot(),Fd2=Fdrandom.hot() } 
+  else 
+  { Fd=Fdrandom.pot(),Fd2=Fdrandom.pot() }
   
   d = document.getElementById("selectedsize").value;
 
@@ -89,11 +92,7 @@ function gogo(){
 	dtsz=1.1*svgz/256
 	ddtsz=3.5*svgz/256
 	bdtsz=5*svgz/256
-  
-  antip=Fd.aindex(1000000)
-  rough=Fd.mixof(Fd.bulk( 1000,function(){return Fd.irange(0,10000)} ),1000000)
-  antiq=Fd.antisort(rough,[])
-  
+    
   var de = document.getElementById("log"); 
   de.outerHTML = ""; delete de
 
@@ -117,7 +116,7 @@ function chartfuncs() {
 	var funz= [
 	 //[function(){ return Fd.lrange(0.5,-10,10) },"visk "],
 	 [Math.random,"math.random "],
-	 [Fd.f48,"Fdrandom.f48 "],
+	 [ function(){return Fd.gskip(Fd2.gskip())},"dither "],
 	 [Fd.dbl,"Fdrandom.dbl "],
 	 [Fd.f24,"f24 "],
 	 [Fd.rndbit,"rndbit "],
@@ -169,12 +168,16 @@ function chartfuncs() {
 	]
  			
 	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
-	if(runstep==10){  }
+	if(runstep==10){ 
+		antip=Fd.aindex(1000000)
+		rough=Fd.mixof(Fd.bulk( 1000,function(){return Fd.irange(0,10000)} ),1000000)
+		antiq=Fd.antisort(rough,[])
+  }
 	
 	chartf(reps=1, funz[runstep][0], dur=2.5, funz[runstep][1], funz[runstep++][2] ) 
   //
-  if(runstep<funz.length){ intervar=setInterval(chartfuncs, 250); }
-  //~ if(runstep<2){ intervar=setInterval(chartfuncs, 250); }
+  //~ if(runstep<funz.length){ intervar=setInterval(chartfuncs, 250); }
+  if(runstep<3){ intervar=setInterval(chartfuncs, 250); }
 	
 }
 
