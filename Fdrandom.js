@@ -66,7 +66,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.0.3" }
+  function version() { return "v2.1.0" }
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
@@ -87,9 +87,6 @@ var newFdrPot = function(){ return (function(sd){ //factory
   }
   
   function hot() {
-    if(arguments.length===0 && typeof hotFdrandomPot === 'object'){ 
-      return hotFdrandomPot   //returns existing hotpot if already made
-    }
     if(typeof(window)!=='undefined' 
      && (window.crypto||window.msCrypto)){ 
       var cO = window.crypto||window.msCrypto
@@ -98,7 +95,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
       ag=[(new Date()).getTime()-1.332e+12, Math.random()] 
     }
     ag.push(arguments)
-    return hotFdrandomPot = newFdrPot(ag)
+    return newFdrPot(ag)
   }
 
   ///A redesign of J.Baagoe's Alea; a float-cut dual-lcg prng
@@ -460,8 +457,6 @@ var newFdrPot = function(){ return (function(sd){ //factory
   }
 
 }(arguments))}
-
-var hotFdrandomPot 
 
 //Hopefuly exports to node, amd, commonjs or global object
 if (typeof exports !== 'undefined') 
