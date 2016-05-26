@@ -123,14 +123,14 @@ var newFdrPot = function(){ return (function(sd){ //factory
 
   function ui32() { return (f48()*0x1700000000)>>>0 }
   
-  function rbit() {  //fastest method tested
-    if( rb<1.1258999e+15 ) return (rb*=2)&1
-    return (rb= dbl() +0.5) &1 
+  function rbit() { 
+    if( rb<2147483648 ) return (rb*=2)&1  //25% faster with rb<31 bits
+    return (rb= f48() +0.5) &1 
   }
 
   function rpole() { 
-    if( rb<1.1258999e+15 ) return ((rb*=2)&2)-1
-    return ( (rb= dbl() +1.5) &2) -1
+    if( rb<2147483648 ) return ((rb*=2)&2)-1
+    return ( (rb= f48() +1.5) &2) -1
   } 
   
   function ilcg() ///flat lcg 
