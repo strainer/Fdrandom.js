@@ -103,12 +103,12 @@ var newFdrPot = function(){ return (function(sd){ //factory
     var c= 0.12810301030196883 * U[0] +
            15.378612015061215 * (1.0000000000000037-(U[ju=(ju===7?1:ju+1)]))
     return U[ju]= c-( (U[0]=c) >>>0 )
-  } 
+  } //20 msb of the magic numbers were mined with scanrandom.js
 
   function dbl() { 
-    return ( (( ((f48()*0x39b00000000)>>>4)*
+    return ( (( ((f48()*0x39b00000000)>>>4)* //saves 4bits of entropy
             0.06249999650753)+f48())*5.960464477540047e-08 )
-  }
+  } 
   
   function f24() { return f48()*0.99999997019767 }
 
@@ -174,13 +174,13 @@ var newFdrPot = function(){ return (function(sd){ //factory
   function lrange(a,b,d){
     a= (a===undefined)?0.5:a; b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     
-    if(a>0.5){
-      if (f48()>a*2-1) return f48()*(d-b) +b
-    }else{
-      if (f48()<a*2) return f48()*(d-b) +b
+    if(a>0.5){  //load middle of dist
+      if (f48()>a*2-1) return f48()*(d-b) +b //return flat
+    }else{      //load the ends
+      if (f48()<a*2) return f48()*(d-b) +b   //return flat
     }
     var c=(f48()*1.333+f48()+f48()*0.66666)*0.3333333-0.5
-    c= (a>0.5)?c:((c>0)?0.5-c:-0.5-c)
+    c= (a>0.5)?c: (c>0)?0.5-c:-0.5-c   //transform if load ends
     return b+ (d-b)* (c+0.5)
   }
   
@@ -292,7 +292,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     }
 
     var d,p,ep=e-1
-    while( c<ep ){
+    while( c<ep ){ 
       d= Math.floor( c+( f48()*(e-c) ) ) 
       p= Ao[c]; Ao[c++]=Ao[d]; Ao[d]=p
     }
