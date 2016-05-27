@@ -1,6 +1,6 @@
 
 if(!Fdrandom.checkfloat()){
-  document.getElementById('floatfail').style.display="block";  
+  document.getElementById('floatfail').style.display="block"; 
 }
 
 var fnstats={}
@@ -19,15 +19,15 @@ var tlogger = document.getElementById('log')
 
 var intervar,Fd,isHot
 
-var antip,antiq,rough,rcount=0
+var mixud,antip,antiq,rough,rcount=0
 
 
 var returnAVal= function(A)
 { rcount=rcount==999999?0:rcount+1; return A[rcount] }
 var returnBVal= function(A)
 { var k=rcount*2; if(k>999999) k-=999999 
-	rcount=rcount==999999?0:rcount+1;
-	return A[k]
+  rcount=rcount==999999?0:rcount+1;
+  return A[k]
 }
 var returnADelt= function(A)
 { return A[rcount]-A[rcount=rcount==999999?0:rcount+1] }
@@ -64,9 +64,11 @@ function gogo(){
 
 function chartfuncs() {
   
-  clearInterval(intervar)  
+  clearInterval(intervar) 
   
   var dur=3,reps=1
+  
+  var sx=0
   var funz= [
    [Math.random,"math.random "],
    [Fd.next,"Fdrandom.next "],
@@ -122,11 +124,15 @@ function chartfuncs() {
    [Fd.lrange,"lrange 0",0],
    [returnAVal,"flat aindex",antip],
    [returnBVal,"fl-aindx 2n",antip],
-   [returnADelt,"fl-aindx delta ",antip],	 
+   [returnADelt,"fl-aindx delta ",antip],	
    [returnAVal,"rough rnd",rough],
    [returnAVal,"rg antisorted",antiq],
    [returnBVal,"rg a-sorted 2n",antiq],
-   [returnADelt,"rg a-sorted delta ",antiq],	 
+   [returnADelt,"rg a-sorted delta ",antiq],	
+   [returnAVal,"flat mixup",mixud],	
+   [returnADelt,"fl-mixup delta ",mixud],
+   [ function(){return Math.sin(sx+=Fd.gthorn(0,Math.PI))},"Sin(++gthorn(0,PI)) "],
+    
   ]
        
   //~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
@@ -134,6 +140,7 @@ function chartfuncs() {
     antip=Fd.aindex(1000000)
     rough=Fd.mixof(Fd.bulk( 500,function(){return Fd.irange(0,1000)} ),1000000)
     antiq=Fd.antisort(rough,[])
+    mixud=Fd.mixup(Fd.aindex(false,1000000,0,0))
   }
   
   chartf(reps=1, funz[runstep][0], dur=2.5, funz[runstep][1], funz[runstep++][2] ) 
@@ -167,7 +174,7 @@ chartf = function(n,a,b,c,d){
   
   if(firstrun)
   { firstrun=false;
-    var k=benchf(Math.sqrt,b,c,d)  
+    var k=benchf(Math.sqrt,b,c,d) 
   }
   
   var cc=document.createElement('div')
@@ -204,7 +211,7 @@ benchf = function (meth, bentime, meth_nm, meth_arg) {
   
   var qqtlen=1
   if(typeof meth_arg!=='undefined')
-  { qqtlen=1 }    
+  { qqtlen=1 } 
   
   var i = 0, retv= 0,retvsum=0,donereps=0;
   var minret=0xffffffff>>>0, maxret=0
@@ -212,14 +219,14 @@ benchf = function (meth, bentime, meth_nm, meth_arg) {
   var ra=0,rb=0,rt=0
   
   for (var w=0;w<4;w++)
-  {  
+  { 
     var qreps=0,qtime=0,nreps=100000, repfac=1
     atm= performance.now(); rt=9999999999999
     ctm = atm, dtm=0
 
     while(ctm-atm<bentime){
             
-      for(i=0;i<nreps/10;i++)  
+      for(i=0;i<nreps/10;i++) 
       { var r=meth(meth_arg) 
         //if (r>maxret){ maxret=r }
         //{ if (r<minret){ minret=r } }
@@ -234,7 +241,7 @@ benchf = function (meth, bentime, meth_nm, meth_arg) {
         for(i=0;i<nreps;i++)  { retv+=meth() }
       }
       
-      ctm= performance.now();    
+      ctm= performance.now(); 
       
       bdtm=dtm; dtm=ctm-btm
       
@@ -272,7 +279,7 @@ benchf = function (meth, bentime, meth_nm, meth_arg) {
   //rex+='<td>'+"  mid:"+((minret+maxret)/2).toFixed(7)+'</td>';
   rex+='</tr>';
 
-  return rex;  
+  return rex; 
 };
 
 function fmtplace(i){
@@ -293,7 +300,7 @@ function fltline_cnv(fnm,func,d)
   if(Math.abs((maxval-1)*16)<1)
   { maxval=1; }
   if(Math.abs((maxval-0x7ffffffff)/100000)<1)
-  { maxval=0x7fffffff; }  
+  { maxval=0x7fffffff; } 
   if(Math.abs((maxval-0xffffffff)/100000)<1)
   { maxval=0xffffffff; }
   
@@ -414,6 +421,7 @@ function twodim_dist_canv(func,d)
   var colz=[ "#403","#080","#403","#080","#403","#080","#403",
              "#052","#7a0033","#052","#7a0033","#052","#7a0033","#052", ]
   var colcn=0;
+  var alfac=1/(vgsc*8)
   
   for(i=0;i<distel+1;i++){ dst[i]=0; }
   
@@ -427,10 +435,11 @@ function twodim_dist_canv(func,d)
 
     colcn=(colcn==13)?0:colcn+1
     ctx.fillStyle = colz[colcn]
-     
-    ctx.fillRect(xx*widefac, yy*highfac, dtsz, dtsz);  
     
-  }  
+    ctx.globalAlpha=i*alfac 
+    ctx.fillRect(xx*widefac, yy*highfac, dtsz, dtsz); 
+    
+  } 
 
   //~ console.log(dst)
   for (i = 0; i < vgsc*31; i++)
@@ -454,7 +463,7 @@ function twodim_dist_canv(func,d)
     ctx.fillStyle = "#006"
     ctx.fillRect(xx,yy,ddtsz,ddtsz)
     
-  }  
+  } 
   
   ctx.fillStyle = "#000"
   ctx.font="bold 20px sans-serif";
