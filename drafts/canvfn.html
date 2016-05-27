@@ -112,18 +112,21 @@ function chartfuncs() {
 	clearInterval(intervar)	
 	
 	var dur=3,reps=1
-		
+	var sq=0.1	
 	var funz= [
 	 //[function(){ return Fd.lrange(0.5,-10,10) },"visk "],
-	 [Math.random,"math.random "],
+	 [ function(){return Math.sin(sq+=1.5707)},"sin(+=pi/1.999) "],
+	 [ function(){return Math.sin(sq+=Fd.gthorn(0,Math.PI))},"sin(+gthorn(0,pi)) "],
 	 [ function(){return Fd.gskip(Fd2.gskip())},"dither "],
 	 [Fd.dbl,"Fdrandom.dbl "],
 	 [Fd.f24,"f24 "],
-	 [Fd.rndbit,"rndbit "],
-	 [Fd.rndsign,"rndsign "],
-	 [Fd.usum,"usum 1 ",1],
-	 [Fd.usum,"usum 2 ",2],
-	 [Fd.usum,"usum 3 ",3],
+	 [Fd.f48,"f48 "],
+	 [Fd.rbit,"rbit "],
+	 [Fd.rpole,"rpole "],
+	 [Fd.f48,"f48 "],
+	 //~ [Fd.usum,"usum 1 ",1],
+	 //~ [Fd.usum,"usum 2 ",2],
+	 //~ [Fd.usum,"usum 3 ",3],
 	 //~ [Fd.usum,"usum 4 ",4],
 	 //~ [Fd.usum,"usum 5 ",5],
 	 //~ [Fd.usum,"usum 6 ",6],
@@ -131,7 +134,7 @@ function chartfuncs() {
 	 //~ [Fd.usum,"usum 8 ",8],
 	 //~ [Fd.usum,"usum 16 ",16],
 	 //~ [Fd.usum,"usum 32 ",32],
-	 [Fd.gaus,"gaus "],
+	 //~ [Fd.gaus,"gaus "],
 	 //~ [Fd.gausx,"gausx "],
 	// [Fd.ui32,"ui32 "],
 	// [Fd.i32,"i32 "],
@@ -158,13 +161,14 @@ function chartfuncs() {
 	// [Fd.lrange,"lrange 0.25",0.25],
 	// [Fd.lrange,"lrange 0.10",0.10],
 	// [Fd.lrange,"lrange 0",0],
-   [returnAVal,"flat aindex",antip],
-   [returnBVal,"fl-aindx 2n",antip],
-	 [returnADelt,"fl-aindx delta ",antip],	 
-   [returnAVal,"rough rnd",rough],
-   [returnAVal,"rg antisorted",antiq],
-   [returnBVal,"rg a-sorted 2n",antiq],
-	 [returnADelt,"rg a-sorted delta ",antiq],	 
+	// 
+   //~ [returnAVal,"flat aindex",antip],
+   //~ [returnBVal,"fl-aindx 2n",antip],
+	 //~ [returnADelt,"fl-aindx delta ",antip],	 
+   //~ [returnAVal,"rough rnd",rough],
+   //~ [returnAVal,"rg antisorted",antiq],
+   //~ [returnBVal,"rg a-sorted 2n",antiq],
+	 //~ [returnADelt,"rg a-sorted delta ",antiq],	 
 	]
  			
 	//~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
@@ -176,8 +180,8 @@ function chartfuncs() {
 	
 	chartf(reps=1, funz[runstep][0], dur=2.5, funz[runstep][1], funz[runstep++][2] ) 
   //
-  //~ if(runstep<funz.length){ intervar=setInterval(chartfuncs, 250); }
-  if(runstep<3){ intervar=setInterval(chartfuncs, 250); }
+  if(runstep<funz.length){ intervar=setInterval(chartfuncs, 250); }
+  //~ if(runstep<3){ intervar=setInterval(chartfuncs, 250); }
 	
 }
 
@@ -444,6 +448,8 @@ function twodim_dist_canv(func,d)
 	           "#052","#7a0033","#052","#7a0033","#052","#7a0033","#052", ]
 	var colcn=0;
 	
+	var alfac=1/(vgsc*7)
+	
 	for(i=0;i<distel;i++){ dst[i]=0; }
 	
 	for (i = 0; i < vgsc*6; i++) {
@@ -455,7 +461,8 @@ function twodim_dist_canv(func,d)
 
     colcn=(colcn==13)?0:colcn+1
     ctx.fillStyle = colz[colcn]
-     
+    
+    ctx.globalAlpha=0.1+i*alfac
 		ctx.fillRect(xx*widefac, yy*highfac, dtsz, dtsz);	
 		
 	}	

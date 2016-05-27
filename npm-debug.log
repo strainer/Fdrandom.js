@@ -1,0 +1,2556 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'speaker' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.2
+4 verbose install initial load of C:\Users\Dell\AppData\Roaming\npm\package.json
+5 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\package.json
+6 silly cache add args [ 'speaker', null ]
+7 verbose cache add spec speaker
+8 silly cache add parsed spec Result {
+8 silly cache add   raw: 'speaker',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'speaker',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: '*',
+8 silly cache add   type: 'range' }
+9 silly addNamed speaker@*
+10 verbose addNamed "*" is a valid semver range for speaker
+11 silly addNameRange { name: 'speaker', range: '*', hasData: false }
+12 silly mapToRegistry name speaker
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npmjs.org/
+15 silly mapToRegistry uri https://registry.npmjs.org/speaker
+16 verbose addNameRange registry:https://registry.npmjs.org/speaker not in flight; fetching
+17 verbose request uri https://registry.npmjs.org/speaker
+18 verbose request no auth needed
+19 info attempt registry request try #1 at 2:03:28 PM
+20 verbose request using bearer token for auth
+21 verbose request id e47b7273ef8956cd
+22 verbose etag "2JXYTPMFTUEMBJUSOXIWLHJKZ"
+23 http request GET https://registry.npmjs.org/speaker
+24 http 304 https://registry.npmjs.org/speaker
+25 verbose headers { 'cache-control': 'max-age=300',
+25 verbose headers   'accept-ranges': 'bytes',
+25 verbose headers   date: 'Sat, 21 May 2016 13:03:27 GMT',
+25 verbose headers   via: '1.1 varnish',
+25 verbose headers   connection: 'keep-alive',
+25 verbose headers   'x-served-by': 'cache-lcy1131-LCY',
+25 verbose headers   'x-cache': 'MISS',
+25 verbose headers   'x-cache-hits': '0',
+25 verbose headers   'x-timer': 'S1463835807.577284,VS0,VE85',
+25 verbose headers   vary: 'Accept-Encoding' }
+26 silly get cb [ 304,
+26 silly get   { 'cache-control': 'max-age=300',
+26 silly get     'accept-ranges': 'bytes',
+26 silly get     date: 'Sat, 21 May 2016 13:03:27 GMT',
+26 silly get     via: '1.1 varnish',
+26 silly get     connection: 'keep-alive',
+26 silly get     'x-served-by': 'cache-lcy1131-LCY',
+26 silly get     'x-cache': 'MISS',
+26 silly get     'x-cache-hits': '0',
+26 silly get     'x-timer': 'S1463835807.577284,VS0,VE85',
+26 silly get     vary: 'Accept-Encoding' } ]
+27 verbose etag https://registry.npmjs.org/speaker from cache
+28 verbose get saving speaker to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\speaker\.cache.json
+29 silly addNameRange number 2 { name: 'speaker', range: '*', hasData: true }
+30 silly addNameRange versions [ 'speaker',
+30 silly addNameRange   [ '0.0.1',
+30 silly addNameRange     '0.0.2',
+30 silly addNameRange     '0.0.3',
+30 silly addNameRange     '0.0.4',
+30 silly addNameRange     '0.0.5',
+30 silly addNameRange     '0.0.6',
+30 silly addNameRange     '0.0.7',
+30 silly addNameRange     '0.0.8',
+30 silly addNameRange     '0.0.9',
+30 silly addNameRange     '0.0.10',
+30 silly addNameRange     '0.1.0',
+30 silly addNameRange     '0.1.1',
+30 silly addNameRange     '0.1.2',
+30 silly addNameRange     '0.1.3',
+30 silly addNameRange     '0.2.0',
+30 silly addNameRange     '0.2.1',
+30 silly addNameRange     '0.2.2',
+30 silly addNameRange     '0.2.3',
+30 silly addNameRange     '0.2.4',
+30 silly addNameRange     '0.2.5',
+30 silly addNameRange     '0.2.6',
+30 silly addNameRange     '0.3.0' ] ]
+31 silly addNamed speaker@0.3.0
+32 verbose addNamed "0.3.0" is a plain semver version for speaker
+33 silly cache afterAdd speaker@0.3.0
+34 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\speaker\0.3.0\package\package.json not in flight; writing
+35 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\speaker\0.3.0\package\package.json written
+36 silly install resolved [ { name: 'speaker',
+36 silly install resolved     description: 'Output PCM audio data to the speakers',
+36 silly install resolved     keywords:
+36 silly install resolved      [ 'pcm',
+36 silly install resolved        'audio',
+36 silly install resolved        'sound',
+36 silly install resolved        'music',
+36 silly install resolved        'output',
+36 silly install resolved        'speaker',
+36 silly install resolved        'headphone',
+36 silly install resolved        'alsa',
+36 silly install resolved        'coreaudio',
+36 silly install resolved        'openal',
+36 silly install resolved        'sdl',
+36 silly install resolved        'portaudio',
+36 silly install resolved        'jack',
+36 silly install resolved        'oss',
+36 silly install resolved        'pulse',
+36 silly install resolved        'mpg123' ],
+36 silly install resolved     license: 'MIT',
+36 silly install resolved     version: '0.3.0',
+36 silly install resolved     author:
+36 silly install resolved      { name: 'Nathan Rajlich',
+36 silly install resolved        email: 'nathan@tootallnate.net',
+36 silly install resolved        url: 'http://tootallnate.net' },
+36 silly install resolved     repository:
+36 silly install resolved      { type: 'git',
+36 silly install resolved        url: 'git://github.com/TooTallNate/node-speaker.git' },
+36 silly install resolved     bugs: { url: 'https://github.com/TooTallNate/node-speaker/issues' },
+36 silly install resolved     homepage: 'https://github.com/TooTallNate/node-speaker',
+36 silly install resolved     main: './index.js',
+36 silly install resolved     scripts:
+36 silly install resolved      { test: 'node-gyp rebuild --mpg123-backend=dummy && mocha --reporter spec',
+36 silly install resolved        install: 'node-gyp rebuild' },
+36 silly install resolved     dependencies:
+36 silly install resolved      { bindings: '^1.2.1',
+36 silly install resolved        debug: '^2.2.0',
+36 silly install resolved        nan: '^2.2.0',
+36 silly install resolved        'readable-stream': '^2.0.5' },
+36 silly install resolved     devDependencies: { mocha: '^2.1.0' },
+36 silly install resolved     gypfile: true,
+36 silly install resolved     gitHead: 'd191f24ab8fdb1276b22acb24f83c5d520e5ad26',
+36 silly install resolved     _id: 'speaker@0.3.0',
+36 silly install resolved     _shasum: '36e0ee37e74fb88f7ead9ac9b1f1517b9b82d253',
+36 silly install resolved     _from: 'speaker@*',
+36 silly install resolved     _npmVersion: '2.14.20',
+36 silly install resolved     _nodeVersion: '4.4.0',
+36 silly install resolved     _npmUser: { name: 'tootallnate', email: 'nathan@tootallnate.net' },
+36 silly install resolved     maintainers: [ [Object] ],
+36 silly install resolved     dist:
+36 silly install resolved      { shasum: '36e0ee37e74fb88f7ead9ac9b1f1517b9b82d253',
+36 silly install resolved        tarball: 'https://registry.npmjs.org/speaker/-/speaker-0.3.0.tgz' },
+36 silly install resolved     _npmOperationalInternal:
+36 silly install resolved      { host: 'packages-16-east.internal.npmjs.com',
+36 silly install resolved        tmp: 'tmp/speaker-0.3.0.tgz_1460253726170_0.7878933397587389' },
+36 silly install resolved     directories: {},
+36 silly install resolved     _resolved: 'https://registry.npmjs.org/speaker/-/speaker-0.3.0.tgz',
+36 silly install resolved     readme: 'ERROR: No README data found!' } ]
+37 info install speaker@0.3.0 into C:\Users\Dell\AppData\Roaming\npm
+38 info installOne speaker@0.3.0
+39 verbose installOne of speaker to C:\Users\Dell\AppData\Roaming\npm not in flight; installing
+40 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\speaker-04d15bf752b4d02c.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+41 silly install write writing speaker 0.3.0 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+42 verbose unbuild node_modules\speaker
+43 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker is being purged from base C:\Users\Dell\AppData\Roaming\npm
+44 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+45 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\speaker\0.3.0\package.tgz
+46 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+47 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker is being purged
+48 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+49 silly gunzTarPerm modes [ '777', '666' ]
+50 silly gunzTarPerm extractEntry package.json
+51 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+52 silly gunzTarPerm extractEntry .npmignore
+53 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+54 silly gunzTarPerm extractEntry README.md
+55 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+56 silly gunzTarPerm extractEntry index.js
+57 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+58 silly gunzTarPerm extractEntry deps/mpg123/README
+59 silly gunzTarPerm modified mode [ 'deps/mpg123/README', 420, 438 ]
+60 silly gunzTarPerm extractEntry deps/mpg123/configure.ac
+61 silly gunzTarPerm modified mode [ 'deps/mpg123/configure.ac', 420, 438 ]
+62 silly gunzTarPerm extractEntry deps/mpg123/ChangeLog
+63 silly gunzTarPerm modified mode [ 'deps/mpg123/ChangeLog', 420, 438 ]
+64 silly gunzTarPerm extractEntry deps/mpg123/INSTALL
+65 silly gunzTarPerm modified mode [ 'deps/mpg123/INSTALL', 420, 438 ]
+66 silly gunzTarPerm extractEntry deps/mpg123/Makefile.am
+67 silly gunzTarPerm modified mode [ 'deps/mpg123/Makefile.am', 420, 438 ]
+68 silly gunzTarPerm extractEntry deps/mpg123/Makefile.in
+69 silly gunzTarPerm modified mode [ 'deps/mpg123/Makefile.in', 420, 438 ]
+70 silly gunzTarPerm extractEntry deps/mpg123/NEWS
+71 silly gunzTarPerm modified mode [ 'deps/mpg123/NEWS', 420, 438 ]
+72 silly gunzTarPerm extractEntry deps/mpg123/NEWS.libmpg123
+73 silly gunzTarPerm modified mode [ 'deps/mpg123/NEWS.libmpg123', 420, 438 ]
+74 silly gunzTarPerm extractEntry deps/mpg123/AUTHORS
+75 silly gunzTarPerm modified mode [ 'deps/mpg123/AUTHORS', 420, 438 ]
+76 silly gunzTarPerm extractEntry deps/mpg123/TODO
+77 silly gunzTarPerm modified mode [ 'deps/mpg123/TODO', 420, 438 ]
+78 silly gunzTarPerm extractEntry deps/mpg123/aclocal.m4
+79 silly gunzTarPerm modified mode [ 'deps/mpg123/aclocal.m4', 420, 438 ]
+80 silly gunzTarPerm extractEntry deps/mpg123/config/freebsd/x64/config.h
+81 silly gunzTarPerm modified mode [ 'deps/mpg123/config/freebsd/x64/config.h', 420, 438 ]
+82 silly gunzTarPerm extractEntry deps/mpg123/config/freebsd/x64/mpg123.h
+83 silly gunzTarPerm modified mode [ 'deps/mpg123/config/freebsd/x64/mpg123.h', 420, 438 ]
+84 silly gunzTarPerm extractEntry deps/mpg123/config/linux/arm/config.h
+85 silly gunzTarPerm modified mode [ 'deps/mpg123/config/linux/arm/config.h', 420, 438 ]
+86 silly gunzTarPerm extractEntry deps/mpg123/config/linux/arm/mpg123.h
+87 silly gunzTarPerm modified mode [ 'deps/mpg123/config/linux/arm/mpg123.h', 420, 438 ]
+88 silly gunzTarPerm extractEntry deps/mpg123/config/linux/ia32/config.h
+89 silly gunzTarPerm modified mode [ 'deps/mpg123/config/linux/ia32/config.h', 420, 438 ]
+90 silly gunzTarPerm extractEntry deps/mpg123/config/linux/ia32/mpg123.h
+91 silly gunzTarPerm modified mode [ 'deps/mpg123/config/linux/ia32/mpg123.h', 420, 438 ]
+92 silly gunzTarPerm extractEntry deps/mpg123/config/linux/x64/config.h
+93 silly gunzTarPerm modified mode [ 'deps/mpg123/config/linux/x64/config.h', 420, 438 ]
+94 silly gunzTarPerm extractEntry deps/mpg123/config/linux/x64/mpg123.h
+95 silly gunzTarPerm modified mode [ 'deps/mpg123/config/linux/x64/mpg123.h', 420, 438 ]
+96 silly gunzTarPerm extractEntry deps/mpg123/config/mac/ia32/config.h
+97 silly gunzTarPerm modified mode [ 'deps/mpg123/config/mac/ia32/config.h', 420, 438 ]
+98 silly gunzTarPerm extractEntry deps/mpg123/config/mac/ia32/mpg123.h
+99 silly gunzTarPerm modified mode [ 'deps/mpg123/config/mac/ia32/mpg123.h', 420, 438 ]
+100 silly gunzTarPerm extractEntry deps/mpg123/config/mac/x64/config.h
+101 silly gunzTarPerm modified mode [ 'deps/mpg123/config/mac/x64/config.h', 420, 438 ]
+102 silly gunzTarPerm extractEntry deps/mpg123/config/mac/x64/mpg123.h
+103 silly gunzTarPerm modified mode [ 'deps/mpg123/config/mac/x64/mpg123.h', 420, 438 ]
+104 silly gunzTarPerm extractEntry deps/mpg123/config/solaris/ia32/config.h
+105 silly gunzTarPerm modified mode [ 'deps/mpg123/config/solaris/ia32/config.h', 420, 438 ]
+106 silly gunzTarPerm extractEntry deps/mpg123/config/solaris/ia32/mpg123.h
+107 silly gunzTarPerm modified mode [ 'deps/mpg123/config/solaris/ia32/mpg123.h', 420, 438 ]
+108 silly gunzTarPerm extractEntry deps/mpg123/config/solaris/x64/config.h
+109 silly gunzTarPerm modified mode [ 'deps/mpg123/config/solaris/x64/config.h', 420, 438 ]
+110 silly gunzTarPerm extractEntry deps/mpg123/config/solaris/x64/mpg123.h
+111 silly gunzTarPerm modified mode [ 'deps/mpg123/config/solaris/x64/mpg123.h', 420, 438 ]
+112 silly gunzTarPerm extractEntry deps/mpg123/config/win/ia32/config.h
+113 silly gunzTarPerm modified mode [ 'deps/mpg123/config/win/ia32/config.h', 420, 438 ]
+114 silly gunzTarPerm extractEntry deps/mpg123/config/win/ia32/mpg123.h
+115 silly gunzTarPerm modified mode [ 'deps/mpg123/config/win/ia32/mpg123.h', 420, 438 ]
+116 silly gunzTarPerm extractEntry deps/mpg123/config/win/x64/config.h
+117 silly gunzTarPerm modified mode [ 'deps/mpg123/config/win/x64/config.h', 420, 438 ]
+118 silly gunzTarPerm extractEntry deps/mpg123/config/win/x64/mpg123.h
+119 silly gunzTarPerm modified mode [ 'deps/mpg123/config/win/x64/mpg123.h', 420, 438 ]
+120 silly gunzTarPerm extractEntry deps/mpg123/configure
+121 silly gunzTarPerm modified mode [ 'deps/mpg123/configure', 493, 511 ]
+122 silly gunzTarPerm extractEntry deps/mpg123/COPYING
+123 silly gunzTarPerm modified mode [ 'deps/mpg123/COPYING', 420, 438 ]
+124 silly gunzTarPerm extractEntry deps/mpg123/equalize.dat
+125 silly gunzTarPerm modified mode [ 'deps/mpg123/equalize.dat', 420, 438 ]
+126 silly gunzTarPerm extractEntry deps/mpg123/libmpg123.pc.in
+127 silly gunzTarPerm modified mode [ 'deps/mpg123/libmpg123.pc.in', 420, 438 ]
+128 silly gunzTarPerm extractEntry deps/mpg123/m4/addrconfig.m4
+129 silly gunzTarPerm modified mode [ 'deps/mpg123/m4/addrconfig.m4', 420, 438 ]
+130 silly gunzTarPerm extractEntry deps/mpg123/m4/libtool.m4
+131 silly gunzTarPerm modified mode [ 'deps/mpg123/m4/libtool.m4', 420, 438 ]
+132 silly gunzTarPerm extractEntry deps/mpg123/m4/ltoptions.m4
+133 silly gunzTarPerm modified mode [ 'deps/mpg123/m4/ltoptions.m4', 420, 438 ]
+134 silly gunzTarPerm extractEntry deps/mpg123/m4/ltsugar.m4
+135 silly gunzTarPerm modified mode [ 'deps/mpg123/m4/ltsugar.m4', 420, 438 ]
+136 silly gunzTarPerm extractEntry deps/mpg123/m4/ltversion.m4
+137 silly gunzTarPerm modified mode [ 'deps/mpg123/m4/ltversion.m4', 420, 438 ]
+138 silly gunzTarPerm extractEntry deps/mpg123/m4/lt~obsolete.m4
+139 silly gunzTarPerm modified mode [ 'deps/mpg123/m4/lt~obsolete.m4', 420, 438 ]
+140 silly gunzTarPerm extractEntry deps/mpg123/makedll.sh
+141 silly gunzTarPerm modified mode [ 'deps/mpg123/makedll.sh', 420, 438 ]
+142 silly gunzTarPerm extractEntry deps/mpg123/man1/mpg123.1
+143 silly gunzTarPerm modified mode [ 'deps/mpg123/man1/mpg123.1', 420, 438 ]
+144 silly gunzTarPerm extractEntry deps/mpg123/mpg123.gyp
+145 silly gunzTarPerm modified mode [ 'deps/mpg123/mpg123.gyp', 420, 438 ]
+146 silly gunzTarPerm extractEntry deps/mpg123/mpg123.spec
+147 silly gunzTarPerm modified mode [ 'deps/mpg123/mpg123.spec', 420, 438 ]
+148 silly gunzTarPerm extractEntry deps/mpg123/mpg123.spec.in
+149 silly gunzTarPerm modified mode [ 'deps/mpg123/mpg123.spec.in', 420, 438 ]
+150 silly gunzTarPerm extractEntry deps/mpg123/scripts/benchmark-cpu.pl
+151 silly gunzTarPerm modified mode [ 'deps/mpg123/scripts/benchmark-cpu.pl', 493, 511 ]
+152 silly gunzTarPerm extractEntry deps/mpg123/scripts/tag_lyrics.py
+153 silly gunzTarPerm modified mode [ 'deps/mpg123/scripts/tag_lyrics.py', 420, 438 ]
+154 silly gunzTarPerm extractEntry deps/mpg123/src/metaprint.h
+155 silly gunzTarPerm modified mode [ 'deps/mpg123/src/metaprint.h', 420, 438 ]
+156 silly gunzTarPerm extractEntry deps/mpg123/src/Makefile.am
+157 silly gunzTarPerm modified mode [ 'deps/mpg123/src/Makefile.am', 420, 438 ]
+158 silly gunzTarPerm extractEntry deps/mpg123/src/audio.c
+159 silly gunzTarPerm modified mode [ 'deps/mpg123/src/audio.c', 420, 438 ]
+160 silly gunzTarPerm extractEntry deps/mpg123/src/audio.h
+161 silly gunzTarPerm modified mode [ 'deps/mpg123/src/audio.h', 420, 438 ]
+162 silly gunzTarPerm extractEntry deps/mpg123/src/buffer.c
+163 silly gunzTarPerm modified mode [ 'deps/mpg123/src/buffer.c', 420, 438 ]
+164 silly gunzTarPerm extractEntry deps/mpg123/src/buffer.h
+165 silly gunzTarPerm modified mode [ 'deps/mpg123/src/buffer.h', 420, 438 ]
+166 silly gunzTarPerm extractEntry deps/mpg123/src/common.c
+167 silly gunzTarPerm modified mode [ 'deps/mpg123/src/common.c', 420, 438 ]
+168 silly gunzTarPerm extractEntry deps/mpg123/src/common.h
+169 silly gunzTarPerm modified mode [ 'deps/mpg123/src/common.h', 420, 438 ]
+170 silly gunzTarPerm extractEntry deps/mpg123/src/config.h.in
+171 silly gunzTarPerm modified mode [ 'deps/mpg123/src/config.h.in', 420, 438 ]
+172 silly gunzTarPerm extractEntry deps/mpg123/src/control_generic.c
+173 silly gunzTarPerm modified mode [ 'deps/mpg123/src/control_generic.c', 420, 438 ]
+174 silly gunzTarPerm extractEntry deps/mpg123/src/equalizer.c
+175 silly gunzTarPerm modified mode [ 'deps/mpg123/src/equalizer.c', 420, 438 ]
+176 silly gunzTarPerm extractEntry deps/mpg123/src/genre.c
+177 silly gunzTarPerm modified mode [ 'deps/mpg123/src/genre.c', 420, 438 ]
+178 silly gunzTarPerm extractEntry deps/mpg123/src/genre.h
+179 silly gunzTarPerm modified mode [ 'deps/mpg123/src/genre.h', 420, 438 ]
+180 silly gunzTarPerm extractEntry deps/mpg123/src/getlopt.c
+181 silly gunzTarPerm modified mode [ 'deps/mpg123/src/getlopt.c', 420, 438 ]
+182 silly gunzTarPerm extractEntry deps/mpg123/src/getlopt.h
+183 silly gunzTarPerm modified mode [ 'deps/mpg123/src/getlopt.h', 420, 438 ]
+184 silly gunzTarPerm extractEntry deps/mpg123/src/httpget.c
+185 silly gunzTarPerm modified mode [ 'deps/mpg123/src/httpget.c', 420, 438 ]
+186 silly gunzTarPerm extractEntry deps/mpg123/src/httpget.h
+187 silly gunzTarPerm modified mode [ 'deps/mpg123/src/httpget.h', 420, 438 ]
+188 silly gunzTarPerm extractEntry deps/mpg123/src/legacy_module.c
+189 silly gunzTarPerm modified mode [ 'deps/mpg123/src/legacy_module.c', 420, 438 ]
+190 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/mpg123lib_intern.h
+191 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/mpg123lib_intern.h', 420, 438 ]
+192 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/Makefile.am
+193 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/Makefile.am', 420, 438 ]
+194 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/compat.c
+195 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/compat.c', 420, 438 ]
+196 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/compat.h
+197 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/compat.h', 420, 438 ]
+198 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct36_3dnow.S
+199 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct36_3dnow.S', 420, 438 ]
+200 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct36_3dnowext.S
+201 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct36_3dnowext.S', 420, 438 ]
+202 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64.c
+203 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64.c', 420, 438 ]
+204 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_3dnow.S
+205 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_3dnow.S', 420, 438 ]
+206 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_3dnowext.S
+207 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_3dnowext.S', 420, 438 ]
+208 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_altivec.c
+209 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_altivec.c', 420, 438 ]
+210 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_i386.c
+211 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_i386.c', 420, 438 ]
+212 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_i486.c
+213 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_i486.c', 420, 438 ]
+214 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_mmx.S
+215 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_mmx.S', 420, 438 ]
+216 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_neon.S
+217 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_neon.S', 420, 438 ]
+218 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_neon_float.S
+219 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_neon_float.S', 420, 438 ]
+220 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_sse.S
+221 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_sse.S', 420, 438 ]
+222 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_sse_float.S
+223 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_sse_float.S', 420, 438 ]
+224 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_x86_64.S
+225 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_x86_64.S', 420, 438 ]
+226 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dct64_x86_64_float.S
+227 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dct64_x86_64_float.S', 420, 438 ]
+228 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/debug.h
+229 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/debug.h', 420, 438 ]
+230 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/decode.h
+231 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/decode.h', 420, 438 ]
+232 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dither.c
+233 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dither.c', 420, 438 ]
+234 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/dither.h
+235 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/dither.h', 420, 438 ]
+236 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/equalizer.c
+237 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/equalizer.c', 420, 438 ]
+238 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/equalizer_3dnow.S
+239 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/equalizer_3dnow.S', 420, 438 ]
+240 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/feature.c
+241 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/feature.c', 420, 438 ]
+242 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/format.c
+243 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/format.c', 420, 438 ]
+244 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/frame.c
+245 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/frame.c', 420, 438 ]
+246 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/frame.h
+247 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/frame.h', 420, 438 ]
+248 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/gapless.h
+249 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/gapless.h', 420, 438 ]
+250 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/getbits.h
+251 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/getbits.h', 420, 438 ]
+252 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/getcpuflags.S
+253 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/getcpuflags.S', 420, 438 ]
+254 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/getcpuflags.h
+255 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/getcpuflags.h', 420, 438 ]
+256 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/huffman.h
+257 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/huffman.h', 420, 438 ]
+258 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/icy.c
+259 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/icy.c', 420, 438 ]
+260 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/icy.h
+261 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/icy.h', 420, 438 ]
+262 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/icy2utf8.c
+263 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/icy2utf8.c', 420, 438 ]
+264 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/icy2utf8.h
+265 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/icy2utf8.h', 420, 438 ]
+266 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/id3.c
+267 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/id3.c', 420, 438 ]
+268 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/id3.h
+269 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/id3.h', 420, 438 ]
+270 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/index.c
+271 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/index.c', 420, 438 ]
+272 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/index.h
+273 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/index.h', 420, 438 ]
+274 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/intsym.h
+275 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/intsym.h', 420, 438 ]
+276 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/l12_integer_tables.h
+277 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/l12_integer_tables.h', 420, 438 ]
+278 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/l2tables.h
+279 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/l2tables.h', 420, 438 ]
+280 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/l3_integer_tables.h
+281 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/l3_integer_tables.h', 420, 438 ]
+282 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/layer1.c
+283 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/layer1.c', 420, 438 ]
+284 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/layer2.c
+285 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/layer2.c', 420, 438 ]
+286 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/layer3.c
+287 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/layer3.c', 420, 438 ]
+288 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/lfs_alias.c
+289 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/lfs_alias.c', 420, 438 ]
+290 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/lfs_wrap.c
+291 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/lfs_wrap.c', 420, 438 ]
+292 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/libmpg123.c
+293 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/libmpg123.c', 420, 438 ]
+294 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/mangle.h
+295 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/mangle.h', 420, 438 ]
+296 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/mpeghead.h
+297 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/mpeghead.h', 420, 438 ]
+298 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/mpg123.h.in
+299 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/mpg123.h.in', 420, 438 ]
+300 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/Makefile.in
+301 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/Makefile.in', 420, 438 ]
+302 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/ntom.c
+303 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/ntom.c', 420, 438 ]
+304 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/optimize.c
+305 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/optimize.c', 420, 438 ]
+306 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/optimize.h
+307 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/optimize.h', 420, 438 ]
+308 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/parse.c
+309 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/parse.c', 420, 438 ]
+310 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/parse.h
+311 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/parse.h', 420, 438 ]
+312 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/reader.h
+313 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/reader.h', 420, 438 ]
+314 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/readers.c
+315 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/readers.c', 420, 438 ]
+316 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/sample.h
+317 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/sample.h', 420, 438 ]
+318 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/stringbuf.c
+319 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/stringbuf.c', 420, 438 ]
+320 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth.c
+321 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth.c', 420, 438 ]
+322 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth.h
+323 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth.h', 420, 438 ]
+324 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_3dnow.S
+325 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_3dnow.S', 420, 438 ]
+326 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_3dnowext.S
+327 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_3dnowext.S', 420, 438 ]
+328 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_8bit.c
+329 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_8bit.c', 420, 438 ]
+330 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_8bit.h
+331 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_8bit.h', 420, 438 ]
+332 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_altivec.c
+333 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_altivec.c', 420, 438 ]
+334 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_arm.S
+335 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_arm.S', 420, 438 ]
+336 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_arm_accurate.S
+337 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_arm_accurate.S', 420, 438 ]
+338 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_i486.c
+339 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_i486.c', 420, 438 ]
+340 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_i586.S
+341 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_i586.S', 420, 438 ]
+342 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_i586_dither.S
+343 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_i586_dither.S', 420, 438 ]
+344 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_mmx.S
+345 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_mmx.S', 420, 438 ]
+346 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_mono.h
+347 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_mono.h', 420, 438 ]
+348 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_neon.S
+349 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_neon.S', 420, 438 ]
+350 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_neon_accurate.S
+351 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_neon_accurate.S', 420, 438 ]
+352 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_neon_float.S
+353 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_neon_float.S', 420, 438 ]
+354 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_neon_s32.S
+355 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_neon_s32.S', 420, 438 ]
+356 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_ntom.h
+357 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_ntom.h', 420, 438 ]
+358 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_real.c
+359 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_real.c', 420, 438 ]
+360 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_s32.c
+361 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_s32.c', 420, 438 ]
+362 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_sse.S
+363 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_sse.S', 420, 438 ]
+364 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_sse3d.h
+365 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_sse3d.h', 420, 438 ]
+366 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_sse_accurate.S
+367 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_sse_accurate.S', 420, 438 ]
+368 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_sse_float.S
+369 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_sse_float.S', 420, 438 ]
+370 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_sse_s32.S
+371 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_sse_s32.S', 420, 438 ]
+372 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_neon.S
+373 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_neon.S', 420, 438 ]
+374 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_neon_accurate.S
+375 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_neon_accurate.S',
+375 silly gunzTarPerm   420,
+375 silly gunzTarPerm   438 ]
+376 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_neon_float.S
+377 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_neon_float.S',
+377 silly gunzTarPerm   420,
+377 silly gunzTarPerm   438 ]
+378 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_neon_s32.S
+379 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_neon_s32.S', 420, 438 ]
+380 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_sse_accurate.S
+381 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_sse_accurate.S',
+381 silly gunzTarPerm   420,
+381 silly gunzTarPerm   438 ]
+382 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_sse_float.S
+383 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_sse_float.S',
+383 silly gunzTarPerm   420,
+383 silly gunzTarPerm   438 ]
+384 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_sse_s32.S
+385 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_sse_s32.S', 420, 438 ]
+386 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_x86_64.S
+387 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_x86_64.S', 420, 438 ]
+388 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_x86_64_accurate.S
+389 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_x86_64_accurate.S',
+389 silly gunzTarPerm   420,
+389 silly gunzTarPerm   438 ]
+390 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_x86_64_float.S
+391 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_x86_64_float.S',
+391 silly gunzTarPerm   420,
+391 silly gunzTarPerm   438 ]
+392 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_stereo_x86_64_s32.S
+393 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_stereo_x86_64_s32.S',
+393 silly gunzTarPerm   420,
+393 silly gunzTarPerm   438 ]
+394 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_x86_64.S
+395 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_x86_64.S', 420, 438 ]
+396 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_x86_64_accurate.S
+397 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_x86_64_accurate.S', 420, 438 ]
+398 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_x86_64_float.S
+399 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_x86_64_float.S', 420, 438 ]
+400 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synth_x86_64_s32.S
+401 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synth_x86_64_s32.S', 420, 438 ]
+402 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/synths.h
+403 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/synths.h', 420, 438 ]
+404 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/tabinit.c
+405 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/tabinit.c', 420, 438 ]
+406 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/tabinit_mmx.S
+407 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/tabinit_mmx.S', 420, 438 ]
+408 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/testcpu.c
+409 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/testcpu.c', 420, 438 ]
+410 silly gunzTarPerm extractEntry deps/mpg123/src/libmpg123/true.h
+411 silly gunzTarPerm modified mode [ 'deps/mpg123/src/libmpg123/true.h', 420, 438 ]
+412 silly gunzTarPerm extractEntry deps/mpg123/src/local.c
+413 silly gunzTarPerm modified mode [ 'deps/mpg123/src/local.c', 420, 438 ]
+414 silly gunzTarPerm extractEntry deps/mpg123/src/local.h
+415 silly gunzTarPerm modified mode [ 'deps/mpg123/src/local.h', 420, 438 ]
+416 silly gunzTarPerm extractEntry deps/mpg123/src/metaprint.c
+417 silly gunzTarPerm modified mode [ 'deps/mpg123/src/metaprint.c', 420, 438 ]
+418 silly gunzTarPerm extractEntry deps/mpg123/src/Makefile.in
+419 silly gunzTarPerm modified mode [ 'deps/mpg123/src/Makefile.in', 420, 438 ]
+420 silly gunzTarPerm extractEntry deps/mpg123/src/module.c
+421 silly gunzTarPerm modified mode [ 'deps/mpg123/src/module.c', 420, 438 ]
+422 silly gunzTarPerm extractEntry deps/mpg123/src/module.h
+423 silly gunzTarPerm modified mode [ 'deps/mpg123/src/module.h', 420, 438 ]
+424 silly gunzTarPerm extractEntry deps/mpg123/src/mpg123.c
+425 silly gunzTarPerm modified mode [ 'deps/mpg123/src/mpg123.c', 420, 438 ]
+426 silly gunzTarPerm extractEntry deps/mpg123/src/mpg123app.h
+427 silly gunzTarPerm modified mode [ 'deps/mpg123/src/mpg123app.h', 420, 438 ]
+428 silly gunzTarPerm extractEntry deps/mpg123/src/output/nas.c
+429 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/nas.c', 420, 438 ]
+430 silly gunzTarPerm extractEntry deps/mpg123/src/output/Makefile.am
+431 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/Makefile.am', 420, 438 ]
+432 silly gunzTarPerm extractEntry deps/mpg123/src/output/aix.c
+433 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/aix.c', 420, 438 ]
+434 silly gunzTarPerm extractEntry deps/mpg123/src/output/alib.c
+435 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/alib.c', 420, 438 ]
+436 silly gunzTarPerm extractEntry deps/mpg123/src/output/alsa.c
+437 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/alsa.c', 420, 438 ]
+438 silly gunzTarPerm extractEntry deps/mpg123/src/output/arts.c
+439 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/arts.c', 420, 438 ]
+440 silly gunzTarPerm extractEntry deps/mpg123/src/output/coreaudio.c
+441 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/coreaudio.c', 420, 438 ]
+442 silly gunzTarPerm extractEntry deps/mpg123/src/output/dummy.c
+443 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/dummy.c', 420, 438 ]
+444 silly gunzTarPerm extractEntry deps/mpg123/src/output/esd.c
+445 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/esd.c', 420, 438 ]
+446 silly gunzTarPerm extractEntry deps/mpg123/src/output/hp.c
+447 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/hp.c', 420, 438 ]
+448 silly gunzTarPerm extractEntry deps/mpg123/src/output/jack.c
+449 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/jack.c', 420, 438 ]
+450 silly gunzTarPerm extractEntry deps/mpg123/src/output/mint.c
+451 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/mint.c', 420, 438 ]
+452 silly gunzTarPerm extractEntry deps/mpg123/src/output/Makefile.in
+453 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/Makefile.in', 420, 438 ]
+454 silly gunzTarPerm extractEntry deps/mpg123/src/output/openal.c
+455 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/openal.c', 420, 438 ]
+456 silly gunzTarPerm extractEntry deps/mpg123/src/output/os2.c
+457 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/os2.c', 420, 438 ]
+458 silly gunzTarPerm extractEntry deps/mpg123/src/output/oss.c
+459 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/oss.c', 420, 438 ]
+460 silly gunzTarPerm extractEntry deps/mpg123/src/output/output.h
+461 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/output.h', 420, 438 ]
+462 silly gunzTarPerm extractEntry deps/mpg123/src/output/portaudio.c
+463 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/portaudio.c', 420, 438 ]
+464 silly gunzTarPerm extractEntry deps/mpg123/src/output/pulse.c
+465 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/pulse.c', 420, 438 ]
+466 silly gunzTarPerm extractEntry deps/mpg123/src/output/sdl.c
+467 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/sdl.c', 420, 438 ]
+468 silly gunzTarPerm extractEntry deps/mpg123/src/output/sgi.c
+469 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/sgi.c', 420, 438 ]
+470 silly gunzTarPerm extractEntry deps/mpg123/src/output/sndio.c
+471 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/sndio.c', 420, 438 ]
+472 silly gunzTarPerm extractEntry deps/mpg123/src/output/sun.c
+473 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/sun.c', 420, 438 ]
+474 silly gunzTarPerm extractEntry deps/mpg123/src/output/win32.c
+475 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/win32.c', 420, 438 ]
+476 silly gunzTarPerm extractEntry deps/mpg123/src/output/win32_wasapi.c
+477 silly gunzTarPerm modified mode [ 'deps/mpg123/src/output/win32_wasapi.c', 420, 438 ]
+478 silly gunzTarPerm extractEntry deps/mpg123/src/playlist.c
+479 silly gunzTarPerm modified mode [ 'deps/mpg123/src/playlist.c', 420, 438 ]
+480 silly gunzTarPerm extractEntry deps/mpg123/src/playlist.h
+481 silly gunzTarPerm modified mode [ 'deps/mpg123/src/playlist.h', 420, 438 ]
+482 silly gunzTarPerm extractEntry deps/mpg123/src/resolver.c
+483 silly gunzTarPerm modified mode [ 'deps/mpg123/src/resolver.c', 420, 438 ]
+484 silly gunzTarPerm extractEntry deps/mpg123/src/resolver.h
+485 silly gunzTarPerm modified mode [ 'deps/mpg123/src/resolver.h', 420, 438 ]
+486 silly gunzTarPerm extractEntry deps/mpg123/src/sfifo.c
+487 silly gunzTarPerm modified mode [ 'deps/mpg123/src/sfifo.c', 420, 438 ]
+488 silly gunzTarPerm extractEntry deps/mpg123/src/sfifo.h
+489 silly gunzTarPerm modified mode [ 'deps/mpg123/src/sfifo.h', 420, 438 ]
+490 silly gunzTarPerm extractEntry deps/mpg123/src/streamdump.c
+491 silly gunzTarPerm modified mode [ 'deps/mpg123/src/streamdump.c', 420, 438 ]
+492 silly gunzTarPerm extractEntry deps/mpg123/src/streamdump.h
+493 silly gunzTarPerm modified mode [ 'deps/mpg123/src/streamdump.h', 420, 438 ]
+494 silly gunzTarPerm extractEntry deps/mpg123/src/term.c
+495 silly gunzTarPerm modified mode [ 'deps/mpg123/src/term.c', 420, 438 ]
+496 silly gunzTarPerm extractEntry deps/mpg123/src/term.h
+497 silly gunzTarPerm modified mode [ 'deps/mpg123/src/term.h', 420, 438 ]
+498 silly gunzTarPerm extractEntry deps/mpg123/src/wav.c
+499 silly gunzTarPerm modified mode [ 'deps/mpg123/src/wav.c', 420, 438 ]
+500 silly gunzTarPerm extractEntry deps/mpg123/src/wavhead.h
+501 silly gunzTarPerm modified mode [ 'deps/mpg123/src/wavhead.h', 420, 438 ]
+502 silly gunzTarPerm extractEntry deps/mpg123/src/win32_net.c
+503 silly gunzTarPerm modified mode [ 'deps/mpg123/src/win32_net.c', 493, 511 ]
+504 silly gunzTarPerm extractEntry deps/mpg123/src/win32_support.c
+505 silly gunzTarPerm modified mode [ 'deps/mpg123/src/win32_support.c', 493, 511 ]
+506 silly gunzTarPerm extractEntry deps/mpg123/src/win32_support.h
+507 silly gunzTarPerm modified mode [ 'deps/mpg123/src/win32_support.h', 493, 511 ]
+508 silly gunzTarPerm extractEntry deps/mpg123/src/xfermem.c
+509 silly gunzTarPerm modified mode [ 'deps/mpg123/src/xfermem.c', 420, 438 ]
+510 silly gunzTarPerm extractEntry deps/mpg123/src/xfermem.h
+511 silly gunzTarPerm modified mode [ 'deps/mpg123/src/xfermem.h', 420, 438 ]
+512 silly gunzTarPerm extractEntry deps/mpg123/test.c
+513 silly gunzTarPerm modified mode [ 'deps/mpg123/test.c', 420, 438 ]
+514 silly gunzTarPerm extractEntry deps/mpg123/test_output.c
+515 silly gunzTarPerm modified mode [ 'deps/mpg123/test_output.c', 420, 438 ]
+516 silly gunzTarPerm extractEntry deps/mpg123/windows-builds.sh
+517 silly gunzTarPerm modified mode [ 'deps/mpg123/windows-builds.sh', 493, 511 ]
+518 silly gunzTarPerm extractEntry binding.gyp
+519 silly gunzTarPerm modified mode [ 'binding.gyp', 420, 438 ]
+520 silly gunzTarPerm extractEntry .travis.yml
+521 silly gunzTarPerm modified mode [ '.travis.yml', 420, 438 ]
+522 silly gunzTarPerm extractEntry examples/sine.js
+523 silly gunzTarPerm modified mode [ 'examples/sine.js', 420, 438 ]
+524 silly gunzTarPerm extractEntry examples/stdin.js
+525 silly gunzTarPerm modified mode [ 'examples/stdin.js', 420, 438 ]
+526 silly gunzTarPerm extractEntry History.md
+527 silly gunzTarPerm modified mode [ 'History.md', 420, 438 ]
+528 silly gunzTarPerm extractEntry appveyor.yml
+529 silly gunzTarPerm modified mode [ 'appveyor.yml', 420, 438 ]
+530 silly gunzTarPerm extractEntry src/binding.cc
+531 silly gunzTarPerm modified mode [ 'src/binding.cc', 420, 438 ]
+532 silly gunzTarPerm extractEntry src/node_pointer.h
+533 silly gunzTarPerm modified mode [ 'src/node_pointer.h', 420, 438 ]
+534 silly gunzTarPerm extractEntry test/test.js
+535 silly gunzTarPerm modified mode [ 'test/test.js', 420, 438 ]
+536 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\package.json
+537 info preinstall speaker@0.3.0
+538 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\package.json
+539 silly prepareForInstallMany adding bindings@^1.2.1 from speaker dependencies
+540 silly prepareForInstallMany adding debug@^2.2.0 from speaker dependencies
+541 silly prepareForInstallMany adding nan@^2.2.0 from speaker dependencies
+542 silly prepareForInstallMany adding readable-stream@^2.0.5 from speaker dependencies
+543 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\package.json
+544 silly cache add args [ 'debug@^2.2.0', null ]
+545 verbose cache add spec debug@^2.2.0
+546 silly cache add parsed spec Result {
+546 silly cache add   raw: 'debug@^2.2.0',
+546 silly cache add   scope: null,
+546 silly cache add   name: 'debug',
+546 silly cache add   rawSpec: '^2.2.0',
+546 silly cache add   spec: '>=2.2.0 <3.0.0',
+546 silly cache add   type: 'range' }
+547 silly addNamed debug@>=2.2.0 <3.0.0
+548 verbose addNamed ">=2.2.0 <3.0.0" is a valid semver range for debug
+549 silly addNameRange { name: 'debug', range: '>=2.2.0 <3.0.0', hasData: false }
+550 silly mapToRegistry name debug
+551 silly mapToRegistry using default registry
+552 silly mapToRegistry registry https://registry.npmjs.org/
+553 silly mapToRegistry uri https://registry.npmjs.org/debug
+554 verbose addNameRange registry:https://registry.npmjs.org/debug not in flight; fetching
+555 silly cache add args [ 'nan@^2.2.0', null ]
+556 verbose cache add spec nan@^2.2.0
+557 silly cache add parsed spec Result {
+557 silly cache add   raw: 'nan@^2.2.0',
+557 silly cache add   scope: null,
+557 silly cache add   name: 'nan',
+557 silly cache add   rawSpec: '^2.2.0',
+557 silly cache add   spec: '>=2.2.0 <3.0.0',
+557 silly cache add   type: 'range' }
+558 silly addNamed nan@>=2.2.0 <3.0.0
+559 verbose addNamed ">=2.2.0 <3.0.0" is a valid semver range for nan
+560 silly addNameRange { name: 'nan', range: '>=2.2.0 <3.0.0', hasData: false }
+561 silly mapToRegistry name nan
+562 silly mapToRegistry using default registry
+563 silly mapToRegistry registry https://registry.npmjs.org/
+564 silly mapToRegistry uri https://registry.npmjs.org/nan
+565 verbose addNameRange registry:https://registry.npmjs.org/nan not in flight; fetching
+566 silly cache add args [ 'readable-stream@^2.0.5', null ]
+567 verbose cache add spec readable-stream@^2.0.5
+568 silly cache add parsed spec Result {
+568 silly cache add   raw: 'readable-stream@^2.0.5',
+568 silly cache add   scope: null,
+568 silly cache add   name: 'readable-stream',
+568 silly cache add   rawSpec: '^2.0.5',
+568 silly cache add   spec: '>=2.0.5 <3.0.0',
+568 silly cache add   type: 'range' }
+569 silly addNamed readable-stream@>=2.0.5 <3.0.0
+570 verbose addNamed ">=2.0.5 <3.0.0" is a valid semver range for readable-stream
+571 silly addNameRange { name: 'readable-stream',
+571 silly addNameRange   range: '>=2.0.5 <3.0.0',
+571 silly addNameRange   hasData: false }
+572 silly mapToRegistry name readable-stream
+573 silly mapToRegistry using default registry
+574 silly mapToRegistry registry https://registry.npmjs.org/
+575 silly mapToRegistry uri https://registry.npmjs.org/readable-stream
+576 verbose addNameRange registry:https://registry.npmjs.org/readable-stream not in flight; fetching
+577 silly cache add args [ 'bindings@^1.2.1', null ]
+578 verbose cache add spec bindings@^1.2.1
+579 silly cache add parsed spec Result {
+579 silly cache add   raw: 'bindings@^1.2.1',
+579 silly cache add   scope: null,
+579 silly cache add   name: 'bindings',
+579 silly cache add   rawSpec: '^1.2.1',
+579 silly cache add   spec: '>=1.2.1 <2.0.0',
+579 silly cache add   type: 'range' }
+580 silly addNamed bindings@>=1.2.1 <2.0.0
+581 verbose addNamed ">=1.2.1 <2.0.0" is a valid semver range for bindings
+582 silly addNameRange { name: 'bindings', range: '>=1.2.1 <2.0.0', hasData: false }
+583 silly mapToRegistry name bindings
+584 silly mapToRegistry using default registry
+585 silly mapToRegistry registry https://registry.npmjs.org/
+586 silly mapToRegistry uri https://registry.npmjs.org/bindings
+587 verbose addNameRange registry:https://registry.npmjs.org/bindings not in flight; fetching
+588 verbose request uri https://registry.npmjs.org/debug
+589 verbose request no auth needed
+590 info attempt registry request try #1 at 2:03:29 PM
+591 verbose request using bearer token for auth
+592 verbose etag "C4LFMWX6TGRHQ5NNI1WWRPHTB"
+593 http request GET https://registry.npmjs.org/debug
+594 verbose request uri https://registry.npmjs.org/readable-stream
+595 verbose request no auth needed
+596 info attempt registry request try #1 at 2:03:29 PM
+597 verbose request using bearer token for auth
+598 verbose etag "E9VURFQDJSVN7SKYIIMYUOYYK"
+599 http request GET https://registry.npmjs.org/readable-stream
+600 verbose request uri https://registry.npmjs.org/nan
+601 verbose request no auth needed
+602 info attempt registry request try #1 at 2:03:29 PM
+603 verbose request using bearer token for auth
+604 verbose etag "24B26O57Z0ASCDVIYEYKA8KVW"
+605 http request GET https://registry.npmjs.org/nan
+606 verbose request uri https://registry.npmjs.org/bindings
+607 verbose request no auth needed
+608 info attempt registry request try #1 at 2:03:29 PM
+609 verbose request using bearer token for auth
+610 verbose etag "5MNVCWCD1NYN71LZKTD8QDCME"
+611 http request GET https://registry.npmjs.org/bindings
+612 http 304 https://registry.npmjs.org/nan
+613 verbose headers { 'cache-control': 'max-age=300',
+613 verbose headers   'accept-ranges': 'bytes',
+613 verbose headers   date: 'Sat, 21 May 2016 13:03:28 GMT',
+613 verbose headers   via: '1.1 varnish',
+613 verbose headers   connection: 'keep-alive',
+613 verbose headers   'x-served-by': 'cache-lcy1121-LCY',
+613 verbose headers   'x-cache': 'MISS',
+613 verbose headers   'x-cache-hits': '0',
+613 verbose headers   'x-timer': 'S1463835808.772308,VS0,VE90',
+613 verbose headers   vary: 'Accept-Encoding' }
+614 silly get cb [ 304,
+614 silly get   { 'cache-control': 'max-age=300',
+614 silly get     'accept-ranges': 'bytes',
+614 silly get     date: 'Sat, 21 May 2016 13:03:28 GMT',
+614 silly get     via: '1.1 varnish',
+614 silly get     connection: 'keep-alive',
+614 silly get     'x-served-by': 'cache-lcy1121-LCY',
+614 silly get     'x-cache': 'MISS',
+614 silly get     'x-cache-hits': '0',
+614 silly get     'x-timer': 'S1463835808.772308,VS0,VE90',
+614 silly get     vary: 'Accept-Encoding' } ]
+615 verbose etag https://registry.npmjs.org/nan from cache
+616 verbose get saving nan to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\nan\.cache.json
+617 silly addNameRange number 2 { name: 'nan', range: '>=2.2.0 <3.0.0', hasData: true }
+618 silly addNameRange versions [ 'nan',
+618 silly addNameRange   [ '0.3.0-wip',
+618 silly addNameRange     '0.3.0-wip2',
+618 silly addNameRange     '0.3.0',
+618 silly addNameRange     '0.3.1',
+618 silly addNameRange     '0.3.2',
+618 silly addNameRange     '0.4.0',
+618 silly addNameRange     '0.4.1',
+618 silly addNameRange     '0.4.2',
+618 silly addNameRange     '0.4.3',
+618 silly addNameRange     '0.4.4',
+618 silly addNameRange     '0.5.0',
+618 silly addNameRange     '0.5.1',
+618 silly addNameRange     '0.5.2',
+618 silly addNameRange     '0.6.0',
+618 silly addNameRange     '0.7.0',
+618 silly addNameRange     '0.7.1',
+618 silly addNameRange     '0.8.0',
+618 silly addNameRange     '1.0.0',
+618 silly addNameRange     '1.1.0',
+618 silly addNameRange     '1.1.1',
+618 silly addNameRange     '1.1.2',
+618 silly addNameRange     '1.2.0',
+618 silly addNameRange     '1.3.0',
+618 silly addNameRange     '1.4.0',
+618 silly addNameRange     '1.4.1',
+618 silly addNameRange     '1.5.0',
+618 silly addNameRange     '1.4.2',
+618 silly addNameRange     '1.4.3',
+618 silly addNameRange     '1.5.1',
+618 silly addNameRange     '1.5.2',
+618 silly addNameRange     '1.6.0',
+618 silly addNameRange     '1.5.3',
+618 silly addNameRange     '1.6.1',
+618 silly addNameRange     '1.6.2',
+618 silly addNameRange     '1.7.0',
+618 silly addNameRange     '1.8.0',
+618 silly addNameRange     '1.8.1',
+618 silly addNameRange     '1.8.2',
+618 silly addNameRange     '1.8.3',
+618 silly addNameRange     '1.8.4',
+618 silly addNameRange     '1.9.0',
+618 silly addNameRange     '2.0.0',
+618 silly addNameRange     '2.0.1',
+618 silly addNameRange     '2.0.2',
+618 silly addNameRange     '2.0.3',
+618 silly addNameRange     '2.0.4',
+618 silly addNameRange     '2.0.5',
+618 silly addNameRange     '2.0.6',
+618 silly addNameRange     '2.0.7',
+618 silly addNameRange     '2.0.8',
+618 silly addNameRange     '2.0.9',
+618 silly addNameRange     '2.1.0',
+618 silly addNameRange     '2.2.0',
+618 silly addNameRange     '2.2.1',
+618 silly addNameRange     '2.3.0',
+618 silly addNameRange     '2.3.1',
+618 silly addNameRange     '2.3.2',
+618 silly addNameRange     '2.3.3' ] ]
+619 silly addNamed nan@2.3.3
+620 verbose addNamed "2.3.3" is a plain semver version for nan
+621 silly cache afterAdd nan@2.3.3
+622 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\nan\2.3.3\package\package.json not in flight; writing
+623 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\nan\2.3.3\package\package.json written
+624 http 304 https://registry.npmjs.org/readable-stream
+625 verbose headers { 'cache-control': 'max-age=300',
+625 verbose headers   'accept-ranges': 'bytes',
+625 verbose headers   date: 'Sat, 21 May 2016 13:03:28 GMT',
+625 verbose headers   via: '1.1 varnish',
+625 verbose headers   connection: 'keep-alive',
+625 verbose headers   'x-served-by': 'cache-lcy1120-LCY',
+625 verbose headers   'x-cache': 'MISS',
+625 verbose headers   'x-cache-hits': '0',
+625 verbose headers   'x-timer': 'S1463835808.772574,VS0,VE170',
+625 verbose headers   vary: 'Accept-Encoding' }
+626 silly get cb [ 304,
+626 silly get   { 'cache-control': 'max-age=300',
+626 silly get     'accept-ranges': 'bytes',
+626 silly get     date: 'Sat, 21 May 2016 13:03:28 GMT',
+626 silly get     via: '1.1 varnish',
+626 silly get     connection: 'keep-alive',
+626 silly get     'x-served-by': 'cache-lcy1120-LCY',
+626 silly get     'x-cache': 'MISS',
+626 silly get     'x-cache-hits': '0',
+626 silly get     'x-timer': 'S1463835808.772574,VS0,VE170',
+626 silly get     vary: 'Accept-Encoding' } ]
+627 verbose etag https://registry.npmjs.org/readable-stream from cache
+628 verbose get saving readable-stream to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\readable-stream\.cache.json
+629 silly addNameRange number 2 { name: 'readable-stream',
+629 silly addNameRange   range: '>=2.0.5 <3.0.0',
+629 silly addNameRange   hasData: true }
+630 silly addNameRange versions [ 'readable-stream',
+630 silly addNameRange   [ '0.0.1',
+630 silly addNameRange     '0.0.2',
+630 silly addNameRange     '0.0.3',
+630 silly addNameRange     '0.0.4',
+630 silly addNameRange     '0.1.0',
+630 silly addNameRange     '0.2.0',
+630 silly addNameRange     '0.3.0',
+630 silly addNameRange     '0.3.1',
+630 silly addNameRange     '1.0.0',
+630 silly addNameRange     '1.0.1',
+630 silly addNameRange     '1.0.2',
+630 silly addNameRange     '1.0.15',
+630 silly addNameRange     '1.0.17',
+630 silly addNameRange     '1.1.7',
+630 silly addNameRange     '1.1.8',
+630 silly addNameRange     '1.1.9',
+630 silly addNameRange     '1.0.24',
+630 silly addNameRange     '1.0.25',
+630 silly addNameRange     '1.1.10',
+630 silly addNameRange     '1.0.25-1',
+630 silly addNameRange     '1.1.11',
+630 silly addNameRange     '1.0.26',
+630 silly addNameRange     '1.0.26-1',
+630 silly addNameRange     '1.1.11-1',
+630 silly addNameRange     '1.0.26-2',
+630 silly addNameRange     '1.1.12',
+630 silly addNameRange     '1.0.26-3',
+630 silly addNameRange     '1.0.26-4',
+630 silly addNameRange     '1.1.12-1',
+630 silly addNameRange     '1.0.27-1',
+630 silly addNameRange     '1.1.13-1',
+630 silly addNameRange     '1.0.31',
+630 silly addNameRange     '1.1.13',
+630 silly addNameRange     '1.0.32',
+630 silly addNameRange     '1.0.32-1',
+630 silly addNameRange     '1.0.33-1',
+630 silly addNameRange     '1.0.33-2',
+630 silly addNameRange     '1.0.33',
+630 silly addNameRange     '2.0.0',
+630 silly addNameRange     '2.0.1',
+630 silly addNameRange     '2.0.2',
+630 silly addNameRange     '2.0.3',
+630 silly addNameRange     '2.0.4',
+630 silly addNameRange     '2.0.5',
+630 silly addNameRange     '2.0.6',
+630 silly addNameRange     '1.0.34',
+630 silly addNameRange     '1.1.14',
+630 silly addNameRange     '2.1.0',
+630 silly addNameRange     '2.1.1',
+630 silly addNameRange     '2.1.2',
+630 silly addNameRange     '2.1.3',
+630 silly addNameRange     '2.1.4' ] ]
+631 silly addNamed readable-stream@2.1.4
+632 verbose addNamed "2.1.4" is a plain semver version for readable-stream
+633 http 304 https://registry.npmjs.org/debug
+634 verbose headers { 'cache-control': 'max-age=300',
+634 verbose headers   'accept-ranges': 'bytes',
+634 verbose headers   date: 'Sat, 21 May 2016 13:03:28 GMT',
+634 verbose headers   via: '1.1 varnish',
+634 verbose headers   connection: 'keep-alive',
+634 verbose headers   'x-served-by': 'cache-lcy1132-LCY',
+634 verbose headers   'x-cache': 'MISS',
+634 verbose headers   'x-cache-hits': '0',
+634 verbose headers   'x-timer': 'S1463835808.769330,VS0,VE182',
+634 verbose headers   vary: 'Accept-Encoding' }
+635 silly get cb [ 304,
+635 silly get   { 'cache-control': 'max-age=300',
+635 silly get     'accept-ranges': 'bytes',
+635 silly get     date: 'Sat, 21 May 2016 13:03:28 GMT',
+635 silly get     via: '1.1 varnish',
+635 silly get     connection: 'keep-alive',
+635 silly get     'x-served-by': 'cache-lcy1132-LCY',
+635 silly get     'x-cache': 'MISS',
+635 silly get     'x-cache-hits': '0',
+635 silly get     'x-timer': 'S1463835808.769330,VS0,VE182',
+635 silly get     vary: 'Accept-Encoding' } ]
+636 verbose etag https://registry.npmjs.org/debug from cache
+637 verbose get saving debug to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\debug\.cache.json
+638 silly cache afterAdd readable-stream@2.1.4
+639 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\readable-stream\2.1.4\package\package.json not in flight; writing
+640 silly addNameRange number 2 { name: 'debug', range: '>=2.2.0 <3.0.0', hasData: true }
+641 silly addNameRange versions [ 'debug',
+641 silly addNameRange   [ '0.0.1',
+641 silly addNameRange     '0.1.0',
+641 silly addNameRange     '0.2.0',
+641 silly addNameRange     '0.3.0',
+641 silly addNameRange     '0.4.0',
+641 silly addNameRange     '0.4.1',
+641 silly addNameRange     '0.5.0',
+641 silly addNameRange     '0.6.0',
+641 silly addNameRange     '0.7.0',
+641 silly addNameRange     '0.7.1',
+641 silly addNameRange     '0.7.2',
+641 silly addNameRange     '0.7.3',
+641 silly addNameRange     '0.7.4',
+641 silly addNameRange     '0.8.0',
+641 silly addNameRange     '0.8.1',
+641 silly addNameRange     '1.0.0',
+641 silly addNameRange     '1.0.1',
+641 silly addNameRange     '1.0.2',
+641 silly addNameRange     '1.0.3',
+641 silly addNameRange     '1.0.4',
+641 silly addNameRange     '2.0.0',
+641 silly addNameRange     '2.1.0',
+641 silly addNameRange     '2.1.1',
+641 silly addNameRange     '2.1.2',
+641 silly addNameRange     '2.1.3',
+641 silly addNameRange     '2.2.0' ] ]
+642 silly addNamed debug@2.2.0
+643 verbose addNamed "2.2.0" is a plain semver version for debug
+644 silly cache afterAdd debug@2.2.0
+645 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\debug\2.2.0\package\package.json not in flight; writing
+646 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\readable-stream\2.1.4\package\package.json written
+647 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\debug\2.2.0\package\package.json written
+648 http 304 https://registry.npmjs.org/bindings
+649 verbose headers { 'cache-control': 'max-age=300',
+649 verbose headers   'accept-ranges': 'bytes',
+649 verbose headers   date: 'Sat, 21 May 2016 13:03:29 GMT',
+649 verbose headers   via: '1.1 varnish',
+649 verbose headers   connection: 'keep-alive',
+649 verbose headers   'x-served-by': 'cache-lcy1127-LCY',
+649 verbose headers   'x-cache': 'MISS',
+649 verbose headers   'x-cache-hits': '0',
+649 verbose headers   'x-timer': 'S1463835808.772790,VS0,VE716',
+649 verbose headers   vary: 'Accept-Encoding' }
+650 silly get cb [ 304,
+650 silly get   { 'cache-control': 'max-age=300',
+650 silly get     'accept-ranges': 'bytes',
+650 silly get     date: 'Sat, 21 May 2016 13:03:29 GMT',
+650 silly get     via: '1.1 varnish',
+650 silly get     connection: 'keep-alive',
+650 silly get     'x-served-by': 'cache-lcy1127-LCY',
+650 silly get     'x-cache': 'MISS',
+650 silly get     'x-cache-hits': '0',
+650 silly get     'x-timer': 'S1463835808.772790,VS0,VE716',
+650 silly get     vary: 'Accept-Encoding' } ]
+651 verbose etag https://registry.npmjs.org/bindings from cache
+652 verbose get saving bindings to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\bindings\.cache.json
+653 silly addNameRange number 2 { name: 'bindings', range: '>=1.2.1 <2.0.0', hasData: true }
+654 silly addNameRange versions [ 'bindings',
+654 silly addNameRange   [ '0.0.1',
+654 silly addNameRange     '0.1.0',
+654 silly addNameRange     '0.1.1',
+654 silly addNameRange     '0.2.0',
+654 silly addNameRange     '0.2.1',
+654 silly addNameRange     '0.2.2',
+654 silly addNameRange     '0.2.3',
+654 silly addNameRange     '0.2.4',
+654 silly addNameRange     '0.3.0',
+654 silly addNameRange     '0.4.0',
+654 silly addNameRange     '1.0.0',
+654 silly addNameRange     '1.1.0',
+654 silly addNameRange     '1.1.1',
+654 silly addNameRange     '1.2.0',
+654 silly addNameRange     '1.2.1' ] ]
+655 silly addNamed bindings@1.2.1
+656 verbose addNamed "1.2.1" is a plain semver version for bindings
+657 silly cache afterAdd bindings@1.2.1
+658 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\bindings\1.2.1\package\package.json not in flight; writing
+659 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\bindings\1.2.1\package\package.json written
+660 silly install resolved [ { name: 'nan',
+660 silly install resolved     version: '2.3.3',
+660 silly install resolved     description: 'Native Abstractions for Node.js: C++ header for Node 0.8 -> 6 compatibility',
+660 silly install resolved     main: 'include_dirs.js',
+660 silly install resolved     repository: { type: 'git', url: 'git://github.com/nodejs/nan.git' },
+660 silly install resolved     scripts:
+660 silly install resolved      { test: 'tap --gc --stderr test/js/*-test.js',
+660 silly install resolved        'rebuild-tests': 'node-gyp rebuild --msvs_version=2013 --directory test',
+660 silly install resolved        docs: 'doc/.build.sh' },
+660 silly install resolved     contributors:
+660 silly install resolved      [ [Object],
+660 silly install resolved        [Object],
+660 silly install resolved        [Object],
+660 silly install resolved        [Object],
+660 silly install resolved        [Object],
+660 silly install resolved        [Object],
+660 silly install resolved        [Object] ],
+660 silly install resolved     devDependencies:
+660 silly install resolved      { bindings: '~1.2.1',
+660 silly install resolved        commander: '^2.8.1',
+660 silly install resolved        glob: '^5.0.14',
+660 silly install resolved        'node-gyp': '~3.0.1',
+660 silly install resolved        tap: '~0.7.1',
+660 silly install resolved        xtend: '~4.0.0' },
+660 silly install resolved     license: 'MIT',
+660 silly install resolved     bugs: { url: 'https://github.com/nodejs/nan/issues' },
+660 silly install resolved     homepage: 'https://github.com/nodejs/nan#readme',
+660 silly install resolved     _id: 'nan@2.3.3',
+660 silly install resolved     _shasum: '64dd83c9704a83648b6c72b401f6384bd94ef16f',
+660 silly install resolved     _resolved: 'https://registry.npmjs.org/nan/-/nan-2.3.3.tgz',
+660 silly install resolved     _from: 'nan@>=2.2.0 <3.0.0',
+660 silly install resolved     _npmVersion: '3.3.6',
+660 silly install resolved     _nodeVersion: '5.0.0',
+660 silly install resolved     _npmUser: { name: 'kkoopa', email: 'bbyholm@abo.fi' },
+660 silly install resolved     dist:
+660 silly install resolved      { shasum: '64dd83c9704a83648b6c72b401f6384bd94ef16f',
+660 silly install resolved        tarball: 'https://registry.npmjs.org/nan/-/nan-2.3.3.tgz' },
+660 silly install resolved     maintainers: [ [Object], [Object] ],
+660 silly install resolved     _npmOperationalInternal:
+660 silly install resolved      { host: 'packages-16-east.internal.npmjs.com',
+660 silly install resolved        tmp: 'tmp/nan-2.3.3.tgz_1462313618725_0.044748055282980204' },
+660 silly install resolved     directories: {},
+660 silly install resolved     readme: 'ERROR: No README data found!' },
+660 silly install resolved   { name: 'readable-stream',
+660 silly install resolved     version: '2.1.4',
+660 silly install resolved     description: 'Streams3, a user-land copy of the stream library from Node.js',
+660 silly install resolved     main: 'readable.js',
+660 silly install resolved     dependencies:
+660 silly install resolved      { 'buffer-shims': '^1.0.0',
+660 silly install resolved        'core-util-is': '~1.0.0',
+660 silly install resolved        inherits: '~2.0.1',
+660 silly install resolved        isarray: '~1.0.0',
+660 silly install resolved        'process-nextick-args': '~1.0.6',
+660 silly install resolved        string_decoder: '~0.10.x',
+660 silly install resolved        'util-deprecate': '~1.0.1' },
+660 silly install resolved     devDependencies:
+660 silly install resolved      { assert: '~1.4.0',
+660 silly install resolved        nyc: '^6.4.0',
+660 silly install resolved        tap: '~0.7.1',
+660 silly install resolved        tape: '~4.5.1',
+660 silly install resolved        zuul: '~3.9.0',
+660 silly install resolved        'zuul-ngrok': '^4.0.0' },
+660 silly install resolved     scripts:
+660 silly install resolved      { test: 'tap test/parallel/*.js test/ours/*.js',
+660 silly install resolved        browser: 'npm run write-zuul && zuul -- test/browser.js',
+660 silly install resolved        'write-zuul': 'printf "ui: tape\ntunnel: ngrok\nbrowsers:\n  - name: $BROWSER_NAME\n    version: $BROWSER_VERSION\n">.zuul.yml',
+660 silly install resolved        local: 'zuul --local -- test/browser.js',
+660 silly install resolved        cover: 'nyc npm test',
+660 silly install resolved        report: 'nyc report --reporter=lcov' },
+660 silly install resolved     repository:
+660 silly install resolved      { type: 'git',
+660 silly install resolved        url: 'git://github.com/nodejs/readable-stream.git' },
+660 silly install resolved     keywords: [ 'readable', 'stream', 'pipe' ],
+660 silly install resolved     browser: { util: false },
+660 silly install resolved     nyc: { include: [Object] },
+660 silly install resolved     license: 'MIT',
+660 silly install resolved     gitHead: '7752832fba237929388dea6c96911a0a6379abfc',
+660 silly install resolved     bugs: { url: 'https://github.com/nodejs/readable-stream/issues' },
+660 silly install resolved     _id: 'readable-stream@2.1.4',
+660 silly install resolved     _shasum: '70b9791c6fcb8480db44bd155a0f6bb58f172468',
+660 silly install resolved     _from: 'readable-stream@>=2.0.5 <3.0.0',
+660 silly install resolved     _npmVersion: '3.8.6',
+660 silly install resolved     _nodeVersion: '5.11.0',
+660 silly install resolved     _npmUser: { name: 'cwmma', email: 'calvin.metcalf@gmail.com' },
+660 silly install resolved     dist:
+660 silly install resolved      { shasum: '70b9791c6fcb8480db44bd155a0f6bb58f172468',
+660 silly install resolved        tarball: 'https://registry.npmjs.org/readable-stream/-/readable-stream-2.1.4.tgz' },
+660 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object] ],
+660 silly install resolved     _npmOperationalInternal:
+660 silly install resolved      { host: 'packages-12-west.internal.npmjs.com',
+660 silly install resolved        tmp: 'tmp/readable-stream-2.1.4.tgz_1463679605032_0.6917394688352942' },
+660 silly install resolved     directories: {},
+660 silly install resolved     _resolved: 'https://registry.npmjs.org/readable-stream/-/readable-stream-2.1.4.tgz',
+660 silly install resolved     readme: 'ERROR: No README data found!',
+660 silly install resolved     homepage: 'https://github.com/nodejs/readable-stream#readme' },
+660 silly install resolved   { name: 'debug',
+660 silly install resolved     version: '2.2.0',
+660 silly install resolved     repository: { type: 'git', url: 'git://github.com/visionmedia/debug.git' },
+660 silly install resolved     description: 'small debugging utility',
+660 silly install resolved     keywords: [ 'debug', 'log', 'debugger' ],
+660 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+660 silly install resolved     contributors: [ [Object] ],
+660 silly install resolved     license: 'MIT',
+660 silly install resolved     dependencies: { ms: '0.7.1' },
+660 silly install resolved     devDependencies: { browserify: '9.0.3', mocha: '*' },
+660 silly install resolved     main: './node.js',
+660 silly install resolved     browser: './browser.js',
+660 silly install resolved     component: { scripts: [Object] },
+660 silly install resolved     gitHead: 'b38458422b5aa8aa6d286b10dfe427e8a67e2b35',
+660 silly install resolved     bugs: { url: 'https://github.com/visionmedia/debug/issues' },
+660 silly install resolved     homepage: 'https://github.com/visionmedia/debug',
+660 silly install resolved     _id: 'debug@2.2.0',
+660 silly install resolved     scripts: {},
+660 silly install resolved     _shasum: 'f87057e995b1a1f6ae6a4960664137bc56f039da',
+660 silly install resolved     _from: 'debug@>=2.2.0 <3.0.0',
+660 silly install resolved     _npmVersion: '2.7.4',
+660 silly install resolved     _nodeVersion: '0.12.2',
+660 silly install resolved     _npmUser: { name: 'tootallnate', email: 'nathan@tootallnate.net' },
+660 silly install resolved     maintainers: [ [Object], [Object] ],
+660 silly install resolved     dist:
+660 silly install resolved      { shasum: 'f87057e995b1a1f6ae6a4960664137bc56f039da',
+660 silly install resolved        tarball: 'http://registry.npmjs.org/debug/-/debug-2.2.0.tgz' },
+660 silly install resolved     directories: {},
+660 silly install resolved     _resolved: 'https://registry.npmjs.org/debug/-/debug-2.2.0.tgz',
+660 silly install resolved     readme: 'ERROR: No README data found!' },
+660 silly install resolved   { name: 'bindings',
+660 silly install resolved     description: 'Helper module for loading your native module\'s .node file',
+660 silly install resolved     keywords: [ 'native', 'addon', 'bindings', 'gyp', 'waf', 'c', 'c++' ],
+660 silly install resolved     version: '1.2.1',
+660 silly install resolved     author:
+660 silly install resolved      { name: 'Nathan Rajlich',
+660 silly install resolved        email: 'nathan@tootallnate.net',
+660 silly install resolved        url: 'http://tootallnate.net' },
+660 silly install resolved     repository:
+660 silly install resolved      { type: 'git',
+660 silly install resolved        url: 'git://github.com/TooTallNate/node-bindings.git' },
+660 silly install resolved     main: './bindings.js',
+660 silly install resolved     bugs: { url: 'https://github.com/TooTallNate/node-bindings/issues' },
+660 silly install resolved     homepage: 'https://github.com/TooTallNate/node-bindings',
+660 silly install resolved     license: 'MIT',
+660 silly install resolved     gitHead: 'e404152ee27f8478ccbc7122ee051246e8e5ec02',
+660 silly install resolved     _id: 'bindings@1.2.1',
+660 silly install resolved     scripts: {},
+660 silly install resolved     _shasum: '14ad6113812d2d37d72e67b4cacb4bb726505f11',
+660 silly install resolved     _from: 'bindings@>=1.2.1 <2.0.0',
+660 silly install resolved     _npmVersion: '1.4.14',
+660 silly install resolved     _npmUser: { name: 'tootallnate', email: 'nathan@tootallnate.net' },
+660 silly install resolved     maintainers: [ [Object], [Object] ],
+660 silly install resolved     dist:
+660 silly install resolved      { shasum: '14ad6113812d2d37d72e67b4cacb4bb726505f11',
+660 silly install resolved        tarball: 'http://registry.npmjs.org/bindings/-/bindings-1.2.1.tgz' },
+660 silly install resolved     directories: {},
+660 silly install resolved     _resolved: 'https://registry.npmjs.org/bindings/-/bindings-1.2.1.tgz',
+660 silly install resolved     readme: 'ERROR: No README data found!' } ]
+661 info install nan@2.3.3 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+662 info install readable-stream@2.1.4 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+663 info install debug@2.2.0 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+664 info install bindings@1.2.1 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+665 info installOne nan@2.3.3
+666 verbose installOne of nan to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker not in flight; installing
+667 info installOne readable-stream@2.1.4
+668 verbose installOne of readable-stream to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker not in flight; installing
+669 info installOne debug@2.2.0
+670 verbose installOne of debug to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker not in flight; installing
+671 info installOne bindings@1.2.1
+672 verbose installOne of bindings to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker not in flight; installing
+673 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\nan-80e7629b27bd7cb6.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan
+674 silly install write writing nan 2.3.3 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan
+675 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\bindings-cd7b046c9e690643.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings
+676 silly install write writing bindings 1.2.1 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings
+677 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\readable-stream-b2df3042de9ef224.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+678 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\debug-79fdfbc370e7493d.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug
+679 verbose unbuild node_modules\speaker\node_modules\nan
+680 silly install write writing readable-stream 2.1.4 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+681 silly install write writing debug 2.2.0 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug
+682 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan is being purged from base C:\Users\Dell\AppData\Roaming\npm
+683 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan
+684 verbose unbuild node_modules\speaker\node_modules\bindings
+685 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\nan\2.3.3\package.tgz
+686 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan
+687 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan is being purged
+688 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan
+689 verbose unbuild node_modules\speaker\node_modules\readable-stream
+690 verbose unbuild node_modules\speaker\node_modules\debug
+691 silly gunzTarPerm modes [ '777', '666' ]
+692 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings is being purged from base C:\Users\Dell\AppData\Roaming\npm
+693 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings
+694 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream is being purged from base C:\Users\Dell\AppData\Roaming\npm
+695 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+696 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug is being purged from base C:\Users\Dell\AppData\Roaming\npm
+697 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug
+698 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\bindings\1.2.1\package.tgz
+699 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings
+700 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings is being purged
+701 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings
+702 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\readable-stream\2.1.4\package.tgz
+703 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+704 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream is being purged
+705 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+706 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\debug\2.2.0\package.tgz
+707 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug
+708 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug is being purged
+709 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug
+710 silly gunzTarPerm modes [ '777', '666' ]
+711 silly gunzTarPerm modes [ '777', '666' ]
+712 silly gunzTarPerm modes [ '777', '666' ]
+713 silly gunzTarPerm extractEntry package.json
+714 silly gunzTarPerm modified mode [ 'package.json', 436, 438 ]
+715 silly gunzTarPerm extractEntry package.json
+716 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+717 silly gunzTarPerm extractEntry README.md
+718 silly gunzTarPerm modified mode [ 'README.md', 436, 438 ]
+719 silly gunzTarPerm extractEntry include_dirs.js
+720 silly gunzTarPerm modified mode [ 'include_dirs.js', 436, 438 ]
+721 silly gunzTarPerm extractEntry package.json
+722 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+723 silly gunzTarPerm extractEntry README.md
+724 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+725 silly gunzTarPerm extractEntry bindings.js
+726 silly gunzTarPerm modified mode [ 'bindings.js', 420, 438 ]
+727 silly gunzTarPerm extractEntry .npmignore
+728 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+729 silly gunzTarPerm extractEntry README.md
+730 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+731 silly gunzTarPerm extractEntry nan_converters.h
+732 silly gunzTarPerm modified mode [ 'nan_converters.h', 436, 438 ]
+733 silly gunzTarPerm extractEntry LICENSE.md
+734 silly gunzTarPerm modified mode [ 'LICENSE.md', 436, 438 ]
+735 silly gunzTarPerm extractEntry doc/node_misc.md
+736 silly gunzTarPerm modified mode [ 'doc/node_misc.md', 436, 438 ]
+737 silly gunzTarPerm extractEntry doc/asyncworker.md
+738 silly gunzTarPerm modified mode [ 'doc/asyncworker.md', 436, 438 ]
+739 silly gunzTarPerm extractEntry package.json
+740 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+741 silly gunzTarPerm extractEntry .npmignore
+742 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+743 silly gunzTarPerm extractEntry node.js
+744 silly gunzTarPerm modified mode [ 'node.js', 420, 438 ]
+745 silly gunzTarPerm extractEntry doc/callback.md
+746 silly gunzTarPerm modified mode [ 'doc/callback.md', 436, 438 ]
+747 silly gunzTarPerm extractEntry doc/converters.md
+748 silly gunzTarPerm modified mode [ 'doc/converters.md', 436, 438 ]
+749 silly gunzTarPerm extractEntry LICENSE
+750 silly gunzTarPerm modified mode [ 'LICENSE', 420, 438 ]
+751 silly gunzTarPerm extractEntry writable.js
+752 silly gunzTarPerm modified mode [ 'writable.js', 420, 438 ]
+753 silly gunzTarPerm extractEntry transform.js
+754 silly gunzTarPerm modified mode [ 'transform.js', 420, 438 ]
+755 silly gunzTarPerm extractEntry readable.js
+756 silly gunzTarPerm modified mode [ 'readable.js', 420, 438 ]
+757 silly gunzTarPerm extractEntry debug.js
+758 silly gunzTarPerm modified mode [ 'debug.js', 420, 438 ]
+759 silly gunzTarPerm extractEntry browser.js
+760 silly gunzTarPerm modified mode [ 'browser.js', 420, 438 ]
+761 silly gunzTarPerm extractEntry doc/errors.md
+762 silly gunzTarPerm modified mode [ 'doc/errors.md', 436, 438 ]
+763 silly gunzTarPerm extractEntry doc/maybe_types.md
+764 silly gunzTarPerm modified mode [ 'doc/maybe_types.md', 436, 438 ]
+765 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings\package.json
+766 silly gunzTarPerm extractEntry Readme.md
+767 silly gunzTarPerm modified mode [ 'Readme.md', 420, 438 ]
+768 silly gunzTarPerm extractEntry passthrough.js
+769 silly gunzTarPerm modified mode [ 'passthrough.js', 420, 438 ]
+770 silly gunzTarPerm extractEntry duplex.js
+771 silly gunzTarPerm modified mode [ 'duplex.js', 420, 438 ]
+772 info preinstall bindings@1.2.1
+773 silly gunzTarPerm extractEntry doc/methods.md
+774 silly gunzTarPerm modified mode [ 'doc/methods.md', 436, 438 ]
+775 silly gunzTarPerm extractEntry doc/new.md
+776 silly gunzTarPerm modified mode [ 'doc/new.md', 436, 438 ]
+777 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings\package.json
+778 silly gunzTarPerm extractEntry doc/stream.md
+779 silly gunzTarPerm modified mode [ 'doc/stream.md', 420, 438 ]
+780 silly gunzTarPerm extractEntry doc/wg-meetings/2015-01-30.md
+781 silly gunzTarPerm modified mode [ 'doc/wg-meetings/2015-01-30.md', 420, 438 ]
+782 silly gunzTarPerm extractEntry lib/_stream_duplex.js
+783 silly gunzTarPerm modified mode [ 'lib/_stream_duplex.js', 420, 438 ]
+784 silly gunzTarPerm extractEntry lib/_stream_passthrough.js
+785 silly gunzTarPerm modified mode [ 'lib/_stream_passthrough.js', 420, 438 ]
+786 silly gunzTarPerm extractEntry lib/_stream_readable.js
+787 silly gunzTarPerm modified mode [ 'lib/_stream_readable.js', 420, 438 ]
+788 silly gunzTarPerm extractEntry lib/_stream_transform.js
+789 silly gunzTarPerm modified mode [ 'lib/_stream_transform.js', 420, 438 ]
+790 silly gunzTarPerm extractEntry lib/_stream_writable.js
+791 silly gunzTarPerm modified mode [ 'lib/_stream_writable.js', 420, 438 ]
+792 silly gunzTarPerm extractEntry .travis.yml
+793 silly gunzTarPerm modified mode [ '.travis.yml', 420, 438 ]
+794 silly gunzTarPerm extractEntry doc/buffers.md
+795 silly gunzTarPerm modified mode [ 'doc/buffers.md', 436, 438 ]
+796 silly gunzTarPerm extractEntry doc/object_wrappers.md
+797 silly gunzTarPerm modified mode [ 'doc/object_wrappers.md', 436, 438 ]
+798 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings\package.json
+799 silly gunzTarPerm extractEntry bower.json
+800 silly gunzTarPerm modified mode [ 'bower.json', 420, 438 ]
+801 silly gunzTarPerm extractEntry .jshintrc
+802 silly gunzTarPerm modified mode [ '.jshintrc', 420, 438 ]
+803 silly install resolved []
+804 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings
+805 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings
+806 silly gunzTarPerm extractEntry doc/persistent.md
+807 silly gunzTarPerm modified mode [ 'doc/persistent.md', 436, 438 ]
+808 silly gunzTarPerm extractEntry doc/scopes.md
+809 silly gunzTarPerm modified mode [ 'doc/scopes.md', 436, 438 ]
+810 info linkStuff bindings@1.2.1
+811 silly linkStuff bindings@1.2.1 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules as its parent node_modules
+812 silly linkStuff bindings@1.2.1 is part of a global install
+813 silly linkStuff bindings@1.2.1 is installed into a global node_modules
+814 silly gunzTarPerm extractEntry doc/script.md
+815 silly gunzTarPerm modified mode [ 'doc/script.md', 436, 438 ]
+816 silly gunzTarPerm extractEntry doc/string_bytes.md
+817 silly gunzTarPerm modified mode [ 'doc/string_bytes.md', 436, 438 ]
+818 verbose linkBins bindings@1.2.1
+819 verbose linkMans bindings@1.2.1
+820 verbose rebuildBundles bindings@1.2.1
+821 silly gunzTarPerm extractEntry component.json
+822 silly gunzTarPerm modified mode [ 'component.json', 420, 438 ]
+823 silly gunzTarPerm extractEntry Makefile
+824 silly gunzTarPerm modified mode [ 'Makefile', 420, 438 ]
+825 info install bindings@1.2.1
+826 info postinstall bindings@1.2.1
+827 silly gunzTarPerm extractEntry doc/v8_internals.md
+828 silly gunzTarPerm modified mode [ 'doc/v8_internals.md', 436, 438 ]
+829 silly gunzTarPerm extractEntry doc/v8_misc.md
+830 silly gunzTarPerm modified mode [ 'doc/v8_misc.md', 436, 438 ]
+831 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\bindings-cd7b046c9e690643.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\bindings
+832 silly gunzTarPerm extractEntry History.md
+833 silly gunzTarPerm modified mode [ 'History.md', 420, 438 ]
+834 silly gunzTarPerm extractEntry nan.h
+835 silly gunzTarPerm modified mode [ 'nan.h', 436, 438 ]
+836 silly gunzTarPerm extractEntry nan_callbacks.h
+837 silly gunzTarPerm modified mode [ 'nan_callbacks.h', 436, 438 ]
+838 silly gunzTarPerm extractEntry nan_callbacks_12_inl.h
+839 silly gunzTarPerm modified mode [ 'nan_callbacks_12_inl.h', 436, 438 ]
+840 silly gunzTarPerm extractEntry nan_callbacks_pre_12_inl.h
+841 silly gunzTarPerm modified mode [ 'nan_callbacks_pre_12_inl.h', 436, 438 ]
+842 silly gunzTarPerm extractEntry nan_converters_43_inl.h
+843 silly gunzTarPerm modified mode [ 'nan_converters_43_inl.h', 436, 438 ]
+844 silly gunzTarPerm extractEntry nan_converters_pre_43_inl.h
+845 silly gunzTarPerm modified mode [ 'nan_converters_pre_43_inl.h', 436, 438 ]
+846 silly gunzTarPerm extractEntry nan_implementation_12_inl.h
+847 silly gunzTarPerm modified mode [ 'nan_implementation_12_inl.h', 436, 438 ]
+848 silly gunzTarPerm extractEntry nan_implementation_pre_12_inl.h
+849 silly gunzTarPerm modified mode [ 'nan_implementation_pre_12_inl.h', 436, 438 ]
+850 silly gunzTarPerm extractEntry nan_maybe_43_inl.h
+851 silly gunzTarPerm modified mode [ 'nan_maybe_43_inl.h', 436, 438 ]
+852 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\package.json
+853 silly gunzTarPerm extractEntry nan_maybe_pre_43_inl.h
+854 silly gunzTarPerm modified mode [ 'nan_maybe_pre_43_inl.h', 436, 438 ]
+855 silly gunzTarPerm extractEntry nan_new.h
+856 silly gunzTarPerm modified mode [ 'nan_new.h', 436, 438 ]
+857 info preinstall debug@2.2.0
+858 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\package.json
+859 silly gunzTarPerm extractEntry nan_object_wrap.h
+860 silly gunzTarPerm modified mode [ 'nan_object_wrap.h', 436, 438 ]
+861 silly gunzTarPerm extractEntry nan_persistent_12_inl.h
+862 silly gunzTarPerm modified mode [ 'nan_persistent_12_inl.h', 436, 438 ]
+863 silly prepareForInstallMany adding ms@0.7.1 from debug dependencies
+864 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\package.json
+865 silly gunzTarPerm extractEntry nan_persistent_pre_12_inl.h
+866 silly gunzTarPerm modified mode [ 'nan_persistent_pre_12_inl.h', 436, 438 ]
+867 silly gunzTarPerm extractEntry nan_string_bytes.h
+868 silly gunzTarPerm modified mode [ 'nan_string_bytes.h', 436, 438 ]
+869 silly cache add args [ 'ms@0.7.1', null ]
+870 verbose cache add spec ms@0.7.1
+871 silly cache add parsed spec Result {
+871 silly cache add   raw: 'ms@0.7.1',
+871 silly cache add   scope: null,
+871 silly cache add   name: 'ms',
+871 silly cache add   rawSpec: '0.7.1',
+871 silly cache add   spec: '0.7.1',
+871 silly cache add   type: 'version' }
+872 silly addNamed ms@0.7.1
+873 verbose addNamed "0.7.1" is a plain semver version for ms
+874 silly mapToRegistry name ms
+875 silly mapToRegistry using default registry
+876 silly mapToRegistry registry https://registry.npmjs.org/
+877 silly mapToRegistry uri https://registry.npmjs.org/ms
+878 verbose addNameVersion registry:https://registry.npmjs.org/ms not in flight; fetching
+879 verbose request uri https://registry.npmjs.org/ms
+880 verbose request no auth needed
+881 info attempt registry request try #1 at 2:03:30 PM
+882 verbose request using bearer token for auth
+883 verbose etag "5143492BBX5I18XHV9RBWJ2GY"
+884 http request GET https://registry.npmjs.org/ms
+885 silly gunzTarPerm extractEntry nan_typedarray_contents.h
+886 silly gunzTarPerm modified mode [ 'nan_typedarray_contents.h', 436, 438 ]
+887 silly gunzTarPerm extractEntry nan_weak.h
+888 silly gunzTarPerm modified mode [ 'nan_weak.h', 436, 438 ]
+889 silly gunzTarPerm extractEntry CHANGELOG.md
+890 silly gunzTarPerm modified mode [ 'CHANGELOG.md', 436, 438 ]
+891 silly gunzTarPerm extractEntry tools/package.json
+892 silly gunzTarPerm modified mode [ 'tools/package.json', 436, 438 ]
+893 silly gunzTarPerm extractEntry tools/README.md
+894 silly gunzTarPerm modified mode [ 'tools/README.md', 436, 438 ]
+895 silly gunzTarPerm extractEntry tools/1to2.js
+896 silly gunzTarPerm modified mode [ 'tools/1to2.js', 509, 511 ]
+897 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\package.json
+898 info preinstall readable-stream@2.1.4
+899 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\package.json
+900 silly prepareForInstallMany adding buffer-shims@^1.0.0 from readable-stream dependencies
+901 silly prepareForInstallMany adding core-util-is@~1.0.0 from readable-stream dependencies
+902 silly prepareForInstallMany adding inherits@~2.0.1 from readable-stream dependencies
+903 silly prepareForInstallMany adding isarray@~1.0.0 from readable-stream dependencies
+904 silly prepareForInstallMany adding process-nextick-args@~1.0.6 from readable-stream dependencies
+905 silly prepareForInstallMany adding string_decoder@~0.10.x from readable-stream dependencies
+906 silly prepareForInstallMany adding util-deprecate@~1.0.1 from readable-stream dependencies
+907 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\package.json
+908 silly cache add args [ 'buffer-shims@^1.0.0', null ]
+909 verbose cache add spec buffer-shims@^1.0.0
+910 silly cache add args [ 'core-util-is@~1.0.0', null ]
+911 verbose cache add spec core-util-is@~1.0.0
+912 silly cache add parsed spec Result {
+912 silly cache add   raw: 'buffer-shims@^1.0.0',
+912 silly cache add   scope: null,
+912 silly cache add   name: 'buffer-shims',
+912 silly cache add   rawSpec: '^1.0.0',
+912 silly cache add   spec: '>=1.0.0 <2.0.0',
+912 silly cache add   type: 'range' }
+913 silly addNamed buffer-shims@>=1.0.0 <2.0.0
+914 verbose addNamed ">=1.0.0 <2.0.0" is a valid semver range for buffer-shims
+915 silly addNameRange { name: 'buffer-shims', range: '>=1.0.0 <2.0.0', hasData: false }
+916 silly mapToRegistry name buffer-shims
+917 silly mapToRegistry using default registry
+918 silly mapToRegistry registry https://registry.npmjs.org/
+919 silly mapToRegistry uri https://registry.npmjs.org/buffer-shims
+920 verbose addNameRange registry:https://registry.npmjs.org/buffer-shims not in flight; fetching
+921 silly cache add parsed spec Result {
+921 silly cache add   raw: 'core-util-is@~1.0.0',
+921 silly cache add   scope: null,
+921 silly cache add   name: 'core-util-is',
+921 silly cache add   rawSpec: '~1.0.0',
+921 silly cache add   spec: '>=1.0.0 <1.1.0',
+921 silly cache add   type: 'range' }
+922 silly addNamed core-util-is@>=1.0.0 <1.1.0
+923 verbose addNamed ">=1.0.0 <1.1.0" is a valid semver range for core-util-is
+924 silly addNameRange { name: 'core-util-is', range: '>=1.0.0 <1.1.0', hasData: false }
+925 silly mapToRegistry name core-util-is
+926 silly mapToRegistry using default registry
+927 silly mapToRegistry registry https://registry.npmjs.org/
+928 silly mapToRegistry uri https://registry.npmjs.org/core-util-is
+929 verbose addNameRange registry:https://registry.npmjs.org/core-util-is not in flight; fetching
+930 silly cache add args [ 'inherits@~2.0.1', null ]
+931 verbose cache add spec inherits@~2.0.1
+932 silly cache add parsed spec Result {
+932 silly cache add   raw: 'inherits@~2.0.1',
+932 silly cache add   scope: null,
+932 silly cache add   name: 'inherits',
+932 silly cache add   rawSpec: '~2.0.1',
+932 silly cache add   spec: '>=2.0.1 <2.1.0',
+932 silly cache add   type: 'range' }
+933 silly addNamed inherits@>=2.0.1 <2.1.0
+934 verbose addNamed ">=2.0.1 <2.1.0" is a valid semver range for inherits
+935 silly addNameRange { name: 'inherits', range: '>=2.0.1 <2.1.0', hasData: false }
+936 silly mapToRegistry name inherits
+937 silly mapToRegistry using default registry
+938 silly mapToRegistry registry https://registry.npmjs.org/
+939 silly mapToRegistry uri https://registry.npmjs.org/inherits
+940 verbose addNameRange registry:https://registry.npmjs.org/inherits not in flight; fetching
+941 silly cache add args [ 'isarray@~1.0.0', null ]
+942 verbose cache add spec isarray@~1.0.0
+943 silly cache add parsed spec Result {
+943 silly cache add   raw: 'isarray@~1.0.0',
+943 silly cache add   scope: null,
+943 silly cache add   name: 'isarray',
+943 silly cache add   rawSpec: '~1.0.0',
+943 silly cache add   spec: '>=1.0.0 <1.1.0',
+943 silly cache add   type: 'range' }
+944 silly addNamed isarray@>=1.0.0 <1.1.0
+945 verbose addNamed ">=1.0.0 <1.1.0" is a valid semver range for isarray
+946 silly addNameRange { name: 'isarray', range: '>=1.0.0 <1.1.0', hasData: false }
+947 silly mapToRegistry name isarray
+948 silly mapToRegistry using default registry
+949 silly mapToRegistry registry https://registry.npmjs.org/
+950 silly mapToRegistry uri https://registry.npmjs.org/isarray
+951 verbose addNameRange registry:https://registry.npmjs.org/isarray not in flight; fetching
+952 silly cache add args [ 'process-nextick-args@~1.0.6', null ]
+953 verbose cache add spec process-nextick-args@~1.0.6
+954 silly cache add parsed spec Result {
+954 silly cache add   raw: 'process-nextick-args@~1.0.6',
+954 silly cache add   scope: null,
+954 silly cache add   name: 'process-nextick-args',
+954 silly cache add   rawSpec: '~1.0.6',
+954 silly cache add   spec: '>=1.0.6 <1.1.0',
+954 silly cache add   type: 'range' }
+955 silly addNamed process-nextick-args@>=1.0.6 <1.1.0
+956 verbose addNamed ">=1.0.6 <1.1.0" is a valid semver range for process-nextick-args
+957 silly addNameRange { name: 'process-nextick-args',
+957 silly addNameRange   range: '>=1.0.6 <1.1.0',
+957 silly addNameRange   hasData: false }
+958 silly mapToRegistry name process-nextick-args
+959 silly mapToRegistry using default registry
+960 silly mapToRegistry registry https://registry.npmjs.org/
+961 silly mapToRegistry uri https://registry.npmjs.org/process-nextick-args
+962 verbose addNameRange registry:https://registry.npmjs.org/process-nextick-args not in flight; fetching
+963 silly cache add args [ 'string_decoder@~0.10.x', null ]
+964 verbose cache add spec string_decoder@~0.10.x
+965 silly cache add parsed spec Result {
+965 silly cache add   raw: 'string_decoder@~0.10.x',
+965 silly cache add   scope: null,
+965 silly cache add   name: 'string_decoder',
+965 silly cache add   rawSpec: '~0.10.x',
+965 silly cache add   spec: '>=0.10.0 <0.11.0',
+965 silly cache add   type: 'range' }
+966 silly addNamed string_decoder@>=0.10.0 <0.11.0
+967 verbose addNamed ">=0.10.0 <0.11.0" is a valid semver range for string_decoder
+968 silly addNameRange { name: 'string_decoder',
+968 silly addNameRange   range: '>=0.10.0 <0.11.0',
+968 silly addNameRange   hasData: false }
+969 silly mapToRegistry name string_decoder
+970 silly mapToRegistry using default registry
+971 silly mapToRegistry registry https://registry.npmjs.org/
+972 silly mapToRegistry uri https://registry.npmjs.org/string_decoder
+973 verbose addNameRange registry:https://registry.npmjs.org/string_decoder not in flight; fetching
+974 silly cache add args [ 'util-deprecate@~1.0.1', null ]
+975 verbose cache add spec util-deprecate@~1.0.1
+976 silly cache add parsed spec Result {
+976 silly cache add   raw: 'util-deprecate@~1.0.1',
+976 silly cache add   scope: null,
+976 silly cache add   name: 'util-deprecate',
+976 silly cache add   rawSpec: '~1.0.1',
+976 silly cache add   spec: '>=1.0.1 <1.1.0',
+976 silly cache add   type: 'range' }
+977 silly addNamed util-deprecate@>=1.0.1 <1.1.0
+978 verbose addNamed ">=1.0.1 <1.1.0" is a valid semver range for util-deprecate
+979 silly addNameRange { name: 'util-deprecate',
+979 silly addNameRange   range: '>=1.0.1 <1.1.0',
+979 silly addNameRange   hasData: false }
+980 silly mapToRegistry name util-deprecate
+981 silly mapToRegistry using default registry
+982 silly mapToRegistry registry https://registry.npmjs.org/
+983 silly mapToRegistry uri https://registry.npmjs.org/util-deprecate
+984 verbose addNameRange registry:https://registry.npmjs.org/util-deprecate not in flight; fetching
+985 verbose request uri https://registry.npmjs.org/buffer-shims
+986 verbose request no auth needed
+987 info attempt registry request try #1 at 2:03:30 PM
+988 verbose request using bearer token for auth
+989 verbose etag "EHTLU3BE2PY4VZ30RONTAM8RD"
+990 http request GET https://registry.npmjs.org/buffer-shims
+991 verbose request uri https://registry.npmjs.org/core-util-is
+992 verbose request no auth needed
+993 info attempt registry request try #1 at 2:03:30 PM
+994 verbose request using bearer token for auth
+995 verbose etag "75RK9UUWAHLYO40UZKLLOJ8YF"
+996 http request GET https://registry.npmjs.org/core-util-is
+997 verbose request uri https://registry.npmjs.org/inherits
+998 verbose request no auth needed
+999 info attempt registry request try #1 at 2:03:30 PM
+1000 verbose request using bearer token for auth
+1001 verbose etag "9C23BNETE30UZVYRVML0QUTBX"
+1002 http request GET https://registry.npmjs.org/inherits
+1003 verbose request uri https://registry.npmjs.org/isarray
+1004 verbose request no auth needed
+1005 info attempt registry request try #1 at 2:03:30 PM
+1006 verbose request using bearer token for auth
+1007 verbose etag "9BAUPW5RTV3W0838KA6Y08NTG"
+1008 http request GET https://registry.npmjs.org/isarray
+1009 verbose request uri https://registry.npmjs.org/string_decoder
+1010 verbose request no auth needed
+1011 info attempt registry request try #1 at 2:03:30 PM
+1012 verbose request using bearer token for auth
+1013 verbose etag "3SLQP4XEWUIBONOV855WOPR0B"
+1014 http request GET https://registry.npmjs.org/string_decoder
+1015 verbose request uri https://registry.npmjs.org/process-nextick-args
+1016 verbose request no auth needed
+1017 info attempt registry request try #1 at 2:03:30 PM
+1018 verbose request using bearer token for auth
+1019 verbose etag "EJ6O60AA1ABD69WZ5R3W1IDX1"
+1020 http request GET https://registry.npmjs.org/process-nextick-args
+1021 verbose request uri https://registry.npmjs.org/util-deprecate
+1022 verbose request no auth needed
+1023 info attempt registry request try #1 at 2:03:30 PM
+1024 verbose request using bearer token for auth
+1025 verbose etag "363T1WE4HHZV0LMEHAOBAVT0G"
+1026 http request GET https://registry.npmjs.org/util-deprecate
+1027 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan\package.json
+1028 info preinstall nan@2.3.3
+1029 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan\package.json
+1030 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan\package.json
+1031 silly install resolved []
+1032 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan
+1033 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan
+1034 info linkStuff nan@2.3.3
+1035 silly linkStuff nan@2.3.3 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules as its parent node_modules
+1036 silly linkStuff nan@2.3.3 is part of a global install
+1037 silly linkStuff nan@2.3.3 is installed into a global node_modules
+1038 verbose linkBins nan@2.3.3
+1039 verbose linkMans nan@2.3.3
+1040 verbose rebuildBundles nan@2.3.3
+1041 info install nan@2.3.3
+1042 info postinstall nan@2.3.3
+1043 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\nan-80e7629b27bd7cb6.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\nan
+1044 http 304 https://registry.npmjs.org/isarray
+1045 verbose headers { 'cache-control': 'max-age=300',
+1045 verbose headers   'accept-ranges': 'bytes',
+1045 verbose headers   date: 'Sat, 21 May 2016 13:03:29 GMT',
+1045 verbose headers   via: '1.1 varnish',
+1045 verbose headers   connection: 'keep-alive',
+1045 verbose headers   'x-served-by': 'cache-lcy1121-LCY',
+1045 verbose headers   'x-cache': 'MISS',
+1045 verbose headers   'x-cache-hits': '0',
+1045 verbose headers   'x-timer': 'S1463835809.800465,VS0,VE86',
+1045 verbose headers   vary: 'Accept-Encoding' }
+1046 silly get cb [ 304,
+1046 silly get   { 'cache-control': 'max-age=300',
+1046 silly get     'accept-ranges': 'bytes',
+1046 silly get     date: 'Sat, 21 May 2016 13:03:29 GMT',
+1046 silly get     via: '1.1 varnish',
+1046 silly get     connection: 'keep-alive',
+1046 silly get     'x-served-by': 'cache-lcy1121-LCY',
+1046 silly get     'x-cache': 'MISS',
+1046 silly get     'x-cache-hits': '0',
+1046 silly get     'x-timer': 'S1463835809.800465,VS0,VE86',
+1046 silly get     vary: 'Accept-Encoding' } ]
+1047 verbose etag https://registry.npmjs.org/isarray from cache
+1048 verbose get saving isarray to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\isarray\.cache.json
+1049 silly addNameRange number 2 { name: 'isarray', range: '>=1.0.0 <1.1.0', hasData: true }
+1050 silly addNameRange versions [ 'isarray', [ '0.0.0', '0.0.1', '1.0.0' ] ]
+1051 silly addNamed isarray@1.0.0
+1052 verbose addNamed "1.0.0" is a plain semver version for isarray
+1053 silly cache afterAdd isarray@1.0.0
+1054 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\isarray\1.0.0\package\package.json not in flight; writing
+1055 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\isarray\1.0.0\package\package.json written
+1056 http 304 https://registry.npmjs.org/process-nextick-args
+1057 verbose headers { 'cache-control': 'max-age=300',
+1057 verbose headers   'accept-ranges': 'bytes',
+1057 verbose headers   date: 'Sat, 21 May 2016 13:03:29 GMT',
+1057 verbose headers   via: '1.1 varnish',
+1057 verbose headers   connection: 'keep-alive',
+1057 verbose headers   'x-served-by': 'cache-lcy1125-LCY',
+1057 verbose headers   'x-cache': 'MISS',
+1057 verbose headers   'x-cache-hits': '0',
+1057 verbose headers   'x-timer': 'S1463835809.800844,VS0,VE165',
+1057 verbose headers   vary: 'Accept-Encoding' }
+1058 silly get cb [ 304,
+1058 silly get   { 'cache-control': 'max-age=300',
+1058 silly get     'accept-ranges': 'bytes',
+1058 silly get     date: 'Sat, 21 May 2016 13:03:29 GMT',
+1058 silly get     via: '1.1 varnish',
+1058 silly get     connection: 'keep-alive',
+1058 silly get     'x-served-by': 'cache-lcy1125-LCY',
+1058 silly get     'x-cache': 'MISS',
+1058 silly get     'x-cache-hits': '0',
+1058 silly get     'x-timer': 'S1463835809.800844,VS0,VE165',
+1058 silly get     vary: 'Accept-Encoding' } ]
+1059 verbose etag https://registry.npmjs.org/process-nextick-args from cache
+1060 verbose get saving process-nextick-args to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\process-nextick-args\.cache.json
+1061 silly addNameRange number 2 { name: 'process-nextick-args',
+1061 silly addNameRange   range: '>=1.0.6 <1.1.0',
+1061 silly addNameRange   hasData: true }
+1062 silly addNameRange versions [ 'process-nextick-args',
+1062 silly addNameRange   [ '1.0.0',
+1062 silly addNameRange     '1.0.1',
+1062 silly addNameRange     '1.0.2',
+1062 silly addNameRange     '1.0.3',
+1062 silly addNameRange     '1.0.4',
+1062 silly addNameRange     '1.0.5',
+1062 silly addNameRange     '1.0.6',
+1062 silly addNameRange     '1.0.7' ] ]
+1063 silly addNamed process-nextick-args@1.0.7
+1064 verbose addNamed "1.0.7" is a plain semver version for process-nextick-args
+1065 silly cache afterAdd process-nextick-args@1.0.7
+1066 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\process-nextick-args\1.0.7\package\package.json not in flight; writing
+1067 http 304 https://registry.npmjs.org/string_decoder
+1068 verbose headers { 'cache-control': 'max-age=300',
+1068 verbose headers   'accept-ranges': 'bytes',
+1068 verbose headers   date: 'Sat, 21 May 2016 13:03:29 GMT',
+1068 verbose headers   via: '1.1 varnish',
+1068 verbose headers   connection: 'keep-alive',
+1068 verbose headers   'x-served-by': 'cache-lcy1120-LCY',
+1068 verbose headers   'x-cache': 'MISS',
+1068 verbose headers   'x-cache-hits': '0',
+1068 verbose headers   'x-timer': 'S1463835809.800534,VS0,VE174',
+1068 verbose headers   vary: 'Accept-Encoding' }
+1069 silly get cb [ 304,
+1069 silly get   { 'cache-control': 'max-age=300',
+1069 silly get     'accept-ranges': 'bytes',
+1069 silly get     date: 'Sat, 21 May 2016 13:03:29 GMT',
+1069 silly get     via: '1.1 varnish',
+1069 silly get     connection: 'keep-alive',
+1069 silly get     'x-served-by': 'cache-lcy1120-LCY',
+1069 silly get     'x-cache': 'MISS',
+1069 silly get     'x-cache-hits': '0',
+1069 silly get     'x-timer': 'S1463835809.800534,VS0,VE174',
+1069 silly get     vary: 'Accept-Encoding' } ]
+1070 verbose etag https://registry.npmjs.org/string_decoder from cache
+1071 verbose get saving string_decoder to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\string_decoder\.cache.json
+1072 http 304 https://registry.npmjs.org/util-deprecate
+1073 verbose headers { 'cache-control': 'max-age=300',
+1073 verbose headers   'accept-ranges': 'bytes',
+1073 verbose headers   date: 'Sat, 21 May 2016 13:03:29 GMT',
+1073 verbose headers   via: '1.1 varnish',
+1073 verbose headers   connection: 'keep-alive',
+1073 verbose headers   'x-served-by': 'cache-lcy1125-LCY',
+1073 verbose headers   'x-cache': 'MISS',
+1073 verbose headers   'x-cache-hits': '0',
+1073 verbose headers   'x-timer': 'S1463835809.804893,VS0,VE173',
+1073 verbose headers   vary: 'Accept-Encoding' }
+1074 silly get cb [ 304,
+1074 silly get   { 'cache-control': 'max-age=300',
+1074 silly get     'accept-ranges': 'bytes',
+1074 silly get     date: 'Sat, 21 May 2016 13:03:29 GMT',
+1074 silly get     via: '1.1 varnish',
+1074 silly get     connection: 'keep-alive',
+1074 silly get     'x-served-by': 'cache-lcy1125-LCY',
+1074 silly get     'x-cache': 'MISS',
+1074 silly get     'x-cache-hits': '0',
+1074 silly get     'x-timer': 'S1463835809.804893,VS0,VE173',
+1074 silly get     vary: 'Accept-Encoding' } ]
+1075 verbose etag https://registry.npmjs.org/util-deprecate from cache
+1076 verbose get saving util-deprecate to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\util-deprecate\.cache.json
+1077 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\process-nextick-args\1.0.7\package\package.json written
+1078 silly addNameRange number 2 { name: 'string_decoder',
+1078 silly addNameRange   range: '>=0.10.0 <0.11.0',
+1078 silly addNameRange   hasData: true }
+1079 silly addNameRange versions [ 'string_decoder',
+1079 silly addNameRange   [ '0.0.0',
+1079 silly addNameRange     '0.0.1',
+1079 silly addNameRange     '0.10.24',
+1079 silly addNameRange     '0.11.10',
+1079 silly addNameRange     '0.10.25',
+1079 silly addNameRange     '0.11.10-1',
+1079 silly addNameRange     '0.10.25-1',
+1079 silly addNameRange     '0.10.31' ] ]
+1080 silly addNamed string_decoder@0.10.31
+1081 verbose addNamed "0.10.31" is a plain semver version for string_decoder
+1082 silly addNameRange number 2 { name: 'util-deprecate',
+1082 silly addNameRange   range: '>=1.0.1 <1.1.0',
+1082 silly addNameRange   hasData: true }
+1083 silly addNameRange versions [ 'util-deprecate', [ '1.0.0', '1.0.1', '1.0.2' ] ]
+1084 silly addNamed util-deprecate@1.0.2
+1085 verbose addNamed "1.0.2" is a plain semver version for util-deprecate
+1086 silly cache afterAdd string_decoder@0.10.31
+1087 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\string_decoder\0.10.31\package\package.json not in flight; writing
+1088 silly cache afterAdd util-deprecate@1.0.2
+1089 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\util-deprecate\1.0.2\package\package.json not in flight; writing
+1090 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\string_decoder\0.10.31\package\package.json written
+1091 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\util-deprecate\1.0.2\package\package.json written
+1092 http 304 https://registry.npmjs.org/ms
+1093 verbose headers { 'cache-control': 'max-age=300',
+1093 verbose headers   'accept-ranges': 'bytes',
+1093 verbose headers   date: 'Sat, 21 May 2016 13:03:30 GMT',
+1093 verbose headers   via: '1.1 varnish',
+1093 verbose headers   connection: 'keep-alive',
+1093 verbose headers   'x-served-by': 'cache-lcy1125-LCY',
+1093 verbose headers   'x-cache': 'MISS',
+1093 verbose headers   'x-cache-hits': '0',
+1093 verbose headers   'x-timer': 'S1463835809.751831,VS0,VE353',
+1093 verbose headers   vary: 'Accept-Encoding' }
+1094 silly get cb [ 304,
+1094 silly get   { 'cache-control': 'max-age=300',
+1094 silly get     'accept-ranges': 'bytes',
+1094 silly get     date: 'Sat, 21 May 2016 13:03:30 GMT',
+1094 silly get     via: '1.1 varnish',
+1094 silly get     connection: 'keep-alive',
+1094 silly get     'x-served-by': 'cache-lcy1125-LCY',
+1094 silly get     'x-cache': 'MISS',
+1094 silly get     'x-cache-hits': '0',
+1094 silly get     'x-timer': 'S1463835809.751831,VS0,VE353',
+1094 silly get     vary: 'Accept-Encoding' } ]
+1095 verbose etag https://registry.npmjs.org/ms from cache
+1096 verbose get saving ms to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\ms\.cache.json
+1097 silly cache afterAdd ms@0.7.1
+1098 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\ms\0.7.1\package\package.json not in flight; writing
+1099 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\ms\0.7.1\package\package.json written
+1100 silly install resolved [ { name: 'ms',
+1100 silly install resolved     version: '0.7.1',
+1100 silly install resolved     description: 'Tiny ms conversion utility',
+1100 silly install resolved     repository: { type: 'git', url: 'git://github.com/guille/ms.js.git' },
+1100 silly install resolved     main: './index',
+1100 silly install resolved     devDependencies: { mocha: '*', 'expect.js': '*', serve: '*' },
+1100 silly install resolved     component: { scripts: [Object] },
+1100 silly install resolved     gitHead: '713dcf26d9e6fd9dbc95affe7eff9783b7f1b909',
+1100 silly install resolved     bugs: { url: 'https://github.com/guille/ms.js/issues' },
+1100 silly install resolved     homepage: 'https://github.com/guille/ms.js',
+1100 silly install resolved     _id: 'ms@0.7.1',
+1100 silly install resolved     scripts: {},
+1100 silly install resolved     _shasum: '9cd13c03adbff25b65effde7ce864ee952017098',
+1100 silly install resolved     _from: 'ms@0.7.1',
+1100 silly install resolved     _npmVersion: '2.7.5',
+1100 silly install resolved     _nodeVersion: '0.12.2',
+1100 silly install resolved     _npmUser: { name: 'rauchg', email: 'rauchg@gmail.com' },
+1100 silly install resolved     maintainers: [ [Object] ],
+1100 silly install resolved     dist:
+1100 silly install resolved      { shasum: '9cd13c03adbff25b65effde7ce864ee952017098',
+1100 silly install resolved        tarball: 'https://registry.npmjs.org/ms/-/ms-0.7.1.tgz' },
+1100 silly install resolved     directories: {},
+1100 silly install resolved     _resolved: 'https://registry.npmjs.org/ms/-/ms-0.7.1.tgz',
+1100 silly install resolved     readme: 'ERROR: No README data found!' } ]
+1101 info install ms@0.7.1 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug
+1102 info installOne ms@0.7.1
+1103 verbose installOne of ms to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug not in flight; installing
+1104 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\ms-bb9a950bb7b9121b.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms
+1105 silly install write writing ms 0.7.1 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms
+1106 verbose unbuild node_modules\speaker\node_modules\debug\node_modules\ms
+1107 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms is being purged from base C:\Users\Dell\AppData\Roaming\npm
+1108 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms
+1109 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\ms\0.7.1\package.tgz
+1110 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms
+1111 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms is being purged
+1112 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms
+1113 silly gunzTarPerm modes [ '777', '666' ]
+1114 silly gunzTarPerm extractEntry package.json
+1115 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+1116 silly gunzTarPerm extractEntry .npmignore
+1117 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+1118 silly gunzTarPerm extractEntry README.md
+1119 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+1120 silly gunzTarPerm extractEntry LICENSE
+1121 silly gunzTarPerm modified mode [ 'LICENSE', 420, 438 ]
+1122 silly gunzTarPerm extractEntry index.js
+1123 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+1124 silly gunzTarPerm extractEntry History.md
+1125 silly gunzTarPerm modified mode [ 'History.md', 420, 438 ]
+1126 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms\package.json
+1127 info preinstall ms@0.7.1
+1128 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms\package.json
+1129 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms\package.json
+1130 silly install resolved []
+1131 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms
+1132 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms
+1133 info linkStuff ms@0.7.1
+1134 silly linkStuff ms@0.7.1 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules as its parent node_modules
+1135 silly linkStuff ms@0.7.1 is part of a global install
+1136 silly linkStuff ms@0.7.1 is installed into a global node_modules
+1137 verbose linkBins ms@0.7.1
+1138 verbose linkMans ms@0.7.1
+1139 verbose rebuildBundles ms@0.7.1
+1140 info install ms@0.7.1
+1141 info postinstall ms@0.7.1
+1142 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\ms-bb9a950bb7b9121b.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug\node_modules\ms
+1143 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug
+1144 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug
+1145 info linkStuff debug@2.2.0
+1146 silly linkStuff debug@2.2.0 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules as its parent node_modules
+1147 silly linkStuff debug@2.2.0 is part of a global install
+1148 silly linkStuff debug@2.2.0 is installed into a global node_modules
+1149 verbose linkBins debug@2.2.0
+1150 verbose linkMans debug@2.2.0
+1151 verbose rebuildBundles debug@2.2.0
+1152 verbose rebuildBundles [ 'ms' ]
+1153 info install debug@2.2.0
+1154 info postinstall debug@2.2.0
+1155 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\debug-79fdfbc370e7493d.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\debug
+1156 http 304 https://registry.npmjs.org/core-util-is
+1157 verbose headers { 'cache-control': 'max-age=300',
+1157 verbose headers   'accept-ranges': 'bytes',
+1157 verbose headers   date: 'Sat, 21 May 2016 13:03:30 GMT',
+1157 verbose headers   via: '1.1 varnish',
+1157 verbose headers   connection: 'keep-alive',
+1157 verbose headers   'x-served-by': 'cache-lcy1127-LCY',
+1157 verbose headers   'x-cache': 'MISS',
+1157 verbose headers   'x-cache-hits': '0',
+1157 verbose headers   'x-timer': 'S1463835809.800827,VS0,VE667',
+1157 verbose headers   vary: 'Accept-Encoding' }
+1158 silly get cb [ 304,
+1158 silly get   { 'cache-control': 'max-age=300',
+1158 silly get     'accept-ranges': 'bytes',
+1158 silly get     date: 'Sat, 21 May 2016 13:03:30 GMT',
+1158 silly get     via: '1.1 varnish',
+1158 silly get     connection: 'keep-alive',
+1158 silly get     'x-served-by': 'cache-lcy1127-LCY',
+1158 silly get     'x-cache': 'MISS',
+1158 silly get     'x-cache-hits': '0',
+1158 silly get     'x-timer': 'S1463835809.800827,VS0,VE667',
+1158 silly get     vary: 'Accept-Encoding' } ]
+1159 verbose etag https://registry.npmjs.org/core-util-is from cache
+1160 verbose get saving core-util-is to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\core-util-is\.cache.json
+1161 silly addNameRange number 2 { name: 'core-util-is', range: '>=1.0.0 <1.1.0', hasData: true }
+1162 silly addNameRange versions [ 'core-util-is', [ '1.0.0', '1.0.1', '1.0.2' ] ]
+1163 silly addNamed core-util-is@1.0.2
+1164 verbose addNamed "1.0.2" is a plain semver version for core-util-is
+1165 silly cache afterAdd core-util-is@1.0.2
+1166 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\core-util-is\1.0.2\package\package.json not in flight; writing
+1167 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\core-util-is\1.0.2\package\package.json written
+1168 http 304 https://registry.npmjs.org/inherits
+1169 verbose headers { 'cache-control': 'max-age=300',
+1169 verbose headers   'accept-ranges': 'bytes',
+1169 verbose headers   date: 'Sat, 21 May 2016 13:03:30 GMT',
+1169 verbose headers   via: '1.1 varnish',
+1169 verbose headers   connection: 'keep-alive',
+1169 verbose headers   'x-served-by': 'cache-lcy1121-LCY',
+1169 verbose headers   'x-cache': 'MISS',
+1169 verbose headers   'x-cache-hits': '0',
+1169 verbose headers   'x-timer': 'S1463835809.800505,VS0,VE682',
+1169 verbose headers   vary: 'Accept-Encoding' }
+1170 silly get cb [ 304,
+1170 silly get   { 'cache-control': 'max-age=300',
+1170 silly get     'accept-ranges': 'bytes',
+1170 silly get     date: 'Sat, 21 May 2016 13:03:30 GMT',
+1170 silly get     via: '1.1 varnish',
+1170 silly get     connection: 'keep-alive',
+1170 silly get     'x-served-by': 'cache-lcy1121-LCY',
+1170 silly get     'x-cache': 'MISS',
+1170 silly get     'x-cache-hits': '0',
+1170 silly get     'x-timer': 'S1463835809.800505,VS0,VE682',
+1170 silly get     vary: 'Accept-Encoding' } ]
+1171 verbose etag https://registry.npmjs.org/inherits from cache
+1172 verbose get saving inherits to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\inherits\.cache.json
+1173 silly addNameRange number 2 { name: 'inherits', range: '>=2.0.1 <2.1.0', hasData: true }
+1174 silly addNameRange versions [ 'inherits', [ '1.0.0', '2.0.0', '2.0.1', '1.0.1', '1.0.2' ] ]
+1175 silly addNamed inherits@2.0.1
+1176 verbose addNamed "2.0.1" is a plain semver version for inherits
+1177 silly cache afterAdd inherits@2.0.1
+1178 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\inherits\2.0.1\package\package.json not in flight; writing
+1179 http 304 https://registry.npmjs.org/buffer-shims
+1180 verbose headers { 'cache-control': 'max-age=300',
+1180 verbose headers   'accept-ranges': 'bytes',
+1180 verbose headers   date: 'Sat, 21 May 2016 13:03:30 GMT',
+1180 verbose headers   via: '1.1 varnish',
+1180 verbose headers   connection: 'keep-alive',
+1180 verbose headers   'x-served-by': 'cache-lcy1126-LCY',
+1180 verbose headers   'x-cache': 'MISS',
+1180 verbose headers   'x-cache-hits': '0',
+1180 verbose headers   'x-timer': 'S1463835809.800489,VS0,VE694',
+1180 verbose headers   vary: 'Accept-Encoding' }
+1181 silly get cb [ 304,
+1181 silly get   { 'cache-control': 'max-age=300',
+1181 silly get     'accept-ranges': 'bytes',
+1181 silly get     date: 'Sat, 21 May 2016 13:03:30 GMT',
+1181 silly get     via: '1.1 varnish',
+1181 silly get     connection: 'keep-alive',
+1181 silly get     'x-served-by': 'cache-lcy1126-LCY',
+1181 silly get     'x-cache': 'MISS',
+1181 silly get     'x-cache-hits': '0',
+1181 silly get     'x-timer': 'S1463835809.800489,VS0,VE694',
+1181 silly get     vary: 'Accept-Encoding' } ]
+1182 verbose etag https://registry.npmjs.org/buffer-shims from cache
+1183 verbose get saving buffer-shims to C:\Users\Dell\AppData\Roaming\npm-cache\registry.npmjs.org\buffer-shims\.cache.json
+1184 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\inherits\2.0.1\package\package.json written
+1185 silly addNameRange number 2 { name: 'buffer-shims', range: '>=1.0.0 <2.0.0', hasData: true }
+1186 silly addNameRange versions [ 'buffer-shims', [ '1.0.0' ] ]
+1187 silly addNamed buffer-shims@1.0.0
+1188 verbose addNamed "1.0.0" is a plain semver version for buffer-shims
+1189 silly cache afterAdd buffer-shims@1.0.0
+1190 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\buffer-shims\1.0.0\package\package.json not in flight; writing
+1191 verbose afterAdd C:\Users\Dell\AppData\Roaming\npm-cache\buffer-shims\1.0.0\package\package.json written
+1192 silly install resolved [ { name: 'isarray',
+1192 silly install resolved     description: 'Array#isArray for older browsers',
+1192 silly install resolved     version: '1.0.0',
+1192 silly install resolved     repository:
+1192 silly install resolved      { type: 'git',
+1192 silly install resolved        url: 'git://github.com/juliangruber/isarray.git' },
+1192 silly install resolved     homepage: 'https://github.com/juliangruber/isarray',
+1192 silly install resolved     main: 'index.js',
+1192 silly install resolved     dependencies: {},
+1192 silly install resolved     devDependencies: { tape: '~2.13.4' },
+1192 silly install resolved     keywords: [ 'browser', 'isarray', 'array' ],
+1192 silly install resolved     author:
+1192 silly install resolved      { name: 'Julian Gruber',
+1192 silly install resolved        email: 'mail@juliangruber.com',
+1192 silly install resolved        url: 'http://juliangruber.com' },
+1192 silly install resolved     license: 'MIT',
+1192 silly install resolved     testling: { files: 'test.js', browsers: [Object] },
+1192 silly install resolved     scripts: { test: 'tape test.js' },
+1192 silly install resolved     gitHead: '2a23a281f369e9ae06394c0fb4d2381355a6ba33',
+1192 silly install resolved     bugs: { url: 'https://github.com/juliangruber/isarray/issues' },
+1192 silly install resolved     _id: 'isarray@1.0.0',
+1192 silly install resolved     _shasum: 'bb935d48582cba168c06834957a54a3e07124f11',
+1192 silly install resolved     _from: 'isarray@>=1.0.0 <1.1.0',
+1192 silly install resolved     _npmVersion: '3.3.12',
+1192 silly install resolved     _nodeVersion: '5.1.0',
+1192 silly install resolved     _npmUser: { name: 'juliangruber', email: 'julian@juliangruber.com' },
+1192 silly install resolved     dist:
+1192 silly install resolved      { shasum: 'bb935d48582cba168c06834957a54a3e07124f11',
+1192 silly install resolved        tarball: 'https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz' },
+1192 silly install resolved     maintainers: [ [Object] ],
+1192 silly install resolved     directories: {},
+1192 silly install resolved     _resolved: 'https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz',
+1192 silly install resolved     readme: 'ERROR: No README data found!' },
+1192 silly install resolved   { name: 'process-nextick-args',
+1192 silly install resolved     version: '1.0.7',
+1192 silly install resolved     description: 'process.nextTick but always with args',
+1192 silly install resolved     main: 'index.js',
+1192 silly install resolved     scripts: { test: 'node test.js' },
+1192 silly install resolved     repository:
+1192 silly install resolved      { type: 'git',
+1192 silly install resolved        url: 'git+https://github.com/calvinmetcalf/process-nextick-args.git' },
+1192 silly install resolved     author: '',
+1192 silly install resolved     license: 'MIT',
+1192 silly install resolved     bugs: { url: 'https://github.com/calvinmetcalf/process-nextick-args/issues' },
+1192 silly install resolved     homepage: 'https://github.com/calvinmetcalf/process-nextick-args',
+1192 silly install resolved     devDependencies: { tap: '~0.2.6' },
+1192 silly install resolved     gitHead: '5c00899ab01dd32f93ad4b5743da33da91404f39',
+1192 silly install resolved     _id: 'process-nextick-args@1.0.7',
+1192 silly install resolved     _shasum: '150e20b756590ad3f91093f25a4f2ad8bff30ba3',
+1192 silly install resolved     _from: 'process-nextick-args@>=1.0.6 <1.1.0',
+1192 silly install resolved     _npmVersion: '3.8.6',
+1192 silly install resolved     _nodeVersion: '5.11.0',
+1192 silly install resolved     _npmUser: { name: 'cwmma', email: 'calvin.metcalf@gmail.com' },
+1192 silly install resolved     dist:
+1192 silly install resolved      { shasum: '150e20b756590ad3f91093f25a4f2ad8bff30ba3',
+1192 silly install resolved        tarball: 'https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-1.0.7.tgz' },
+1192 silly install resolved     maintainers: [ [Object] ],
+1192 silly install resolved     _npmOperationalInternal:
+1192 silly install resolved      { host: 'packages-12-west.internal.npmjs.com',
+1192 silly install resolved        tmp: 'tmp/process-nextick-args-1.0.7.tgz_1462394251778_0.36989671061746776' },
+1192 silly install resolved     directories: {},
+1192 silly install resolved     _resolved: 'https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-1.0.7.tgz',
+1192 silly install resolved     readme: 'ERROR: No README data found!' },
+1192 silly install resolved   { name: 'string_decoder',
+1192 silly install resolved     version: '0.10.31',
+1192 silly install resolved     description: 'The string_decoder module from Node core',
+1192 silly install resolved     main: 'index.js',
+1192 silly install resolved     dependencies: {},
+1192 silly install resolved     devDependencies: { tap: '~0.4.8' },
+1192 silly install resolved     scripts: { test: 'tap test/simple/*.js' },
+1192 silly install resolved     repository:
+1192 silly install resolved      { type: 'git',
+1192 silly install resolved        url: 'git://github.com/rvagg/string_decoder.git' },
+1192 silly install resolved     homepage: 'https://github.com/rvagg/string_decoder',
+1192 silly install resolved     keywords: [ 'string', 'decoder', 'browser', 'browserify' ],
+1192 silly install resolved     license: 'MIT',
+1192 silly install resolved     gitHead: 'd46d4fd87cf1d06e031c23f1ba170ca7d4ade9a0',
+1192 silly install resolved     bugs: { url: 'https://github.com/rvagg/string_decoder/issues' },
+1192 silly install resolved     _id: 'string_decoder@0.10.31',
+1192 silly install resolved     _shasum: '62e203bc41766c6c28c9fc84301dab1c5310fa94',
+1192 silly install resolved     _from: 'string_decoder@>=0.10.0 <0.11.0',
+1192 silly install resolved     _npmVersion: '1.4.23',
+1192 silly install resolved     _npmUser: { name: 'rvagg', email: 'rod@vagg.org' },
+1192 silly install resolved     maintainers: [ [Object], [Object] ],
+1192 silly install resolved     dist:
+1192 silly install resolved      { shasum: '62e203bc41766c6c28c9fc84301dab1c5310fa94',
+1192 silly install resolved        tarball: 'http://registry.npmjs.org/string_decoder/-/string_decoder-0.10.31.tgz' },
+1192 silly install resolved     directories: {},
+1192 silly install resolved     _resolved: 'https://registry.npmjs.org/string_decoder/-/string_decoder-0.10.31.tgz',
+1192 silly install resolved     readme: 'ERROR: No README data found!' },
+1192 silly install resolved   { name: 'util-deprecate',
+1192 silly install resolved     version: '1.0.2',
+1192 silly install resolved     description: 'The Node.js `util.deprecate()` function with browser support',
+1192 silly install resolved     main: 'node.js',
+1192 silly install resolved     browser: 'browser.js',
+1192 silly install resolved     scripts: { test: 'echo "Error: no test specified" && exit 1' },
+1192 silly install resolved     repository:
+1192 silly install resolved      { type: 'git',
+1192 silly install resolved        url: 'git://github.com/TooTallNate/util-deprecate.git' },
+1192 silly install resolved     keywords: [ 'util', 'deprecate', 'browserify', 'browser', 'node' ],
+1192 silly install resolved     author:
+1192 silly install resolved      { name: 'Nathan Rajlich',
+1192 silly install resolved        email: 'nathan@tootallnate.net',
+1192 silly install resolved        url: 'http://n8.io/' },
+1192 silly install resolved     license: 'MIT',
+1192 silly install resolved     bugs: { url: 'https://github.com/TooTallNate/util-deprecate/issues' },
+1192 silly install resolved     homepage: 'https://github.com/TooTallNate/util-deprecate',
+1192 silly install resolved     gitHead: '475fb6857cd23fafff20c1be846c1350abf8e6d4',
+1192 silly install resolved     _id: 'util-deprecate@1.0.2',
+1192 silly install resolved     _shasum: '450d4dc9fa70de732762fbd2d4a28981419a0ccf',
+1192 silly install resolved     _from: 'util-deprecate@>=1.0.1 <1.1.0',
+1192 silly install resolved     _npmVersion: '2.14.4',
+1192 silly install resolved     _nodeVersion: '4.1.2',
+1192 silly install resolved     _npmUser: { name: 'tootallnate', email: 'nathan@tootallnate.net' },
+1192 silly install resolved     maintainers: [ [Object] ],
+1192 silly install resolved     dist:
+1192 silly install resolved      { shasum: '450d4dc9fa70de732762fbd2d4a28981419a0ccf',
+1192 silly install resolved        tarball: 'http://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz' },
+1192 silly install resolved     directories: {},
+1192 silly install resolved     _resolved: 'https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz',
+1192 silly install resolved     readme: 'ERROR: No README data found!' },
+1192 silly install resolved   { name: 'core-util-is',
+1192 silly install resolved     version: '1.0.2',
+1192 silly install resolved     description: 'The `util.is*` functions introduced in Node v0.12.',
+1192 silly install resolved     main: 'lib/util.js',
+1192 silly install resolved     repository: { type: 'git', url: 'git://github.com/isaacs/core-util-is.git' },
+1192 silly install resolved     keywords:
+1192 silly install resolved      [ 'util',
+1192 silly install resolved        'isBuffer',
+1192 silly install resolved        'isArray',
+1192 silly install resolved        'isNumber',
+1192 silly install resolved        'isString',
+1192 silly install resolved        'isRegExp',
+1192 silly install resolved        'isThis',
+1192 silly install resolved        'isThat',
+1192 silly install resolved        'polyfill' ],
+1192 silly install resolved     author:
+1192 silly install resolved      { name: 'Isaac Z. Schlueter',
+1192 silly install resolved        email: 'i@izs.me',
+1192 silly install resolved        url: 'http://blog.izs.me/' },
+1192 silly install resolved     license: 'MIT',
+1192 silly install resolved     bugs: { url: 'https://github.com/isaacs/core-util-is/issues' },
+1192 silly install resolved     scripts: { test: 'tap test.js' },
+1192 silly install resolved     devDependencies: { tap: '^2.3.0' },
+1192 silly install resolved     gitHead: 'a177da234df5638b363ddc15fa324619a38577c8',
+1192 silly install resolved     homepage: 'https://github.com/isaacs/core-util-is#readme',
+1192 silly install resolved     _id: 'core-util-is@1.0.2',
+1192 silly install resolved     _shasum: 'b5fd54220aa2bc5ab57aab7140c940754503c1a7',
+1192 silly install resolved     _from: 'core-util-is@>=1.0.0 <1.1.0',
+1192 silly install resolved     _npmVersion: '3.3.2',
+1192 silly install resolved     _nodeVersion: '4.0.0',
+1192 silly install resolved     _npmUser: { name: 'isaacs', email: 'i@izs.me' },
+1192 silly install resolved     dist:
+1192 silly install resolved      { shasum: 'b5fd54220aa2bc5ab57aab7140c940754503c1a7',
+1192 silly install resolved        tarball: 'http://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz' },
+1192 silly install resolved     maintainers: [ [Object] ],
+1192 silly install resolved     directories: {},
+1192 silly install resolved     _resolved: 'https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz',
+1192 silly install resolved     readme: 'ERROR: No README data found!' },
+1192 silly install resolved   { name: 'inherits',
+1192 silly install resolved     description: 'Browser-friendly inheritance fully compatible with standard node.js inherits()',
+1192 silly install resolved     version: '2.0.1',
+1192 silly install resolved     keywords:
+1192 silly install resolved      [ 'inheritance',
+1192 silly install resolved        'class',
+1192 silly install resolved        'klass',
+1192 silly install resolved        'oop',
+1192 silly install resolved        'object-oriented',
+1192 silly install resolved        'inherits',
+1192 silly install resolved        'browser',
+1192 silly install resolved        'browserify' ],
+1192 silly install resolved     main: './inherits.js',
+1192 silly install resolved     browser: './inherits_browser.js',
+1192 silly install resolved     repository: { type: 'git', url: 'git://github.com/isaacs/inherits.git' },
+1192 silly install resolved     license: 'ISC',
+1192 silly install resolved     scripts: { test: 'node test' },
+1192 silly install resolved     bugs: { url: 'https://github.com/isaacs/inherits/issues' },
+1192 silly install resolved     _id: 'inherits@2.0.1',
+1192 silly install resolved     dist:
+1192 silly install resolved      { shasum: 'b17d08d326b4423e568eff719f91b0b1cbdf69f1',
+1192 silly install resolved        tarball: 'http://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz' },
+1192 silly install resolved     _from: 'inherits@>=2.0.1 <2.1.0',
+1192 silly install resolved     _npmVersion: '1.3.8',
+1192 silly install resolved     _npmUser: { name: 'isaacs', email: 'i@izs.me' },
+1192 silly install resolved     maintainers: [ [Object] ],
+1192 silly install resolved     directories: {},
+1192 silly install resolved     _shasum: 'b17d08d326b4423e568eff719f91b0b1cbdf69f1',
+1192 silly install resolved     _resolved: 'https://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz',
+1192 silly install resolved     readme: 'ERROR: No README data found!',
+1192 silly install resolved     homepage: 'https://github.com/isaacs/inherits#readme' },
+1192 silly install resolved   { name: 'buffer-shims',
+1192 silly install resolved     version: '1.0.0',
+1192 silly install resolved     description: 'some shims for node buffers',
+1192 silly install resolved     main: 'index.js',
+1192 silly install resolved     scripts: { test: 'tape test/*.js' },
+1192 silly install resolved     files: [ 'index.js' ],
+1192 silly install resolved     license: 'MIT',
+1192 silly install resolved     devDependencies: { tape: '^4.5.1' },
+1192 silly install resolved     repository:
+1192 silly install resolved      { type: 'git',
+1192 silly install resolved        url: 'git+ssh://git@github.com/calvinmetcalf/buffer-shims.git' },
+1192 silly install resolved     gitHead: 'ea89b3857ab5b8203957922a84e9a48cf4c47e0a',
+1192 silly install resolved     bugs: { url: 'https://github.com/calvinmetcalf/buffer-shims/issues' },
+1192 silly install resolved     _id: 'buffer-shims@1.0.0',
+1192 silly install resolved     _shasum: '9978ce317388c649ad8793028c3477ef044a8b51',
+1192 silly install resolved     _from: 'buffer-shims@>=1.0.0 <2.0.0',
+1192 silly install resolved     _npmVersion: '3.8.6',
+1192 silly install resolved     _nodeVersion: '5.11.0',
+1192 silly install resolved     _npmUser: { name: 'cwmma', email: 'calvin.metcalf@gmail.com' },
+1192 silly install resolved     dist:
+1192 silly install resolved      { shasum: '9978ce317388c649ad8793028c3477ef044a8b51',
+1192 silly install resolved        tarball: 'https://registry.npmjs.org/buffer-shims/-/buffer-shims-1.0.0.tgz' },
+1192 silly install resolved     maintainers: [ [Object] ],
+1192 silly install resolved     _npmOperationalInternal:
+1192 silly install resolved      { host: 'packages-16-east.internal.npmjs.com',
+1192 silly install resolved        tmp: 'tmp/buffer-shims-1.0.0.tgz_1462560889323_0.8640750856138766' },
+1192 silly install resolved     directories: {},
+1192 silly install resolved     _resolved: 'https://registry.npmjs.org/buffer-shims/-/buffer-shims-1.0.0.tgz',
+1192 silly install resolved     readme: 'ERROR: No README data found!',
+1192 silly install resolved     homepage: 'https://github.com/calvinmetcalf/buffer-shims#readme' } ]
+1193 info install isarray@1.0.0 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+1194 info install process-nextick-args@1.0.7 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+1195 info install string_decoder@0.10.31 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+1196 info install util-deprecate@1.0.2 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+1197 info install core-util-is@1.0.2 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+1198 info install inherits@2.0.1 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+1199 info install buffer-shims@1.0.0 into C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+1200 info installOne isarray@1.0.0
+1201 verbose installOne of isarray to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream not in flight; installing
+1202 info installOne process-nextick-args@1.0.7
+1203 verbose installOne of process-nextick-args to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream not in flight; installing
+1204 info installOne string_decoder@0.10.31
+1205 verbose installOne of string_decoder to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream not in flight; installing
+1206 info installOne util-deprecate@1.0.2
+1207 verbose installOne of util-deprecate to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream not in flight; installing
+1208 info installOne core-util-is@1.0.2
+1209 verbose installOne of core-util-is to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream not in flight; installing
+1210 info installOne inherits@2.0.1
+1211 verbose installOne of inherits to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream not in flight; installing
+1212 info installOne buffer-shims@1.0.0
+1213 verbose installOne of buffer-shims to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream not in flight; installing
+1214 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\string-decoder-3345ee448c1e4552.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder
+1215 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\core-util-is-4a5a658ce7bacc80.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is
+1216 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\inherits-e372fe6d11a88240.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits
+1217 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\buffer-shims-955f20566345c3ee.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims
+1218 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\util-deprecate-f5334825f8ac576d.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate
+1219 silly install write writing string_decoder 0.10.31 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder
+1220 silly install write writing core-util-is 1.0.2 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is
+1221 silly install write writing inherits 2.0.1 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits
+1222 silly install write writing buffer-shims 1.0.0 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims
+1223 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\isarray-e2fdb11fc38f156c.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray
+1224 silly install write writing util-deprecate 1.0.2 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate
+1225 verbose lock using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\process-nextick-args-b4a5cca27c85cf63.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args
+1226 silly install write writing isarray 1.0.0 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray
+1227 silly install write writing process-nextick-args 1.0.7 to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args
+1228 verbose unbuild node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder
+1229 verbose unbuild node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is
+1230 verbose unbuild node_modules\speaker\node_modules\readable-stream\node_modules\inherits
+1231 verbose unbuild node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims
+1232 verbose unbuild node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate
+1233 verbose unbuild node_modules\speaker\node_modules\readable-stream\node_modules\isarray
+1234 verbose unbuild node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args
+1235 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder is being purged from base C:\Users\Dell\AppData\Roaming\npm
+1236 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder
+1237 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is is being purged from base C:\Users\Dell\AppData\Roaming\npm
+1238 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is
+1239 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits is being purged from base C:\Users\Dell\AppData\Roaming\npm
+1240 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits
+1241 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims is being purged from base C:\Users\Dell\AppData\Roaming\npm
+1242 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims
+1243 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate is being purged from base C:\Users\Dell\AppData\Roaming\npm
+1244 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate
+1245 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\string_decoder\0.10.31\package.tgz
+1246 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder
+1247 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder is being purged
+1248 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder
+1249 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\core-util-is\1.0.2\package.tgz
+1250 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is
+1251 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is is being purged
+1252 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is
+1253 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\inherits\2.0.1\package.tgz
+1254 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits
+1255 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits is being purged
+1256 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits
+1257 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\buffer-shims\1.0.0\package.tgz
+1258 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims
+1259 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims is being purged
+1260 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims
+1261 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray is being purged from base C:\Users\Dell\AppData\Roaming\npm
+1262 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray
+1263 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\util-deprecate\1.0.2\package.tgz
+1264 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate
+1265 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate is being purged
+1266 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate
+1267 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args is being purged from base C:\Users\Dell\AppData\Roaming\npm
+1268 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args
+1269 silly gunzTarPerm modes [ '777', '666' ]
+1270 silly gunzTarPerm modes [ '777', '666' ]
+1271 silly gunzTarPerm modes [ '777', '666' ]
+1272 silly gunzTarPerm modes [ '777', '666' ]
+1273 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\isarray\1.0.0\package.tgz
+1274 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray
+1275 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray is being purged
+1276 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray
+1277 silly gunzTarPerm modes [ '777', '666' ]
+1278 verbose tar unpack C:\Users\Dell\AppData\Roaming\npm-cache\process-nextick-args\1.0.7\package.tgz
+1279 verbose tar unpacking to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args
+1280 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args is being purged
+1281 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args
+1282 silly gunzTarPerm modes [ '777', '666' ]
+1283 silly gunzTarPerm modes [ '777', '666' ]
+1284 silly gunzTarPerm extractEntry package.json
+1285 silly gunzTarPerm modified mode [ 'package.json', 436, 438 ]
+1286 silly gunzTarPerm extractEntry package.json
+1287 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+1288 silly gunzTarPerm extractEntry package.json
+1289 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+1290 silly gunzTarPerm extractEntry package.json
+1291 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+1292 silly gunzTarPerm extractEntry package.json
+1293 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+1294 silly gunzTarPerm extractEntry package.json
+1295 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+1296 silly gunzTarPerm extractEntry package.json
+1297 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+1298 silly gunzTarPerm extractEntry .npmignore
+1299 silly gunzTarPerm modified mode [ '.npmignore', 436, 438 ]
+1300 silly gunzTarPerm extractEntry README.md
+1301 silly gunzTarPerm modified mode [ 'README.md', 436, 438 ]
+1302 silly gunzTarPerm extractEntry README.md
+1303 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+1304 silly gunzTarPerm extractEntry LICENSE
+1305 silly gunzTarPerm modified mode [ 'LICENSE', 420, 438 ]
+1306 silly gunzTarPerm extractEntry README.md
+1307 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+1308 silly gunzTarPerm extractEntry LICENSE
+1309 silly gunzTarPerm modified mode [ 'LICENSE', 420, 438 ]
+1310 silly gunzTarPerm extractEntry index.js
+1311 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+1312 silly gunzTarPerm extractEntry license.md
+1313 silly gunzTarPerm modified mode [ 'license.md', 420, 438 ]
+1314 silly gunzTarPerm extractEntry README.md
+1315 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+1316 silly gunzTarPerm extractEntry LICENSE
+1317 silly gunzTarPerm modified mode [ 'LICENSE', 420, 438 ]
+1318 silly gunzTarPerm extractEntry .npmignore
+1319 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+1320 silly gunzTarPerm extractEntry README.md
+1321 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+1322 silly gunzTarPerm extractEntry index.js
+1323 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+1324 silly gunzTarPerm extractEntry test.js
+1325 silly gunzTarPerm modified mode [ 'test.js', 420, 438 ]
+1326 silly gunzTarPerm extractEntry LICENSE
+1327 silly gunzTarPerm modified mode [ 'LICENSE', 436, 438 ]
+1328 silly gunzTarPerm extractEntry index.js
+1329 silly gunzTarPerm modified mode [ 'index.js', 436, 438 ]
+1330 silly gunzTarPerm extractEntry test.js
+1331 silly gunzTarPerm modified mode [ 'test.js', 420, 438 ]
+1332 silly gunzTarPerm extractEntry float.patch
+1333 silly gunzTarPerm modified mode [ 'float.patch', 420, 438 ]
+1334 silly gunzTarPerm extractEntry readme.md
+1335 silly gunzTarPerm modified mode [ 'readme.md', 420, 438 ]
+1336 silly gunzTarPerm extractEntry inherits.js
+1337 silly gunzTarPerm modified mode [ 'inherits.js', 420, 438 ]
+1338 silly gunzTarPerm extractEntry inherits_browser.js
+1339 silly gunzTarPerm modified mode [ 'inherits_browser.js', 420, 438 ]
+1340 silly gunzTarPerm extractEntry index.js
+1341 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+1342 silly gunzTarPerm extractEntry test.js
+1343 silly gunzTarPerm modified mode [ 'test.js', 420, 438 ]
+1344 silly gunzTarPerm extractEntry browser.js
+1345 silly gunzTarPerm modified mode [ 'browser.js', 420, 438 ]
+1346 silly gunzTarPerm extractEntry node.js
+1347 silly gunzTarPerm modified mode [ 'node.js', 420, 438 ]
+1348 silly gunzTarPerm extractEntry .travis.yml
+1349 silly gunzTarPerm modified mode [ '.travis.yml', 420, 438 ]
+1350 silly gunzTarPerm extractEntry license.md
+1351 silly gunzTarPerm modified mode [ 'license.md', 420, 438 ]
+1352 silly gunzTarPerm extractEntry lib/util.js
+1353 silly gunzTarPerm modified mode [ 'lib/util.js', 420, 438 ]
+1354 silly gunzTarPerm extractEntry test.js
+1355 silly gunzTarPerm modified mode [ 'test.js', 420, 438 ]
+1356 silly gunzTarPerm extractEntry .travis.yml
+1357 silly gunzTarPerm modified mode [ '.travis.yml', 420, 438 ]
+1358 silly gunzTarPerm extractEntry Makefile
+1359 silly gunzTarPerm modified mode [ 'Makefile', 420, 438 ]
+1360 silly gunzTarPerm extractEntry History.md
+1361 silly gunzTarPerm modified mode [ 'History.md', 420, 438 ]
+1362 silly gunzTarPerm extractEntry readme.md
+1363 silly gunzTarPerm modified mode [ 'readme.md', 420, 438 ]
+1364 silly gunzTarPerm extractEntry component.json
+1365 silly gunzTarPerm modified mode [ 'component.json', 420, 438 ]
+1366 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims\package.json
+1367 info preinstall buffer-shims@1.0.0
+1368 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims\package.json
+1369 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims\package.json
+1370 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits\package.json
+1371 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder\package.json
+1372 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is\package.json
+1373 info preinstall inherits@2.0.1
+1374 silly install resolved []
+1375 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims
+1376 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims
+1377 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args\package.json
+1378 info preinstall string_decoder@0.10.31
+1379 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits\package.json
+1380 info preinstall core-util-is@1.0.2
+1381 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate\package.json
+1382 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder\package.json
+1383 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is\package.json
+1384 info linkStuff buffer-shims@1.0.0
+1385 silly linkStuff buffer-shims@1.0.0 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules as its parent node_modules
+1386 silly linkStuff buffer-shims@1.0.0 is part of a global install
+1387 silly linkStuff buffer-shims@1.0.0 is installed into a global node_modules
+1388 info preinstall process-nextick-args@1.0.7
+1389 info preinstall util-deprecate@1.0.2
+1390 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits\package.json
+1391 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args\package.json
+1392 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate\package.json
+1393 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder\package.json
+1394 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is\package.json
+1395 verbose write writing to C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray\package.json
+1396 silly install resolved []
+1397 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits
+1398 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits
+1399 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args\package.json
+1400 silly install resolved []
+1401 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder
+1402 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder
+1403 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate\package.json
+1404 info preinstall isarray@1.0.0
+1405 silly install resolved []
+1406 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is
+1407 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is
+1408 verbose linkBins buffer-shims@1.0.0
+1409 verbose linkMans buffer-shims@1.0.0
+1410 verbose rebuildBundles buffer-shims@1.0.0
+1411 info install buffer-shims@1.0.0
+1412 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray\package.json
+1413 info linkStuff inherits@2.0.1
+1414 silly linkStuff inherits@2.0.1 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules as its parent node_modules
+1415 silly linkStuff inherits@2.0.1 is part of a global install
+1416 silly linkStuff inherits@2.0.1 is installed into a global node_modules
+1417 info linkStuff string_decoder@0.10.31
+1418 silly linkStuff string_decoder@0.10.31 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules as its parent node_modules
+1419 silly linkStuff string_decoder@0.10.31 is part of a global install
+1420 silly linkStuff string_decoder@0.10.31 is installed into a global node_modules
+1421 info postinstall buffer-shims@1.0.0
+1422 silly install resolved []
+1423 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args
+1424 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args
+1425 info linkStuff core-util-is@1.0.2
+1426 silly linkStuff core-util-is@1.0.2 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules as its parent node_modules
+1427 silly linkStuff core-util-is@1.0.2 is part of a global install
+1428 silly linkStuff core-util-is@1.0.2 is installed into a global node_modules
+1429 silly install resolved []
+1430 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate
+1431 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate
+1432 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\buffer-shims-955f20566345c3ee.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\buffer-shims
+1433 verbose readDependencies loading dependencies from C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray\package.json
+1434 info linkStuff process-nextick-args@1.0.7
+1435 silly linkStuff process-nextick-args@1.0.7 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules as its parent node_modules
+1436 silly linkStuff process-nextick-args@1.0.7 is part of a global install
+1437 silly linkStuff process-nextick-args@1.0.7 is installed into a global node_modules
+1438 info linkStuff util-deprecate@1.0.2
+1439 silly linkStuff util-deprecate@1.0.2 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules as its parent node_modules
+1440 silly linkStuff util-deprecate@1.0.2 is part of a global install
+1441 silly linkStuff util-deprecate@1.0.2 is installed into a global node_modules
+1442 silly install resolved []
+1443 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray
+1444 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray
+1445 verbose linkBins inherits@2.0.1
+1446 verbose linkMans inherits@2.0.1
+1447 verbose rebuildBundles inherits@2.0.1
+1448 info install inherits@2.0.1
+1449 verbose linkBins string_decoder@0.10.31
+1450 verbose linkMans string_decoder@0.10.31
+1451 verbose rebuildBundles string_decoder@0.10.31
+1452 verbose linkBins core-util-is@1.0.2
+1453 verbose linkMans core-util-is@1.0.2
+1454 verbose rebuildBundles core-util-is@1.0.2
+1455 info install string_decoder@0.10.31
+1456 info postinstall inherits@2.0.1
+1457 info install core-util-is@1.0.2
+1458 info linkStuff isarray@1.0.0
+1459 silly linkStuff isarray@1.0.0 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules as its parent node_modules
+1460 silly linkStuff isarray@1.0.0 is part of a global install
+1461 silly linkStuff isarray@1.0.0 is installed into a global node_modules
+1462 info postinstall string_decoder@0.10.31
+1463 info postinstall core-util-is@1.0.2
+1464 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\inherits-e372fe6d11a88240.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\inherits
+1465 verbose linkBins process-nextick-args@1.0.7
+1466 verbose linkMans process-nextick-args@1.0.7
+1467 verbose rebuildBundles process-nextick-args@1.0.7
+1468 info install process-nextick-args@1.0.7
+1469 verbose linkBins util-deprecate@1.0.2
+1470 verbose linkMans util-deprecate@1.0.2
+1471 verbose rebuildBundles util-deprecate@1.0.2
+1472 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\core-util-is-4a5a658ce7bacc80.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\core-util-is
+1473 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\string-decoder-3345ee448c1e4552.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\string_decoder
+1474 info install util-deprecate@1.0.2
+1475 info postinstall process-nextick-args@1.0.7
+1476 info postinstall util-deprecate@1.0.2
+1477 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\process-nextick-args-b4a5cca27c85cf63.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\process-nextick-args
+1478 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\util-deprecate-f5334825f8ac576d.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\util-deprecate
+1479 verbose linkBins isarray@1.0.0
+1480 verbose linkMans isarray@1.0.0
+1481 verbose rebuildBundles isarray@1.0.0
+1482 info install isarray@1.0.0
+1483 info postinstall isarray@1.0.0
+1484 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\isarray-e2fdb11fc38f156c.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream\node_modules\isarray
+1485 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+1486 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+1487 info linkStuff readable-stream@2.1.4
+1488 silly linkStuff readable-stream@2.1.4 has C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules as its parent node_modules
+1489 silly linkStuff readable-stream@2.1.4 is part of a global install
+1490 silly linkStuff readable-stream@2.1.4 is installed into a global node_modules
+1491 verbose linkBins readable-stream@2.1.4
+1492 verbose linkMans readable-stream@2.1.4
+1493 verbose rebuildBundles readable-stream@2.1.4
+1494 verbose rebuildBundles [ 'buffer-shims',
+1494 verbose rebuildBundles   'core-util-is',
+1494 verbose rebuildBundles   'inherits',
+1494 verbose rebuildBundles   'isarray',
+1494 verbose rebuildBundles   'process-nextick-args',
+1494 verbose rebuildBundles   'string_decoder',
+1494 verbose rebuildBundles   'util-deprecate' ]
+1495 info install readable-stream@2.1.4
+1496 info postinstall readable-stream@2.1.4
+1497 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\readable-stream-b2df3042de9ef224.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker\node_modules\readable-stream
+1498 verbose about to build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+1499 info build C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+1500 info linkStuff speaker@0.3.0
+1501 silly linkStuff speaker@0.3.0 has C:\Users\Dell\AppData\Roaming\npm\node_modules as its parent node_modules
+1502 silly linkStuff speaker@0.3.0 is part of a global install
+1503 silly linkStuff speaker@0.3.0 is installed into a global node_modules
+1504 silly linkStuff speaker@0.3.0 is installed into the top-level global node_modules
+1505 verbose linkBins speaker@0.3.0
+1506 verbose linkMans speaker@0.3.0
+1507 verbose rebuildBundles speaker@0.3.0
+1508 verbose rebuildBundles [ 'bindings', 'debug', 'nan', 'readable-stream' ]
+1509 info install speaker@0.3.0
+1510 verbose unsafe-perm in lifecycle true
+1511 info speaker@0.3.0 Failed to exec install script
+1512 verbose unlock done using C:\Users\Dell\AppData\Roaming\npm-cache\_locks\speaker-04d15bf752b4d02c.lock for C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+1513 verbose stack Error: speaker@0.3.0 install: `node-gyp rebuild`
+1513 verbose stack Exit status 1
+1513 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:214:16)
+1513 verbose stack     at emitTwo (events.js:87:13)
+1513 verbose stack     at EventEmitter.emit (events.js:172:7)
+1513 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:24:14)
+1513 verbose stack     at emitTwo (events.js:87:13)
+1513 verbose stack     at ChildProcess.emit (events.js:172:7)
+1513 verbose stack     at maybeClose (internal/child_process.js:818:16)
+1513 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+1514 verbose pkgid speaker@0.3.0
+1515 verbose cwd O:\hub\lead\fdrandom
+1516 error Windows_NT 6.0.6002
+1517 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "speaker"
+1518 error node v4.2.2
+1519 error npm  v2.14.7
+1520 error code ELIFECYCLE
+1521 error speaker@0.3.0 install: `node-gyp rebuild`
+1521 error Exit status 1
+1522 error Failed at the speaker@0.3.0 install script 'node-gyp rebuild'.
+1522 error This is most likely a problem with the speaker package,
+1522 error not with npm itself.
+1522 error Tell the author that this fails on your system:
+1522 error     node-gyp rebuild
+1522 error You can get their info via:
+1522 error     npm owner ls speaker
+1522 error There is likely additional logging output above.
+1523 verbose exit [ 1, true ]
+1524 verbose unbuild node_modules\speaker
+1525 info preuninstall speaker@0.3.0
+1526 info uninstall speaker@0.3.0
+1527 verbose unbuild rmStuff speaker@0.3.0 from C:\Users\Dell\AppData\Roaming\npm\node_modules
+1528 info postuninstall speaker@0.3.0
+1529 silly gentlyRm C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker is being purged from base C:\Users\Dell\AppData\Roaming\npm
+1530 verbose gentlyRm don't care about contents; nuking C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+1531 silly vacuum-fs purging C:\Users\Dell\AppData\Roaming\npm\node_modules\speaker
+1532 silly vacuum-fs quitting because other entries in C:\Users\Dell\AppData\Roaming\npm\node_modules

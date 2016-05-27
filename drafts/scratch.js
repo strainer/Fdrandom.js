@@ -9,6 +9,16 @@ p=Fdrandom.pot()
 q=Fdrandom.pot()
 h=Fdrandom.hot()
 
+pr(k)
+
+return
+
+k=0
+for(i=0;i<100000000;i++)
+{ k+=h.rbit() }
+pr(k)
+return
+
 
 function reppr(f,x,a,b)
 { for(var i=0;i<x;i++){ pr(f(a,b)) } }
@@ -125,11 +135,6 @@ if (dieh){
 // math.sqrt(0.0000000000000001 * math.pow(2,350)) =  n = 4.8e+044
 
 
-//~ k=0
-//~ for(i=0;i<100000000;i++)
-//~ { k+=Fdrandom.rbit() }
-//~ pr(k)
-//~ return
 
 
 //~ pr("-")
