@@ -267,6 +267,7 @@ File `antisort.md` contains more notes on antisorting.
 
 Version History
 ---------------
+* 2.2.0 - made hot pots non static and tweaked rbit and rpole
 * 2.0.3 - improved aindex parameters
 * 2.0.1 - augmented aresult()
 * 2.0.0 - added antisorting
