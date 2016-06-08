@@ -316,15 +316,19 @@ section {
   padding-bottom:50px;
 }
 
-section p {
+section div#legend {
   
 	color:#000;
 	background-color:#cfdfff;  
 	clear:both; 
 	margin:1em 5em; 
-	padding:2px 2px 2px 6px;	
-  border:1px solid white;
+	padding:1em;	
+    border:10px solid #9bf;
 
+}
+
+section div#legend h4 {  
+	margin:0em 0em 0.5em 0em; 
 }
 
 /* Footer */

@@ -4,7 +4,7 @@
  ** in homage to human ingenuity against greed and hatred.
  */
 
-var newFdrPot = function(){ return (function(sd){
+var newFdrPot = function(){ return (function(sd){ //factory
   'use strict'
   
   var va,vl,vs,qr,us,rb,ju,U,sv,i,ar
@@ -12,17 +12,17 @@ var newFdrPot = function(){ return (function(sd){
   
   sv=getstate()
     
-  function plant(sd) {
+  function plant(sd) {           //constructor
     
     va=1000, vl=1, vs=1, qr=0.0, us=0.0, rb=2.0e+15
     ju=1, U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
 
     sow(sd)
     
-    for( i=0;i<98;i++ ) f48()
-    va=irange(3206324,3259829)
+    for( i=0;i<98;i++ ) f48()    //warms up state to hide seed
+    va=irange(3206324,3259829)   //ishr2's seed
 
-    function sow(sd) {
+    function sow(sd) {      //digests seed objects recursively
       var t=typeof(sd) , r 
       
       if(t === 'string'){
@@ -32,7 +32,7 @@ var newFdrPot = function(){ return (function(sd){
         return 
       }
       
-      if(va<0){ return }
+      if(va<0){ return }    //va is count limiting the process
       
       if(t === 'object')
       { va--
@@ -66,18 +66,18 @@ var newFdrPot = function(){ return (function(sd){
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.0.2" }
+  function version() { return "v2.2.0" }
 
+  function getstate() {
+    return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
+            ,ju, va, vl, vs, qr, us, rb ] 
+  } 
+  
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
     ju=s[8];  va=s[9];  vl=s[10] 
     vs=s[11]; qr=s[12]; us=s[13]; rb=s[14]; sv=s
   }
-
-  function getstate() {
-    return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7], 
-             ju, va, vl, vs, qr, us, rb ] 
-  } 
 
   function pot() { return newFdrPot(arguments) }
   
@@ -87,9 +87,6 @@ var newFdrPot = function(){ return (function(sd){
   }
   
   function hot() {
-    if(arguments.length===0 && typeof hotFdrandomPot === 'object'){ 
-      return hotFdrandomPot 
-    }
     if(typeof(window)!=='undefined' 
      && (window.crypto||window.msCrypto)){ 
       var cO = window.crypto||window.msCrypto
@@ -98,20 +95,20 @@ var newFdrPot = function(){ return (function(sd){
       ag=[(new Date()).getTime()-1.332e+12, Math.random()] 
     }
     ag.push(arguments)
-    return hotFdrandomPot = newFdrPot(ag)
+    return newFdrPot(ag)
   }
 
-  ///A redesign of J.Baagøe's Alea; a float-cut dual-lcg prng
+  ///A redesign of J.Baagoe's Alea; a float-cut dual-lcg prng
   function f48() { 
     var c= 0.12810301030196883 * U[0] +
            15.378612015061215 * (1.0000000000000037-(U[ju=(ju===7?1:ju+1)]))
     return U[ju]= c-( (U[0]=c) >>>0 )
-  } 
+  } //20 msb of the magic numbers were mined with scanrandom.js
 
   function dbl() { 
-    return ( (( ((f48()*0x39b00000000)>>>4)*
+    return ( (( ((f48()*0x39b00000000)>>>4)* //saves 4bits of entropy
             0.06249999650753)+f48())*5.960464477540047e-08 )
-  }
+  } 
   
   function f24() { return f48()*0.99999997019767 }
 
@@ -124,12 +121,12 @@ var newFdrPot = function(){ return (function(sd){
   function ui32() { return (f48()*0x1700000000)>>>0 }
   
   function rbit() { 
-    if( rb<1.1258999e+15 ) return (rb*=2)&1
+    if( rb<2147483648 ) return (rb*=2)&1  //25% faster with rb<31 bits
     return (rb= dbl() +0.5) &1 
   }
 
   function rpole() { 
-    if( rb<1.1258999e+15 ) return ((rb*=2)&2)-1
+    if( rb<2147483648 ) return ((rb*=2)&2)-1
     return ( (rb= dbl() +1.5) &2) -1
   } 
   
@@ -139,7 +136,7 @@ var newFdrPot = function(){ return (function(sd){
   function ishr2() ///flawed shift register
   { va^= (va<<7)+1498916339; return va^= va>>>8  }
 
-  function ishp(){ 
+  function ishp(){ ///the two combined for interest
     vl = (vl*13229323)^3962102927
     return vl^((vl<<7)+1498916339) 
   }
@@ -177,13 +174,13 @@ var newFdrPot = function(){ return (function(sd){
   function lrange(a,b,d){
     a= (a===undefined)?0.5:a; b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     
-    if(a>0.5){
-      if (f48()>a*2-1) return f48()*(d-b) +b
-    }else{
-      if (f48()<a*2) return f48()*(d-b) +b
+    if(a>0.5){  //load middle of dist
+      if (f48()>a*2-1) return f48()*(d-b) +b //return flat
+    }else{      //load the ends
+      if (f48()<a*2) return f48()*(d-b) +b   //return flat
     }
     var c=(f48()*1.333+f48()+f48()*0.66666)*0.3333333-0.5
-    c= (a>0.5)?c:((c>0)?0.5-c:-0.5-c)
+    c= (a>0.5)?c: (c>0)?0.5-c:-0.5-c   //transform if load ends
     return b+ (d-b)* (c+0.5)
   }
   
@@ -196,11 +193,11 @@ var newFdrPot = function(){ return (function(sd){
     return b+ (d-b)* (0.5+ 0.333333* (0.5+f48()-f48()*2)) 
   }
 
-  function gskip(c,b,d)  
-  { qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48() 
-	  d= (d===undefined)?1:d
-	  return (b||0)+(d-(b||0))*(qr-= qr>>>0) 
-	}
+  function gskip(c,b,d){
+    qr+= ( c=c||f48()*0.666 )*0.5; qr+=(1-c)*f48() 
+    d= (d===undefined)?1:d
+    return (b||0)+(d-(b||0))*(qr-= qr>>>0) 
+  }
   
   var psig,csig
   function usum(n,sig,mu) { 
@@ -283,7 +280,7 @@ var newFdrPot = function(){ return (function(sd){
         Ao=new Array(e-c); e-=c
         for( i=0;i<e;i++ ) Ao[i]= Ai[i+c]
         c=0; 
-      }else{ //Ao is given array
+      }else{
         joinr=null
         ob=Ao.length
 
@@ -295,7 +292,7 @@ var newFdrPot = function(){ return (function(sd){
     }
 
     var d,p,ep=e-1
-    while( c<ep ){
+    while( c<ep ){ 
       d= Math.floor( c+( f48()*(e-c) ) ) 
       p= Ao[c]; Ao[c++]=Ao[d]; Ao[d]=p
     }
@@ -303,40 +300,40 @@ var newFdrPot = function(){ return (function(sd){
     return joinr? Ao=So+Ao.join("") : Ao
   }
       
-  function aindex(mx,Ai,sq,sep,lim,x){
+  function aindex(mx,Ai,sq,sep,lim,x){  //Sorry but its working....
     var Av,i
     if( typeof mx !=='boolean')
     { x=lim,lim=sep,sep=sq,sq=Ai,Ai=mx,mx=true }
     if( typeof Ai !=='object' || !isFinite(Ai[0])
      ||(typeof sep ==='string' && sep==="pos")){ 
-	    Av= new Array((Ai>0)?Ai:Ai.length)
-	    if( typeof sq ==='undefined') sq=1
-	    if(sep ==="pos"){ sep=lim,lim=x }
-		  for( i=0;i<Av.length;i++ ) Av[i]=i
-	  }else{ Av=Ai,sq=sq||0 }
+      Av= new Array((Ai>0)?Ai:Ai.length)
+      if( typeof sq ==='undefined') sq=1
+      if(sep ==="pos"){ sep=lim,lim=x }
+      for( i=0;i<Av.length;i++ ) Av[i]=i
+    }else{ Av=Ai,sq=sq||0 }
     
     var ne=Av.length, nc=ne>50?50:ne-1, nd=ne>350?350:ne-1
 
     var Ax= new Array(ne); for(var i=0;i<ne;i++) Ax[i]=i
         
-    if(ne<1) return Ax
+    if(ne<1) return Ax   //handle diminutive arrays
     if(mx) mixup(Ax)
     if(ne==2){ 
       if ((sq<0)^(Av[Ax[1]]>Av[Ax[0]]))
       { return [Ax[1],Ax[0]] }else{ return Ax } 
     }
          
-    var usep=false, bsep=(sep===0)?"zero":sep, csep=sep*0.5
-    if( typeof sep ==='undefined' || sep==="auto" ){      
+    var autosep=false, bsep=(sep===0)?"zero":sep, csep=sep*0.5
+    if( typeof sep ==='undefined' || sep==="auto" ){ 
       var kd=0, np=(ne*0.33)|0, nq=1+(ne*0.66)|0 
       for( i=0;i<nd;i++){
         kd+=Math.abs(Av[i]-Av[(np+i)%ne])
-           +Math.abs(Av[(np+i)%ne]-Av[(nq+i)%ne])
-           +Math.abs(Av[(ne+nq-i)%ne]-Av[(ne-i)%ne]) 
-      }          
-      usep=true, sep=bsep=kd/(nd*10), csep=sep*0.5
+          + Math.abs(Av[(np+i)%ne]-Av[(nq+i)%ne])
+          + Math.abs(Av[(ne+nq-i)%ne]-Av[(ne-i)%ne]) 
+      } 
+      autosep=true, sep=bsep=kd/(nd*10), csep=sep*0.5
     }
-    if(ne<10) usep=false
+    if(ne<10) autosep=false
     if(!lim){ lim=(ne+500000)*0.001 }
     var ti=lim*8000, te=ti*0.3 
     
@@ -347,30 +344,30 @@ var newFdrPot = function(){ return (function(sd){
       var ib=(c=c<0?c+ne:c)%ne, ic=ib+1, id=ib+2, ie=ib+3
       if(ie>=ne){ ie=ie-ne,id=id%ne,ic=ic%ne }
       
-      var stick=0 ,d=1      
+      var stick=0 ,d=1 
       
-      if(usep){ sep=bsep*range(0.83333,1.2),csep=sep*0.5 }
+      if(autosep){ sep=bsep*range(0.83333,1.2),csep=sep*0.5 }
 
-      if(Math.abs(Av[Ax[ic]]-Av[Ax[id]]+sq)<sep){ 
+      if(Math.abs(Av[Ax[ic]]-Av[Ax[id]]+sq)<sep){  //1-away collision 
         jm=irange(2,nd)+ic, jr=jm+nc, stick=1, d=-2, lw=ti<te
         while ( stick && jm<jr ){ 
-          j=jm%ne         
+          j=jm%ne 
           if( Math.abs(Av[Ax[id]]-Av[Ax[j]]+sq)>=sep 
            && Math.abs(Av[Ax[(j+1)%ne]]-Av[Ax[ic]]+sq)>=sep
            && (lw || Math.abs(Av[Ax[ie]]-Av[Ax[j]]+sq)>=csep) 
           ){ 
-            stick=0, t=Ax[ic], Ax[ic]=Ax[j], Ax[j]=t            
+            stick=0, t=Ax[ic], Ax[ic]=Ax[j], Ax[j]=t 
             if(jm-ic+2>ch){ ch=jm-ic+2 }
           }
           jm++;
-        }        
+        } 
         var f=(jm-jr+nc)*0.5; ti-=f
         if(stick){ t=Ax[ib], Ax[ib]=Ax[ic], Ax[ic]=t }
-        if(usep) { bsep*= (66-((f-2)/nc))*0.0151466 } 
+        if(autosep) { bsep*= (66-((f-2)/nc))*0.0151466 } 
         
-      }else{ 
-        if( ti>te && Math.abs(Av[Ax[ic]]-Av[Ax[ie]]+sq)<csep )  
-        { stick=1, jm=irange(2,nd)+ic, jr=jm+nc     
+      }else{ //1-away good, check 2-away
+        if( ti>te && Math.abs(Av[Ax[ic]]-Av[Ax[ie]]+sq)<csep ) 
+        { stick=1, jm=irange(2,nd)+ic, jr=jm+nc 
           while ( stick && jm<jr ){ 
             j=jm%ne
             if(Math.abs(Av[Ax[id]]-Av[Ax[j]]+sq)>=sep
@@ -388,7 +385,7 @@ var newFdrPot = function(){ return (function(sd){
       c=c+d, ch=ch-d, ti-- 
     }
     
-    if(usep){ ar=(ti>te)?bsep*0.81:(ti<1)?0:-bsep*0.8 }
+    if(autosep){ ar=(ti>te)?bsep*0.81:(ti<1)?0:-bsep*0.8 }
     else{ ar=(ti>te)?bsep:(ti<1)?0:-bsep }
     
     return Ax
@@ -401,10 +398,10 @@ var newFdrPot = function(){ return (function(sd){
       for(i=0;i<n;i++)
       { c=Math.abs(A[i]-A[(i+1)%n]+(Av||0)); if(c<df)df=c }
     }else{
-	    for(i=0;i<n;i++)
-	    { c=Math.abs(Av[A[i]]-Av[A[(i+1)%n]]+(sq||0)); if(c<df)df=c }
-	  }
-	  return (ar>0||ar==="zero")?df:-df    
+      for(i=0;i<n;i++)
+      { c=Math.abs(Av[A[i]]-Av[A[(i+1)%n]]+(sq||0)); if(c<df)df=c }
+    }
+    return (ar>0||ar==="zero")?df:-df 
   }
 
   function antisort(mx,Ai,A,sq,sep,lim,x){
@@ -421,7 +418,7 @@ var newFdrPot = function(){ return (function(sd){
     if( typeof A !=='object' ){ for(i=0;i<e;i++) Ai[i]=Ao[c+i] }
     return Ao
   }
-	  
+    
   function bulk(A,f,b,c,d){
     if( typeof A !=='object' ){ A=new Array( isFinite(A)?A:1 )  }
     var i=0,n=A.length; f=f||f48 
@@ -460,8 +457,6 @@ var newFdrPot = function(){ return (function(sd){
   }
 
 }(arguments))}
-
-var hotFdrandomPot 
 
 //Hopefuly exports to node, amd, commonjs or global object
 if (typeof exports !== 'undefined') 

@@ -44,7 +44,7 @@
 
 <div id="dash" style="text-align:center; margin:0px auto; width:100%;">
   
-  <button onclick="gogo()">Run 48 Charts</button> 
+  <button onclick="gogo()">Run 51 Charts</button> 
 
   <select id="selectedsize">
 		<option value="small">Small</option>
@@ -64,11 +64,19 @@
 <img src="images/chartexample.jpg" height="242" width="811" />
 </div>
 </div>
-
-<p>Legend:<br>The leftward charts plot 50 thousand variates as 25 thousand 2D points, also a histogram of their distribution is superimposed. In the rightwise charts a <em>random walk</em> is drawn with 800k points, each point is moved in x & y axis by 2 variates and a horizontal drift to traverse the chart 32 times on average. Red dots mark the beginning and end of the walk. Min and max values out of 32k samples and the average delta between sequential variates are printed on the righthand chart.<br><br> These features are arranged to examine the distributions and spot some potential bias or patterns in outputs. The chart of 'ishr2' reveals patterning which was not detected by 'diehard battery' tests. The function 'gskip' has special 2d distribution but appears to be unbiased. <br><br> The Final 7 charts the examine the result of the antisorting shuffle on flat and sparse distributions.</p>
+<div id="legend">
+<h4>Legend</h4>
+<p>The lefthand charts plot 50 thousand variates as 25 thousand 2D points. Each point is drawn a different hue, which cycles through 14 values (a multiple of Fdrandom's state space of 7 ~50 bit numbers), the drawing alpha also increases through duration of the plot. These effects can render potential non-random patterning which might otherwise not be made visible. A normal histogram of the functions distribution is superimposed on the chart in blue.</p>
+<p>In the righthand charts a <em>random walk</em> is drawn with 800k points, each point is moved in X & Y axis by consecutive variates and a horizontal drift is added to traverse the chart 32 times on average. Red dots mark the beginning and end of the walk. Min and max values out of 32k samples and the average delta between sequential variates are printed on the righthand chart.</p>
+<br><h4>Notes</h4>
+<p>These charts are arranged to examine the functions performance and distributions and spot some potential bias or patterns. The chart of <code>ishr2()</code> reveals patterning which was not detected by the 'Diehard' tests. The function <code>gskip()</code> has special 2d distribution but seems unbiased.</p>
+<p>The final charts the examine the result of the antisorting quasi-random-shuffle on flat and coarse distributed inputs. The distrubition of the standard-random-shuffle function '<code>mixup()</code>' is also checked.</p>
+<p>The very last chart demos gthorn drawing a fuzzy circle with consecutive values, by stepping a target of PI/2 inside Math.sin: <code> function(){return Math.sin(x+=Fd.gthorn(0,Math.PI))}</code></p> 
+<br><h4>Contact</h4><p>If you encounter faults in this page on a modern browser send an issue to: <a href="https://github.com/strainer/Fdrandom.js/issues">github.com/strainer/Fdrandom.js/issues</a> to help out thanks. </p>
+</div>
       </section>
       <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using custom theme</small></p>
+        <small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using custom theme</small>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->

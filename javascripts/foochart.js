@@ -131,7 +131,7 @@ function chartfuncs() {
    [returnADelt,"rg a-sorted delta ",antiq],	
    [returnAVal,"flat mixup",mixud],	
    [returnADelt,"fl-mixup delta ",mixud],
-   [ function(){return Math.sin(sx+=Fd.gthorn(0,Math.PI))},"Sin(++gthorn(0,PI)) "],
+   [function(){return Math.sin(sx+=Fd.gthorn(0,Math.PI))},"Sin gthorn"],
     
   ]
        
