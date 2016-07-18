@@ -1,5 +1,37 @@
+// @license http://opensource.org/licenses/MIT
+// copyright Paul Irish 2015
+// -- performance.now polyfill
 
-if(!Fdrandom.checkfloat()){
+(function(){
+
+  if(typeof(window)==='undefined') window={}
+  if ("performance" in window == false) {
+      window.performance = {};
+  }
+  
+  Date.now = (Date.now || function () {  // thanks IE8
+    return new Date().getTime();
+  });
+
+  if ("now" in window.performance == false){
+    
+    var nowOffset = Date.now();
+    
+    if (typeof(performance)!=='undefined' && performance.timing && performance.timing.navigationStart){
+      nowOffset = performance.timing.navigationStart
+    }
+
+    window.performance.now = function now(){
+      return Date.now() - nowOffset;
+    }
+  }
+
+})();
+
+// fin Paul Irish
+
+
+if( typeof(Fdrandom)!=='undefined' && !Fdrandom.checkfloat() ){
   document.getElementById('floatfail').style.display="block"; 
 }
 
