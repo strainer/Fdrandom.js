@@ -4,7 +4,7 @@ Fast deterministic random functions for Javascript.
 
 ### Features
 
-* Fast tested PRNG.  
+* A fast tested PRNG.  
 * Integer, single and double precision float values.
 * Range, loaded, boolean, mix and antisort functions.
 * Distribution options: 
@@ -79,7 +79,7 @@ igbrist|   60    | Signed bristly game dist.
 ilcg   |  130    | A simple lcg (fails many rnd tests)  
 ishr2  |   60    | A fast flawed shift register generator 
            
-### Pick'n Mix
+### Random Pick and Mix
 
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
@@ -106,17 +106,16 @@ Speed & Quality
 ---------------
 The percentages in the above tables are very rough as js engine
 performance varies. Fdrandoms default method:`f48` runs at about 
-same speed as Chromes native Math.random. On Firefox it runs faster 
-than Math.random.
+same speed as both Firefox and Chromes native Math.random in 2017.
 
-`f48` alias `next` has no detectable bias across over 10^16 outputs
-and each has at least 48 bits of resolution which are tested
-as passing G Marsaglias old but substantial `diehard` test suite.
-It has yet to be tested by the latest means, but shows no issues so far.
+`f48` and 'dbl' have no detectable bias across over 10^16 outputs and 
+each has at least 48 bits of resolution which are tested as passing 
+G Marsaglias old but quite substantial `diehard` test suite.
 
-`Math.random` on Chrome has detectable statistical bias and only 
-32 bits of resolution. Firefoxs `Math.random` has cryptographic 
-quality but is a bit slower.
+`Math.random` on Chrome had detectable statistical bias and only 
+32 bits of resolution in 2016. Firefoxs `Math.random` was using its 
+slow *cryptographic* PRNG but in 2017 is updated to a good quality
+fast PRNG.
 
 f48 algorithm is informed by J.Baagoe's PRNG `Alea` which 
 seems to be the fastest form of high quality prng for javascript 
@@ -267,6 +266,7 @@ File `antisort.md` contains more notes on antisorting.
 
 Version History
 ---------------
+* 2.3.0 - tweaked seeding slightly
 * 2.2.0 - made hot pots non static and tweaked rbit and rpole
 * 2.0.3 - improved aindex parameters
 * 2.0.1 - augmented aresult()
