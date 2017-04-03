@@ -44,6 +44,8 @@ var newFdrPot = function(){ return (function(sd){ //factory
         return 
       }
       
+      if(t === 'boolean') { U[0]*=0.93; if(sd){ f48() } return }
+
       if(isFinite(sd)){
         r= (sd<=0)? Math.abs(sd)+1.234 : sd 
         while(r>16)     r=r*0.0019560471624266144
@@ -52,7 +54,6 @@ var newFdrPot = function(){ return (function(sd){ //factory
         return
       }
    
-      if(t === 'boolean') { U[0]*=0.93; if(sd){ f48() } return }
       if(t === 'function'){ U[0]*=0.91; sow(sd.name); return }
       if(t === 'symbol')  { U[0]*=0.89 }
 
@@ -66,7 +67,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.2.0" }
+  function version() { return "v2.3.0" }
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
@@ -304,7 +305,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     var Av,i
     if( typeof mx !=='boolean')
     { x=lim,lim=sep,sep=sq,sq=Ai,Ai=mx,mx=true }
-    if( typeof Ai !=='object' || !isFinite(Ai[0])
+    if( typeof Ai !=='object' || !(isFinite(Ai[0]) && parseFloat(Ai[0]))
      ||(typeof sep ==='string' && sep==="pos")){ 
       Av= new Array((Ai>0)?Ai:Ai.length)
       if( typeof sq ==='undefined') sq=1
@@ -420,7 +421,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
   }
     
   function bulk(A,f,b,c,d){
-    if( typeof A !=='object' ){ A=new Array( isFinite(A)?A:1 )  }
+    if( typeof A !=='object' ){ A=new Array( parseInt(A)||1 )  }
     var i=0,n=A.length; f=f||f48 
     while( i<n ) A[i++]=f(b,c,d);
     return A

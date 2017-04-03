@@ -9,8 +9,9 @@ p=Fdrandom.pot()
 q=Fdrandom.pot()
 h=Fdrandom.hot()
 
-pr(k)
+pr(h.gskip(0,1,256))
 
+pr(h.checkfloat())
 return
 
 k=0
