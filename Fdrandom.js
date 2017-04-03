@@ -67,7 +67,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.3.0" }
+  function version() { return "v2.3.1" }
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
@@ -305,7 +305,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     var Av,i
     if( typeof mx !=='boolean')
     { x=lim,lim=sep,sep=sq,sq=Ai,Ai=mx,mx=true }
-    if( typeof Ai !=='object' || !(isFinite(Ai[0]) && parseFloat(Ai[0]))
+    if( typeof Ai !=='object' || (isNaN(parseFloat(Ai[0])) || !isFinite(Ai[0]))
      ||(typeof sep ==='string' && sep==="pos")){ 
       Av= new Array((Ai>0)?Ai:Ai.length)
       if( typeof sq ==='undefined') sq=1
