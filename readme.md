@@ -204,7 +204,7 @@ oftenMid = gthorn(p,q)  //same shape over range p to q
 See the [Charts](http://strainer.github.io/Fdrandom.js/) for gaming distributions
 
 ### Mixup/Pick:
-```
+```javascript
 inray =["0","1","2","3","4","5","6","sha","la","la"] 
 instr ="0123456789abcdef" 
 outray=[1,2,3]
