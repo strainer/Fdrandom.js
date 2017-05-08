@@ -41,13 +41,13 @@ next     |   100   | Standard randoms with 48bit resolution
 f48      |   100   | Alias of next (0 to 0.999999999999998)  
 dbl      |   50    | Same as next/f48 with 53 bits resolution
 f24      |   90    | Safe values for Float32array (0 to 0.99999994)
-         |         |                               
+ :------ | :-----: | :----------------------------
 i32      |   80    | 32 bit signed integer values
 ui32     |   80    | 32 bit unsigned integer values
-         |         |                               
+ :------ | :-----: | :----------------------------
 rbit     |   150   | 0 or 1 
 rpole    |   140   | -1 or 1 
-         |         |
+ :------ | :-----: | :----------------------------
 range    |   90    | Uniformly distributed numbers in range          
 irange   |   70    | Uniformly distributed integers (inclusive)              
 lrange   |   30    | Middle/end loaded numbers in range
@@ -98,7 +98,7 @@ hot     | 0.005  | Clone Fdrandom using seeds from browser crypto
 repot   | 5>0.5% | Resets or reseeds an existing pot
 getstate|  5%    | Gets an array containing state of a pot
 setstate|  5%    | Sets state of pot with array (no reseeding)
-        |        | 
+ :----- | :-----:| :-------------------------------------
 version |        | prints version
 checkfloat|      | checks float math is compliant for expected output
 
