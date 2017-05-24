@@ -1,6 +1,6 @@
 require ('../dlib/mutil.js')
 //~ Fdrandom=require ('../Fdrandom.min.js')
-Fdrandom=require ('../Fdrandom.min.js')
+Fdrandom=require ('../Fdrandom.js')
 //~ Fdrandom=require ('./autoproto.js')
 require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
@@ -13,9 +13,9 @@ po=Fdrandom.pot()
 q=Fdrandom.pot()
 r=Fdrandom.pot()
 
-d=h.aindex(10000000)
-d=h.mixup(d)
-return
+//~ d=h.aindex(10000000)
+//~ d=h.mixup(d)
+//~ return
 
 pr(h.antisort([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],0,5,10000))
 pr(h.antisort([0,0,0,0,0,5,5,5,5,5,5,11,11,11,11,11],0,5,10000))
