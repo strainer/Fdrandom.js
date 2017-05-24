@@ -3,7 +3,8 @@ version() returns version
 
 pot([seeding variable or object]) returns a seeded new instance of fdrandom 
 repot([seeding variable or object]) resets or reseeds this instance of fdrandom 
-hot([extra seeds]) returns a randomly seeded new instance of fdrandom 
+hot([extra seeds]) returns a randomly seeded instance of fdrandom 
+hotpot([extra seeds]) returns a randomly seeded new instance of fdrandom 
 
 getstate() returns array of parents state for setstate
 setstate(state_array) sets state with state array returned by getstate  
