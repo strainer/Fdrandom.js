@@ -131,7 +131,7 @@ var newFdrPot = function(){
   function ui32() { return (f48()*0x1700000000)>>>0 }
   
   function rbit() { 
-    if( rb<2147483648 ) return (rb*=2)&1  //25% faster with rb<31 bits
+    if( rb<2147483648 ) return (rb*=2)&1 
     return (rb= dbl() +0.5) &1 
   }
 
@@ -216,8 +216,7 @@ var newFdrPot = function(){
     
     if(sig === undefined) return sum
     if(sig !== psig) 
-    {  psig=sig; csig= sig*2/n*Math.sqrt(n) } //doesnt nail it
-    //sig wants converted to equivalent gaus for large n
+    {  psig=sig; csig= sig*3.47/Math.sqrt(n) } //approx 1/100th accurate
     
     return (mu||0)+ sum*csig 
   }

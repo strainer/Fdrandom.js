@@ -4,10 +4,33 @@ Fdrandom=require ('../Fdrandom.js')
 require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
 
-
 p=Fdrandom.pot()
 q=Fdrandom.pot()
 h=Fdrandom.hot()
+
+
+var nn=1
+var zum=p.bulk(100000, function(){return h.usum(nn,5)} ) 
+//~ var zum=p.bulk(100000, function(){return h.gaus(1)} ) 
+
+var res=sstats(zum)
+
+pr(res.sdev)
+pr(Math.sqrt(nn)/3.47)
+//{ lw:lw ,hi:hi ,mean:mean ,sdev:Math.sqrt( mean2/(nn-1) ) }
+
+//100:2.9    100 3     10  1    1  1/3
+//50:2.4
+//25:1.44
+//10:0.9 
+//6:0.70
+//5:0.64
+//4:0.57
+//3:0.50
+//2:0.40
+//1:0.29
+return
+
 
 pr(h.gskip(0,1,256))
 

@@ -196,10 +196,9 @@ random0or1 = p.rbit()   //random bit
 random0or1 = p.rpole()  //random -1 or 1
 
 gaussianNormal = p.gaus()
-gaussianMath = p.gaus(sigma,mu) //sigma is ~scale, mu is offset
-uniformSum = p.usum(n)          //add n*( -0.5 > 0.5 ) randoms
-uniformSum = p.usum(n,sigma,mu) //to scale and shift with sigma and mu
-gausGame = p.usum(4,1)          //a quick rough approximation of gaussian
+gaussianMath = p.gaus(stndev,mean) //default stndv=1, mean=0
+uniformSum = p.usum(n)             //add n*( -0.5 > 0.5 ) randoms
+uniformSum = p.usum(n,stndev,mean) //scale to stnd deviation and mean
 
 normGame = gnorm()      //approx gaussian shape range -1 to 1
 normGame = gnorm(2,4.5) //same shape range 2 to 4.5
@@ -271,6 +270,7 @@ File `antisort.md` contains more notes on antisorting.
 
 Version History
 ---------------
+* 2.3.2 - improved usum. Made hot() static, added hotpot()s
 * 2.3.0 - tweaked seeding slightly
 * 2.2.0 - made hot pots non static and tweaked rbit and rpole
 * 2.0.3 - improved aindex parameters
