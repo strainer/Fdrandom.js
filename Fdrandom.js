@@ -465,7 +465,7 @@ if (typeof exports !== 'undefined')
   else { exports.Fdrandom = newFdrPot({}) }
 } else {
   if (typeof define === 'function' && define.amd) 
-  { define( 'Fdrandom',[],function(){return newFdrPot({})} ) }
+  { define( mdname,[],function(){return factory()} ) }
   else
   { (1,eval)('this').Fdrandom = newFdrPot({}) } 
 }
