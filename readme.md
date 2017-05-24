@@ -27,7 +27,7 @@ unsigned_int_value = Fdrandom.ui32()// 0 to 4294967295
 separate_seeded_generator = Fdrandom.pot(seed)
 int_val = separate_seeded_generator.i32()
 arandhex = Fdrandom.hot().mixof("0123456789abcdef","0x",8)
-autoseeded = Fdrandom.hot()
+autoseeded_pot= Fdrandom.hotpot()
 ```	
 	
 Method list	
@@ -94,7 +94,7 @@ aresult |        | Report the minimum delta achieved by antisort
 Method  |Speed % | Notes
  :----- | :-----:| :-------------------------------------
 pot     | 0.005  | Clone and seed Fdrandom object (pot)    
-hot     | 0.005  | Clone Fdrandom using seeds from browser crypto  
+hotpot  | 0.005  | Clone Fdrandom using seeds from browser crypto  
 repot   | 5>0.5% | Resets or reseeds an existing pot
 getstate|  5%    | Gets an array containing state of a pot
 setstate|  5%    | Sets state of pot with array (no reseeding)
@@ -134,7 +134,7 @@ Practical seeding can be achieved by sending an array containing
 public user strings, or private unique ids, or a single number or 
 nothing depending on the level of uniqueness desired.
  
-`Fdrandom.hot(seed)` returns an unpredictable clone which includes
+`Fdrandom.hotpot(seed)` returns an unpredictable clone which includes
 seeds from browser crypto if available, and date and Math.random
 if not available.
  
@@ -150,6 +150,11 @@ effectively hash objects but is somewhat slow for that.
 the Fdrandom object gets cloned for each pot. 'Repot'ing with
 a new seed is much faster. 'repot' without a seed resets to
 first potted state and is very fast. 
+
+`Fdrandom.hot()` or `anypot.hot()` is a static hot (indeterminable)
+instance for speed and convienience. Methods like gaus(), gskip() and 
+aresult() can require an independat instance (pot or hotpot) for continuity
+of results.
 
 Precision/Types
 ---------------

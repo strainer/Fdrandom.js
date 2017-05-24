@@ -4,7 +4,11 @@
  ** in homage to human ingenuity against greed and hatred.
  */
 
-var newFdrPot = function(){ return (function(sd){ //factory
+var newFdrPot = function(){ 
+  
+  var FdrandomHotPot    //static instance for indeterminables
+
+  return (function(sd){ //factory
   'use strict'
   
   var va,vl,vs,qr,us,rb,ju,U,sv,i,ar
@@ -12,7 +16,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
   
   sv=getstate()
     
-  function plant(sd) {           //constructor
+  function plant(sd) {  //constructor
     
     va=1000, vl=1, vs=1, qr=0.0, us=0.0, rb=2.0e+15
     ju=1, U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
@@ -67,7 +71,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.3.1" }
+  function version() { return "v2.3.2" }
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
@@ -87,7 +91,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     return this 
   }
   
-  function hot() {
+  function hotpot() {
     if(typeof(window)!=='undefined' 
      && (window.crypto||window.msCrypto)){ 
       var cO = window.crypto||window.msCrypto
@@ -99,6 +103,11 @@ var newFdrPot = function(){ return (function(sd){ //factory
     return newFdrPot(ag)
   }
 
+  function hot(){
+    if(!FdrandomHotPot){ FdrandomHotPot=hotpot() }
+    return FdrandomHotPot
+  }
+    
   ///A redesign of J.Baagoe's Alea; a float-cut dual-lcg prng
   function f48() { 
     var c= 0.12810301030196883 * U[0] +
@@ -428,7 +437,8 @@ var newFdrPot = function(){ return (function(sd){ //factory
   }
   
   return{
-     pot: pot   ,hot: hot  ,repot: repot  ,reset: repot
+     pot: pot   ,hot: hot  ,hotpot: hotpot
+    ,repot: repot          ,reset: repot
     ,getstate: getstate    ,setstate:   setstate
     ,version: version      ,checkfloat: checkfloat 
     
@@ -459,14 +469,14 @@ var newFdrPot = function(){ return (function(sd){ //factory
 
 }(arguments))}
 
-//Hopefuly exports to node, amd, commonjs or global object
+var mdname='Fdrandom' ,factory=newFdrPot
 if (typeof exports !== 'undefined') 
 { if (typeof module !== 'undefined' && module.exports)
-  { exports = module.exports = newFdrPot({}) }
-  else { exports.Fdrandom = newFdrPot({}) }
+  { exports = module.exports = factory() }
+  else { exports[mdname] = factory() }
 } else {
   if (typeof define === 'function' && define.amd) 
-  { define( 'Fdrandom',[],function(){return newFdrPot({})} ) }
+  { define( mdname,[],function(){return factory()} ) }
   else
-  { (1,eval)('this').Fdrandom = newFdrPot({}) } 
+  { (1,eval)('this')[mdname] = factory() } 
 }
