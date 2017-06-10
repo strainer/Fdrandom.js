@@ -2,10 +2,12 @@ Fdrandom.js
 ===========
 Fast deterministic random functions for Javascript.
 
+Examine available distributions on the [generator test page](http://strainer.github.io/Fdrandom.js/)
+
 ### Features
 
-* A fast tested PRNG.  
-* Integer, single and double precision float values.
+* A fast tested base PRNG.  
+* Integer, single and double precision float ouput.
 * Range, loaded, boolean, mix and antisort functions.
 * Distribution options: 
   * Unbiased uniforms. 
@@ -13,7 +15,7 @@ Fast deterministic random functions for Javascript.
   * Normal approximated by Uniform Sum.
   * Low discrepency / Quasi random (custom spaced walk)
   * Convenience gaming distributions
-  * [Demo Charts](http://strainer.github.io/Fdrandom.js/)
+	* Dynamic distribution generator
 	
 Usage
 -----
@@ -51,6 +53,7 @@ rpole    |   140   | -1 or 1
 range    |   90    | Uniformly distributed numbers in range          
 irange   |   70    | Uniformly distributed integers (inclusive)              
 lrange   |   30    | Middle/end loaded numbers in range
+zrange   |   5     | Dynamically distributed numbers in range
 	
 ### Normal Distribution Prngs
 
@@ -102,9 +105,11 @@ setstate|  5%    | Sets state of pot with array (no reseeding)
 version |        | prints version
 checkfloat|      | checks float math is compliant for expected output
 
+A compact api reference is [here](./Fdrandom.api)
+
 Speed & Quality
 ---------------
-The percentages in the above tables are very rough as js engine
+The percentages in the above tables are very rough as VM
 performance varies. Fdrandoms default method:`f48` runs at about 
 same speed as both Firefox and Chromes native Math.random in 2017.
 
@@ -151,10 +156,10 @@ the Fdrandom object gets cloned for each pot. 'Repot'ing with
 a new seed is much faster. 'repot' without a seed resets to
 first potted state and is very fast. 
 
-`Fdrandom.hot()` or `anypot.hot()` is a static hot (indeterminable)
-instance for speed and convienience. Methods like gaus(), gskip() and 
-aresult() can require an independat instance (pot or hotpot) for continuity
-of results.
+`Fdrandom.hot()` (or `anypot.hot()`) is a static 'hot' (indeterminable)
+instance for speed and convienience. Note that methods like gaus(), gskip(), 
+zrange() and aresult() require an independant instance (pot or hotpot) for 
+full continuity of results.
 
 Precision/Types
 ---------------
@@ -191,6 +196,8 @@ oneToTenInteger=p.irange(1,10)   //end is inclusive
 minusOneToOne_FlatDist =p.lrange(0.5) //loaded range. 
 minusOneToOne_EndBias =p.lrange(0.4)  //First param sets a loading factor
 twoToFive_MidBias = p.lrange(0.6,2,5) //0= High ends, 0.5=Flat, 1=High Mid
+
+rangeInUnknownDist = p.zrange(0,1) //0to1 in a dynamicly changing distribution
 
 random0or1 = p.rbit()   //random bit
 random0or1 = p.rpole()  //random -1 or 1
@@ -270,6 +277,7 @@ File `antisort.md` contains more notes on antisorting.
 
 Version History
 ---------------
+* 2.4.0 - created zrange, a dynamic distribution generator
 * 2.3.2 - improved usum. Made hot() static, added hotpot()s
 * 2.3.0 - tweaked seeding slightly
 * 2.2.0 - made hot pots non static and tweaked rbit and rpole

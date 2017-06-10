@@ -1,60 +1,63 @@
-checkfloat() returns true if host platforms float math is compliant for expected results
-version() returns version
+checkfloat() return true if host platforms float math is compliant for expected results
+version() return version
 
-pot([seeding variable or object]) returns a seeded new instance of fdrandom 
+pot([seeding variable or object]) return a seeded new instance of fdrandom 
 repot([seeding variable or object]) resets or reseeds this instance of fdrandom 
-hot([extra seeds]) returns a randomly seeded instance of fdrandom 
-hotpot([extra seeds]) returns a randomly seeded new instance of fdrandom 
+hot([extra seeds]) return a randomly seeded instance of fdrandom 
+hotpot([extra seeds]) return a randomly seeded new instance of fdrandom 
 
-getstate() returns array of parents state for setstate
+getstate() return array of parents state for setstate
 setstate(state_array) sets state with state array returned by getstate  
 
-f48() returns 48bit precision equally distributed variates 0 to 0.9999999999999999 
-dbl() returns 53bit precision equally distributed variates 0 to 0.9999999999999999
-f24() returns 48bit precision equally distributed variates 0 to 0.99999994
+f48() return 48bit precision equally distributed variates 0 to 0.9999999999999999 
+dbl() return 53bit precision equally distributed variates 0 to 0.9999999999999999
+f24() return 48bit precision equally distributed variates 0 to 0.99999994
 
-range(a,b) returns equally distributed reals in range a to <b
-irange(a,b) returns equally distributed integer in range a to b inclusive
-gnorm([a=-1][,b=1]) returns approximate normally distributed reals in range a to b 
+gnorm([a=-1][,b=1]) return approximate normally distributed reals in range a to b 
 
-lrange(L [,a=-1][,b=1]) returns loaded distribution through range a to b where L=0:High ends|0.5=Flat|1=Middle peaked  
+range(a,b) return equally distributed reals in range a to <b
+irange(a,b) return equally distributed integer in range a to b inclusive
 
-i32()  returns signed integer randoms    
-ui32() returns unsigned integer randoms    
+lrange(L [,a=-1][,b=1]) return loaded distribution through range a to b where L=0:High ends|0.5=Flat|1=Middle peaked  
 
-rbit() returns random 0 or 1
-rpole() returns random -1 or 1     
+zrange([,a=-1][,b=1][,K=1]) return a semi-randomly altering combination of two distributions. Output range is a to b. K=0:combination does not change, k=1:changes over 100s outputs, K=100:changes every few calls, k>1000:almost every call.  
 
-ilcg() returns signed 32bit integer ok but weak lcg randoms 
-ishr2() returns slightly patterned 32bit shift register randoms   
-ishp() returns fast good quality 32bit integer randoms    
+i32()  return signed integer randoms    
+ui32() return unsigned integer randoms    
 
-uigless() returns unsigned ints in a patterned distribution favouring low values
-uigmore() returns unsigned ints in a patterned distribution favouring high values
-igbrist() returns signed ints in a patterned distribution peaking in values
-igmmode() returns signed ints in patterned unsymetric but balanced distribution
+rbit() return random 0 or 1
+rpole() return random -1 or 1     
 
-gbowl([a=-1][,b=1]) returns bowl shaped distribution in range a to b      
-gspire([a=-1][,b=1]) returns spire shaped distribution in range a to b
-gthorn([a=-1][,b=1]) returns thorn shaped distribution in range a to b
-gwedge([a=-1][,b=1]) returns wedge shaped distribution in range a to b
-gteat([a=-1][,b=1]) returns teat shaped distribution in range a to b
-gtrapez([a=-1][,b=1]) returns trapeziod shaped distribution in range a to b
+ilcg() return signed 32bit integer ok but weak lcg randoms 
+ishr2() return slightly patterned 32bit shift register randoms   
+ishp() return fast good quality 32bit integer randoms    
 
-gskip([skip=f48()/3][,a=0][,b=1]) returns quasirandom reals cycling a to b, skipping variably or by skip as factor of range
+uigless() return unsigned ints in a patterned distribution favouring low values
+uigmore() return unsigned ints in a patterned distribution favouring high values
+igbrist() return signed ints in a patterned distribution peaking in values
+igmmode() return signed ints in patterned unsymetric but balanced distribution
 
-usum(n,sig,mu) returns uniform sum of n equal distributed randoms
-gaus(sig,mu) returns gaussion variates sig=sigma, mu = mu
-gausx(sig,mu) returns extra precision gaussion variates sig=sigma, mu = mu
+gbowl([a=-1][,b=1]) return bowl shaped distribution in range a to b      
+gspire([a=-1][,b=1]) return spire shaped distribution in range a to b
+gthorn([a=-1][,b=1]) return thorn shaped distribution in range a to b
+gwedge([a=-1][,b=1]) return wedge shaped distribution in range a to b
+gteat([a=-1][,b=1]) return teat shaped distribution in range a to b
+gtrapez([a=-1][,b=1]) return trapeziod shaped distribution in range a to b
 
-mixof (in [,out=intype][,n=1][,in_start=0][,in_fin=len]) returns new or given output array or string consisting of n randomly choosen elements from elements|chars in_start to in_fin 
+gskip([skip=f48()/3][,a=0][,b=1]) return quasirandom reals cycling a to b, skipping variably or by skip as factor of range
 
-mixup(in [,out=in][,inStart=0][,fin=inLen]) shuffles positions of array or string, inplace or adds to end of out array or string. Returns the input or output string|array.
+usum(n[,stnddev=1][,mean=0]) return uniform sum of n equal distributed randoms
+gaus([stnddev=1][,mean=0]) return gaussion variates sig=sigma, mu = mu
+gausx([stnddev=1][,mean=0]) return extra precision gaussion variates sig=sigma, mu = mu
 
-antisort([premix:boolean,] inArray or length [,outArray=inArray][,orderIncrement=auto][,posmode=off|"pos"][,sep="auto"][,bogoMilliSecTimeout=auto]) returns input array shuffled randomly with sequential elements separated by approx 10% numeric range or by 10% source-index-range if "pos" set or first element is not finite.
+mixof (in [,out=intype][,n=1][,in_start=0][,in_fin=len]) return new or given output array or string consisting of n randomly choosen elements from elements|chars in_start to in_fin 
 
-aindex([premix:boolean,] Array [,orderIncrement=auto][,posmode=off|"pos"][,sep="auto"][,bogoMilliSecTimeout=auto]) returns index of array antisorted by numeric value or element "index" if specified or non numeric. eg. for shuffling a playlist
+mixup(in [,out=in][,inStart=0][,fin=inLen]) shuffles positions of array or string, inplace or adds to end of out array or string. return the input or output string|array.
 
-aresult([indexArray][,valueArray][,orderIncrement]) returns estimated minimum separation achieved on last antisort. Signless but returns negative if only direct neighbours could be separated. If relevant arrays are supplied the definite value is calculated. 
+antisort([premix:boolean,] inArray or length [,outArray=inArray][,orderIncrement=auto][,posmode=off|"pos"][,sep="auto"][,bogoMilliSecTimeout=auto]) return input array shuffled randomly with sequential elements separated by approx 10% numeric range or by 10% source-index-range if "pos" set or first element is not finite.
 
-bulk(in_array|new_array_len [,func=f48][,func param][,func param][,func param]) returns the input or a new array filled with func,params
+aindex([premix:boolean,] Array [,orderIncrement=auto][,posmode=off|"pos"][,sep="auto"][,bogoMilliSecTimeout=auto]) return index of array antisorted by numeric value or element "index" if specified or non numeric. eg. for shuffling a playlist
+
+aresult([indexArray][,valueArray][,orderIncrement]) return estimated minimum separation achieved on last antisort. Signless but return negative if only direct neighbours could be separated. If relevant arrays are supplied the definite value is calculated. 
+
+bulk(in_array|new_array_len [,func=f48][,func param][,func param][,func param]) return the input or a new array filled with func,params
