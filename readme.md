@@ -277,6 +277,7 @@ File `antisort.md` contains more notes on antisorting.
 
 Version History
 ---------------
+* 2.5.0 - tweaked zrange to have drifting average
 * 2.4.0 - created zrange, a dynamic distribution generator
 * 2.3.2 - improved usum. Made hot() static, added hotpot()s
 * 2.3.0 - tweaked seeding slightly

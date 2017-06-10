@@ -71,7 +71,7 @@ var newFdrPot = function(){
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.4.0" }
+  function version() { return "v2.5.0" }
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
@@ -186,17 +186,19 @@ var newFdrPot = function(){
     var x=us*0.001  //us is 0 to max, max is 10
 
     us+=(e-0.3333)*c
+    ua+=(e-0.5)*0.01
+    ua=ua>1?1:ua<0?0:ua
 
-    if(ga<6){ var gaa=dists[ga](-1,1) }
+    if(ga<6){ var gaa=dists[ga](-1+ua,ua) }
     else{
-      if(ga==6){ gaa=gskip(0,-1,1) }
-      else{ gaa=lrange(ua,-1.0,1.0) }
+      if(ga==6){ gaa=gskip(0,-1+ua,ua) }
+      else{ gaa=lrange(ua*0.75,-1.0,1) }
     }
     
-    if(gb<6){ var gbb=dists[gb](-1.0,1.0) }
+    if(gb<6){ var gbb=dists[gb](-1.0,1) }
     else{
       if(gb==6){ gbb=gskip(0,-1,1) }
-      else{ gbb=lrange(ub*0.5,-1.0,1.0) }
+      else{ gbb=lrange(ub*0.4,-1.0+ua,ua) }
     }
  
     return b+ (d-b)*((gbb*x -gaa*x + gaa)*0.5+0.5) 
