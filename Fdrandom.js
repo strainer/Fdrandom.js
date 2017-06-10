@@ -4,17 +4,21 @@
  ** in homage to human ingenuity against greed and hatred.
  */
 
-var newFdrPot = function(){ return (function(sd){ //factory
+var newFdrPot = function(){ 
+  
+  var FdrHotPot    //a static instance for indeterminables
+
+  return (function(sd){ //factory
   'use strict'
   
-  var va,vl,vs,qr,us,rb,ju,U,sv,i,ar
+  var va,vl,qr,rb,ga,gb,ua,ub,us,ju,U,sv,i
   plant(sd) 
   
   sv=getstate()
     
-  function plant(sd) {           //constructor
+  function plant(sd) {   //constructor
     
-    va=1000, vl=1, vs=1, qr=0.0, us=0.0, rb=2.0e+15
+    va=1000, vl=1, ga=-1, gb=0, qr=ua=ub=0, us=-0.1, rb=2.0e+15
     ju=1, U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
 
     sow(sd)
@@ -32,7 +36,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
         return 
       }
       
-      if(va<0){ return }    //va is count limiting the process
+      if(va<0){ return }    //va used to count limit the process
       
       if(t === 'object')
       { va--
@@ -44,6 +48,8 @@ var newFdrPot = function(){ return (function(sd){ //factory
         return 
       }
       
+      if(t === 'boolean') { U[0]*=0.93; if(sd){ f48() } return }
+
       if(isFinite(sd)){
         r= (sd<=0)? Math.abs(sd)+1.234 : sd 
         while(r>16)     r=r*0.0019560471624266144
@@ -52,7 +58,6 @@ var newFdrPot = function(){ return (function(sd){ //factory
         return
       }
    
-      if(t === 'boolean') { U[0]*=0.93; if(sd){ f48() } return }
       if(t === 'function'){ U[0]*=0.91; sow(sd.name); return }
       if(t === 'symbol')  { U[0]*=0.89 }
 
@@ -66,17 +71,18 @@ var newFdrPot = function(){ return (function(sd){ //factory
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.2.0" }
+  function version() { return "v2.4.0" }
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
-            ,ju, va, vl, vs, qr, us, rb ] 
+            ,ju, va, vl, qr, rb, ga, gb, ua, ub, us ] 
   } 
   
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
-    ju=s[8];  va=s[9];  vl=s[10] 
-    vs=s[11]; qr=s[12]; us=s[13]; rb=s[14]; sv=s
+    ju=s[8];  va=s[9];  vl=s[10]; qr=s[11]; rb=s[12]; 
+    ga=s[13]; gb=s[14]; ua=s[15]; ub=s[16]; us=s[17];
+    sv=s
   }
 
   function pot() { return newFdrPot(arguments) }
@@ -86,7 +92,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     return this 
   }
   
-  function hot() {
+  function hotpot() {
     if(typeof(window)!=='undefined' 
      && (window.crypto||window.msCrypto)){ 
       var cO = window.crypto||window.msCrypto
@@ -98,6 +104,11 @@ var newFdrPot = function(){ return (function(sd){ //factory
     return newFdrPot(ag)
   }
 
+  function hot(){
+    if(!FdrHotPot){ FdrHotPot=hotpot() }
+    return FdrHotPot
+  }
+    
   ///A redesign of J.Baagoe's Alea; a float-cut dual-lcg prng
   function f48() { 
     var c= 0.12810301030196883 * U[0] +
@@ -121,7 +132,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
   function ui32() { return (f48()*0x1700000000)>>>0 }
   
   function rbit() { 
-    if( rb<2147483648 ) return (rb*=2)&1  //25% faster with rb<31 bits
+    if( rb<2147483648 ) return (rb*=2)&1 
     return (rb= dbl() +0.5) &1 
   }
 
@@ -141,14 +152,55 @@ var newFdrPot = function(){ return (function(sd){ //factory
     return vl^((vl<<7)+1498916339) 
   }
 
-  function uigless() 
+  function uigless()
   { return (( ui32()&ui32() )>>>0)  }
-  function uigmore() 
+  function uigmore()
   { return (( ui32()|ui32() )>>>0)  }
-  function igbrist() 
+  function igbrist()
   { return (( ui32()&ui32() )>>1) + (( ui32()|ui32() )>>1)  }
-  function igmmode() 
+  function igmmode()
   { return (( ui32()&ui32() )>>1) - (( ui32()|ui32() )>>1)  }
+  
+  
+  function zrange(b,d,c){ //a semi-randomly altering combination of two distributions 
+                             
+    var dists=[gbowl,gbowl,gspire,range,gnorm,gtrapez]
+        
+    c= (c===undefined)?1:c; b= (b===undefined)?-1:b; d= (d===undefined)?1:d
+   
+    var e=f48() 
+    
+    if(us>1000){ 
+      ga=gb, ua=ub
+      gb=irange(0,10) 
+      us=0,ub=f48()	
+    }else{
+      if( us<0 ){
+        if(ga<0){ ga=irange(0,8); ua=f48() }
+        gb=ga, ub=ua
+        ga=irange(0,10)
+        us=1000,ua=f48()
+      }
+    }
+
+    var x=us*0.001  //us is 0 to max, max is 10
+
+    us+=(e-0.3333)*c
+
+    if(ga<6){ var gaa=dists[ga](-1,1) }
+    else{
+      if(ga==6){ gaa=gskip(0,-1,1) }
+      else{ gaa=lrange(ua,-1.0,1.0) }
+    }
+    
+    if(gb<6){ var gbb=dists[gb](-1.0,1.0) }
+    else{
+      if(gb==6){ gbb=gskip(0,-1,1) }
+      else{ gbb=lrange(ub*0.5,-1.0,1.0) }
+    }
+ 
+    return b+ (d-b)*((gbb*x -gaa*x + gaa)*0.5+0.5) 
+  }
   
   function gbowl(b,d){ 
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d; var c=f48()
@@ -171,7 +223,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     return b+ (d-b)* 0.2* (f48()+f48()+f48()+f48()+f48())
   } 
-  function lrange(a,b,d){
+  function lrange(a,b,d){ //default -1 to 1
     a= (a===undefined)?0.5:a; b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     
     if(a>0.5){  //load middle of dist
@@ -206,8 +258,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     
     if(sig === undefined) return sum
     if(sig !== psig) 
-    {  psig=sig; csig= sig*2/n*Math.sqrt(n) } //doesnt nail it
-    //sig wants converted to equivalent gaus for large n
+    {  psig=sig; csig= sig*3.47/Math.sqrt(n) } //approx 1/100th accurate
     
     return (mu||0)+ sum*csig 
   }
@@ -304,7 +355,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     var Av,i
     if( typeof mx !=='boolean')
     { x=lim,lim=sep,sep=sq,sq=Ai,Ai=mx,mx=true }
-    if( typeof Ai !=='object' || !isFinite(Ai[0])
+    if( typeof Ai !=='object' || (isNaN(parseFloat(Ai[0])) || !isFinite(Ai[0]))
      ||(typeof sep ==='string' && sep==="pos")){ 
       Av= new Array((Ai>0)?Ai:Ai.length)
       if( typeof sq ==='undefined') sq=1
@@ -385,14 +436,14 @@ var newFdrPot = function(){ return (function(sd){ //factory
       c=c+d, ch=ch-d, ti-- 
     }
     
-    if(autosep){ ar=(ti>te)?bsep*0.81:(ti<1)?0:-bsep*0.8 }
-    else{ ar=(ti>te)?bsep:(ti<1)?0:-bsep }
+    if(autosep){ us=(ti>te)?bsep*0.81:(ti<1)?0:-bsep*0.8 }
+    else{ us=(ti>te)?bsep:(ti<1)?0:-bsep }
     
     return Ax
   }
   
   function aresult(A,Av,sq){ 
-    if(!A) { return ar }
+    if(!A) { return us }
     var c, n=A.length, df=Infinity
     if( typeof Av !=='object' ){
       for(i=0;i<n;i++)
@@ -401,7 +452,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
       for(i=0;i<n;i++)
       { c=Math.abs(Av[A[i]]-Av[A[(i+1)%n]]+(sq||0)); if(c<df)df=c }
     }
-    return (ar>0||ar==="zero")?df:-df 
+    return (us>0||us==="zero")?df:-df 
   }
 
   function antisort(mx,Ai,A,sq,sep,lim,x){
@@ -420,14 +471,15 @@ var newFdrPot = function(){ return (function(sd){ //factory
   }
     
   function bulk(A,f,b,c,d){
-    if( typeof A !=='object' ){ A=new Array( isFinite(A)?A:1 )  }
+    if( typeof A !=='object' ){ A=new Array( parseInt(A)||1 )  }
     var i=0,n=A.length; f=f||f48 
     while( i<n ) A[i++]=f(b,c,d);
     return A
   }
   
   return{
-     pot: pot   ,hot: hot  ,repot: repot  ,reset: repot
+     pot: pot   ,hot: hot  ,hotpot: hotpot
+    ,repot: repot          ,reset: repot
     ,getstate: getstate    ,setstate:   setstate
     ,version: version      ,checkfloat: checkfloat 
     
@@ -436,7 +488,7 @@ var newFdrPot = function(){ return (function(sd){ //factory
     ,i32: i32   ,ui32: ui32
     
     ,rbit: rbit ,rndbit:rbit  ,rpole: rpole  ,rndsign:rpole
-    ,range: range  ,irange: irange ,lrange:lrange
+    ,range: range  ,irange: irange ,lrange:lrange ,zrange:zrange
     
     ,gaus: gaus    ,gausx: gausx   ,usum: usum
     
@@ -458,14 +510,14 @@ var newFdrPot = function(){ return (function(sd){ //factory
 
 }(arguments))}
 
-//Hopefuly exports to node, amd, commonjs or global object
+var mdname='Fdrandom' ,factory=newFdrPot
 if (typeof exports !== 'undefined') 
 { if (typeof module !== 'undefined' && module.exports)
-  { exports = module.exports = newFdrPot({}) }
-  else { exports.Fdrandom = newFdrPot({}) }
+  { exports = module.exports = factory() }
+  else { exports[mdname] = factory() }
 } else {
   if (typeof define === 'function' && define.amd) 
   { define( mdname,[],function(){return factory()} ) }
   else
-  { (1,eval)('this').Fdrandom = newFdrPot({}) } 
+  { (1,eval)('this')[mdname] = factory() } 
 }

@@ -110,20 +110,19 @@ function chartfuncs() {
    [Fd.rbit,"rbit "],
    [Fd.rpole,"rpole "],
   
-   [Fd.usum,"usum 1 ",1],
    [Fd.usum,"usum 2 ",2],
    [Fd.usum,"usum 3 ",3],
    [Fd.usum,"usum 4 ",4],
    [Fd.usum,"usum 5 ",5],
    
-   //~ [Fd.usum,"usum 6 ",6],
-   //~ [Fd.usum,"usum 7 ",7],
-   //~ [Fd.usum,"usum 8 ",8],
-   //~ [Fd.usum,"usum 16 ",16],
-   //~ [Fd.usum,"usum 32 ",32],
+   ///~ [Fd.usum,"usum 6 ",6],
+   ///~ [Fd.usum,"usum 7 ",7],
+   ///~ [Fd.usum,"usum 8 ",8],
+   ///~ [Fd.usum,"usum 16 ",16],
+   ///~ [Fd.usum,"usum 32 ",32],
   
    [Fd.gaus,"gaus "],
-   //~ [Fd.gausx,"gausx "],
+   ///~ [Fd.gausx,"gausx "],
   
    [Fd.ui32,"ui32 "],
    [Fd.i32,"i32 "],
@@ -154,6 +153,10 @@ function chartfuncs() {
    [Fd.lrange,"lrange 0.25",0.25],
    [Fd.lrange,"lrange 0.10",0.10],
    [Fd.lrange,"lrange 0",0],
+   [function(){return Fd.zrange(0,1,1)},"zrange 1"],
+   [function(){return Fd.hot().zrange(0,1,0.001)},"hot().zrange 0.001"],
+   [function(){return Fd.hot().zrange(0,1,0.001)},"hot().zrange 0.001"],
+   [function(){return Fd.hot().zrange(0,1,0.001)},"hot().zrange 0.001"],
    [returnAVal,"flat aindex",antip],
    [returnBVal,"fl-aindx 2n",antip],
    [returnADelt,"fl-aindx delta ",antip],	
@@ -164,7 +167,7 @@ function chartfuncs() {
    [returnAVal,"flat mixup",mixud],	
    [returnADelt,"fl-mixup delta ",mixud],
    [function(){return Math.sin(sx+=Fd.gthorn(0,Math.PI))},"Sin gthorn"],
-    
+   
   ]
        
   //~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
