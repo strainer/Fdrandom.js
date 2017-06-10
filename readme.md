@@ -15,8 +15,8 @@ Examine available distributions on the [generator test page](http://strainer.git
   * Normal approximated by Uniform Sum.
   * Low discrepency / Quasi random (custom spaced walk)
   * Convenience gaming distributions
-	* Dynamic distribution generator
-	
+  * Dynamic distribution generator
+
 Usage
 -----
 ```javascript 
