@@ -105,7 +105,7 @@ setstate|  5%    | Sets state of pot with array (no reseeding)
 version |        | prints version
 checkfloat|      | checks float math is compliant for expected output
 
-A compact api reference is [here](./Fdrandom.api)
+A compact api reference is [here](./fdrandom.api)
 
 Speed & Quality
 ---------------
