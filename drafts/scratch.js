@@ -9,8 +9,28 @@ q=Fdrandom.pot()
 h=Fdrandom.hot()
 
 
+console.log(q.f48())
+q.repot()
+console.log(q.f48())
+q.repot("1")
+console.log(q.f48())
+q.repot("1")
+console.log(q.f48())
+q.repot("2")
+console.log(q.f48())
+q.repot("1")
+console.log(q.f48())
+
+console.log(-0===0)
+return
+
 var nn=1
 var zum=p.bulk(100000, function(){return h.usum(nn,5)} ) 
+var zay=p.bulk(30, function(){return Math.round(h.zrange(0,100,1)) } )
+
+console.log(zay.join(" "))
+ 
+return
 //~ var zum=p.bulk(100000, function(){return h.gaus(1)} ) 
 
 var res=sstats(zum)

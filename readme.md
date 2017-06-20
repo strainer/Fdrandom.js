@@ -61,8 +61,10 @@ Method	| Speed % | Notes
  :----- | :-----: | :------------------------------
 gaus    |   20    | Fast high quality gaussians        
 gausx   |   15    | Possibly needless extra resolution employed           
+cauchy  |   10    | Cauchy distribution           
 usum    | 25@n=4  | Custom uniform sum 
-gnorm   |   30    | Normal curve shaped game distribution 
+gnorm   |   25    | Normal curve shaped game distribution 
+gcauchy |   15    | Cauchy curve shaped game distribution 
 
 ### Other Distributions
 
@@ -105,6 +107,12 @@ setstate|  5%    | Sets state of pot with array (no reseeding)
 version |        | prints version
 checkfloat|      | checks float math is compliant for expected output
 
+### Helpers
+Method | Notes
+ :---- | :----------------
+bulk   | returns an array filled with the supplied function
+within | runs a generator up to n times
+ 
 A compact api reference is [here](./fdrandom.api)
 
 Speed & Quality
@@ -207,8 +215,15 @@ gaussianMath = p.gaus(stndev,mean) //default stndv=1, mean=0
 uniformSum = p.usum(n)             //add n*( -0.5 > 0.5 ) randoms
 uniformSum = p.usum(n,stndev,mean) //scale to stnd deviation and mean
 
+cauchy = p.cauchy(scale,mean) //cauchy distribution tends towards excessive values 
+
+limitedcauchy = p.within(-10,10,function(){return p.cauchy(scale,mean)},13) 
+//'within' calls the callback up to 13 times, until value is in range.
+//if never in range returns range(-10,10) 
+
 normGame = gnorm()      //approx gaussian shape range -1 to 1
 normGame = gnorm(2,4.5) //same shape range 2 to 4.5
+cauchyGame = gcauchy(2,4.5) //cauchy shape range 2 to 4.5
 oftenMid = gthorn()     //sharp peak in middle, range -1 to 1
 oftenMid = gthorn(p,q)  //same shape over range p to q
 ```
@@ -277,6 +292,7 @@ File `antisort.md` contains more notes on antisorting.
 
 Version History
 ---------------
+* 2.6.0 - added cauchy and gcauchy functions, and 'within' helper
 * 2.5.0 - tweaked zrange to have drifting average
 * 2.4.0 - created zrange, a dynamic distribution generator
 * 2.3.2 - improved usum. Made hot() static, added hotpot()s

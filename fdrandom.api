@@ -47,8 +47,9 @@ gtrapez([a=-1][,b=1]) return trapeziod shaped distribution in range a to b
 gskip([skip=f48()/3][,a=0][,b=1]) return quasirandom reals cycling a to b, skipping variably or by skip as factor of range
 
 usum(n[,stnddev=1][,mean=0]) return uniform sum of n equal distributed randoms
-gaus([stnddev=1][,mean=0]) return gaussion variates sig=sigma, mu = mu
-gausx([stnddev=1][,mean=0]) return extra precision gaussion variates sig=sigma, mu = mu
+gaus([stnddev=1][,mean=0]) return gaussion variates
+gausx([stnddev=1][,mean=0]) return extra precision gaussion variates
+cauchy([scale=1][,mean=0]) returns cauchy distribution - the ratio of two gaussians
 
 mixof (in [,out=intype][,n=1][,in_start=0][,in_fin=len]) return new or given output array or string consisting of n randomly choosen elements from elements|chars in_start to in_fin 
 
@@ -61,3 +62,5 @@ aindex([premix:boolean,] Array [,orderIncrement=auto][,posmode=off|"pos"][,sep="
 aresult([indexArray][,valueArray][,orderIncrement]) return estimated minimum separation achieved on last antisort. Signless but return negative if only direct neighbours could be separated. If relevant arrays are supplied the definite value is calculated. 
 
 bulk(in_array|new_array_len [,func=f48][,func param][,func param][,func param]) return the input or a new array filled with func,params
+
+within(lo,hi,fnc[,tn=8]) try fnc for a result within lo>hi. return range(lo,hi) if not produced by fnc after tn tries.
