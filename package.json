@@ -1,6 +1,6 @@
 {
   "name": "fdrandom",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "Fast deterministic random methods. Includes Uniform, Gaussian, gaming distributions, shuffles and antisort",
   "main": "Fdrandom.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "url": "git+https://github.com/strainer/Fdrandom.js.git"
   },
   "keywords": [
+    "rng",
     "prng",
     "seedable",
     "fast",
@@ -20,10 +21,12 @@
     "variate",
     "gaussian",
     "normal",
+    "cauchy",
     "game",
     "random",
     "shuffle",
-    "antisort"
+    "antisort",
+    "procedural generation"
   ],
   "author": "Andrew Strain <AndrewInput@gmail.com> (https://github.com/strainer/)",
   "license": "PDDL-1.0",
