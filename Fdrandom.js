@@ -11,14 +11,14 @@ var newFdrPot = function(){
   return (function(sd){ //factory
   'use strict'
   
-  var va,vl,qr,rb,ga,gb,ua,ub,us,ju,U,sv,i
+  var nml,va,vl,qr,rb,ga,gb,ua,ub,us,ju,U,sv,i
   plant(sd) 
   
   sv=getstate()
     
   function plant(sd) {   //constructor
     
-    va=1000, vl=1, ga=-1, gb=0, qr=ua=ub=0, us=-0.1, rb=2.0e+15
+    va=1000, vl=1, ga=-1, gb=0, nml=qr=ua=ub=-0, us=-0.1, rb=2.0e+15
     ju=1, U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
 
     sow(sd)
@@ -71,24 +71,24 @@ var newFdrPot = function(){
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.4.0" }
+  function version() { return "v2.6.0" }
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
-            ,ju, va, vl, qr, rb, ga, gb, ua, ub, us ] 
+            ,ju, va, vl, qr, rb, ga, gb, ua, ub, us, nml ] 
   } 
   
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
     ju=s[8];  va=s[9];  vl=s[10]; qr=s[11]; rb=s[12]; 
     ga=s[13]; gb=s[14]; ua=s[15]; ub=s[16]; us=s[17];
-    sv=s
+    nml=s[18]; sv=s
   }
 
   function pot() { return newFdrPot(arguments) }
   
   function repot(s) { 
-    if (s) { plant({"0":{"0":s}}) } else { setstate(sv) }
+    if (s===undefined) { setstate(sv) } else { plant({"0":{"0":s}}) }
     return this 
   }
   
@@ -164,41 +164,44 @@ var newFdrPot = function(){
   
   function zrange(b,d,c){ //a semi-randomly altering combination of two distributions 
                              
-    var dists=[gbowl,gbowl,gspire,range,gnorm,gtrapez]
+    var dists=[gbowl,range,gtrapez,gnorm,gcauchy,gspire]
         
     c= (c===undefined)?1:c; b= (b===undefined)?-1:b; d= (d===undefined)?1:d
    
     var e=f48() 
     
-    if(us>1000){ 
-      ga=gb, ua=ub
-      gb=irange(0,10) 
-      us=0,ub=f48()	
-    }else{
+    if(us>1000){ //gb was strong, becomes ga
+      us-=1000 ,ga=gb ,ua=ub
+      if(ga>7){gb=irange(0,7)}else{gb=irange(0,9)}
+      ub=f48()	
+    }else{      //ga was strong
       if( us<0 ){
         if(ga<0){ ga=irange(0,8); ua=f48() }
-        gb=ga, ub=ua
-        ga=irange(0,10)
-        us=1000,ua=f48()
+        us+=1000 ,gb=ga ,ub=ua
+        if(gb>7){ga=irange(0,7)}else{ga=irange(0,9)}
+        ua=f48()
       }
     }
 
-    var x=us*0.001  //us is 0 to max, max is 10
+    var x=us*0.001 ,cf=Math.sqrt(c*0.002)  //us is 0>1000
 
     us+=(e-0.3333)*c
-    ua+=(e-0.5)*0.01
+    
+    ua+=(f48()-0.5)*cf
     ua=ua>1?1:ua<0?0:ua
+    ub-=(f48()-0.5)*cf
+    ub=ub>1?1:ub<0?0:ub
 
     if(ga<6){ var gaa=dists[ga](-1+ua,ua) }
     else{
-      if(ga==6){ gaa=gskip(0,-1+ua,ua) }
-      else{ gaa=lrange(ua*0.75,-1.0,1) }
+      if(ga<8){ gaa=gskip(0,-1+ua,ua) }
+      else{ gaa=lrange(ub*0.7,-1+ua*0.85,ua*0.85+0.15) }
     }
     
-    if(gb<6){ var gbb=dists[gb](-1.0,1) }
+    if(gb<6){ var gbb=dists[gb](-1+ub,ub) }
     else{
-      if(gb==6){ gbb=gskip(0,-1,1) }
-      else{ gbb=lrange(ub*0.4,-1.0+ua,ua) }
+      if(gb<8){ gbb=gskip(0,-1+ub,ub) }
+      else{ gbb=lrange(ua*0.7,-1+ub*0.85,ub*0.85+0.15) }
     }
  
     return b+ (d-b)*((gbb*x -gaa*x + gaa)*0.5+0.5) 
@@ -224,6 +227,10 @@ var newFdrPot = function(){
   function gnorm(b,d){
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d
     return b+ (d-b)* 0.2* (f48()+f48()+f48()+f48()+f48())
+  } 
+  function gcauchy(b,d){
+    b= (b===undefined)?-1:b; d= (d===undefined)?1:d
+    return b+ (d-b)*(0.5+((f48()+f48()+f48()-1.5)/(0.1+Math.abs(f48()+f48()+f48()-1.5)))*0.03333333333)
   } 
   function lrange(a,b,d){ //default -1 to 1
     a= (a===undefined)?0.5:a; b= (b===undefined)?-1:b; d= (d===undefined)?1:d
@@ -254,29 +261,29 @@ var newFdrPot = function(){
   }
   
   var psig,csig
-  function usum(n,sig,mu) { 
+  function usum(n,scale,mean) { 
     var sum= (((n=n||2)&1)==1)? 0.5 : 0
     for( var i=0;i<n;i++ ) sum=f48()-sum 
     
-    if(sig === undefined) return sum
-    if(sig !== psig) 
-    {  psig=sig; csig= sig*3.47/Math.sqrt(n) } //approx 1/100th accurate
+    if(scale === undefined) return sum
+    if(scale !== psig) //cache csig value for scale 
+    {  psig=scale; csig= scale*3.47/Math.sqrt(n) } //approx 1/100th accurate
     
-    return (mu||0)+ sum*csig 
+    return (mean||0)+ sum*csig 
   }
 
-  function gaus(sig,mu) { return nrml(f48,sig,mu) }
+  function gaus(scale,mean) { return nrml(f48,scale,mean) }
   
-  function gausx(sig,mu){ return nrml(dbl,sig,mu) }
+  function gausx(scale,mean){ return nrml(dbl,scale,mean) }
   
-  var nml=0
+  function cauchy(scale,mean){ return (mean||0)+(scale||1)*nrml(f48)/nrml(f48) }
   
-  function nrml(func,sig,mu) /// G Marsaglias box muller polar method
+  function nrml(func,scale,mean) /// G Marsaglias box muller polar method
   { var p,q,w
   
     if(nml){ 
       q = nml ; nml=0
-      if(sig) return q *sig +(mu||0)
+      if(scale) return q *scale +(mean||0)
       return q
     }else{
       do {
@@ -287,7 +294,7 @@ var newFdrPot = function(){
       w = Math.sqrt(( -2.0*Math.log(w) ) /w)
       nml = p*w;
       
-      if(sig) return q*w*sig+(mu||0)
+      if(scale) return q*w*scale+(mean||0)
       return q*w 
     }
   }
@@ -478,6 +485,15 @@ var newFdrPot = function(){
     while( i<n ) A[i++]=f(b,c,d);
     return A
   }
+
+  function within(a,e,fn,n){
+    var r; n=n||5
+    while(n--){
+      r =fn()
+      if(r>=a&&r<=e){ return r }
+    }
+    return range(a,e)
+  }
   
   return{
      pot: pot   ,hot: hot  ,hotpot: hotpot
@@ -492,9 +508,9 @@ var newFdrPot = function(){
     ,rbit: rbit ,rndbit:rbit  ,rpole: rpole  ,rndsign:rpole
     ,range: range  ,irange: irange ,lrange:lrange ,zrange:zrange
     
-    ,gaus: gaus    ,gausx: gausx   ,usum: usum
+    ,cauchy:cauchy ,gaus: gaus ,gausx: gausx ,usum: usum
     
-    ,mixup: mixup  ,mixof: mixof    ,bulk:bulk
+    ,mixup: mixup  ,mixof: mixof    ,bulk:bulk  ,within:within
     ,aindex:aindex ,aresult:aresult ,antisort:antisort 
     ,ilcg: ilcg   ,ishr2: ishr2    ,ishp:  ishp
     
@@ -505,7 +521,7 @@ var newFdrPot = function(){
     ,fgthorn: gthorn  ,fgskip:   gskip    ,fgteat:gteat
     
     ,gbowl: gbowl     ,gspire: gspire  ,gthorn: gthorn 
-    ,gwedge: gwedge   ,gnorm: gnorm 
+    ,gwedge: gwedge   ,gnorm: gnorm   ,gcauchy:gcauchy 
     ,gteat: gteat     ,gtrapez: gtrapez 
     ,gskip: gskip
   }

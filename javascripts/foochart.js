@@ -46,6 +46,7 @@ var dtsz=1.1*svgz/256
 var ddtsz=3.5*svgz/256
 var bdtsz=5*svgz/256
 var starttime
+var zocount=1.234
 
 var tlogger = document.getElementById('log')
 
@@ -68,6 +69,7 @@ function gogo(){
   
   isHot = ('hot'===document.getElementById("seed").value)
   if ( isHot ) { Fd=Fdrandom.hot() } else { Fd=Fdrandom.pot() }
+  if ( isHot ) { Fd2=Fdrandom.hot() } else { Fd2=Fdrandom.pot() }
   
   d = document.getElementById("selectedsize").value;
 
@@ -105,81 +107,94 @@ function chartfuncs() {
    [Math.random,"math.random "],
    [Fd.next,"Fdrandom.next "],
    [Fd.dbl,"Fdrandom.dbl "],
+   
    [Fd.f24,"f24 "],
-  
    [Fd.rbit,"rbit "],
    [Fd.rpole,"rpole "],
   
    [Fd.usum,"usum 2 ",2],
    [Fd.usum,"usum 3 ",3],
    [Fd.usum,"usum 4 ",4],
-   [Fd.usum,"usum 5 ",5],
-   [Fd.usum,"usum 6 ",6],
    
+   [Fd.usum,"usum 5 ",5],
    ///~ [Fd.usum,"usum 6 ",6],
    ///~ [Fd.usum,"usum 7 ",7],
    ///~ [Fd.usum,"usum 8 ",8],
    ///~ [Fd.usum,"usum 16 ",16],
    ///~ [Fd.usum,"usum 32 ",32],
-  
    [Fd.gaus,"gaus "],
-   ///~ [Fd.gausx,"gausx "],
+   [Fd.gnorm,"gnorm "],
+   
+   [Fd.cauchy,"cauchy "],
+   [function(){return Fd.within(-12,12,Fd.cauchy)}, "cauchy within -12,12" ],
+   [Fd.gcauchy,"gcauchy "],
+  ///~ [Fd.gausx,"gausx "],
   
    [Fd.ui32,"ui32 "],
    [Fd.i32,"i32 "],
    [Fd.ilcg,"ilcg "],
+   
    [Fd.ishr2,"ishr2 "],
    [Fd.ishp,"ishp "],
    [Fd.uigless,"uigless "],
+   
    [Fd.uigmore,"uigmore "],
    [Fd.igbrist,"igbrist "],
    [Fd.igmmode,"igmmode "],
+   
    [Fd.gskip,"gskip "],
    [Fd.gskip,"gskip 0.2",0.2],
    [Fd.gskip,"gskip 0.8",0.8],
+   
    [Fd.gbowl,"gbowl "],
    [Fd.gtrapez,"gtrapez "],
    [Fd.gteat,"gteat "],
+   
    [Fd.gthorn,"gthorn "],
    [Fd.gspire,"gspire "],
-   [Fd.gnorm,"gnorm "],
    [Fd.lrange,"lrange 1.0",1.0],
-   [Fd.lrange,"lrange 0.90",0.90],
-   [Fd.lrange,"lrange 0.75",0.75],
-   [Fd.lrange,"lrange 0.60",0.60],
+   
+   [Fd.lrange,"lrange 0.85",0.85],
+   [Fd.lrange,"lrange 0.65",0.65],
    [Fd.lrange,"lrange 0.50",0.50],
-   [Fd.lrange,"lrange 0.40",0.40],
-   [Fd.lrange,"lrange 0.25",0.25],
-   [Fd.lrange,"lrange 0.10",0.10],
+   
+   [Fd.lrange,"lrange 0.35",0.35],
+   [Fd.lrange,"lrange 0.15",0.15],
    [Fd.lrange,"lrange 0",0],
-   [function(){return Fd.hot().zrange(0,1,100)},"hot().zrange 100"],
-   [function(){return Fd.hot().zrange(0,1,10)},"hot().zrange 10"],
-   [function(){return Fd.hot().zrange(0,1,1)},"hot().zrange 1"],
-   [function(){return Fd.hot().zrange(0,1,0.1)},"hot().zrange 0.1"],
-   [function(){return Fd.hot().zrange(0,1,0.1)},"hot().zrange 0.1"],
-   [function(){return Fd.hot().zrange(0,1,0.01)},"hot().zrange 0.01"],
-   [function(){return Fd.hot().zrange(0,1,0.01)},"hot().zrange 0.01"],
-   [function(){return Fd.hot().zrange(0,1,0.001)},"hot().zrange 0.001"],
-   [function(){return Fd.hot().zrange(0,1,0.001)},"hot().zrange 0.001"],
-   [returnAVal,"flat aindex",antip],
-   [returnBVal,"fl-aindx 2n",antip],
-   [returnADelt,"fl-aindx delta ",antip],	
+   
+   [function(){return Fd2.zrange(0,1,100)},"zrange 100"],
+   [function(){return Fd2.zrange(0,1,10)},"zrange 10"],
+   [function(){return Fd2.zrange(0,1,1)},"zrange 1"],
+                        
+   [function(){return Fd2.zrange(0,1,0.1)},"zrange 0.1"],
+   [function(){return Fd2.zrange(0,1,0.1)},"zrange 0.1"],
+   [function(){return Fd2.zrange(0,1,0.01)},"zrange 0.01"],
+                        
+   [function(){return Fd2.zrange(0,1,0.01)},"zrange 0.01"],
+   [function(){return Fd2.zrange(0,1,0.01)},"zrange 0.01"],
+   [function(){return Fd2.zrange(0,1,0.001)},"zrange 0.001"],
+                        
+   [function(){return Fd2.zrange(0,1,0.001)},"zrange 0.001"],
+   [function(){return Fd2.zrange(0,1,0.001)},"zrange 0.001"],
    [returnAVal,"rough rnd",rough],
+   
    [returnAVal,"rg antisorted",antiq],
    [returnBVal,"rg a-sorted 2n",antiq],
+   [returnAVal,"flat aindex",antip],
+   
+   [returnBVal,"fl-aindx 2n",antip],
+   [returnADelt,"fl-aindx delta ",antip],	
    [returnADelt,"rg a-sorted delta ",antiq],	
+   
    [returnAVal,"flat mixup",mixud],	
    [returnADelt,"fl-mixup delta ",mixud],
-   [function(){return Math.sin(sx+=Fd.gthorn(0,Math.PI))},"Sin gthorn"],
-   [function(){return Math.sin(sx+=Fd.zrange(0,Math.PI,0.1))},"Sin zrange"],
-   [function(){return Math.sin(sx+=Fd.gnorm(0,Math.PI,0.1))},"Sin gnorm"],
-   
+   [function(){return Math.sin(sx+=Fd.gthorn(0,Math.PI))},"Sin gthorn"] 
   ]
        
   //~ funz= [ [Fdrandom.i32gx,"i32gx "] ]
   if(runstep==38){ 
     antip=Fd.aindex(1000000)
-    rough=Fd.mixof(Fd.bulk( 500,function(){return Fd.irange(0,1000)} ),1000000)
+    rough=Fd.mixof(Fd.bulk( 500,function(){return Fd.range(0,1000)} ),1000000)
     antiq=Fd.antisort(rough,[])
     mixud=Fd.mixup(Fd.aindex(false,1000000,0,0))
   }
@@ -235,6 +250,7 @@ chartf = function(n,a,b,c,d){
   cc.innerHTML +=rexx
   
   if ( !isHot ) Fd.repot()
+  Fd2.repot(zocount+=1)
   
   cc.appendChild(twodim_dist_canv(a,d))
   cc.appendChild(fltline_cnv(c,a,d))
