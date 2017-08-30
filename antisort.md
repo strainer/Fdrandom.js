@@ -1,18 +1,14 @@
 Antisorting
 -----------
 
-The best shuffle algorithms are efficient and use a good quality random number generator to achieve an equal probability for every possible rearrangement of the data - so every output sequence has an unbiased chance of being produced. This is ideal for many applications of shuffling, however beyond the archetypal 'card game' example - in data processing contexts - a perfectly linear shuffle may often not be the optimum kind. 
-
-The standard random shuffle is routinely used to *put data out of order* and when that is the goal it has a weakness in that it can also put data *into* any order including the simple linear one that is input. That may be unlikely to happen when the set is large, but it can still arrange smaller parts into unsought order.  
-
-In as much as sorting implies moving the most similar items together into a simple 
+As sorting implies moving the most similar items together into a simple 
 incremental pattern, "antisorting" could mean the opposite - moving items out of a simple pattern ensuring the most similar items are *not placed close to each other*.
 
 Functions `antisort` and `aindex` are designed for this: 
 * `antisort(inarray, ..opts)` 'super-shuffles' arrays out of order. 
 * `aindex(array or length, ..opts)` returns an 'antisorted index' for accessing arrays out of order.
  
-The functions can re-arrange by elements input indices (which works on any ordered arrays of the same length), or by elements numeric values such as song quality ratings, ages or sizes (which works on the particular distribution of those values). The output will be quite randomly shuffled or indexed **except** items of similar value (or source position) will not be located next to each other. The algorithm used is basically a random shuffle followed by fuzzy checking and swapping values until all are clear.
+The functions can re-arrange arrays by their elements initial indices or by elements numeric values such as song quality ratings, ages or sizes. The output will be quite randomly shuffled or indexed **except** items of similar value (or initial position) will not be located next to each other after the antisort. The algorithm used is basically a random shuffle followed by fuzzy checking and swapping values until all are clear.
 
 The minimum distance ensured between consecutive values is generated automatically and works out as approximately 9% of the total range. Half the 'immediate-neighbour' distance is also ensured between '2-doors-away' neighbours. 
 So for an antisort of a simple list running 0 to 100 eg `antiList=pot.aindex(100)`, the auto-minimum-separation between consecutive elements will be 8 or 9, and min-separation between '2-away' elements will be 4 or 5. The minimum separation drops when the input values are less diverse (or smaller).  
@@ -24,8 +20,7 @@ antisort([1,1,1,1,2,2,2,2]) //will return [1,2,1,2,1,2,1,2] or [2,1,2,1...]
 antisort([1,1,1,2,2,2,2,2]) //will timeout trying to fit the extra 2
 ```
 
-`aresult()` returns the approximate value of the minimum separation achieved by the 
-previous antisort. If '2-away' separation was not achieved `aresult()` returns a negative value of '1-away' separation (negated). If no separation was achieved it returns 0.
+`aresult()` returns the approximate value of the minimum separation achieved by the previous antisort. If '2-away' separation was not achieved `aresult()` returns a negative value of '1-away' separation (negated). If no separation was achieved it returns 0.
 
 ```
 /* Examples of aresult() */
@@ -70,23 +65,23 @@ This creates some unevenly distributed sorted test data, its sum and average is 
 
 Output:
 
-window-len | rand-smp-err | asort-win-err |   aw/rs %
- :-------: | :----------: | :-----------: | :---------:
-     2     |    0.3346    |    0.2964     |    88.6
-     3     |    0.2683    |    0.2225     |    82.9
-     4     |    0.2334    |    0.1853     |    79.4
-     5     |    0.2077    |    0.1619     |    78.0
-     7     |    0.1743    |    0.1324     |    76.0
-    11     |    0.1392    |    0.1029     |    73.9
-    23     |    0.0951    |    0.0693     |    72.8
-    59     |    0.0603    |    0.0433     |    71.9
-    95     |    0.0468    |    0.0345     |    73.8
-   220     |    0.0309    |    0.0238     |    77.0
-   447     |    0.0210    |    0.0167     |    79.7
-   767     |    0.0160    |    0.0135     |    84.1
-  1790     |    0.0098    |    0.0087     |    88.4
-  3967     |    0.0056    |    0.0055     |    97.9
-  6813     |    0.0032    |    0.0029     |    88.9 
+| window-len | rand-smp-err | asort-win-err |   aw/rs %  |
+| :--------: | :----------: | :-----------: | :---------:|
+|      2     |    0.3346    |    0.2964     |    88.6    |
+|      3     |    0.2683    |    0.2225     |    82.9    |
+|      4     |    0.2334    |    0.1853     |    79.4    |
+|      5     |    0.2077    |    0.1619     |    78.0    |
+|      7     |    0.1743    |    0.1324     |    76.0    |
+|     11     |    0.1392    |    0.1029     |    73.9    |
+|     23     |    0.0951    |    0.0693     |    72.8    |
+|     59     |    0.0603    |    0.0433     |    71.9    |
+|     95     |    0.0468    |    0.0345     |    73.8    |
+|    220     |    0.0309    |    0.0238     |    77.0    |
+|    447     |    0.0210    |    0.0167     |    79.7    |
+|    767     |    0.0160    |    0.0135     |    84.1    |
+|   1790     |    0.0098    |    0.0087     |    88.4    |
+|   3967     |    0.0056    |    0.0055     |    97.9    |
+|   6813     |    0.0032    |    0.0029     |    88.9    |
 
 In this test case estimation of mean was up to 30% more accurate when
 selecting samples by a-index than by random. Put another way about 25%
