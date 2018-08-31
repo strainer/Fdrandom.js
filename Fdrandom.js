@@ -76,7 +76,7 @@ var newFdrPot = function(){
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.6.1" }
+  function version() { return "v2.7.0" }
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
@@ -114,7 +114,7 @@ var newFdrPot = function(){
     return FdrHotPot
   }
     
-  ///A redesign of J.Baagoe's Alea; a float-cut dual-lcg prng
+  ///A redesign of J.Baagoe's Alea; a float cast dual lcg prng
   function f48() { 
     var c= 0.12810301030196883 * U[0] +
            15.378612015061215 * (1.0000000000000037-(U[ju=(ju===7?1:ju+1)]))
@@ -265,11 +265,11 @@ var newFdrPot = function(){
     return (b||0)+(d-(b||0))*(qr-= qr>>>0) 
   }
  
-  //fill sequences from Martin Roberts, extremelearning.com.au
+  /// fill sequences of Martin Roberts. extremelearning.com.au
   function fillr1(b,d){
     ua+=0.61803398874989 ; ua-=ua>>>0
     
-    d=(d===undefined)?1:d; b=b||0
+    b=(b===undefined)?-1:b; d=(d===undefined)?1:d; 
     return (ua*(d-b))+b 
   }
   
@@ -277,7 +277,7 @@ var newFdrPot = function(){
     ua+=0.75487766624669 ; ua-=ua>>>0
     ub+=0.56984029099805 ; ub-=ub>>>0
     
-    d=(d===undefined)?1:d; b=b||0
+    b=(b===undefined)?-1:b; d=(d===undefined)?1:d;
     return [ (ua*(d-b))+b , (ub*(d-b))+b ]
   }
 
@@ -294,7 +294,7 @@ var newFdrPot = function(){
     ub+=0.67104360670379 ; ub-=ub>>>0
     us+=0.54970047790197 ; us-=us>>>0
     
-    d=(d===undefined)?1:d; b=b||0
+    b=(b===undefined)?-1:b; d=(d===undefined)?1:d;
     return [ (ua*(d-b))+b, (ub*(d-b))+b, (us*(d-b))+b ]
   } 
   
