@@ -112,20 +112,11 @@ function chartfuncs() {
    [Fd.gnorm,"gnorm "], 
    [Fd.gcauchy,"gcauchy "]
   ]
-
-  var funz= [
-   [Math.random,"math.random "],
-   [Fd.next,"Fdrandom.next "],
-   [Fd.dbl,"dbl"],
-   [Fd.dbl,"dbl"],
-   [Fd.dbl,"dbl"],
-  ]
   
   var flip=0;
   var fillres=[]
   
-
-  var funzx= [
+  var funz = [
    [Math.random,"math.random "],
    [Fd.next,"Fdrandom.next "],
    [Fd.dbl,"Fdrandom.dbl "],
