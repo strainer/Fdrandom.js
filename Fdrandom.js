@@ -25,7 +25,12 @@ var newFdrPot = function(){
     
     for( i=0;i<98;i++ ) f48()    //warms up state to hide seed
     va=irange(3206324,3259829)   //ishr2's seed
-
+    
+    // fillr constants coordinated for r2
+    ua=0.5+U[0]*0.75487766624669
+    ub=0.5+U[0]*0.56984029099805
+    ua=ua-ua>>>0 ; ub=ub-ub>>>0 
+    
     function sow(sd) {      //digests seed objects recursively
       var t=typeof(sd) , r 
       
@@ -71,7 +76,7 @@ var newFdrPot = function(){
     return p.dbl() === 0.8410126021290781
   }
   
-  function version() { return "v2.6.0" }
+  function version() { return "v2.6.1" }
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
@@ -259,6 +264,39 @@ var newFdrPot = function(){
     d= (d===undefined)?1:d
     return (b||0)+(d-(b||0))*(qr-= qr>>>0) 
   }
+ 
+  //fill sequences from Martin Roberts, extremelearning.com.au
+  function fillr1(b,d){
+    ua+=0.61803398874989 ; ua-=ua>>>0
+    
+    d=(d===undefined)?1:d; b=b||0
+    return (ua*(d-b))+b 
+  }
+  
+  function fillr2(b,d){
+    ua+=0.75487766624669 ; ua-=ua>>>0
+    ub+=0.56984029099805 ; ub-=ub>>>0
+    
+    d=(d===undefined)?1:d; b=b||0
+    return [ (ua*(d-b))+b , (ub*(d-b))+b ]
+  }
+
+  function fillr3(b,d){
+    if(us==-0.1){ //must init state for 3d
+      
+      ua=U[0]+U[1]*0.81917251339616
+      ub=U[0]+U[1]*0.67104360670379
+      us=U[0]+U[1]*0.54970047790197
+      ua=ua-ua>>>0 ; ub=ub-ub>>>0 ; us=us-us>>>0 
+    }
+    
+    ua+=0.81917251339616 ; ua-=ua>>>0
+    ub+=0.67104360670379 ; ub-=ub>>>0
+    us+=0.54970047790197 ; us-=us>>>0
+    
+    d=(d===undefined)?1:d; b=b||0
+    return [ (ua*(d-b))+b, (ub*(d-b))+b, (us*(d-b))+b ]
+  } 
   
   var psig,csig
   function usum(n,scale,mean) { 
@@ -523,7 +561,8 @@ var newFdrPot = function(){
     ,gbowl: gbowl     ,gspire: gspire  ,gthorn: gthorn 
     ,gwedge: gwedge   ,gnorm: gnorm   ,gcauchy:gcauchy 
     ,gteat: gteat     ,gtrapez: gtrapez 
-    ,gskip: gskip
+    ,gskip: gskip 
+    ,fillr1:fillr1    ,fillr2:fillr2  ,fillr3:fillr3
   }
 
 }(arguments))}
