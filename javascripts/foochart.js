@@ -103,7 +103,29 @@ function chartfuncs() {
   var dur=3,reps=1
   
   var sx=0
+  
+  var funzy= [
+   [Math.random,"math.random "],
+   [Fd.next,"Fdrandom.next "],
+   [Fd.usum,"usum 2 ",2],
+   [Fd.usum,"usum 3 ",3],
+   [Fd.gnorm,"gnorm "], 
+   [Fd.gcauchy,"gcauchy "]
+  ]
+
   var funz= [
+   [Math.random,"math.random "],
+   [Fd.next,"Fdrandom.next "],
+   [Fd.dbl,"dbl"],
+   [Fd.dbl,"dbl"],
+   [Fd.dbl,"dbl"],
+  ]
+  
+  var flip=0;
+  var fillres=[]
+  
+
+  var funzx= [
    [Math.random,"math.random "],
    [Fd.next,"Fdrandom.next "],
    [Fd.dbl,"Fdrandom.dbl "],
@@ -146,6 +168,26 @@ function chartfuncs() {
    [Fd.gskip,"gskip 0.2",0.2],
    [Fd.gskip,"gskip 0.8",0.8],
    
+   [function(){return Fd.fillr1(0,1)},"fillr1"],
+   
+   [function(){
+      if(flip==0){
+        flip=2
+        fillres=Fd2.fillr2(0,1)
+      }
+      return fillres[--flip] 
+    }
+    ,"fillr2"],
+   
+   [function(){
+      if(flip<2){
+        flip=3
+        fillres=Fd2.fillr3(0,1)
+      }
+      return fillres[--flip] 
+    }
+    ,"yz only fillr3"],
+    
    [Fd.gbowl,"gbowl "],
    [Fd.gtrapez,"gtrapez "],
    [Fd.gteat,"gteat "],
