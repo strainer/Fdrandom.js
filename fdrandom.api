@@ -46,6 +46,10 @@ gtrapez([a=-1][,b=1]) return trapeziod shaped distribution in range a to b
 
 gskip([skip=f48()/3][,a=0][,b=1]) return quasirandom reals cycling a to b, skipping variably or by skip as factor of range
 
+fillr1([a=-1][,b=1]) return a filling pattern in range a to b
+fillr2([a=-1][,b=1]) return 2d array filling pattern for square of sides a to b
+fillr3([a=-1][,b=1]) return 3d array filling pattern for cube of sides a to b
+
 usum(n[,stnddev=1][,mean=0]) return uniform sum of n equal distributed randoms
 gaus([stnddev=1][,mean=0]) return gaussion variates
 gausx([stnddev=1][,mean=0]) return extra precision gaussion variates
