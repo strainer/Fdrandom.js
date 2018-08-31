@@ -71,6 +71,9 @@ gcauchy |   15    | Cauchy curve shaped game distribution
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
 gskip  |   90    | Low discrepancy floats (custom spaced)        
+fillr1 |   30    | Range staggered fill pattern        
+fillr2 |   25    | Square staggered fill pattern        
+fillr3 |   20    | Cube staggered fill pattern        
 gbowl  |   50    | Bowl shaped game distribution 
 gspire |   50    | Spire shaped game distribution 
 gthorn |   30    | Thorn shaped game distribution 
@@ -292,6 +295,7 @@ File `antisort.md` contains more notes on antisorting.
 
 Version History
 ---------------
+* 2.7.0 - added 'R' fill patterns of Martin Roberts. From [Article](http://http://extremelearning.com.au/unreasonable-effectiveness-of-quasirandom-sequences/) 
 * 2.6.0 - added cauchy and gcauchy functions, and 'within' helper
 * 2.5.0 - tweaked zrange to have drifting average
 * 2.4.0 - created zrange, a dynamic distribution generator
