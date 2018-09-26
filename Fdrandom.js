@@ -75,8 +75,6 @@ var Fdrandom = function(){ //factory
     for( i=0;i<1000000;i++,p.dbl() ){}
     return p.dbl() === 0.8410126021290781
   }
-  
-  function version() { return "v2.7.0" }
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
@@ -536,35 +534,34 @@ var Fdrandom = function(){ //factory
   return{
      pot: pot   ,hot: hot  ,hotpot: hotpot
     ,repot: repot          ,reset: repot
-    ,getstate: getstate    ,setstate:   setstate
-    ,version: version      ,checkfloat: checkfloat 
-    
+    ,getstate: getstate    ,setstate: setstate 
+    ,checkfloat: checkfloat	
+   
     ,next: f48  ,f48: f48  ,dbl: dbl
     ,f24: f24   ,fxs: dbl 
     ,i32: i32   ,ui32: ui32
     
-    ,rbit: rbit ,rndbit:rbit  ,rpole: rpole  ,rndsign:rpole
-    ,range: range  ,irange: irange ,lrange:lrange ,zrange:zrange
+    ,rbit: rbit ,rpole: rpole
+    ,range: range  ,irange: irange 
+    ,lrange:lrange ,zrange: zrange
     
-    ,cauchy:cauchy ,gaus: gaus ,gausx: gausx ,usum: usum
-    
-    ,mixup: mixup  ,mixof: mixof    ,bulk:bulk  ,within:within
-    ,aindex:aindex ,aresult:aresult ,antisort:antisort 
-    ,ilcg: ilcg   ,ishr2: ishr2    ,ishp:  ishp
+    ,cauchy:cauchy  ,gaus: gaus  ,gausx: gausx  ,usum: usum
     
     ,uigless: uigless  ,uigmore: uigmore 
     ,igbrist: igbrist  ,igmmode: igmmode 
-    
-    ,fgwedge: gwedge  ,fgtrapez: gtrapez  ,fgnorm:gnorm
-    ,fgthorn: gthorn  ,fgskip:   gskip    ,fgteat:gteat
-    
-    ,gbowl: gbowl     ,gspire: gspire  ,gthorn: gthorn 
-    ,gwedge: gwedge   ,gnorm: gnorm   ,gcauchy:gcauchy 
-    ,gteat: gteat     ,gtrapez: gtrapez 
-    ,gskip: gskip 
-    ,fillr1:fillr1    ,fillr2:fillr2  ,fillr3:fillr3
-  }
+    ,ilcg: ilcg      ,ishr2: ishr2    ,ishp: ishp
+        
+    ,gbowl: gbowl    ,gspire: gspire  ,gthorn: gthorn 
+    ,gwedge: gwedge  ,gnorm: gnorm    ,gcauchy: gcauchy 
+    ,gskip: gskip    ,gteat: gteat    ,gtrapez: gtrapez 
+        
+    ,mixup: mixup    ,mixof: mixof
+    ,aindex: aindex  ,aresult: aresult  ,antisort: antisort 
+    ,fillr1: fillr1  ,fillr2: fillr2    ,fillr3: fillr3
 
+    ,bulk:bulk  ,within:within
+    ,version: function(){ return "v2.7.x" } 
+  }
 }(arguments))}
   
 if(module && module.exports) module.exports = Fdrandom
