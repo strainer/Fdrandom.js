@@ -1,14 +1,14 @@
-// Fdrandom.js - Fast deterministic random lib
+ // Fdrandom.js - Fast deterministic random methods
 /** @author Andrew Strain
  ** This is free and unencumbered software released into the public domain 
- ** in homage to human ingenuity against greed and hatred.
+ ** in homage to human ingenuity against greed and destruction.
  */
 
-var newFdrPot = function(){ 
+var Fdrandom = function(){ //factory
   
   var FdrHotPot    //a static instance for indeterminables
 
-  return (function(sd){ //factory
+  return (function(sd){ 
   'use strict'
   
   var nml,va,vl,qr,rb,ga,gb,ua,ub,us,ju,U,sv,i
@@ -167,7 +167,7 @@ var newFdrPot = function(){
   { return (( ui32()&ui32() )>>1) - (( ui32()|ui32() )>>1)  }
   
   
-  function zrange(b,d,c){ //a semi-randomly altering combination of two distributions 
+  function zrange(b,d,c){ //a fluctuating combination of distributions 
                              
     var dists=[gbowl,range,gtrapez,gnorm,gcauchy,gspire]
         
@@ -566,15 +566,7 @@ var newFdrPot = function(){
   }
 
 }(arguments))}
-
-var mdname='Fdrandom' ,factory=newFdrPot
-if (typeof exports !== 'undefined') 
-{ if (typeof module !== 'undefined' && module.exports)
-  { exports = module.exports = factory() }
-  else { exports[mdname] = factory() }
-} else {
-  if (typeof define === 'function' && define.amd) 
-  { define( mdname,[],function(){return factory()} ) }
-  else
-  { (1,eval)('this')[mdname] = factory() } 
-}
+  
+if(module && module.exports) module.exports = Fdrandom
+else if(window) window.Fdrandom = Fdrandom
+else console.log("Fdrandom.js did not import")
