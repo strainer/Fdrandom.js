@@ -26,10 +26,10 @@ var newFdrandom = function(){ //factory
     for( i=0;i<98;i++ ) f48()    //warms up state to hide seed
     va=irange(3206324,3259829)   //ishr2's seed
     
-    // fillr constants coordinated for r2
+    // fillr constants coordinated for r2 ? check these ?
     ua=0.5+U[0]*0.75487766624669
     ub=0.5+U[0]*0.56984029099805
-    ua=ua-ua>>>0 ; ub=ub-ub>>>0 
+    ua=ua-(ua>>>0) ; ub=ub-(ub>>>0) 
     
     function sow(sd) {      //digests seed objects recursively
       var t=typeof(sd) , r 
@@ -56,9 +56,8 @@ var newFdrandom = function(){ //factory
       if(t === 'boolean') { U[0]*=0.93; if(sd){ f48() } return }
 
       if(isFinite(sd)){
-        r= (sd<=0)? Math.abs(sd)+1.234 : sd 
-        while(r>16)     r=r*0.0019560471624266144
-        while(r<1.0e-4) r=r*511.11110111111111111
+        r= sd<=0? 1.234020348919-sd : sd 
+        r= modp(r,15.034271450894242661)
         U[0]=U[0]*0.1 + r*0.8999999; f48() 
         return
       }
@@ -72,8 +71,8 @@ var newFdrandom = function(){ //factory
 
   function checkfloat() 
   { var p=newFdrandom([3,2],2450,"~fez",{c:0.1})
-    for( i=0;i<1000000;i++,p.dbl() ){}
-    return p.dbl() === 0.8410126021290781
+    for( i=0;i<1000000;i++ ){ p.dbl() }
+    return p.dbl() === 0.6630336428202791
   }
 
   function getstate() {
@@ -285,7 +284,7 @@ var newFdrandom = function(){ //factory
       ua=U[0]+U[1]*0.81917251339616
       ub=U[0]+U[1]*0.67104360670379
       us=U[0]+U[1]*0.54970047790197
-      ua=ua-ua>>>0 ; ub=ub-ub>>>0 ; us=us-us>>>0 
+      ua=ua-(ua>>>0) ; ub=ub-(ub>>>0) ; us=us-(us>>>0) 
     }
     
     ua+=0.81917251339616 ; ua-=ua>>>0
@@ -437,8 +436,8 @@ var newFdrandom = function(){ //factory
     
     while( ch>0 && ti>0 ) { 
       
-      var ib=(c=c<0?c+ne:c)%ne, ic=ib+1, id=ib+2, ie=ib+3
-      if(ie>=ne){ ie=ie-ne,id=id%ne,ic=ic%ne }
+      var ib=modp((c=c<0?c+ne:c),ne), ic=ib+1, id=ib+2, ie=ib+3
+      if(ie>=ne){ ie=ie-ne,id=modp(id,ne),ic=modp(ic,ne) }
       
       var stick=0 ,d=1 
       
@@ -447,7 +446,7 @@ var newFdrandom = function(){ //factory
       if(Math.abs(Av[Ax[ic]]-Av[Ax[id]]+sq)<sep){  //1-away collision 
         jm=irange(2,nd)+ic, jr=jm+nc, stick=1, d=-2, lw=ti<te
         while ( stick && jm<jr ){ 
-          j=jm%ne 
+          j=modp(jm,ne) 
           if( Math.abs(Av[Ax[id]]-Av[Ax[j]]+sq)>=sep 
            && Math.abs(Av[Ax[(j+1)%ne]]-Av[Ax[ic]]+sq)>=sep
            && (lw || Math.abs(Av[Ax[ie]]-Av[Ax[j]]+sq)>=csep) 
@@ -465,7 +464,7 @@ var newFdrandom = function(){ //factory
         if( ti>te && Math.abs(Av[Ax[ic]]-Av[Ax[ie]]+sq)<csep ) 
         { stick=1, jm=irange(2,nd)+ic, jr=jm+nc 
           while ( stick && jm<jr ){ 
-            j=jm%ne
+            j=modp(jm,ne)
             if(Math.abs(Av[Ax[id]]-Av[Ax[j]]+sq)>=sep
              &&Math.abs(Av[Ax[(j+1)%ne]]-Av[Ax[ie]]+sq)>=sep
              &&Math.abs(Av[Ax[ic]]-Av[Ax[j]]+sq)>=csep)
@@ -515,6 +514,8 @@ var newFdrandom = function(){ //factory
     return Ao
   }
     
+  function modp(a,b){ return a-Math.floor(a/b)*b }
+  
   function bulk(A,f,b,c,d){
     if( typeof A !=='object' ){ A=new Array( parseInt(A)||1 )  }
     var i=0,n=A.length; f=f||f48 
