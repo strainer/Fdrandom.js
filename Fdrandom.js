@@ -4,7 +4,7 @@
  ** in homage to human ingenuity against greed and destruction.
  */
 
-var Fdrandom = function(){ //factory
+var newFdrandom = function(){ //factory
   
   var FdrHotPot    //a static instance for indeterminables
 
@@ -49,7 +49,7 @@ var Fdrandom = function(){ //factory
         { U[0]*=0.95; for( r=0; r<sd.length; r++ ){ sow(sd[r]) } return }
         if(sd === null) { U[0]*=0.97; return }
         U[0]*=0.93;
-        for(r in sd) { sow(r);sow(sd[r]) } 
+        for(r in sd) if(sd.hasOwnProperty(r)){ sow(r);sow(sd[r]) } 
         return 
       }
       
@@ -71,7 +71,7 @@ var Fdrandom = function(){ //factory
   }
 
   function checkfloat() 
-  { var p=newFdrPot([3,2],2450,"~fez",{c:0.1})
+  { var p=newFdrandom([3,2],2450,"~fez",{c:0.1})
     for( i=0;i<1000000;i++,p.dbl() ){}
     return p.dbl() === 0.8410126021290781
   }
@@ -564,6 +564,6 @@ var Fdrandom = function(){ //factory
   }
 }(arguments))}
   
-if(module && module.exports) module.exports = Fdrandom
-else if(window) window.Fdrandom = Fdrandom
+if(module && module.exports) module.exports = newFdrandom()
+else if(window) window.Fdrandom = newFdrandom()
 else console.log("Fdrandom.js did not import")
