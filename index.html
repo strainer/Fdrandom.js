@@ -33,7 +33,7 @@
       </header>
       <section>
         <h2>
-<a id="distribution-graphs-and-benchmarks" class="anchor" href="#distribution-graphs-and-benchmarks" aria-hidden="true"><span class="octicon octicon-link"></span></a>63 Test Charts</h2>
+<a id="distribution-graphs-and-benchmarks" class="anchor" href="#distribution-graphs-and-benchmarks" aria-hidden="true"><span class="octicon octicon-link"></span></a>66 Test Charts</h2>
 
 
 <div id="dash" style="text-align:center; margin:0px auto; width:100%;">
@@ -60,12 +60,12 @@
 </div>
 <div id="legend">
 <h4>Lefthand charts:</h4>
-<p>50 thousand variates are plotted as 25 thousand 2D points. Each point is drawn a different hue, which cycles through 14 values (a multiple of Fdrandom's state space of 7 ~50 bit numbers), the drawing transparency also increases through duration of the plot. These effects can render potential non-random patterning which might otherwise not be made visible. A histogram of the functions distribution is superimposed on the chart in blue.</p>
+<p>50 thousand results are plotted as 25 thousand 2D points. Each point is drawn a different hue, which cycles through 14 values. 14 is a multiple of Fdrandom's state space of 7 ~50 bit numbers. The drawing transparency also increases through duration of the plot. These effects can render potential non-random patterning which might otherwise not be made visible. A histogram of the functions distribution is superimposed on the chart in blue.</p>
 <h4>Righthand Charts:</h4>
 <p>A <em>random walk</em> is drawn with 800k points, each point is moved in X & Y axis by consecutive variates and a horizontal drift is added to traverse the chart 32 times on average. Red dots mark the beginning and end of the walk. Min and max values out of 32k samples and the average delta between sequential variates are printed on the righthand chart.</p>
 <br><h4>Notes</h4>
-<p>These charts are arranged to examine the functions performance and distributions and spot some potential bias or patterns. The chart of <code>ishr2()</code> reveals patterning which was not detected by the 'Diehard' tests. The function <code>gskip()</code> has special 2d distribution but seems unbiased.</p>
-<p>The final charts the examine the result of the antisorting quasi-random-shuffle on flat and coarse distributed inputs. The distrubition of the standard-random-shuffle function '<code>mixup()</code>' is also checked.</p>
+<p>These charts are made to display the functions performance and distributions and spot potential bias or patterns. The zrange function is made to produce erratic changing distributions. The blue histogram and drift charts include less samples than the 2D charts.</p>
+<p>The final charts examine the results of the quasi-random 'antisorting' shuffle on flat and coarsely distributed array contents. The distrubition of the standard random shuffle function '<code>mixup()</code>' is also checked.</p>
 <p>The very last chart has gthorn drawing a fuzzy circle with consecutive values, by stepping a target of PI/2 inside Math.sin: <code> function(){return Math.sin(x+=Fd.gthorn(0,Math.PI))}</code></p> 
 </div>
       </section>
@@ -77,3 +77,4 @@
 		
   </body>
 </html>
+<script>//gogo()</script>
