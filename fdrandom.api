@@ -18,9 +18,10 @@ gnorm([a=-1][,b=1]) return approximate normally distributed reals in range a to 
 range(a,b) return equally distributed reals in range a to <b
 irange(a,b) return equally distributed integer in range a to b inclusive
 
-lrange(L [,a=-1][,b=1]) return loaded distribution through range a to b where L=0:High ends|0.5=Flat|1=Middle peaked  
+lrange([loaded=0.5][,a=-1][,b=1]) return loaded distribution through range a to b where L=0:High ends|0.5=Flat|1=Middle peaked  
+vrange([a=-1][,b=1][,loaded=0.5]) return loaded distribution through range a to b where L=0:High ends|0.5=Flat|1=Middle peaked  
 
-zrange([,a=-1][,b=1][,K=1]) return a semi-randomly altering combination of two distributions. Output range is a to b. K=0:combination does not change, k=1:changes over 100s outputs, K=100:changes every few calls, k>1000:almost every call.  
+zrange([a=-1][,b=1][,K=1]) return a semi-randomly altering combination of two distributions. Output range is a to b. K=0:combination does not change, k=1:changes over 100s outputs, K=100:changes every few calls, k>1000:almost every call.  
 
 i32()  return signed integer randoms    
 ui32() return unsigned integer randoms    
@@ -40,11 +41,21 @@ igmmode() return signed ints in patterned unsymetric but balanced distribution
 gbowl([a=-1][,b=1]) return bowl shaped distribution in range a to b      
 gspire([a=-1][,b=1]) return spire shaped distribution in range a to b
 gthorn([a=-1][,b=1]) return thorn shaped distribution in range a to b
+ghorn([a=-1][,b=1]) return sharp normal shaped distribution in range a to b
 gwedge([a=-1][,b=1]) return wedge shaped distribution in range a to b
 gteat([a=-1][,b=1]) return teat shaped distribution in range a to b
 gtrapez([a=-1][,b=1]) return trapeziod shaped distribution in range a to b
+gspill([a=0][,b=1][,edge=0to1]) return linear dist in range drops off from edge
+ggrad([a=0][,b=1]) return linear gradient distribtion
+gbands([a=-1][,b=1]) return triangular dist approximated in 5 bands 
+gskew([a=0][,b=1]) return left skewed dist average middle 
+gpick([a=0][,b=1][,dev=0.4]) return mid peaked dist configurable deviation 
 
 gskip([skip=f48()/3][,a=0][,b=1]) return quasirandom reals cycling a to b, skipping variably or by skip as factor of range
+qskip([a=0][,b=1][,skip=f48()/3]) return quasirandom reals cycling a to b, skipping variably or by skip as factor of range
+qxskip([a=0][,b=1][,focus=0.5) return quasirandom stumbling reals cycling a to b, skipping variably or by skip as factor of range
+qhop([a=0][,b=1][,focus=0.5) return quasirandom hopping reals cycling a to b, skipping variably or by skip as factor of range
+qtrip([a=0][,b=1][,focus=0.5) return quasirandom 3 hopping reals cycling a to b, skipping variably or by skip as factor of range
 
 fillr1([a=-1][,b=1]) return a filling pattern in range a to b
 fillr2([a=-1][,b=1]) return 2d array filling pattern for square of sides a to b
@@ -54,6 +65,7 @@ usum(n[,stnddev=1][,mean=0]) return uniform sum of n equal distributed randoms
 gaus([stnddev=1][,mean=0]) return gaussion variates
 gausx([stnddev=1][,mean=0]) return extra precision gaussion variates
 cauchy([scale=1][,mean=0]) returns cauchy distribution - the ratio of two gaussians
+gcauchy([a=-1][,b=1]) returns cauchy like distribution
 
 mixof (in [,out=intype][,n=1][,in_start=0][,in_fin=len]) return new or given output array or string consisting of n randomly choosen elements from elements|chars in_start to in_fin 
 

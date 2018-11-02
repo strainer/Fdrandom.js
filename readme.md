@@ -12,10 +12,10 @@ Examine available distributions on the [generator test page](http://strainer.git
 * Distribution options: 
   * Unbiased uniforms. 
   * Gaussian distribution by Box Muller polar method. 
-  * Normal approximated by Uniform Sum.
-  * Low discrepency / Quasi random (custom spaced walk)
-  * Convenience gaming distributions
+  * Fast Gaussian approximated by fitted curve.
+  * Various game distributions
   * Dynamic distribution generator
+* Quasi random walks and fill patterns
 
 Usage
 -----
@@ -52,7 +52,7 @@ rpole    |   140   | -1 or 1
   &nbsp; |         |
 range    |   90    | Uniformly distributed numbers in range          
 irange   |   70    | Uniformly distributed integers (inclusive)              
-lrange   |   30    | Middle/end loaded numbers in range
+vrange   |   30    | Middle/end loaded numbers in range
 zrange   |   5     | Dynamically distributed numbers in range
 	
 ### Normal Distribution Prngs
@@ -70,22 +70,27 @@ gcauchy |   15    | Cauchy curve shaped game distribution
 
 Method | Speed % | Notes                                  					
  :---- | :-----: | :-------------------------------------
-gskip  |   90    | Low discrepancy floats (custom spaced)        
-fillr1 |   30    | Range staggered fill pattern        
-fillr2 |   25    | Square staggered fill pattern        
-fillr3 |   20    | Cube staggered fill pattern        
-gbowl  |   50    | Bowl shaped game distribution 
-gspire |   50    | Spire shaped game distribution 
-gthorn |   30    | Thorn shaped game distribution 
-gwedge |   30    | Wedge shaped game distribution 
-gteat  |   30    | Teat shaped game distribution  
-gtrapez|   50    | Trapezoid game distribution 
+qskip  |   30    | Low discrepancy floats (custom spaced)        
+qxskip |   20    | Curious discrepancy (see chart)        
+qhop   |   10    | Curious discrepancy (see chart)
+qtrip  |   10    | Curious discrepancy (see chart)
+fillr1 |   30    | HQ Line staggered fill pattern        
+fillr2 |   25    | HQ Square staggered fill pattern        
+fillr3 |   20    | HQ Cube staggered fill pattern        
+ggrad  |   50    | Linear gradient distribution 
+gspill |   50    | Linear with drop off distribution 
+ghorn  |   50    | Like normal but peaked dist. 
+gbands |   50    | Triangular approximation with bands. 
+gpick  |   50    | Custom deviation, sharp or smooth. 
+gskew  |   50    | Smooth skewed range middle average. 
+gbowl  |   50    | Bowl shaped distribution 
+gthorn |   30    | Thorn shaped distribution 
+gteat  |   30    | Teat shaped distribution  
+gtrapez|   50    | Trapezoid distribution 
 uigless|   60    | Unsigned 1/4 bit density game dist.       
 uigmore|   60    | Unsigned 3/4 bit density game dist.      
 igmmode|   60    | Signed multi modal game dist.      
 igbrist|   60    | Signed bristly game dist.      
-ilcg   |  130    | A simple lcg (fails many rnd tests)  
-ishr2  |   60    | A fast flawed shift register generator 
            
 ### Random Pick and Mix
 
@@ -192,7 +197,7 @@ Benchmarking and Testing
 ------------------------
 Diehard reports for the generators are in the directory `reports`
 
-The `drafts` directory contains untidy code and node scripts used to discover and 
+The `drafts` directory contains messy code and node scripts used to discover and 
 test the generators and methods.
 
 Examples
@@ -281,20 +286,21 @@ arrayOfFunc= p.bulk(100 ,p.irange ,1 ,6) //array of 100 dicerolls
 Antisorting 
 -----------
 
-In as much as sorting implies moving the most similar items together into a simple 
-incremental pattern, "antisorting" could mean the opposite - moving items out of a 
-simple pattern while ensuring the most similar items are *not* placed close to each other.
+While sorting entails moving the most similar items together into a simple 
+incremental pattern, "antisorting" could mean the opposite - to arrange the most similar items to *not* be placed close to each other.
 
 Functions `antisort` and `aindex` are designed for this: 
 * `antisort(inarray, ..opts)` quasi-randomly shuffles arrays out of order. 
 * `aindex(array or length, ..opts)` returns an 'antisorted index' for accessing arrays out of order.
  
-The functions can re-arrange by elements input indices (which works on any ordered arrays of the same length), or by elements numeric values such as song quality ratings, ages or sizes (which works on the particular distribution of those values). The output is quite randomly shuffled or indexed **except** items of similar value (or source position) are not placed next to each other. The algorithm used is basically a random shuffle followed by dithered checking and swapping values until all are clear.
+The functions can re-arrange by elements input indices (which works on any pre-ordered arrays of the same length), or by elements numeric values such as song quality ratings, ages or sizes (which works on the particular distribution of those values). The output is quite randomly shuffled or indexed **except** items of similar value (or source position) are not placed next to each other. The algorithm used is basically a random shuffle followed by dithered checking and swapping values until all are separated.
 
 File `antisort.md` contains more notes on antisorting. 
 
 Version History
 ---------------
+* 3.0.0 - Add new quasi-random and game distributions and retire some. Faster gnorm. 
+* 2.8.0 - object seeding tweaked 
 * 2.7.0 - added 'R' fill patterns of Martin Roberts. From [Article](http://http://extremelearning.com.au/unreasonable-effectiveness-of-quasirandom-sequences/) 
 * 2.6.0 - added cauchy and gcauchy functions, and 'within' helper
 * 2.5.0 - tweaked zrange to have drifting average
