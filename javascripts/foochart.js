@@ -248,7 +248,7 @@ function chartfuncs() {
    
    [Fd.lrange,"lrange 0.75",0.75],
    //~ [Fd.lrange,"lrange 0.65",0.65],
-   [Fd.lrange,"lrange 0.50",0.50],
+   [Fd.lrange,"lrange 0.25",0.50],
    
    [Fd.lrange,"lrange 0.50",0.50],
    //~ [Fd.lrange,"lrange 0.15",0.15],
