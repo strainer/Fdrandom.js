@@ -38,7 +38,8 @@ if( typeof(Fdrandom)!=='undefined' && !Fdrandom.checkfloat() ){
 var fnstats={}
 var firstrun=1
 var runstep=0
-var vgsc=1024*4
+var vgsc=1024*4/1.5
+var dist_sample_factor=333
 var svgz=200
 var svgsc=1
 var opac = Math.sqrt(2000/vgsc)
@@ -73,7 +74,7 @@ function gogo(){
   
   d = document.getElementById("selectedsize").value;
 
-  svgz=200; if (d==='large') svgz=384
+  svgz=200; if (d==='large') svgz=384*3
   
   opac = Math.sqrt(2000/vgsc)
   dtsz=1.1*svgz/256
@@ -103,14 +104,62 @@ function chartfuncs() {
   var dur=3,reps=1
   
   var sx=0
-  
+
+  var funzy =[
+     [function(){
+        if(flip==0){
+          flip=2
+          fillres=Fd2.fillr2(0,1)
+        }
+        var r=fillres[--flip] + Fd.f48()/350 + 1
+        return r-(r>>>0)
+      }
+      ,"fillr2"],
+     [function(){
+        if(flip==0){
+          flip=2
+          fillres=Fd2.fillr2(0,1)
+        }
+        var r=fillres[--flip] + Fd.gskip()/10000 + 1
+        return r-(r>>>0)
+      }
+      ,"fillr2"]
+  ]
+    
   var funzy= [
-   [Math.random,"math.random "],
-   [Fd.next,"Fdrandom.next "],
-   [Fd.usum,"usum 2 ",2],
-   [Fd.usum,"usum 3 ",3],
-   [Fd.gnorm,"gnorm "], 
-   [Fd.gcauchy,"gcauchy "]
+   //~ [Math.random,"math.random "],
+   //~ [Fd.next,"Fdrandom.next "],
+   //~ [Fd.usum,"usum 2 ",2],
+   //~ [Fd.ilcg ,"ilcg "],
+    [function(){return Fd2.zrange(0,1,100)},"zrange 100"],
+    [function(){return Fd2.zrange(0,1,10)},"zrange 10"],
+    [function(){return Fd2.zrange(0,1,1)},"zrange 1"],
+
+   //~ [Fd.ui32,"ui32 "],
+   //~ [Fd.i32,"i32 "],
+   //~ [Fd.range,"irange "],
+
+   //~ [Fd.qskip,"qskip "],
+   //~ [Fd.qxskip,"qxskip "],
+   //~ [Fd.qtrip ,"qtrip "],
+   //~ [Fd.qhop ,"qhop "],
+   //~ [Fd.cheat,"cheat",-3],
+   //~ [Fd.gaus,"gaus "],
+   
+     //~ [function(){return Fd2.zrange(0,1,100)},"zrange 100"],
+     //~ [function(){return Fd2.zrange(0,1,10)},"zrange 10"],
+     //~ [function(){return Fd2.zrange(0,1,1)},"zrange 1"],
+                          
+     //~ [function(){return Fd2.zrange(0,1,0.1)},"zrange 0.1"],
+     //~ [function(){return Fd2.zrange(0,1,0.1)},"zrange 0.1"],
+     //~ [function(){return Fd2.zrange(0,1,0.01)},"zrange 0.01"],
+                          
+     //~ [function(){return Fd2.zrange(0,1,0.01)},"zrange 0.01"],
+     //~ [function(){return Fd2.zrange(0,1,0.01)},"zrange 0.01"],
+     //~ [function(){return Fd2.zrange(0,1,0.001)},"zrange 0.001"],
+                          
+     //~ [function(){return Fd2.zrange(0,1,0.001)},"zrange 0.001"],
+     //~ [function(){return Fd2.zrange(0,1,0.001)},"zrange 0.001"],
   ]
   
   var flip=0;
@@ -145,20 +194,23 @@ function chartfuncs() {
   
    [Fd.ui32,"ui32 "],
    [Fd.i32,"i32 "],
-   [Fd.ilcg,"ilcg "],
+   //~ [Fd.ilcg,"ilcg "],
    
-   [Fd.ishr2,"ishr2 "],
-   [Fd.ishp,"ishp "],
+   //~ [Fd.ishr2,"ishr2 "],
+   //~ [Fd.ishp,"ishp "],
    [Fd.uigless,"uigless "],
    
    [Fd.uigmore,"uigmore "],
    [Fd.igbrist,"igbrist "],
    [Fd.igmmode,"igmmode "],
    
-   [Fd.gskip,"gskip "],
-   [Fd.gskip,"gskip 0.2",0.2],
-   [Fd.gskip,"gskip 0.8",0.8],
-   
+   [Fd.qskip,"qskip "],
+   [Fd.gskip,"qskip .. 0.2",0.2],
+   [Fd.gskip,"qskip .. 0.8",0.8],
+   [Fd.qxskip,"qxskip "],
+   [Fd.qtrip ,"qtrip "],
+   [Fd.qhop ,"qhop "],
+
    [function(){return Fd.fillr1(0,1)},"fillr1"],
    
    [function(){
@@ -179,20 +231,27 @@ function chartfuncs() {
     }
     ,"yz only fillr3"],
     
+   [Fd.gspill,"gspill"],
+   [Fd.ggrad ,"ggrad "],
+   [Fd.ghorn ,"ghorn "],
+   [Fd.gbands,"gbands"],
+   [Fd.gpick ,"gpick "],
+   [Fd.gskew ,"gskew "],
+   
    [Fd.gbowl,"gbowl "],
    [Fd.gtrapez,"gtrapez "],
    [Fd.gteat,"gteat "],
    
    [Fd.gthorn,"gthorn "],
-   [Fd.gspire,"gspire "],
+   //~ [Fd.gspire,"gspire "],
    [Fd.lrange,"lrange 1.0",1.0],
    
-   [Fd.lrange,"lrange 0.85",0.85],
-   [Fd.lrange,"lrange 0.65",0.65],
+   [Fd.lrange,"lrange 0.75",0.75],
+   //~ [Fd.lrange,"lrange 0.65",0.65],
    [Fd.lrange,"lrange 0.50",0.50],
    
-   [Fd.lrange,"lrange 0.35",0.35],
-   [Fd.lrange,"lrange 0.15",0.15],
+   [Fd.lrange,"lrange 0.50",0.50],
+   //~ [Fd.lrange,"lrange 0.15",0.15],
    [Fd.lrange,"lrange 0",0],
    
    [function(){return Fd2.zrange(0,1,100)},"zrange 100"],
@@ -524,18 +583,21 @@ function twodim_dist_canv(func,d)
     tcnt+=2;
 
     colcn=(colcn==13)?0:colcn+1
-    ctx.fillStyle = colz[colcn]
     
-    ctx.globalAlpha=i*alfac 
-    ctx.fillRect(xx*widefac, yy*highfac, dtsz, dtsz); 
+    var clrr=colz[colcn],dtszz=dtsz,alfacc=alfac
+    //~ if(i<vgsc*0.0333){ clrr="#000"; dtszz=dtsz*1.5 ; alfacc=1 }
+    ctx.fillStyle = clrr
+    
+    ctx.globalAlpha=i*alfacc 
+    ctx.fillRect(xx*widefac, yy*highfac, dtszz, dtszz); 
     
   } 
 
   //~ console.log(dst)
-  for (i = 0; i < vgsc*31; i++)
+  for (i = 0; i < vgsc*dist_sample_factor; i++)
   {
     var yy=(func(d)-minval)
-    dst[((yy)/dist*(distel-1.1))>>>0]++
+    dst[Math.round((yy)/dist*(distel-1.1))]++
     tcnt++;
   }
 
