@@ -164,7 +164,7 @@ var newFdrandom = function(){ //factory
   function igmmode()
   { return (( ui32()&ui32() )>>1) - (( ui32()|ui32() )>>1)  }
   
-  function lrange(a,b,d){ return lrange(b,d,a) } //old param version
+  function lrange(a,b,d){ return vrange(b,d,a) } //old param version
   
   function vrange(b,d,a){ //default -1 to 1
     b= (b===undefined)?-1:b; d= (d===undefined)?1:d
