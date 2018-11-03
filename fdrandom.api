@@ -47,6 +47,7 @@ gteat([a=-1][,b=1]) return teat shaped distribution in range a to b
 gtrapez([a=-1][,b=1]) return trapeziod shaped distribution in range a to b
 gspill([a=0][,b=1][,edge=0to1]) return linear dist in range drops off from edge
 ggrad([a=0][,b=1]) return linear gradient distribtion
+ngrad([a=0][,b=1]) return half bell shaped gradient distribtion
 gbands([a=-1][,b=1]) return triangular dist approximated in 5 bands 
 gskew([a=0][,b=1]) return left skewed dist average middle 
 gpick([a=0][,b=1][,dev=0.4]) return mid peaked dist configurable deviation 

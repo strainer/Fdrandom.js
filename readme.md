@@ -78,10 +78,11 @@ fillr1 |   30    | HQ Line staggered fill pattern
 fillr2 |   25    | HQ Square staggered fill pattern        
 fillr3 |   20    | HQ Cube staggered fill pattern        
 ggrad  |   50    | Linear gradient distribution 
+ngrad  |   50    | Normal gradient distribution 
 gspill |   50    | Linear with drop off distribution 
 ghorn  |   50    | Like normal but peaked dist. 
 gbands |   50    | Triangular approximation with bands. 
-gpick  |   50    | Custom deviation, sharp or smooth. 
+gpick  |   50    | Custom variance, sharp or smooth. 
 gskew  |   50    | Smooth skewed range middle average. 
 gbowl  |   50    | Bowl shaped distribution 
 gthorn |   30    | Thorn shaped distribution 
@@ -136,11 +137,11 @@ G Marsaglias old but quite substantial `diehard` test suite.
 `Math.random` on Chrome had detectable statistical bias and only 
 32 bits of resolution in 2016. Firefoxs `Math.random` was using its 
 slow *cryptographic* PRNG but in 2017 is updated to a good quality
-fast PRNG.
+PRNG faster than fdrandoms. 
 
 f48 algorithm is informed by J.Baagoe's PRNG `Alea` which 
-seems to be the fastest form of high quality prng for javascript 
-to date. f48 uses different multipliers in a slightly adjusted 
+seems to be the fastest form of high quality prng for vanilla
+javascript to date. f48 uses different multipliers in a slightly adjusted 
 mechanism to output 16 more bits of resolution per number than 
 Alea v0.8 while achieving similar speed.
 
@@ -209,9 +210,9 @@ p=Fdrandom.pot()
 oneToTenFloat = p.range(1,10)    //end is not (quite) inclusive
 oneToTenInteger=p.irange(1,10)   //end is inclusive
 
-minusOneToOne_FlatDist =p.lrange(0.5) //loaded range. 
-minusOneToOne_EndBias =p.lrange(0.4)  //First param sets a loading factor
-twoToFive_MidBias = p.lrange(0.6,2,5) //0= High ends, 0.5=Flat, 1=High Mid
+minusOneToOne_FlatDist =p.lrange(0,1,0.5) //loaded range. 
+minusOneToOne_EndBias =p.lrange(0,1,0.4)  //First param sets a loading factor
+twoToFive_MidBias = p.lrange(2,5,0.6) //0= High ends, 0.5=Flat, 1=High Mid
 
 rangeInUnknownDist = p.zrange(0,1) //0to1 in a dynamicly changing distribution
 
@@ -232,8 +233,9 @@ limitedcauchy = p.within(-10,10,function(){return p.cauchy(scale,mean)},13)
 normGame = gnorm()      //approx gaussian shape range -1 to 1
 normGame = gnorm(2,4.5) //same shape range 2 to 4.5
 cauchyGame = gcauchy(2,4.5) //cauchy shape range 2 to 4.5
-oftenMid = gthorn()     //sharp peak in middle, range -1 to 1
-oftenMid = gthorn(p,q)  //same shape over range p to q
+oftenMid = gpick()      //sharp peak in middle, range -1 to 1
+oftenMid = gpick(p,q)  //same shape over range p to q
+oftenMid = gpick(p,q,s)  //s=sharpness : 0 flat, <0 sharper, >0 blunter  
 ```
 See the [Charts](http://strainer.github.io/Fdrandom.js/) for gaming distributions
 
@@ -299,6 +301,7 @@ File `antisort.md` contains more notes on antisorting.
 
 Version History
 ---------------
+* 3.1.0 - Add ngrad distribution (half bell shape) 
 * 3.0.0 - Add new quasi-random and game distributions and retire some. Faster gnorm. 
 * 2.8.0 - object seeding tweaked 
 * 2.7.0 - added 'R' fill patterns of Martin Roberts. From [Article](http://http://extremelearning.com.au/unreasonable-effectiveness-of-quasirandom-sequences/) 
