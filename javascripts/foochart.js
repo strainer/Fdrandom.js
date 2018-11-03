@@ -131,9 +131,9 @@ function chartfuncs() {
    //~ [Fd.next,"Fdrandom.next "],
    //~ [Fd.usum,"usum 2 ",2],
    //~ [Fd.ilcg ,"ilcg "],
-    [function(){return Fd2.zrange(0,1,100)},"zrange 100"],
-    [function(){return Fd2.zrange(0,1,10)},"zrange 10"],
-    [function(){return Fd2.zrange(0,1,1)},"zrange 1"],
+    //~ [function(){return Fd2.zrange(0,1,100)},"zrange 100"],
+    //~ [function(){return Fd2.zrange(0,1,10)},"zrange 10"],
+    //~ [function(){return Fd2.zrange(0,1,1)},"zrange 1"],
 
    //~ [Fd.ui32,"ui32 "],
    //~ [Fd.i32,"i32 "],
@@ -178,14 +178,14 @@ function chartfuncs() {
    [Fd.usum,"usum 3 ",3],
    [Fd.usum,"usum 4 ",4],
    
-   [Fd.usum,"usum 5 ",5],
+   [Fd.ghorn ,"ghorn "],
    ///~ [Fd.usum,"usum 6 ",6],
    ///~ [Fd.usum,"usum 7 ",7],
    ///~ [Fd.usum,"usum 8 ",8],
    ///~ [Fd.usum,"usum 16 ",16],
    ///~ [Fd.usum,"usum 32 ",32],
-   [Fd.gaus,"gaus "],
    [Fd.gnorm,"gnorm "],
+   [Fd.gaus,"gaus "],
    
    [Fd.cauchy,"cauchy "],
    [function(){return Fd.within(-12,12,Fd.cauchy)}, "cauchy within -12,12" ],
@@ -204,12 +204,40 @@ function chartfuncs() {
    [Fd.igbrist,"igbrist "],
    [Fd.igmmode,"igmmode "],
    
+   [Fd.ggrad ,"ggrad "],
+   [Fd.ngrad ,"ngrad "],
+   [Fd.gskew ,"gskew "], 
+
+   [Fd.gspill,"gspill"],
+   [Fd.gtrapez,"gtrapez "],
+   [Fd.gbands,"gbands"],
+
+   [Fd.gbowl,"gbowl "],
+   [Fd.gthorn,"gthorn "],
+   
+   [Fd.gteat,"gteat "], 
+   [function(){return Fd.gpick(-1,1)} ,"gpick"],
+   [function(){return Fd.gpick(-1,1,-0.25)} ,"gpick -0.25"],
+   [function(){return Fd.gpick(-1,1,0.0)} ,"gpick 0.0"],
+   [function(){return Fd.gpick(-1,1,0.25)} ,"gpick 0.25"],
+
+   //~ [Fd.gspire,"gspire "],
+   [Fd.lrange,"vrange 1.0",1.0],
+   
+   [Fd.lrange,"vrange 0.75",0.75],
+   //~ [Fd.lrange,"lrange 0.65",0.65],
+   [Fd.lrange,"vrange 0.50",0.50],
+   
+   [Fd.lrange,"vrange 0.25",0.25],
+   //~ [Fd.lrange,"lrange 0.15",0.15],
+   [Fd.lrange,"vrange 0",0],
+
    [Fd.qskip,"qskip "],
    [Fd.gskip,"qskip .. 0.2",0.2],
    [Fd.gskip,"qskip .. 0.8",0.8],
    [Fd.qxskip,"qxskip "],
-   [Fd.qtrip ,"qtrip "],
    [Fd.qhop ,"qhop "],
+   [Fd.qtrip ,"qtrip "],
 
    [function(){return Fd.fillr1(0,1)},"fillr1"],
    
@@ -230,32 +258,9 @@ function chartfuncs() {
       return fillres[--flip] 
     }
     ,"yz only fillr3"],
-    
-   [Fd.gspill,"gspill"],
-   [Fd.ggrad ,"ggrad "],
-   [Fd.ghorn ,"ghorn "],
-   [Fd.gbands,"gbands"],
-   [Fd.gpick ,"gpick "],
-   [Fd.gskew ,"gskew "],
-   
-   [Fd.gbowl,"gbowl "],
-   [Fd.gtrapez,"gtrapez "],
-   [Fd.gteat,"gteat "],
-   
-   [Fd.gthorn,"gthorn "],
-   //~ [Fd.gspire,"gspire "],
-   [Fd.lrange,"lrange 1.0",1.0],
-   
-   [Fd.lrange,"lrange 0.75",0.75],
-   //~ [Fd.lrange,"lrange 0.65",0.65],
-   [Fd.lrange,"lrange 0.25",0.50],
-   
-   [Fd.lrange,"lrange 0.50",0.50],
-   //~ [Fd.lrange,"lrange 0.15",0.15],
-   [Fd.lrange,"lrange 0",0],
-   
+       
    [function(){return Fd2.zrange(0,1,100)},"zrange 100"],
-   [function(){return Fd2.zrange(0,1,10)},"zrange 10"],
+   //~ [function(){return Fd2.zrange(0,1,10)},"zrange 10"],
    [function(){return Fd2.zrange(0,1,1)},"zrange 1"],
                         
    [function(){return Fd2.zrange(0,1,0.1)},"zrange 0.1"],
@@ -263,10 +268,10 @@ function chartfuncs() {
    [function(){return Fd2.zrange(0,1,0.01)},"zrange 0.01"],
                         
    [function(){return Fd2.zrange(0,1,0.01)},"zrange 0.01"],
-   [function(){return Fd2.zrange(0,1,0.01)},"zrange 0.01"],
+   //~ [function(){return Fd2.zrange(0,1,0.01)},"zrange 0.01"],
    [function(){return Fd2.zrange(0,1,0.001)},"zrange 0.001"],
                         
-   [function(){return Fd2.zrange(0,1,0.001)},"zrange 0.001"],
+   //~ [function(){return Fd2.zrange(0,1,0.001)},"zrange 0.001"],
    [function(){return Fd2.zrange(0,1,0.001)},"zrange 0.001"],
    [returnAVal,"rough rnd",rough],
    

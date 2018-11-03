@@ -265,6 +265,12 @@ var newFdrandom = function(){ //factory
     return ufit(b,d, (1.333333333-c)*0.75)
   }
       
+  function ngrad(b,d){
+    var c=f48()*0.5
+    c = sqrt(sqrt(c)) + 0.21*c*c*sqrt(c) 
+    return ufit(b,d,  1-c*1.138926841352 )
+  }
+
   function gnorm(b,d){
     var h=false,c=f48()
     if(c>0.5) c=1-c ,h=true 
@@ -623,7 +629,7 @@ var newFdrandom = function(){ //factory
     
     ,uigless: uigless  ,uigmore: uigmore 
     ,igbrist: igbrist  ,igmmode: igmmode 
-    ,ilcg: ilcg      ,ishr2: ishr2    ,ishp: ishp
+    ,ilcg: ilcg     ,ishr2: ishr2    ,ishp: ishp
         
     ,gbowl: gbowl    ,gspire: gpick  ,gthorn: gthorn 
     ,gwedge: gwedge  ,gnorm: gnorm   ,gcauchy: gcauchy 
@@ -633,14 +639,14 @@ var newFdrandom = function(){ //factory
     ,qr1fill: fillr1  ,qr2fill: fillr2  ,qr3fill: fillr3
     ,fillr1: fillr1  ,fillr2: fillr2  ,fillr3: fillr3
     
-    ,gspill :gspill  ,ggrad :ggrad  ,ghorn :ghorn 
-    ,gbands :gbands  ,gpick :gpick  ,gskew :gskew 
+    ,gspill :gspill  ,ggrad :ggrad  ,ngrad: ngrad  ,gskew :gskew 
+    ,gbands :gbands  ,ghorn :ghorn  ,gpick :gpick 
     
     ,mixup: mixup    ,mixof: mixof
     ,aindex: aindex  ,aresult: aresult  ,antisort: antisort 
 
     ,bulk:bulk  ,within:within ,dev2:dev2
-    ,version: function(){ return "v3.0.0" } 
+    ,version: function(){ return "v3.1.0" } 
   }
 }(arguments))}
   
