@@ -32,7 +32,7 @@
 
 
 if( typeof(Fdrandom)!=='undefined' && !Fdrandom.checkfloat() ){
-  document.getElementById('floatfail').style.display="block"; 
+  //document.getElementById('floatfail').style.display="block"; 
 }
 
 var fnstats={}
@@ -127,6 +127,12 @@ function chartfuncs() {
   ]
     
   var funzy= [
+    [Fd.cauchy,"cauchy "],
+    [Fd.cauchy,"cauchy "],
+    [Fd.cauchy,"cauchy "],
+    [Fd.cauchy,"cauchy "],
+    [Fd.cauchy,"cauchy "],
+    [Fd.cauchy,"cauchy "],
    //~ [Math.random,"math.random "],
    //~ [Fd.next,"Fdrandom.next "],
    //~ [Fd.usum,"usum 2 ",2],
@@ -440,6 +446,9 @@ function fmtplace(i){
   var plc=Math.abs(6/((1-Math.abs(i))||1)) ;plc =(plc>5||plc<0)?5:plc
   return plc+1 
 }
+
+function modp(a,b){ return a-Math.floor(a/b)*b }
+
 function fltline_cnv(fnm,func,d)
 {
   var minval=fnstats.minval
@@ -497,9 +506,10 @@ function fltline_cnv(fnm,func,d)
     sx+=(func(d)-mid)*kw + ((svgz*30)/nn)
     sy+=(func(d)-mid)*kh
     
-    
-    if(sx>(svgz)){sx=0}else if(sx<0){sx=svgz}
-    if(sy<0){sy=svgz}else if(sy>svgz){sy=0}
+    sx=modp(sx,svgz)
+    sy=modp(sy,svgz)
+    //~ if(sx>(svgz)){sx=0}else if(sx<0){sx=svgz}
+    //~ if(sy<0){sy=svgz}else if(sy>svgz){sy=0}
     
     if ((i%nw)!=0){ continue }
     
