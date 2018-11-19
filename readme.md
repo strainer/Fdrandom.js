@@ -1,21 +1,15 @@
 Fdrandom.js
 ===========
-Fast deterministic random functions for Javascript.
+A fast deterministic random helper library for Javascript.
 
-Examine available distributions on the [generator test page](http://strainer.github.io/Fdrandom.js/)
+Included distributions are 
 
 ### Features
 
-* A fast tested base PRNG.  
-* Integer, single and double precision float ouput.
-* Range, loaded, boolean, mix and antisort functions.
-* Distribution options: 
-  * Unbiased uniforms. 
-  * Gaussian distribution by Box Muller polar method. 
-  * Fast Gaussian approximated by fitted curve.
-  * Various game distributions
-  * Dynamic distribution generator
-* Quasi random walks and fill patterns
+* A fast tested internal PRNG.  
+* Many distribution options - illustrated on the [test page](http://strainer.github.io/Fdrandom.js/).
+* Quasi random walks and fill patterns.
+* Random mix, shuffle and 'antisorting' functions.
 
 Usage
 -----
@@ -26,10 +20,10 @@ double_value  = Fdrandom.next()     // 0 to 0.999999999999998
 signed_int_value = Fdrandom.i32()   // -2147483648 to 2147483647
 unsigned_int_value = Fdrandom.ui32()// 0 to 4294967295
 
-separate_seeded_generator = Fdrandom.pot(seed)
-int_val = separate_seeded_generator.i32()
-arandhex = Fdrandom.hot().mixof("0123456789abcdef","0x",8)
-autoseeded_pot= Fdrandom.hotpot()
+let apot = Fdrandom.pot(seed) //a seeded clone of Fdrandom
+int_val = apot.i32()
+let hpot= Fdrandom.hotpot() //an unpredicatably seeded clone
+arandhex = hpot.mixof("0123456789abcdef","0x",8)
 ```	
 	
 Method list	
@@ -60,10 +54,9 @@ zrange   |   5     | Dynamically distributed numbers in range
 Method	| Speed % | Notes                           
  :----- | :-----: | :------------------------------
 gaus    |   20    | Fast high quality gaussians        
-gausx   |   15    | Possibly needless extra resolution employed           
 cauchy  |   10    | Cauchy distribution           
 usum    | 25@n=4  | Custom uniform sum 
-gnorm   |   25    | Normal curve shaped game distribution 
+gnorm   |   30    | Normal curve shaped game distribution 
 gcauchy |   15    | Cauchy curve shaped game distribution 
 
 ### Other Distributions
@@ -88,10 +81,10 @@ gbowl  |   50    | Bowl shaped distribution
 gthorn |   30    | Thorn shaped distribution 
 gteat  |   30    | Teat shaped distribution  
 gtrapez|   50    | Trapezoid distribution 
-uigless|   60    | Unsigned 1/4 bit density game dist.       
-uigmore|   60    | Unsigned 3/4 bit density game dist.      
-igmmode|   60    | Signed multi modal game dist.      
-igbrist|   60    | Signed bristly game dist.      
+uigless|   50    | Unsigned 1/4 bit density game dist.       
+uigmore|   50    | Unsigned 3/4 bit density game dist.      
+igmmode|   50    | Signed multi modal game dist.      
+igbrist|   50    | Signed bristly game dist.      
            
 ### Random Pick and Mix
 
@@ -301,6 +294,7 @@ File `antisort.md` contains more notes on antisorting.
 
 Version History
 ---------------
+* 3.2.0 - Improve zrange, state resetting is changed.  
 * 3.1.0 - Add ngrad distribution (half bell shape) 
 * 3.0.0 - Add new quasi-random and game distributions and retire some. Faster gnorm. 
 * 2.8.0 - object seeding tweaked 

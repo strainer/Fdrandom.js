@@ -12,7 +12,7 @@ var newFdrandom = function(){ //factory
   'use strict'
   
   var sqrt=Math.sqrt,abs=Math.abs
-  var nml,va,vl,qr,rb,ga,gb,ua,ub,us,ju,U,sv,i
+  var nml,va,vl,qr,qg,rb,ga,gb,ua,ub,uc,us,ju,U,sv,i
   
   plant(sd) 
   
@@ -20,7 +20,7 @@ var newFdrandom = function(){ //factory
     
   function plant(sd) {   //constructor
         
-    va=1000, vl=1, ga=3, gb=4, nml=qr=ua=ub=-0, us=-0.1, rb=2.0e+15
+    va=1000, vl=1, ga=3, gb=4, nml=qr=qg=ua=ub=uc=-0, us=-0.1, rb=2.0e+15
     ju=1, U=[ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ]
 
     sow(sd)
@@ -79,14 +79,14 @@ var newFdrandom = function(){ //factory
 
   function getstate() {
     return [ U[0],U[1],U[2],U[3],U[4],U[5],U[6],U[7] 
-            ,ju, va, vl, qr, rb, ga, gb, ua, ub, us, nml ] 
+            ,ju, va, vl, qr, qg, rb, ga, gb, ua, ub, uc, us, nml ] 
   } 
   
   function setstate(s) {
     for( i=0;i<8;i++ ) U[i]=s[i]
-    ju=s[8];  va=s[9];  vl=s[10]; qr=s[11]; rb=s[12]; 
-    ga=s[13]; gb=s[14]; ua=s[15]; ub=s[16]; us=s[17];
-    nml=s[18]; sv=s
+    ju=s[8];  va=s[9];  vl=s[10]; qr=s[11]; qg=s[12]; rb=s[13]; 
+    ga=s[14]; gb=s[15]; ua=s[16]; ub=s[17]; uc= s[18]; us=s[19];
+    nml=s[20]; sv=s
   }
 
   function pot() { return newFdrandom(arguments) }
@@ -185,21 +185,21 @@ var newFdrandom = function(){ //factory
     var dists=[gbowl,gbands,gtrapez,gnorm,gcauchy,ghorn] 
 
     var e=f48(),x=us*0.001 ,cf=c*0.002  //us is 0>1000 
-    us+=(e-0.3333)*c
     
     if(us>1000){ //gb was strong, becomes ga
-      us-=1000 ,ga=gb ,ua=ub
+      us=modp(us,1000) ,ga=gb ,ua=ub
       if(ga>7){gb=irange(0,7)}else{gb=irange(0,9)}
       ub=f48()	
     }else{      //ga was strong
       if( us<0 ){
         if(ga<0){ ga=irange(0,8); ua=f48() }
-        us+=1000 ,gb=ga ,ub=ua
+        us=modp(us,1000) ,gb=ga ,ub=ua
         if(gb>7){ga=irange(0,7)}else{ga=irange(0,9)}
         ua=f48()
       }
     }
 
+    us+=(e-0.3333)*c
     ua+=(f48()-0.5)*cf
     ua=ua>1?1:ua<0?0:ua
     ub-=(f48()-0.5)*cf
@@ -234,8 +234,8 @@ var newFdrandom = function(){ //factory
     return ufit(b,d, qr-= qr>>>0) 
   }
   function gskip(c,b,d){
-    us+= ( c=c||f48()*0.66666666 )*0.5; us+=(1-c)*f48() 
-    return ufit(b,d, us-= us>>>0) 
+    qg+= ( c=c||f48()*0.66666666 )*0.5; qg+=(1-c)*f48() 
+    return ufit(b,d, qg-= qg>>>0) 
   }
   function qxskip(b,d,c){
     c= (c===undefined)?0.5:c
@@ -361,17 +361,17 @@ var newFdrandom = function(){ //factory
   function fillr3(b,d){
     b=(b===undefined)?-1:b; d=(d===undefined)?1:d;
 
-    if(us==-0.1){ //must init state for 3d 
+    if(uc==-0.1){ //must init state for 3d 
       ua=U[0]+U[1]*0.81917251339616
       ub=U[0]+U[1]*0.67104360670379
-      us=U[0]+U[1]*0.54970047790197
-      ua=ua-(ua>>>0) ; ub=ub-(ub>>>0) ; us=us-(us>>>0) 
+      uc=U[0]+U[1]*0.54970047790197
+      ua=ua-(ua>>>0) ; ub=ub-(ub>>>0) ; uc=uc-(us>>>0) 
     } 
     ua+=0.81917251339616 ; ua-=ua>>>0
     ub+=0.67104360670379 ; ub-=ub>>>0
-    us+=0.54970047790197 ; us-=us>>>0
+    uc+=0.54970047790197 ; uc-=uc>>>0
     
-    return [ (ua*(d-b))+b, (ub*(d-b))+b, (us*(d-b))+b ]
+    return [ (ua*(d-b))+b, (ub*(d-b))+b, (uc*(d-b))+b ]
   } 
   
   var psig,csig
@@ -646,7 +646,7 @@ var newFdrandom = function(){ //factory
     ,aindex: aindex  ,aresult: aresult  ,antisort: antisort 
 
     ,bulk:bulk  ,within:within ,dev2:dev2
-    ,version: function(){ return "v3.1.0" } 
+    ,version: function(){ return "v3.2.0" } 
   }
 }(arguments))}
   
