@@ -47,7 +47,7 @@ var dtsz=1.1*svgz/256
 var ddtsz=3.5*svgz/256
 var bdtsz=5*svgz/256
 var starttime
-var zocount=1.234
+var zocount=1234
 
 var tlogger = document.getElementById('log')
 
