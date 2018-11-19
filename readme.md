@@ -2,12 +2,10 @@ Fdrandom.js
 ===========
 A fast deterministic random helper library for Javascript.
 
-Included distributions are 
-
 ### Features
 
 * A fast tested internal PRNG.  
-* Many distribution options - illustrated on the [test page](http://strainer.github.io/Fdrandom.js/).
+* Many distribution options are illustrated on the [test page](http://strainer.github.io/Fdrandom.js/).
 * Quasi random walks and fill patterns.
 * Random mix, shuffle and 'antisorting' functions.
 
