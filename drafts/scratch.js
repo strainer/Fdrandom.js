@@ -1,8 +1,81 @@
+
+var t = 1
+var r = true
+var hasAttrs = false,t,r
+
+console.log(hasAttrs)
+
+return
+
 require ('../dlib/mutil.js')
 //~ Fdrandom=require ('../Fdrandom.min.js')
-Fdrandom=require ('../Fdrandom.js')
+Fdrandom=require ('../../fdrandomi/Fdrandom.js')
+//~ Fdrandom=require ('O:/hub/ven/load/fancybfr/dep/Fdrandom.js')
 require ('../dlib/Testprngs.js')
 require ('../dlib/floatpresc.js')
+
+
+//~ console.log(Fdrandom.checkfloat())
+
+fdr=Fdrandom.pot()
+
+console.log(fdr.aindex(23))
+
+ 
+//~ checkperiod(fdr.ilcg,2)
+
+return
+
+
+if(true==0) { console.log("yep") }
+return
+benchn(4,Math.random  ,10,"math ")
+benchn(4,Fdrandom.f48  ,10,"f48 ")
+//~ benchn(4,Fdrandom.rbit  ,10,"rbit ")
+benchn(4,Fdrandom.gnorm  ,10,"gnorm ")
+
+
+
+
+return
+
+var e=8
+function dbl(a) { 
+  var r= [
+    
+    ( (( ((a*0x39b00000000)>>>4)* //saves 4bits of entropy
+    0.06249999650753))*5.960464477540047e-08 )
+    ,
+    ( (( ((((a+e)-e)*0x39b000000)/64)* //saves 4bits of entropy
+    0.06249999650753))*5.960464477540047e-08 )
+  
+   ]
+ return r 
+} 
+
+
+function dblx(a) { 
+  var r= [
+    
+    (a*0x39b00000000)>>>4
+    ,
+    (((a+e))*0x39b000000)/64 - (e*0x39b000000)/64
+    ,
+    ((a*0x39b00000000)>>>4) - (((a+e)-e)*0x39b000000)/64
+   ]
+ return r 
+} 
+
+
+for(var i=0;i<=1;i+=0.1) console.log(i,dblx(i))
+
+
+return
+
+
+
+
+
 
 p=Fdrandom.pot()
 q=Fdrandom.pot()
@@ -141,10 +214,6 @@ return
 */
 
 //~ compfunc(Fdrandom.f32,Fdrandom_i.f32)
-
-benchn(4,Math.random  ,10,"math ")
-benchn(4,Fdrandom.f48  ,10,"f48 ")
-benchn(4,Fdrandom.rbit  ,10,"rbit ")
 
 
 

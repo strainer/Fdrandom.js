@@ -21,10 +21,9 @@
 </script>
 
 <script src='../dlib/mutil.js'></script>
-<script src='../dlib/Fdrandom.js'></script>
+<script src='../../fdrandomi/Fdrandom.js'></script>
 <script src='../dlib/Testprngs.js'></script>
 <script src='../dlib/floatpresc.js'></script>
-<script src='./seedrandom.js'></script>
 
 <script>
 //~ console.log("-")
@@ -35,16 +34,17 @@ dur=4
 
 benchn(dur,Math.random    ,5) 
 
-var myrng = new Math.seedrandom('hello.');
+//~ var myrng = new Math.seedrandom('hello.');
 
-benchn(dur,myrng    ,5)
+//~ benchn(dur,myrng    ,5)
 
 //~ pr(Fdrandom.i32q())
 //~ pr(Fdrandom.i32q())
 //~ pr(Fdrandom.i32q())
 //~ pr(Fdrandom.i32q())
 //~ benchn(3,Fdrandom.i32   ,5,"i32 ")  
-benchn(dur,Fdrandom.f53  ,5,"f53 ")  
+benchn(dur,Fdrandom.f48  ,5,"f48 ")  
+benchn(dur,Fdrandom.gnorm  ,5,"gnorm ")  
 
 //~ benchn(dur,Math.random    ,dur,"Math.random ")  
 //~ benchn(dur,Fdrandom.i32  ,dur,"i32 ")  
@@ -55,8 +55,8 @@ benchn(dur,Fdrandom.f53  ,5,"f53 ")
 //~ benchn(3,Fdrandom.f32a    ,dur,"f32a   " )
 //~ benchn(3,Fdrandom.f32    ,dur,"f32   " )
 //~ benchn(3,Fdrandom.f53    ,dur, "f53  " )
-benchn(3,Fdrandom.next    ,dur, "next  " )
-benchn(3,Fdrandom.f53a    ,dur,"f53a  " )
+//~ benchn(3,Fdrandom.next    ,dur, "next  " )
+//~ benchn(3,Fdrandom.f53a    ,dur,"f53a  " )
 
 //~ benchn(3,Fdrandom.f53bm    ,dur,"f53bm   " )
 //~ benchn(3,Fdrandom.f45bm    ,dur,"f45bm   " )
