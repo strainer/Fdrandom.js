@@ -10,6 +10,8 @@ getstate() return array of parents state for setstate
 setstate(state_array) sets state with state array returned by getstate  
 
 f48() return 48bit precision equally distributed variates 0 to 0.9999999999999999 
+next() alias of f48()
+random() alias of f48()
 dbl() return 53bit precision equally distributed variates 0 to 0.9999999999999999
 f24() return 48bit precision equally distributed variates 0 to 0.99999994
 

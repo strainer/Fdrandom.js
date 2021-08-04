@@ -617,8 +617,8 @@ var newFdrandom = function(){ //factory
     ,getstate: getstate    ,setstate: setstate 
     ,checkfloat: checkfloat	
    
-    ,next: f48  ,f48: f48  ,dbl: dbl
-    ,f24: f24   ,fxs: dbl 
+    ,random:f48 ,f48: f48   ,next:f48 
+    ,f24: f24   ,fxs: dbl   ,dbl: dbl
     ,i32: i32   ,ui32: ui32
     
     ,rbit: rbit ,rpole: rpole
@@ -646,7 +646,7 @@ var newFdrandom = function(){ //factory
     ,aindex: aindex  ,aresult: aresult  ,antisort: antisort 
 
     ,bulk:bulk  ,within:within ,dev2:dev2
-    ,version: function(){ return "v3.2.0" } 
+    ,version: function(){ return "v3.3.0" } 
   }
 }(arguments))}
   

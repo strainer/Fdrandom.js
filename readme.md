@@ -7,7 +7,7 @@ A fast deterministic random helper library for Javascript.
 * A fast tested internal PRNG.  
 * Many distribution options are illustrated on the [test page](http://strainer.github.io/Fdrandom.js/).
 * Quasi random walks and fill patterns.
-* Random mix, shuffle and 'antisorting' functions.
+* String & array mix, shuffle and 'antisorting' functions.
 
 Usage
 -----
@@ -31,8 +31,8 @@ Method list
 
 Method	 | Speed % | Notes                         
  :------ | :-----: | :----------------------------
-next     |   100   | Standard randoms with 48bit resolution
-f48      |   100   | Alias of next (0 to 0.999999999999998)  
+random   |   100   | Standard randoms with 48bit resolution
+f48      |   100   | Alias of random (0 to 0.999999999999998)  
 dbl      |   50    | Same as next/f48 with 53 bits resolution
 f24      |   90    | Safe values for Float32array (0 to 0.99999994)
   &nbsp; |         |                               
